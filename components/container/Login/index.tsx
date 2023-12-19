@@ -1,10 +1,12 @@
+import Content from "./components/Content";
 import Header from "./components/Header";
 
 const Login = () => {
   return (
-    <div>
+    <>
       <Header />
-    </div>
+      <Content />
+    </>
   );
 };
 export default Login;

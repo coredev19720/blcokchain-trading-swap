@@ -1,8 +1,9 @@
 import dynamic from "next/dynamic";
 import { styled } from "@mui/system";
-import colors from "@/app/themes/colors";
+import colors from "@/themes/colors";
 import { ReactElement } from "react";
-const Loading = dynamic(() => import("@/app/components/common/Loading"));
+import { PageWrapper } from "@/styles/common";
+const Loading = dynamic(() => import("@/components/common/Loading"));
 
 interface Props {
   children: ReactElement;
@@ -12,19 +13,21 @@ interface Props {
 const Wrapper = styled("main")(({ theme }) => ({
   height: "100vh",
   width: "100vw",
-  background: theme.palette.mode === "light" ? colors.ln20 : colors.dn50,
+  overflow: "hidden",
+  background: theme.palette.mode === "light" ? colors.p300 : colors.dn50,
   display: "flex",
   flexDirection: "column",
+  alignItems: "center",
 }));
 
 const Layout = (props: Props) => {
   const { children, loading } = props;
 
   return (
-    <>
+    <Wrapper>
+      <PageWrapper>{children}</PageWrapper>
       {loading && <Loading />}
-      <Wrapper>{children}</Wrapper>
-    </>
+    </Wrapper>
   );
 };
 

@@ -4,23 +4,11 @@ import breakpoints from "@/app/themes/breakpoints";
 const Button = {
   styleOverrides: {
     root: {
-      fontSize: "1.4rem",
-      lineHeight: "2.2rem",
+      fontSize: "1.3rem",
+      lineHeight: "1.8rem",
       boxShadow: "none",
       "&:hover": {
         boxShadow: "none",
-      },
-      [`@media screen and (max-width: ${breakpoints.xl}px)`]: {
-        fontSize: "1.4rem",
-        lineHeight: "2.2rem",
-      },
-      [`@media screen and (max-width: ${breakpoints.lg}px)`]: {
-        fontSize: "1.2rem",
-        lineHeight: "1.6rem",
-      },
-      [`@media screen and (max-width: 1024px)`]: {
-        fontSize: "1.4rem",
-        lineHeight: "2.2rem",
       },
     },
     containedPrimary: {
@@ -135,21 +123,9 @@ const Button = {
       padding: "6px 14px",
     },
     sizeSmall: {
-      fontSize: "1.4rem",
-      lineHeight: "2.2rem",
+      fontSize: "1.2rem",
+      lineHeight: "1.6rem",
       padding: "8px 16px",
-      [`@media screen and (min-width: ${breakpoints.xxl}px)`]: {
-        fontSize: "1.6rem",
-        lineHeight: "2.4rem",
-      },
-      [`@media screen and (max-width: ${breakpoints.xl}px)`]: {
-        fontSize: "1.2rem",
-        lineHeight: "1.6rem",
-      },
-      [`@media screen and (max-width: ${breakpoints.lg}px)`]: {
-        fontSize: "1rem",
-        lineHeight: "1.4rem",
-      },
     },
     outlinedSizeSmall: {
       padding: "6px 14px",

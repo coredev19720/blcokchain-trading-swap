@@ -1,5 +1,5 @@
-import Layout from "@/app/components/common/Layout";
-import Login from "@/app/components/container/Login";
+import Layout from "@/components/common/Layout";
+import Login from "@/components/container/Login";
 
 const LoginPage = (props: any) => {
   return (
