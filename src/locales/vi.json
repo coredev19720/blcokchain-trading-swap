@@ -1,0 +1,8 @@
+{
+  "login": {
+    "txt_login": "Đăng nhập"
+  },
+  "dashboard": {
+    "txt_welcome": "Xin chào, dashboard"
+  }
+}

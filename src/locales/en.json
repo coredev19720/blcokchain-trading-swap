@@ -1,0 +1,8 @@
+{
+  "login": {
+    "txt_login": "Login"
+  },
+  "dashboard": {
+    "txt_welcome": "Hello, dashboard"
+  }
+}

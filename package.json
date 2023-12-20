@@ -23,6 +23,7 @@
     "react-hook-form": "^7.49.2",
     "react-i18next": "^13.5.0",
     "react-intl": "^6.5.5",
+    "sass": "^1.69.5",
     "styled-components": "^6.1.1",
     "universal-cookie": "^6.1.1"
   },
