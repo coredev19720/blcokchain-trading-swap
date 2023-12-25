@@ -14,12 +14,12 @@ const Content = () => {
     console.log("data", data);
   };
   const redirectToForgotPwd = () =>
-    router.push(`/${params.locale}/forgot-password`);
+    router.push(`/${params?.locale}/forgot-password`);
   const redirectToCashTransfer = () =>
-    router.push(`/${params.locale}/cash-transfer`);
+    router.push(`/${params?.locale}/cash-transfer`);
   const redirectToOnlTrading = () => {
     console.log("click");
-    router.push(`/${params.locale}/onl-trading`);
+    router.push(`/${params?.locale}/onl-trading`);
   };
 
   return (

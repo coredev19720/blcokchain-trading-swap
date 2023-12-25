@@ -17,6 +17,7 @@
     "@next/bundle-analyzer": "^14.0.4",
     "@reduxjs/toolkit": "^2.0.1",
     "@t3-oss/env-nextjs": "^0.7.1",
+    "axios": "^1.6.2",
     "i18next": "^23.7.11",
     "js-cookie": "^3.0.5",
     "next": "14.0.4",

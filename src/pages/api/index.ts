@@ -6,7 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { method, headers } = req;
+  const { method } = req;
   switch (method) {
     case "GET":
       try {
@@ -15,7 +15,6 @@ export default async function handler(
         console.log(e);
         res.status(400).json({ reason: e.message || "serverInternalError" });
       }
-
       break;
     default:
       res.setHeader("Allow", ["GET"]);
