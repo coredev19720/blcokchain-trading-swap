@@ -1,5 +1,4 @@
 import { IconButton, TextField, Typography, Button } from "@mui/material";
-import { useRouter } from "next/router";
 import { createRef, useRef, useState, KeyboardEvent } from "react";
 import {
   useForm,
@@ -27,7 +26,6 @@ const LoginForm = ({ onSubmit }: IProps) => {
   const usernameRef = useRef(null);
   const pwdRef: React.RefObject<HTMLInputElement> = createRef();
   const [showPwd, setShowPwd] = useState(false);
-  const Router = useRouter();
 
   const handleKeyDownEnter = (
     e: KeyboardEvent<HTMLDivElement>,

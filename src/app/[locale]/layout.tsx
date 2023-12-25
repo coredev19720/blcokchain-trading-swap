@@ -1,9 +1,7 @@
 import "@/src/styles/global/common.scss";
-
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, useMessages } from "next-intl";
-
 import { AppConfig } from "@/src/utils/AppConfig";
 
 export const metadata: Metadata = {
@@ -32,18 +30,14 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  // Layouts must accept a children prop.
-  // This will be populated with nested layouts or pages
   children,
   params: { locale },
 }: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  // Validate that the incoming `locale` parameter is valid
   if (!AppConfig.locales.includes(locale)) notFound();
 
-  // Using internationalization in Client Components
   const messages = useMessages();
 
   return (

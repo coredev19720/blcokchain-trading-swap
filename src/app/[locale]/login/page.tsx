@@ -1,21 +1,12 @@
 import Layout from "@/src/components/common/Layout";
 import Login from "@/src/components/container/Login";
 
-const LoginPage = (props: any) => {
+const LoginPage = () => {
   return (
     <Layout loading={false}>
-      <Login {...props} />
+      <Login />
     </Layout>
   );
 };
-
-export async function getServerSideProps(context: any) {
-  const { query } = context;
-  return {
-    props: {
-      query,
-    },
-  };
-}
 
 export default LoginPage;

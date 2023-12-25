@@ -1,3 +1,4 @@
+"use client";
 import dynamic from "next/dynamic";
 import { styled } from "@mui/system";
 import colors from "@/src/themes/colors";
