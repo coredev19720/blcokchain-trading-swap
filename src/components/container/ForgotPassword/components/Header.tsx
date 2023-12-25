@@ -12,7 +12,7 @@ interface IProps {
 const Header = ({ title, handleBack }: IProps) => {
   return (
     <Wrapper>
-      <ArrowBack onClick />
+      <ArrowBack onClick={handleBack} />
       <Typography>{title}</Typography>
     </Wrapper>
   );
