@@ -4,9 +4,9 @@ const Typography = {
   styleOverrides: {
     root: {
       margin: 0,
-      color: colors.dn30,
+      color: colors.mn70,
     },
   },
-}
+};
 
 export default Typography;

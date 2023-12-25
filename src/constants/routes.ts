@@ -1,1 +1,1 @@
-export const publicUrls = ["login"];
+export const publicUrls = ["login", "forgot-password"];

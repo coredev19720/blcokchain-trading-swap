@@ -7,24 +7,34 @@ import {
   ControllerFieldState,
   UseFormStateReturn,
 } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { uIdGen } from "@/src/utils/helpers";
 import HelpText from "@/src/components/common/HelpText";
-import { Wrapper, FieldWrapper } from "./styles";
+import { Wrapper, FieldWrapper, AdormentWrapper } from "./styles";
+import FieldLabel from "@/src/components/common/FieldLabel";
+import { ILoginForm } from "@/src/interface/common";
+
 interface IProps {
-  onSubmit: () => void;
+  onSubmit: (data: ILoginForm) => void;
 }
 const LoginForm = ({ onSubmit }: IProps) => {
-  const { t } = useTranslation();
+  const t = useTranslations("login");
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({});
+  } = useForm({
+    defaultValues: {
+      username: "",
+      pwd: "",
+      expireTime: 60,
+    },
+  });
 
   const usernameRef = useRef(null);
   const pwdRef: React.RefObject<HTMLInputElement> = createRef();
+  const expireTimeRef: React.RefObject<HTMLInputElement> = createRef();
   const [showPwd, setShowPwd] = useState(false);
 
   const handleKeyDownEnter = (
@@ -39,9 +49,13 @@ const LoginForm = ({ onSubmit }: IProps) => {
           }
           return;
         case "pwd": {
-          handleSubmit(onSubmit)();
+          if (expireTimeRef.current) {
+            expireTimeRef.current.focus();
+          }
+          return;
         }
         default:
+          handleSubmit(onSubmit)();
           return;
       }
     }
@@ -78,7 +92,7 @@ const LoginForm = ({ onSubmit }: IProps) => {
         onChange={onChange}
         value={value}
         variant="outlined"
-        type="textbox"
+        type={showPwd ? "textbox" : "password"}
         id={uIdGen()}
         autoComplete="off"
         onKeyDown={(e) => {
@@ -88,9 +102,38 @@ const LoginForm = ({ onSubmit }: IProps) => {
         inputRef={pwdRef}
         InputProps={{
           endAdornment: (
-            <IconButton onClick={handleClickShowPwd} edge="end">
-              {showPwd ? <VisibilityOff /> : <Visibility />}
-            </IconButton>
+            <AdormentWrapper>
+              <IconButton onClick={handleClickShowPwd} edge="end">
+                {showPwd ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </AdormentWrapper>
+          ),
+        }}
+        fullWidth
+      />
+    );
+  };
+
+  const renderExpireTime = ({ field }: any) => {
+    const { onChange, value } = field;
+    return (
+      <TextField
+        onChange={onChange}
+        value={value}
+        variant="outlined"
+        type="number"
+        id={uIdGen()}
+        autoComplete="off"
+        onKeyDown={(e) => {
+          handleKeyDownEnter(e, "expireTime");
+        }}
+        error={!!errors.expireTime}
+        inputRef={expireTimeRef}
+        InputProps={{
+          endAdornment: (
+            <AdormentWrapper>
+              <Typography>{t("txt_minute")}</Typography>
+            </AdormentWrapper>
           ),
         }}
         fullWidth
@@ -100,13 +143,13 @@ const LoginForm = ({ onSubmit }: IProps) => {
 
   return (
     <div>
-      <Typography variant="h4" fontWeight="700">
-        {t("changePassword")}
-      </Typography>
-      <div>
-        <form>
-          <Wrapper>
-            <Typography variant="body1">{t("lblCurrentPassword")}</Typography>
+      <form>
+        <Wrapper>
+          <Typography variant="h3" fontWeight={600}>
+            {t("txt_login")}
+          </Typography>
+          <FieldWrapper>
+            <FieldLabel>{t("txt_username_input")}</FieldLabel>
             <Controller
               control={control}
               name="username"
@@ -115,24 +158,30 @@ const LoginForm = ({ onSubmit }: IProps) => {
             {errors.username && (
               <HelpText text={(errors.username.message as string) || ""} />
             )}
-          </Wrapper>
-          <Wrapper>
-            <Typography variant="body1">{t("lblNewPassword")}</Typography>
-            <Controller
-              control={control}
-              name="newPassword"
-              render={renderPwdInput}
-            />
+          </FieldWrapper>
+          <FieldWrapper>
+            <FieldLabel>{t("txt_pwd_input")}</FieldLabel>
+            <Controller control={control} name="pwd" render={renderPwdInput} />
             {errors.pwd && (
               <HelpText text={(errors.pwd.message as string) || ""} />
             )}
-          </Wrapper>
-
+          </FieldWrapper>
+          <FieldWrapper>
+            <FieldLabel>{t("txt_expire_time_input")}</FieldLabel>
+            <Controller
+              control={control}
+              name="expireTime"
+              render={renderExpireTime}
+            />
+            {errors.expireTime && (
+              <HelpText text={(errors.expireTime.message as string) || ""} />
+            )}
+          </FieldWrapper>
           <Button variant="contained" onClick={handleSubmit(onSubmit)}>
             Đăng nhập
           </Button>
-        </form>
-      </div>
+        </Wrapper>
+      </form>
     </div>
   );
 };

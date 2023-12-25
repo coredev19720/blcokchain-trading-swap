@@ -1,6 +1,15 @@
 {
   "login": {
-    "txt_login": "Đăng nhập"
+    "txt_login": "Đăng nhập",
+    "txt_username_input": "Tên đăng nhập",
+    "txt_pwd_input": "Mật khẩu",
+    "txt_expire_time_input": "Tự động đăng xuất sau",
+    "txt_minute": "Phút",
+    "txt_forgot_pwd": "Quên mật khẩu",
+    "txt_cs_phone": "028 - 7306 8686",
+    "txt_cs": "Dịch vụ khách hàng",
+    "txt_cash_transfer": "Hướng dẫn chuyển tiền vào tài khoản",
+    "txt_online_transfer": "Hướng dẫn giao dịch trực tuyến"
   },
   "dashboard": {
     "txt_welcome": "Xin chào, dashboard"

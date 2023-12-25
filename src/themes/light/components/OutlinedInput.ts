@@ -15,6 +15,7 @@ const OutlinedInput = {
       "&.Mui-focused": {
         "& .MuiOutlinedInput-notchedOutline": {
           borderColor: colors.sb60,
+          background: "transparent",
         },
       },
       "&.Mui-error": {
@@ -25,13 +26,10 @@ const OutlinedInput = {
     },
     input: {
       height: "unset",
-      padding: 8,
-      color: colors.dn30,
       borderRadius: 4,
-      "&:hover": {
-        backgroundColor: colors.ln30,
-      },
+      padding: "12px 16px",
+      "&:hover": {},
     },
   },
-}
+};
 export default OutlinedInput;

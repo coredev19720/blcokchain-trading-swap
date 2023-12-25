@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import { AppConfig } from "@/src/utils/AppConfig";
-
+import ThemeRegistry from "../ThemeRegistry";
+import { Providers } from "@/src/redux/provider";
 export const metadata: Metadata = {
   icons: [
     {
@@ -44,14 +45,11 @@ export default function RootLayout({
     <html lang={locale}>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
+          <ThemeRegistry options={{ key: "mui" }}>
+            <Providers>{children}</Providers>
+          </ThemeRegistry>
         </NextIntlClientProvider>
       </body>
     </html>
   );
 }
-
-// Enable edge runtime but you are required to disable the `migrate` function in `src/libs/DB.ts`
-// Unfortunately, this also means it will also disable the automatic migration of the database
-// And, you will have to manually migrate it with `drizzle-kit push`
-// export const runtime = 'edge';

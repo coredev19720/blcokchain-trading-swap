@@ -154,6 +154,7 @@ div#__next {
 
 //text area
 a
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -205,6 +206,10 @@ h1 {
   color: red
 }
 
+* {
+  box-sizing: border-box;
+}
+
 @media print {
   body * {
     visibility: hidden;
@@ -225,6 +230,7 @@ h1 {
     margin: -150px 0 0 -250px;
   }
 }
+
 @media screen and (max-width:1024px) {
   body {
     overflow: hidden;
