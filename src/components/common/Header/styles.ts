@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const Wrapper = styled("div")(({ theme }) => ({
@@ -8,6 +8,8 @@ export const Wrapper = styled("div")(({ theme }) => ({
   alignItems: "center",
 }));
 
-export const BackButton = styled(Button)(({ theme }) => ({
-  textTransform: "none",
+export const BackButton = styled(Typography)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  gap: 4,
 }));

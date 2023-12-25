@@ -14,6 +14,7 @@ import HelpText from "@/src/components/common/HelpText";
 import { Wrapper, FieldWrapper, AdormentWrapper } from "./styles";
 import FieldLabel from "@/src/components/common/FieldLabel";
 import { ILoginForm } from "@/src/interface/common";
+import colors from "@/src/themes/colors";
 
 interface IProps {
   onSubmit: (data: ILoginForm) => void;
@@ -81,6 +82,11 @@ const LoginForm = ({ onSubmit }: IProps) => {
         error={!!errors.username}
         inputRef={usernameRef}
         fullWidth
+        InputProps={{
+          startAdornment: (
+            <Typography style={{ paddingLeft: 4 }}>086C-</Typography>
+          ),
+        }}
       />
     );
   };
@@ -145,7 +151,7 @@ const LoginForm = ({ onSubmit }: IProps) => {
     <div>
       <form>
         <Wrapper>
-          <Typography variant="h3" fontWeight={600}>
+          <Typography variant="h3" fontWeight={600} color="text.primary">
             {t("txt_login")}
           </Typography>
           <FieldWrapper>

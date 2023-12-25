@@ -1,11 +1,11 @@
 import { Typography } from "@mui/material";
 import colors from "@/src/themes/colors";
-import { Wrapper } from "./styles";
+import { Wrapper, HelpLinkWraper } from "./styles";
 import LoginForm from "./comonents/LoginForm";
 import { useTranslations } from "next-intl";
 import { ILoginForm } from "@/src/interface/common";
-import cookies from "js-cookie";
 import { useRouter, useParams } from "next/navigation";
+import CustomerService from "./comonents/CustomerService";
 const Content = () => {
   const params = useParams();
   const router = useRouter();
@@ -15,6 +15,13 @@ const Content = () => {
   };
   const redirectToForgotPwd = () =>
     router.push(`/${params.locale}/forgot-password`);
+  const redirectToCashTransfer = () =>
+    router.push(`/${params.locale}/cash-transfer`);
+  const redirectToOnlTrading = () => {
+    console.log("click");
+    router.push(`/${params.locale}/onl-trading`);
+  };
+
   return (
     <Wrapper>
       <LoginForm onSubmit={handleLogin} />
@@ -26,6 +33,23 @@ const Content = () => {
       >
         {t("txt_forgot_pwd")}
       </Typography>
+      <CustomerService />
+      <HelpLinkWraper>
+        <Typography
+          align="center"
+          fontWeight={600}
+          onClick={redirectToCashTransfer}
+        >
+          {t("txt_cash_transfer")}
+        </Typography>
+        <Typography
+          align="center"
+          fontWeight={600}
+          onClick={redirectToOnlTrading}
+        >
+          {t("txt_online_trading")}
+        </Typography>
+      </HelpLinkWraper>
     </Wrapper>
   );
 };

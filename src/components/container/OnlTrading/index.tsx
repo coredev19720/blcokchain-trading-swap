@@ -1,11 +1,11 @@
 "use client";
 import Header from "../../common/Header";
-const ForgotPassword = () => {
+const OnlTrading = () => {
   return (
     <div>
       <Header />
-      <div>Quen mat khau</div>
+      <div>Huong dan giao dich truc tuyen</div>;
     </div>
   );
 };
-export default ForgotPassword;
+export default OnlTrading;

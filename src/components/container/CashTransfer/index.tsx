@@ -1,11 +1,11 @@
 "use client";
 import Header from "../../common/Header";
-const ForgotPassword = () => {
+const CashTransfer = () => {
   return (
     <div>
       <Header />
-      <div>Quen mat khau</div>
+      <div>Huong dan chuyen tien</div>
     </div>
   );
 };
-export default ForgotPassword;
+export default CashTransfer;
