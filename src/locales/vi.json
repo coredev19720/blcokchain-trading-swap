@@ -11,6 +11,12 @@
     "txt_cash_transfer": "Hướng dẫn chuyển tiền vào tài khoản",
     "txt_online_trading": "Hướng dẫn giao dịch trực tuyến"
   },
+  "forgotPwd": {
+    "txt_forgot_pwd": "Quên mật khẩu",
+    "txt_otp": "Nhập mã xác thực",
+    "txt_new_pwd": "Tạo mật khẩu mới",
+    "txt_pwd_updated": "Mật khẩu mới đã được cập nhật"
+  },
   "dashboard": {
     "txt_welcome": "Xin chào, dashboard"
   }
