@@ -1,7 +1,12 @@
-import { useTranslations } from "next-intl";
+import Layout from "@/src/components/common/Layout";
+import Dashboard from "@/src/components/container/Dashboard";
 
-export default function Page() {
-  const t = useTranslations("dashboard");
+const DashboardPage = () => {
+  return (
+    <Layout loading={false}>
+      <Dashboard />
+    </Layout>
+  );
+};
 
-  return <h1>{t("txt_welcome")}</h1>;
-}
+export default DashboardPage;

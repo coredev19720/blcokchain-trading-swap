@@ -6,12 +6,23 @@ import { useTranslations } from "next-intl";
 import { ILoginForm } from "@/src/interface/common";
 import { useRouter, useParams } from "next/navigation";
 import CustomerService from "./comonents/CustomerService";
+import cookies from "js-cookie";
+import dayjs from "dayjs";
 const Content = () => {
   const params = useParams();
   const router = useRouter();
   const t = useTranslations("login");
   const handleLogin = (data: ILoginForm) => {
-    console.log("data", data);
+    if (process.env.NEXT_PUBLIC_TOKEN_COOKIE) {
+      cookies.set(process.env.NEXT_PUBLIC_TOKEN_COOKIE, "logged", {
+        expires: dayjs().add(data.expireTime, "minutes").toDate(),
+      });
+      router.push(
+        `/${params?.locale}?s=${
+          params?.s || process.env.NEXT_PUBLIC_DEFAUL_SYMBOL
+        }`
+      );
+    }
   };
   const redirectToForgotPwd = () =>
     router.push(`/${params?.locale}/forgot-password`);
