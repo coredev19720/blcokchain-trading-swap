@@ -1,5 +1,11 @@
 import { IconButton, TextField, Typography, Button } from "@mui/material";
-import { createRef, useRef, useState, KeyboardEvent } from "react";
+import {
+  createRef,
+  useRef,
+  useState,
+  KeyboardEvent,
+  ReactEventHandler,
+} from "react";
 import {
   useForm,
   Controller,
@@ -15,22 +21,20 @@ import { Wrapper, FieldWrapper, AdormentWrapper } from "./styles";
 import FieldLabel from "@/src/components/common/FieldLabel";
 import { ILoginForm } from "@/src/interface/common";
 import colors from "@/src/themes/colors";
-
 interface IProps {
-  onSubmit: (data: ILoginForm) => void;
+  onSubmit: any;
 }
 const LoginForm = ({ onSubmit }: IProps) => {
   const t = useTranslations("login");
+  const tMess = useTranslations("mess");
   const {
     control,
     handleSubmit,
     formState: { errors },
+    setValue,
+    getValues,
   } = useForm({
-    defaultValues: {
-      username: "",
-      pwd: "",
-      expireTime: 60,
-    },
+    reValidateMode: "onSubmit",
   });
 
   const usernameRef = useRef(null);
@@ -65,12 +69,41 @@ const LoginForm = ({ onSubmit }: IProps) => {
   const handleClickShowPwd = () => {
     setShowPwd((prev) => !prev);
   };
+  const handleChangeExpireTime = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (Number(e.target.value) > 120) {
+      setValue("expireTime", 120);
+      return;
+    }
+    setValue("expireTime", Number(e.target.value));
+  };
 
+  const handleBlurExpireTime = () => {
+    const expireTime = getValues("expireTime");
+    if (expireTime < 5) {
+      setValue("expireTime", 5);
+      return;
+    }
+  };
+
+  const handleChangeUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let txt = e.target.value.trim();
+    if (txt.length > 20) {
+      txt = txt.substring(0, 20);
+    }
+    setValue("username", txt);
+  };
+  const handleChangePwd = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let txt = e.target.value.trim();
+    if (txt.length > 50) {
+      txt = txt.substring(0, 50);
+    }
+    setValue("pwd", txt);
+  };
   const renderUsernameInput = ({ field }: any) => {
-    const { onChange, value } = field;
+    const { value } = field;
     return (
       <TextField
-        onChange={onChange}
+        onChange={handleChangeUsername}
         value={value}
         type="textbox"
         variant="outlined"
@@ -92,10 +125,10 @@ const LoginForm = ({ onSubmit }: IProps) => {
   };
 
   const renderPwdInput = ({ field }: any) => {
-    const { onChange, value } = field;
+    const { value } = field;
     return (
       <TextField
-        onChange={onChange}
+        onChange={handleChangePwd}
         value={value}
         variant="outlined"
         type={showPwd ? "textbox" : "password"}
@@ -121,11 +154,12 @@ const LoginForm = ({ onSubmit }: IProps) => {
   };
 
   const renderExpireTime = ({ field }: any) => {
-    const { onChange, value } = field;
+    const { value } = field;
     return (
       <TextField
-        onChange={onChange}
-        value={value}
+        onChange={handleChangeExpireTime}
+        onBlur={handleBlurExpireTime}
+        value={value || ""}
         variant="outlined"
         type="number"
         id={uIdGen()}
@@ -160,16 +194,34 @@ const LoginForm = ({ onSubmit }: IProps) => {
               control={control}
               name="username"
               render={renderUsernameInput}
+              defaultValue=""
+              rules={{
+                required: { value: true, message: tMess("required_field") },
+              }}
             />
             {errors.username && (
-              <HelpText text={(errors.username.message as string) || ""} />
+              <HelpText
+                stt="error"
+                text={(errors.username.message as string) || ""}
+              />
             )}
           </FieldWrapper>
           <FieldWrapper>
             <FieldLabel>{t("txt_pwd_input")}</FieldLabel>
-            <Controller control={control} name="pwd" render={renderPwdInput} />
+            <Controller
+              control={control}
+              name="pwd"
+              render={renderPwdInput}
+              defaultValue=""
+              rules={{
+                required: { value: true, message: tMess("required_field") },
+              }}
+            />
             {errors.pwd && (
-              <HelpText text={(errors.pwd.message as string) || ""} />
+              <HelpText
+                stt="error"
+                text={(errors.pwd.message as string) || ""}
+              />
             )}
           </FieldWrapper>
           <FieldWrapper>
@@ -178,6 +230,7 @@ const LoginForm = ({ onSubmit }: IProps) => {
               control={control}
               name="expireTime"
               render={renderExpireTime}
+              defaultValue={60}
             />
             {errors.expireTime && (
               <HelpText text={(errors.expireTime.message as string) || ""} />

@@ -19,5 +19,8 @@
   },
   "dashboard": {
     "txt_welcome": "Xin chào, dashboard"
+  },
+  "mess": {
+    "required_field": "Cần điền vào trường còn trống"
   }
 }
