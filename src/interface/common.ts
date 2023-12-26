@@ -8,3 +8,8 @@ export interface ILoginForm {
   pwd: string;
   expireTime: number;
 }
+
+export interface ITickerOpt {
+  title: string;
+  value: string;
+}

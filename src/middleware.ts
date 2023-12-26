@@ -24,9 +24,13 @@ export function middleware(req: NextRequest) {
       return;
     }
   });
-
+  //not login
   if (!token && !isPublic) {
     return NextResponse.redirect(new URL(`/${locale}/login`, req.url));
+  }
+  //logged
+  if (token && isPublic) {
+    return NextResponse.redirect(new URL(`/${locale}`, req.url));
   }
   if (token || isPublic) {
     return intlMiddleware(req);
