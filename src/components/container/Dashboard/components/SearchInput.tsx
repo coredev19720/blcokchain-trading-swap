@@ -15,6 +15,10 @@ const SearchInput = ({ handleSelectTicker }: IProps) => {
     }
     setSearchText(txt);
   };
+  const handleClickTicker = (val: ITickerOpt) => {
+    handleSelectTicker(val);
+    setOpenPanel(false);
+  };
   return (
     <div>
       <TextField
@@ -24,9 +28,9 @@ const SearchInput = ({ handleSelectTicker }: IProps) => {
         fullWidth
       />
       <SearchPanel
+        searchText={searchText}
         open={openPanel}
-        handleClose={setOpenPanel}
-        handleSelectTicker={handleSelectTicker}
+        handleSelectTicker={handleClickTicker}
       />
     </div>
   );

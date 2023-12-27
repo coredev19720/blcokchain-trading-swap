@@ -6,10 +6,11 @@ export const Wrapper = styled("div")(({ theme }) => ({
   gap: 16,
   display: "flex",
   flexDirection: "column",
-  height: "100vh",
-  width: "100vw",
+  height: "100%",
+  width: "100%",
   background: colors.p300,
   maxWidth: 600,
+  overflow: "auto",
 }));
 
 export const InputWrapper = styled("div")(({ theme }) => ({
@@ -17,4 +18,6 @@ export const InputWrapper = styled("div")(({ theme }) => ({
   gap: 8,
 }));
 
-export const TickerWrapper = styled("div")(({ theme }) => ({}));
+export const TickerWrapper = styled("div")(({ theme }) => ({
+  cursor: "pointer",
+}));
