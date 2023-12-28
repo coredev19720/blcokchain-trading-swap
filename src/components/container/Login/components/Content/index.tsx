@@ -8,6 +8,7 @@ import { useRouter, useParams } from "next/navigation";
 import CustomerService from "./comonents/CustomerService";
 import cookies from "js-cookie";
 import dayjs from "dayjs";
+import { toast } from "react-toastify";
 const Content = () => {
   const params = useParams();
   const router = useRouter();
@@ -17,6 +18,7 @@ const Content = () => {
       cookies.set(process.env.NEXT_PUBLIC_TOKEN_COOKIE, "logged", {
         expires: dayjs().add(data.expireTime, "minutes").toDate(),
       });
+      toast.info("Login success");
       router.push(
         `/${params?.locale}?s=${
           params?.s || process.env.NEXT_PUBLIC_DEFAUL_SYMBOL

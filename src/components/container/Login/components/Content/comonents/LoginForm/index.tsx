@@ -19,8 +19,6 @@ import { uIdGen } from "@/src/utils/helpers";
 import HelpText from "@/src/components/common/HelpText";
 import { Wrapper, FieldWrapper, AdormentWrapper } from "./styles";
 import FieldLabel from "@/src/components/common/FieldLabel";
-import { ILoginForm } from "@/src/interface/common";
-import colors from "@/src/themes/colors";
 interface IProps {
   onSubmit: any;
 }
