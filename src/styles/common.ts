@@ -12,3 +12,9 @@ export const RowContent = styled("div")(({ theme }) => ({
   alignItems: "center",
   gap: theme.spacing(2),
 }));
+
+export const ColContent = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+}));
