@@ -86,7 +86,7 @@ const colors = {
 
   //Mid Neutrals
   mn10: "#C5CEE0",
-  mn20: "#B4BCCC",
+  mn20: "#E0E0E0",
   mn30: "#A2A9B8",
   mn40: "#9096A3",
   mn50: "#7E838F",
@@ -111,5 +111,12 @@ const colors = {
   //common colors
   lightBackground: "#FFFFFF",
   darkBackground: "#10171F",
+
+  //common text colors
+  lightUpText: "#13A10E",
+  lightRefText: "#EAA300",
+  lightDownText: "#D13438",
+  lightCeilText: "#B146C2",
+  lightFloorText: "#00B7C3",
 };
 export default colors;

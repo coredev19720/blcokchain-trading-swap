@@ -2,133 +2,49 @@ import breakpoints from "./breakpoints";
 
 const typography = {
   h1: {
-    fontSize: "4rem",
-    lineHeight: "6rem",
+    fontSize: "6rem",
+    lineHeight: "7rem",
     fontWeight: 700,
-    [`@media screen and (max-width: ${breakpoints.xl}px)`]: {
-      fontSize: "3.2rem",
-      lineHeight: "5.2rem",
-    },
-    [`@media screen and (max-width: ${breakpoints.lg}px)`]: {
-      fontSize: "2.8rem",
-      lineHeight: "4.4rem",
-    },
   },
   h2: {
-    fontSize: "3.2rem",
-    lineHeight: "5.2rem",
+    fontSize: "3.4rem",
+    lineHeight: "4.1rem",
     fontWeight: 700,
-    [`@media screen and (max-width: ${breakpoints.xl}px)`]: {
-      fontSize: "2.8rem",
-      lineHeight: "4.4rem",
-    },
-    [`@media screen and (max-width: ${breakpoints.lg}px)`]: {
-      fontSize: "2.4rem",
-      lineHeight: "3.6rem",
-    },
   },
   h3: {
     fontSize: "2.8rem",
-    lineHeight: "4.4rem",
+    lineHeight: "3.4rem",
     fontWeight: 600,
-    [`@media screen and (max-width: ${breakpoints.xl}px)`]: {
-      fontSize: "2.4rem",
-      lineHeight: "3.6rem",
-    },
-    [`@media screen and (max-width: ${breakpoints.lg}px)`]: {
-      fontSize: "2rem",
-      lineHeight: "3.2rem",
-    },
   },
   h4: {
-    fontSize: "2.4rem",
-    lineHeight: "3.6rem",
+    fontSize: "2.2rem",
+    lineHeight: "2.8rem",
     fontWeight: 500,
-    [`@media screen and (max-width: ${breakpoints.xl}px)`]: {
-      fontSize: "2rem",
-      lineHeight: "3.2rem",
-    },
-    [`@media screen and (max-width: ${breakpoints.lg}px)`]: {
-      fontSize: "1.8rem",
-      lineHeight: "2.8rem",
-    },
   },
   h5: {
     fontSize: "2rem",
-    lineHeight: "3.2rem",
+    lineHeight: "2.5rem",
     fontWeight: 500,
-    [`@media screen and (max-width: ${breakpoints.xl}px)`]: {
-      fontSize: "1.8rem",
-      lineHeight: "2.8rem",
-    },
-    [`@media screen and (max-width: ${breakpoints.lg}px)`]: {
-      fontSize: "1.6rem",
-      lineHeight: "2.4rem",
-    },
   },
   h6: {
-    fontSize: "1.8rem",
-    lineHeight: "2.8rem",
-    [`@media screen and (max-width: ${breakpoints.xl}px)`]: {
-      fontSize: "1.6rem",
-      lineHeight: "2.4rem",
-    },
-    [`@media screen and (max-width: ${breakpoints.lg}px)`]: {
-      fontSize: "1.6rem",
-      lineHeight: "2.4rem",
-    },
+    fontSize: "1.7rem",
+    lineHeight: "2.2rem",
   },
   body1: {
-    fontSize: "1.6rem",
-    lineHeight: "2.4rem",
-    [`@media screen and (max-width: ${breakpoints.xl}px)`]: {
-      fontSize: "1.4rem",
-      lineHeight: "2.2rem",
-    },
-    [`@media screen and (max-width: ${breakpoints.lg}px)`]: {
-      fontSize: "1.4rem",
-      lineHeight: "1.6rem",
-    },
-    [`@media screen and (max-width: 1024px)`]: {
-      fontSize: "1.4rem",
-      lineHeight: "2.2rem",
-    },
+    fontSize: "1.7rem",
+    lineHeight: "2.2rem",
   },
   body2: {
-    fontSize: "1.4rem",
-    lineHeight: "2.2rem",
-    [`@media screen and (max-width: ${breakpoints.xl}px)`]: {
-      fontSize: "1.2rem",
-      lineHeight: "1.6rem",
-    },
-    [`@media screen and (max-width: ${breakpoints.lg}px)`]: {
-      fontSize: "1.2rem",
-      lineHeight: "1.6rem",
-    },
+    fontSize: "1.5rem",
+    lineHeight: "2rem",
   },
   subtitle1: {
-    fontSize: "1.2rem",
-    lineHeight: "1.6rem",
-    [`@media screen and (max-width: ${breakpoints.xl}px)`]: {
-      fontSize: "1.2rem",
-      lineHeight: "1.6rem",
-    },
-    [`@media screen and (max-width: ${breakpoints.lg}px)`]: {
-      fontSize: "1.2rem",
-      lineHeight: "1.6rem",
-    },
+    fontSize: "1.3rem",
+    lineHeight: "1.8rem",
   },
   subtitle2: {
     fontSize: "1.2rem",
-    lineHeight: "1.4rem",
-    [`@media screen and (max-width: ${breakpoints.xl}px)`]: {
-      fontSize: "1.2rem",
-      lineHeight: "1.6rem",
-    },
-    [`@media screen and (max-width: ${breakpoints.lg}px)`]: {
-      fontSize: "1.2rem",
-      lineHeight: "1.6rem",
-    },
+    lineHeight: "1.6rem",
   },
   fontWeights: {
     light: 300,

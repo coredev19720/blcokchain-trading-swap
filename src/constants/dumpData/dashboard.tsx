@@ -12,7 +12,7 @@ export const tickers: ITickerData[] = [
     floor: 30.5,
     price: 33.4,
     chg: 0.65,
-    chgPer: 1.98,
+    pctChg: 1.98,
     vol: 14000000,
   },
   {
@@ -26,7 +26,7 @@ export const tickers: ITickerData[] = [
     floor: 25.85,
     price: 27.75,
     chg: -0.05,
-    chgPer: -0.18,
+    pctChg: -0.18,
     vol: 20000000,
   },
   {
@@ -40,7 +40,7 @@ export const tickers: ITickerData[] = [
     floor: 30.55,
     price: 32.8,
     chg: 0.05,
-    chgPer: 0.15,
+    pctChg: 0.15,
     vol: 16000000,
   },
   {
@@ -54,7 +54,7 @@ export const tickers: ITickerData[] = [
     floor: 77.0,
     price: 82.7,
     chg: -0.1,
-    chgPer: -0.12,
+    pctChg: -0.12,
     vol: 900000,
   },
   {
@@ -68,7 +68,7 @@ export const tickers: ITickerData[] = [
     floor: 21.7,
     price: 23.3,
     chg: 0.05,
-    chgPer: 0.22,
+    pctChg: 0.22,
     vol: 48700000,
   },
   {
@@ -82,7 +82,7 @@ export const tickers: ITickerData[] = [
     floor: 39.75,
     price: 42.85,
     chg: 0.15,
-    chgPer: 0.35,
+    pctChg: 0.35,
     vol: 5000000,
   },
   {
@@ -96,7 +96,7 @@ export const tickers: ITickerData[] = [
     floor: 40.05,
     price: 44.7,
     chg: 0.1,
-    chgPer: 0.22,
+    pctChg: 0.22,
     vol: 1000000,
   },
   {
@@ -110,7 +110,7 @@ export const tickers: ITickerData[] = [
     floor: 17.2,
     price: 18.5,
     chg: 0.0,
-    chgPer: 0.0,
+    pctChg: 0.0,
     vol: 8000000,
   },
 ];

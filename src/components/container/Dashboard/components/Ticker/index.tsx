@@ -1,6 +1,6 @@
 import { styled } from "@mui/system";
 import GeneralInfo from "./components/GeneralInfo";
-import MarketValue from "./components/MarketValue";
+import MarketDepth from "./components/MarketDepth";
 import PriceInfo from "./components/PriceInfo";
 import Line from "@/src/components/common/Line";
 import { ITickerData } from "@/src/interface/common";
@@ -15,11 +15,11 @@ interface IProps {
 const Ticker = ({ ticker }: IProps) => {
   return (
     <Wrapper>
-      <GeneralInfo />
+      <GeneralInfo ticker={ticker} />
       <Line />
-      <PriceInfo />
+      <PriceInfo ticker={ticker} />
       <Line />
-      <MarketValue />
+      <MarketDepth ticker={ticker} />
     </Wrapper>
   );
 };

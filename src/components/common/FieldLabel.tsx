@@ -5,7 +5,6 @@ import colors from "@/src/themes/colors";
 
 const Label = styled(Typography)(() => ({
   color: colors.mn70,
-  marginBottom: 4,
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
@@ -19,7 +18,7 @@ const Dot = styled(Typography)({
 const FieldLabel = ({ children, required, variant }: any) => {
   return (
     <Wrapper>
-      <Label variant={variant || "body2"}>{children}</Label>
+      <Label variant={variant || "subtitle1"}>{children}</Label>
       {required && <Dot>*</Dot>}
     </Wrapper>
   );

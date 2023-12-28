@@ -25,6 +25,6 @@ export interface ITickerData {
   floor: number;
   price: number;
   chg: number;
-  chgPer: number;
+  pctChg: number;
   vol: number;
 }

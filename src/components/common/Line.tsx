@@ -8,7 +8,7 @@ interface IProps {
 const Wrapper = styled("div")<IProps>(({ theme, margin, vertical }) => ({
   height: vertical ? "100%" : 1,
   width: vertical ? 1 : "100%",
-  backgroundColor: colors.ln10,
+  backgroundColor: colors.mn20,
   ...(margin && { marginTop: `${margin}px`, marginBottom: `${margin}px` }),
 }));
 const Line = ({ margin, vertical }: IProps) => {
