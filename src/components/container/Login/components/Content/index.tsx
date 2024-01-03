@@ -43,6 +43,7 @@ const Content = () => {
         fontWeight={600}
         color={colors.sb60}
         onClick={redirectToForgotPwd}
+        variant="body2"
       >
         {t("txt_forgot_pwd")}
       </Typography>
@@ -52,6 +53,7 @@ const Content = () => {
           align="center"
           fontWeight={600}
           onClick={redirectToCashTransfer}
+          variant="subtitle1"
         >
           {t("txt_cash_transfer")}
         </Typography>
@@ -59,6 +61,7 @@ const Content = () => {
           align="center"
           fontWeight={600}
           onClick={redirectToOnlTrading}
+          variant="subtitle1"
         >
           {t("txt_online_trading")}
         </Typography>

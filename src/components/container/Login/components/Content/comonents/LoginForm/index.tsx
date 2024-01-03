@@ -183,7 +183,7 @@ const LoginForm = ({ onSubmit }: IProps) => {
     <div>
       <form>
         <Wrapper>
-          <Typography variant="h3" fontWeight={600} color="text.primary">
+          <Typography variant="h5" fontWeight={600} color="text.primary">
             {t("txt_login")}
           </Typography>
           <FieldWrapper>

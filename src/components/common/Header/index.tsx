@@ -11,7 +11,12 @@ const Header = () => {
   };
   return (
     <Wrapper>
-      <BackButton color={colors.sb60} fontWeight={600} onClick={handleBack}>
+      <BackButton
+        color={colors.sb60}
+        fontWeight={600}
+        onClick={handleBack}
+        variant="subtitle1"
+      >
         <ArrowBack />
         Trở về
       </BackButton>

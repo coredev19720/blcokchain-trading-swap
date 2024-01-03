@@ -11,7 +11,6 @@ import Ticker from "./components/Ticker";
 import EmptyState from "./components/EmptyState";
 const Dashboard = () => {
   const searchParams = useSearchParams();
-  const [searchText, setSearchText] = useState<string>("");
   const [openPanel, setOpenPanel] = useState<boolean>(false);
   const [ticker, setTicker] = useState<ITickerData | null>(null);
   useEffect(() => {
@@ -26,14 +25,8 @@ const Dashboard = () => {
 
   return (
     <Wrapper>
-      <SearchInput
-        openPanel={openPanel}
-        searchText={searchText}
-        setSearchText={setSearchText}
-        setOpenPanel={setOpenPanel}
-      />
+      <SearchInput setOpenPanel={setOpenPanel} />
       <SearchPanel
-        searchText={searchText}
         open={openPanel}
         setTicker={setTicker}
         setOpenPanel={setOpenPanel}

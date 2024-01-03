@@ -9,7 +9,6 @@ const Wrapper = styled("div")({
   borderRadius: 40,
   display: "flex",
   alignItems: "center",
-  gap: 16,
 });
 const IconWrapper = styled("div")({
   background: "#FFC114",
@@ -21,7 +20,9 @@ const TextWrapper = styled("div")({
   flex: 1,
   display: "flex",
   height: "100%",
-  gap: 16,
+  alignItems: "center",
+  justifyContent: "space-between",
+  padding: "0 16px",
 });
 const CustomerService = () => {
   const t = useTranslations("login");
@@ -31,10 +32,10 @@ const CustomerService = () => {
         <Image src={csIcon} alt="cs icon" height={40} width={40} />
       </IconWrapper>
       <TextWrapper>
-        <Typography fontWeight={600} color="text.primary">
+        <Typography fontWeight={600} color="text.primary" variant="subtitle1">
           {t("txt_cs")}
         </Typography>
-        <Typography fontWeight={600} color="text.primary">
+        <Typography fontWeight={600} color="text.primary" variant="body2">
           {t("txt_cs_phone")}
         </Typography>
       </TextWrapper>

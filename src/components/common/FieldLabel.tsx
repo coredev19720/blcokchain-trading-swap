@@ -18,7 +18,7 @@ const Dot = styled(Typography)({
 const FieldLabel = ({ children, required, variant }: any) => {
   return (
     <Wrapper>
-      <Label variant={variant || "subtitle1"}>{children}</Label>
+      <Label variant={variant || "subtitle2"}>{children}</Label>
       {required && <Dot>*</Dot>}
     </Wrapper>
   );

@@ -7,8 +7,6 @@ const InputBase = {
       background: colors.p300,
       padding: "12px 16px",
       borderRadius: 8,
-      fontSize: "1.4rem",
-      lineHeight: "2.2rem",
       "&:disabled": {
         opacity: 0.5,
       },

@@ -5,6 +5,10 @@ interface IProps {
   ticker: ITickerData;
 }
 const MarketDepth = ({ ticker }: IProps) => {
-  return <Wrapper> MarketDepth</Wrapper>;
+  return (
+    <Wrapper>
+      <div>MarketDepth</div>
+    </Wrapper>
+  );
 };
 export default MarketDepth;

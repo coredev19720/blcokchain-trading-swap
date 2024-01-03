@@ -5,16 +5,24 @@ export const Wrapper = styled("div")(({ theme }) => ({
   gap: 8,
   display: "flex",
   flexDirection: "column",
-  flex: 1,
+  height: "100vh",
   background: colors.p300,
   overflow: "auto",
-}));
-
-export const InputWrapper = styled("div")(({ theme }) => ({
-  display: "flex",
-  gap: 8,
+  padding: 16,
+  width: "100vw",
 }));
 
 export const TickerWrapper = styled("div")(({ theme }) => ({
   cursor: "pointer",
+  display: "flex",
+  flexDirection: "column",
+  gap: 8,
+}));
+
+export const Tickers = styled("div")(({ theme }) => ({
+  flex: 1,
+  overflow: "auto",
+  display: "flex",
+  flexDirection: "column",
+  gap: 16,
 }));

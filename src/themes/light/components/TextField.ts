@@ -1,6 +1,8 @@
 const TextField = {
   styleOverrides: {
-    root: {},
+    root: {
+      fontSize: 17,
+    },
   },
 };
 

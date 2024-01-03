@@ -31,8 +31,25 @@ export const genTextWithPrefix = (val: number) => {
 };
 
 export const formatBigNumber = (val: number) => {
-  if (val > 1000000000) return `${(val / 1000000000).toFixed(1)}B`;
-  if (val > 1000000) return `${(val / 1000000).toFixed(1)}M`;
-  if (val > 1000) return `${(val / 1000).toFixed(1)}K`;
+  if (val >= 1000000000) return `${(val / 1000000000).toFixed(1)}B`;
+  if (val >= 1000000) return `${(val / 1000000).toFixed(1)}M`;
+  if (val >= 1000) return `${(val / 1000).toFixed(1)}K`;
   return val;
+};
+
+export const formatNumber = (number: number, decimal = 0) => {
+  if (number === 0) return "-";
+  return number
+    ? parseFloat(number.toString()).toLocaleString("en-US", {
+        minimumFractionDigits: decimal,
+        maximumFractionDigits: decimal,
+      })
+    : "-";
+};
+
+export const unFormatNumber = (number: number | string) => {
+  if (typeof number === "string") {
+    return number.split(".").join("").split(",").join("");
+  }
+  return number;
 };
