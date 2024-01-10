@@ -22,7 +22,7 @@ const Ticker = ({ ticker }: IProps) => {
       <Line />
       <MarketValue ticker={ticker} />
       <Line />
-      <MarketDepth ticker={ticker} />
+      <MarketDepth data={ticker.marketDepth} />
     </Wrapper>
   );
 };

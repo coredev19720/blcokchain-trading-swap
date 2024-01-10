@@ -1,7 +1,8 @@
-import { Typography, TextField, OutlinedInput } from "@mui/material";
+import { Typography, OutlinedInput } from "@mui/material";
 import { styled } from "@mui/system";
 import { Cancel, Search } from "@mui/icons-material";
-import { useState } from "react";
+import { useTranslations } from "next-intl";
+
 interface IProps {
   searchText: string;
   setSearchText: (val: string) => void;
@@ -36,6 +37,7 @@ const SearchInput = ({
   setOpenPanel,
   openPanel,
 }: IProps) => {
+  const t = useTranslations("dashboard");
   const handleClearSearchText = () => {
     setSearchText("");
   };
@@ -65,7 +67,9 @@ const SearchInput = ({
         startAdornment={<Search fontSize="large" color="secondary" />}
       />
       {openPanel && (
-        <CloseBtn onClick={() => setOpenPanel(false)}>Đóng</CloseBtn>
+        <CloseBtn onClick={() => setOpenPanel(false)}>
+          {t("txt_close_search")}
+        </CloseBtn>
       )}
     </Wrapper>
   );

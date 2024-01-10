@@ -6,6 +6,7 @@ import colors from "@/src/themes/colors";
 import { genTextColor } from "@/src/utils/helpers";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
+import { useTranslations } from "next-intl";
 const Wrapper = styled("div")(() => ({
   display: "flex",
   gap: 8,
@@ -20,11 +21,12 @@ interface IProps {
   ticker: ITickerData;
 }
 const PriceInfo = ({ ticker }: IProps) => {
+  const t = useTranslations("dashboard");
   return (
     <Wrapper>
       <ContentBlock>
         <RowContent>
-          <FieldLabel>Mở cửa</FieldLabel>
+          <FieldLabel>{t("txt_open_price")}</FieldLabel>
           <Typography
             fontWeight={500}
             variant="body2"
@@ -39,7 +41,7 @@ const PriceInfo = ({ ticker }: IProps) => {
           </Typography>
         </RowContent>
         <RowContent>
-          <FieldLabel>Cao nhất</FieldLabel>
+          <FieldLabel>{t("txt_hightest_price")}</FieldLabel>
           <Typography
             fontWeight={500}
             variant="body2"
@@ -54,7 +56,7 @@ const PriceInfo = ({ ticker }: IProps) => {
           </Typography>
         </RowContent>
         <RowContent>
-          <FieldLabel>Thấp nhất</FieldLabel>
+          <FieldLabel>{t("txt_lowest_price")}</FieldLabel>
           <Typography
             fontWeight={500}
             variant="body2"
@@ -72,7 +74,7 @@ const PriceInfo = ({ ticker }: IProps) => {
       <Line vertical />
       <ContentBlock>
         <RowContent>
-          <FieldLabel>Tham chiếu</FieldLabel>
+          <FieldLabel>{t("txt_ref_price")}</FieldLabel>
           <Typography
             fontWeight={500}
             color={colors.lightRefText}
@@ -82,7 +84,8 @@ const PriceInfo = ({ ticker }: IProps) => {
           </Typography>
         </RowContent>
         <RowContent>
-          <FieldLabel>Trần</FieldLabel>
+          <FieldLabel>{t("txt_ceil_price")}</FieldLabel>
+
           <Typography
             fontWeight={500}
             color={colors.lightCeilText}
@@ -92,7 +95,7 @@ const PriceInfo = ({ ticker }: IProps) => {
           </Typography>
         </RowContent>
         <RowContent>
-          <FieldLabel>Sàn</FieldLabel>
+          <FieldLabel>{t("txt_floor_price")}</FieldLabel>
           <Typography
             fontWeight={500}
             color={colors.lightFloorText}

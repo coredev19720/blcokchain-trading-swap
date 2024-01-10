@@ -19,7 +19,20 @@
     "txt_pwd_updated": "Mật khẩu mới đã được cập nhật"
   },
   "dashboard": {
-    "txt_welcome": "Xin chào, dashboard"
+    "txt_close_search": "Đóng",
+    "txt_open_price": "Mở cửa",
+    "txt_hightest_price": "Cao nhất",
+    "txt_lowest_price": "Thấp nhất",
+    "txt_ref_price": "Tham chiếu",
+    "txt_ceil_price": "Trần",
+    "txt_floor_price": "Sàn"
+  },
+  "common": {
+    "mn_market": "Thị trường",
+    "mn_watchlist": "Danh mục",
+    "mn_trade": "Giao dịch",
+    "mn_account": "Tài khoản",
+    "mn_ordBook": "Sổ lệnh"
   },
   "mess": {
     "required_field": "Cần điền vào trường còn trống"

@@ -50,3 +50,10 @@ export interface IHistoryDeal {
   price: number;
   vol: number;
 }
+
+export interface IMenuItem {
+  label: string;
+  icon: any;
+  url: string;
+  activeIcon: any;
+}
