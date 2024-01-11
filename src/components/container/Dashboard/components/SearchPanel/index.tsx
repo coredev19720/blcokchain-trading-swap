@@ -45,23 +45,6 @@ const SearchPanel = ({ open, setTicker, setOpenPanel }: IProps) => {
                   </Typography>
                 </TickerWrapper>
               ))}
-            {/* fix me, remove this duplicate code */}
-            {tickerOpts
-              .filter((x) => x.value.includes(searchText))
-              .map((x) => (
-                <TickerWrapper
-                  key={x.value}
-                  onClick={() => handleClickTicker(x)}
-                >
-                  <Typography fontWeight={600} color="text.primary">
-                    {x.value}
-                  </Typography>
-                  <Typography variant="subtitle2" fontWeight={400}>
-                    {x.title}
-                  </Typography>
-                </TickerWrapper>
-              ))}
-            {/* fix me, remove this duplicate code */}
           </Tickers>
         </Wrapper>
       </Slide>

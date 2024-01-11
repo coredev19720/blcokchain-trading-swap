@@ -13,12 +13,13 @@ const Content = () => {
   const params = useParams();
   const router = useRouter();
   const t = useTranslations("login");
+  const tLogin = useTranslations("login");
   const handleLogin = (data: ILoginForm) => {
     if (process.env.NEXT_PUBLIC_TOKEN_COOKIE) {
       cookies.set(process.env.NEXT_PUBLIC_TOKEN_COOKIE, "logged", {
         expires: dayjs().add(data.expireTime, "minutes").toDate(),
       });
-      toast.info("Login success");
+      toast.info(tLogin("txt_login_success"));
       router.push(
         `/${params?.locale}?s=${
           params?.s || process.env.NEXT_PUBLIC_DEFAUL_SYMBOL

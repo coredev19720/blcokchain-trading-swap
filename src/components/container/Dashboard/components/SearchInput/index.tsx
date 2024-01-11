@@ -1,6 +1,7 @@
 import { OutlinedInput } from "@mui/material";
 import { styled } from "@mui/system";
 import { Search } from "@mui/icons-material";
+import { useTranslations } from "next-intl";
 interface IProps {
   setOpenPanel: (val: boolean) => void;
 }
@@ -19,9 +20,11 @@ const Input = styled(OutlinedInput)(() => ({
 }));
 
 const SearchInput = ({ setOpenPanel }: IProps) => {
+  const t = useTranslations("dashboard");
   return (
     <Wrapper>
       <Input
+        placeholder={t("fn_symbol_cta_search")}
         onFocus={() => setOpenPanel(true)}
         fullWidth
         startAdornment={<Search fontSize="large" color="secondary" />}

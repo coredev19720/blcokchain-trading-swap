@@ -3,6 +3,7 @@ import StyledTable from "@/src/components/common/StyledTable";
 import { IMarketDepth } from "@/src/interface/common";
 import { IColumn } from "@/src/interface/table";
 import { styled } from "@mui/system";
+import { useTranslations } from "next-intl";
 const Wrapper = styled("div")(() => ({
   display: "flex",
   gap: 8,
@@ -13,23 +14,23 @@ interface IProps {
   data: IMarketDepth;
 }
 const MarketDepth = ({ data }: IProps) => {
-  console.log(data);
+  const t = useTranslations("dashboard");
   const bestDealCols: IColumn[] = [
     {
-      title: "Price",
+      title: t("en_sb_best_price"),
       dataIndex: "price",
       key: "price",
       align: "left",
       width: 100,
     },
     {
-      title: "KL.M",
+      title: t("en_sb_best_buyQty"),
       dataIndex: "buyAmount",
       key: "amount",
       align: "right",
     },
     {
-      title: "KL.B",
+      title: t("en_sb_best_sellQty"),
       dataIndex: "sellAmount",
       key: "amount",
       align: "right",
@@ -38,19 +39,19 @@ const MarketDepth = ({ data }: IProps) => {
 
   const historyDealsCols: IColumn[] = [
     {
-      title: "TG",
+      title: t("en_sb_match_time"),
       dataIndex: "time",
       key: "time",
       align: "center",
     },
     {
-      title: "Price",
+      title: t("en_sb_match_price"),
       dataIndex: "price",
       key: "price",
       align: "right",
     },
     {
-      title: "KL",
+      title: t("en_sb_match_qty"),
       dataIndex: "volumn",
       key: "amount",
       align: "right",
@@ -65,11 +66,11 @@ const MarketDepth = ({ data }: IProps) => {
   return (
     <Wrapper>
       <BestDeal>
-        <FieldLabel></FieldLabel>
+        <FieldLabel>{t("fn_symbol_txt_bestQuote")}</FieldLabel>
         <StyledTable columns={bestDealCols} dataSource={data.deals} />
       </BestDeal>
       <HistoryDeals>
-        <FieldLabel></FieldLabel>
+        <FieldLabel>{t("fn_symbol_txt_ordHist")}</FieldLabel>
         <StyledTable
           columns={historyDealsCols}
           dataSource={data.historyDeals}

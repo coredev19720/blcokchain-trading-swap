@@ -180,66 +180,61 @@ const LoginForm = ({ onSubmit }: IProps) => {
   };
 
   return (
-    <div>
-      <form>
-        <Wrapper>
-          <Typography variant="h5" fontWeight={600} color="text.primary">
-            {t("txt_login")}
-          </Typography>
-          <FieldWrapper>
-            <FieldLabel>{t("txt_username_input")}</FieldLabel>
-            <Controller
-              control={control}
-              name="username"
-              render={renderUsernameInput}
-              defaultValue=""
-              rules={{
-                required: { value: true, message: tMess("required_field") },
-              }}
+    <form>
+      <Wrapper>
+        <Typography variant="h5" fontWeight={600} color="text.primary">
+          {t("fn_login_txt_title")}
+        </Typography>
+        <FieldWrapper>
+          <FieldLabel>{t("fn_login_inp_username")}</FieldLabel>
+          <Controller
+            control={control}
+            name="username"
+            render={renderUsernameInput}
+            defaultValue=""
+            rules={{
+              required: { value: true, message: tMess("required_field") },
+            }}
+          />
+          {errors.username && (
+            <HelpText
+              stt="error"
+              text={(errors.username.message as string) || ""}
             />
-            {errors.username && (
-              <HelpText
-                stt="error"
-                text={(errors.username.message as string) || ""}
-              />
-            )}
-          </FieldWrapper>
-          <FieldWrapper>
-            <FieldLabel>{t("txt_pwd_input")}</FieldLabel>
-            <Controller
-              control={control}
-              name="pwd"
-              render={renderPwdInput}
-              defaultValue=""
-              rules={{
-                required: { value: true, message: tMess("required_field") },
-              }}
-            />
-            {errors.pwd && (
-              <HelpText
-                stt="error"
-                text={(errors.pwd.message as string) || ""}
-              />
-            )}
-          </FieldWrapper>
-          <FieldWrapper>
-            <FieldLabel>{t("txt_expire_time_input")}</FieldLabel>
-            <Controller
-              control={control}
-              name="expireTime"
-              render={renderExpireTime}
-              defaultValue={60}
-            />
-            {errors.expireTime && (
-              <HelpText text={(errors.expireTime.message as string) || ""} />
-            )}
-          </FieldWrapper>
-          <Button variant="contained" onClick={handleSubmit(onSubmit)}>
-            Đăng nhập
-          </Button>
-        </Wrapper>
-      </form>
-    </div>
+          )}
+        </FieldWrapper>
+        <FieldWrapper>
+          <FieldLabel>{t("fn_login_inp_password")}</FieldLabel>
+          <Controller
+            control={control}
+            name="pwd"
+            render={renderPwdInput}
+            defaultValue=""
+            rules={{
+              required: { value: true, message: tMess("required_field") },
+            }}
+          />
+          {errors.pwd && (
+            <HelpText stt="error" text={(errors.pwd.message as string) || ""} />
+          )}
+        </FieldWrapper>
+        <FieldWrapper>
+          <FieldLabel>{t("fn_login_inp_autoLogout")}</FieldLabel>
+          <Controller
+            control={control}
+            name="expireTime"
+            render={renderExpireTime}
+            defaultValue={60}
+          />
+          {errors.expireTime && (
+            <HelpText text={(errors.expireTime.message as string) || ""} />
+          )}
+        </FieldWrapper>
+        <Button variant="contained" onClick={handleSubmit(onSubmit)}>
+          {t("fn_login_cta_login")}
+        </Button>
+      </Wrapper>
+    </form>
   );
 };
 export default LoginForm;

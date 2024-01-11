@@ -26,7 +26,7 @@ const PriceInfo = ({ ticker }: IProps) => {
     <Wrapper>
       <ContentBlock>
         <RowContent>
-          <FieldLabel>{t("txt_open_price")}</FieldLabel>
+          <FieldLabel>{t("en_sb_price_open")}</FieldLabel>
           <Typography
             fontWeight={500}
             variant="body2"
@@ -41,7 +41,7 @@ const PriceInfo = ({ ticker }: IProps) => {
           </Typography>
         </RowContent>
         <RowContent>
-          <FieldLabel>{t("txt_hightest_price")}</FieldLabel>
+          <FieldLabel>{t("en_sb_price_highest")}</FieldLabel>
           <Typography
             fontWeight={500}
             variant="body2"
@@ -56,7 +56,7 @@ const PriceInfo = ({ ticker }: IProps) => {
           </Typography>
         </RowContent>
         <RowContent>
-          <FieldLabel>{t("txt_lowest_price")}</FieldLabel>
+          <FieldLabel>{t("en_sb_price_lowest")}</FieldLabel>
           <Typography
             fontWeight={500}
             variant="body2"
@@ -74,7 +74,7 @@ const PriceInfo = ({ ticker }: IProps) => {
       <Line vertical />
       <ContentBlock>
         <RowContent>
-          <FieldLabel>{t("txt_ref_price")}</FieldLabel>
+          <FieldLabel>{t("en_sb_price_ref")}</FieldLabel>
           <Typography
             fontWeight={500}
             color={colors.lightRefText}
@@ -84,7 +84,7 @@ const PriceInfo = ({ ticker }: IProps) => {
           </Typography>
         </RowContent>
         <RowContent>
-          <FieldLabel>{t("txt_ceil_price")}</FieldLabel>
+          <FieldLabel>{t("en_sb_price_celling")}</FieldLabel>
 
           <Typography
             fontWeight={500}
@@ -95,7 +95,7 @@ const PriceInfo = ({ ticker }: IProps) => {
           </Typography>
         </RowContent>
         <RowContent>
-          <FieldLabel>{t("txt_floor_price")}</FieldLabel>
+          <FieldLabel>{t("en_sb_price_floor")}</FieldLabel>
           <Typography
             fontWeight={500}
             color={colors.lightFloorText}
