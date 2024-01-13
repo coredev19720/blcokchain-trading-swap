@@ -1,16 +1,21 @@
+import colors from "@/src/themes/colors";
 import { styled } from "@mui/system";
+import Image from "next/image";
 
 export const Wrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(4),
   display: "flex",
-  flexDirection: "column",
-  height: "100%",
-  gap: 16,
+  justifyContent: "space-between",
+  background: colors.tintRest,
 }));
 
-export const HelpLinkWraper = styled("div")(({ theme }) => ({
+export const MenuItem = styled("div")(({ theme }) => ({
+  transition: "all 0.2s ease-in-out",
   display: "flex",
   flexDirection: "column",
-  gap: 8,
-  padding: theme.spacing(2, 4),
+  gap: 4,
+  padding: theme.spacing(2),
+  alignItems: "center",
+  justifyContent: "center",
 }));
+
+export const MenuImage = styled(Image)(() => ({}));

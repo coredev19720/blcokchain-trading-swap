@@ -1,7 +1,7 @@
 import Layout from "@/src/components/common/Layout";
 import OnlTrading from "@/src/components/container/OnlTrading";
 
-const LoginPage = () => {
+const OnlTradingPage = () => {
   return (
     <Layout loading={false}>
       <OnlTrading />
@@ -9,4 +9,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default OnlTradingPage;

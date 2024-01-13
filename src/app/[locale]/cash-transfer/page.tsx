@@ -1,7 +1,7 @@
 import Layout from "@/src/components/common/Layout";
 import CashTransfer from "@/src/components/container/CashTransfer";
 
-const LoginPage = () => {
+const CashTransferPage = () => {
   return (
     <Layout loading={false}>
       <CashTransfer />
@@ -9,4 +9,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default CashTransferPage;

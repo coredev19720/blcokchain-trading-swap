@@ -42,7 +42,6 @@ export default function RootLayout({
   if (!AppConfig.locales.includes(locale)) notFound();
 
   const messages = useMessages();
-
   return (
     <html lang={locale}>
       <body>

@@ -52,6 +52,7 @@ const colors = {
   sb80: "#0A3079",
   sb90: "#0B2B67",
   sb100: "#0C2655",
+  tintRest: "#132145",
 
   //Cyan
   sc10: "#F0FFFC",
@@ -118,5 +119,8 @@ const colors = {
   lightDownText: "#D13438",
   lightCeilText: "#B146C2",
   lightFloorText: "#00B7C3",
+
+  //custom colors
+  threeRest: "#ADADAD",
 };
 export default colors;

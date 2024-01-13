@@ -32,7 +32,6 @@ const Content = () => {
   const redirectToCashTransfer = () =>
     router.push(`/${params?.locale}/cash-transfer`);
   const redirectToOnlTrading = () => {
-    console.log("click");
     router.push(`/${params?.locale}/onl-trading`);
   };
 

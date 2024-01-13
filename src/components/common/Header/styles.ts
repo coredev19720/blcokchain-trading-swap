@@ -6,6 +6,7 @@ export const Wrapper = styled("div")(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
+  width: "100%",
 }));
 
 export const BackButton = styled(Typography)(({ theme }) => ({

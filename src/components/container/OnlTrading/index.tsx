@@ -1,11 +1,6 @@
 "use client";
 import Header from "../../common/Header";
 const OnlTrading = () => {
-  return (
-    <div>
-      <Header />
-      <div>Huong dan giao dich truc tuyen</div>;
-    </div>
-  );
+  return <div>Huong dan giao dich truc tuyen</div>;
 };
 export default OnlTrading;

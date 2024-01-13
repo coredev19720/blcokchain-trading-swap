@@ -4,11 +4,13 @@ import { logo } from "@/src/images";
 import { ArrowBack } from "@mui/icons-material";
 import colors from "@/src/themes/colors";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 const Header = () => {
   const router = useRouter();
   const handleBack = () => {
     router.back();
   };
+
   return (
     <Wrapper>
       <BackButton
