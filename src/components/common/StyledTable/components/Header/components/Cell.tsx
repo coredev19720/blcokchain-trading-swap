@@ -1,6 +1,7 @@
 import React from "react";
 import { TableCell, Typography } from "@mui/material";
 import { HeadCellWrapper } from "../../../styles";
+import colors from "@/src/themes/colors";
 interface IProps {
   col: any;
   handleClick: (e: string) => void;
@@ -18,6 +19,7 @@ const Cell = ({ col, sortKey, sortWay, handleClick }: IProps) => {
             align={col.align || "left"}
             variant="body2"
             fontWeight="400"
+            color={colors.p300}
           >
             {col.title}
           </Typography>

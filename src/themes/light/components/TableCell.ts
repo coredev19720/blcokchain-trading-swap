@@ -4,7 +4,7 @@ import breakpoints from "@/src/themes/breakpoints";
 const TableCell = {
   styleOverrides: {
     head: {
-      backgroundColor: colors.ln30,
+      backgroundColor: colors.sb60,
     },
     root: {
       padding: "8px 16px",

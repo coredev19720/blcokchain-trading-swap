@@ -46,7 +46,7 @@ const Content = () => {
         onClick={redirectToForgotPwd}
         variant="body2"
       >
-        {t("txt_forgot_pwd")}
+        {t("fn_login_forgot_pwd")}
       </Typography>
       <CustomerService />
       <HelpLinkWraper>

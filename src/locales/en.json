@@ -10,9 +10,11 @@
     "fn_login_txt_cusService": "Customer services",
     "fn_login_cta_ctInstruct": "Cash deposit instruction",
     "fn_login_cta_otInstruct": "Online trading instruction",
+    "fn_login_forgot_pwd": "Forgot password",
 
     "txt_cs": "Customer services",
-    "txt_cs_phone": "028 - 7306 8686"
+    "txt_cs_phone": "028 - 7306 8686",
+    "txt_minute": "minute"
   },
   "forgotPwd": {
     "txt_forgot_pwd": "Forgot password",

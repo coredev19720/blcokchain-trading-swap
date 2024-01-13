@@ -29,7 +29,6 @@ export const tickers: ITickerData[] = [
         { price: 33.1, sellVol: 1000000, buyVol: 1000000 },
         { price: 33.0, sellVol: 1000000, buyVol: 1000000 },
         { price: 32.9, sellVol: 1000000, buyVol: 1000000 },
-        { price: 32.8, sellVol: 1000000, buyVol: 1000000 },
       ],
       historyDeals: [
         { time: "09:10", price: 33.4, side: "buy", vol: 1000 },
@@ -69,7 +68,6 @@ export const tickers: ITickerData[] = [
         { price: 27.6, sellVol: 1000000, buyVol: 1000000 },
         { price: 27.55, sellVol: 1000000, buyVol: 1000000 },
         { price: 27.5, sellVol: 1000000, buyVol: 1000000 },
-        { price: 27.45, sellVol: 1000000, buyVol: 1000000 },
       ],
       historyDeals: [
         { time: "09:10", price: 27.75, side: "buy", vol: 1000 },
@@ -109,7 +107,6 @@ export const tickers: ITickerData[] = [
         { price: 32.65, sellVol: 1000000, buyVol: 1000000 },
         { price: 32.6, sellVol: 1000000, buyVol: 1000000 },
         { price: 32.55, sellVol: 1000000, buyVol: 1000000 },
-        { price: 32.5, sellVol: 1000000, buyVol: 1000000 },
       ],
       historyDeals: [
         { time: "09:10", price: 32.8, side: "buy", vol: 1000 },
@@ -149,7 +146,6 @@ export const tickers: ITickerData[] = [
         { price: 82.55, sellVol: 1000000, buyVol: 1000000 },
         { price: 82.5, sellVol: 1000000, buyVol: 1000000 },
         { price: 82.45, sellVol: 1000000, buyVol: 1000000 },
-        { price: 82.4, sellVol: 1000000, buyVol: 1000000 },
       ],
       historyDeals: [
         { time: "09:10", price: 82.7, side: "buy", vol: 1000 },
@@ -189,7 +185,6 @@ export const tickers: ITickerData[] = [
         { price: 23.15, sellVol: 1000000, buyVol: 1000000 },
         { price: 23.1, sellVol: 1000000, buyVol: 1000000 },
         { price: 23.05, sellVol: 1000000, buyVol: 1000000 },
-        { price: 23.0, sellVol: 1000000, buyVol: 1000000 },
       ],
       historyDeals: [
         { time: "09:10", price: 23.3, side: "buy", vol: 1000 },
@@ -229,7 +224,6 @@ export const tickers: ITickerData[] = [
         { price: 42.7, sellVol: 1000000, buyVol: 1000000 },
         { price: 42.65, sellVol: 1000000, buyVol: 1000000 },
         { price: 42.6, sellVol: 1000000, buyVol: 1000000 },
-        { price: 42.55, sellVol: 1000000, buyVol: 1000000 },
       ],
       historyDeals: [
         { time: "09:10", price: 42.85, side: "buy", vol: 1000 },
@@ -269,7 +263,6 @@ export const tickers: ITickerData[] = [
         { price: 44.55, sellVol: 1000000, buyVol: 1000000 },
         { price: 44.5, sellVol: 1000000, buyVol: 1000000 },
         { price: 44.45, sellVol: 1000000, buyVol: 1000000 },
-        { price: 44.4, sellVol: 1000000, buyVol: 1000000 },
       ],
       historyDeals: [
         { time: "09:10", price: 44.7, side: "buy", vol: 1000 },
@@ -309,7 +302,6 @@ export const tickers: ITickerData[] = [
         { price: 18.35, sellVol: 1000000, buyVol: 1000000 },
         { price: 18.3, sellVol: 1000000, buyVol: 1000000 },
         { price: 18.25, sellVol: 1000000, buyVol: 1000000 },
-        { price: 18.2, sellVol: 1000000, buyVol: 1000000 },
       ],
       historyDeals: [
         { time: "09:10", price: 18.5, side: "buy", vol: 1000 },

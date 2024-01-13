@@ -1,15 +1,29 @@
 import FieldLabel from "@/src/components/common/FieldLabel";
 import StyledTable from "@/src/components/common/StyledTable";
-import { IMarketDepth } from "@/src/interface/common";
+import { IDealPrice, IHistoryDeal, IMarketDepth } from "@/src/interface/common";
 import { IColumn } from "@/src/interface/table";
+import { formatBigNumber } from "@/src/utils/helpers";
+import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTranslations } from "next-intl";
+
 const Wrapper = styled("div")(() => ({
   display: "flex",
   gap: 8,
+  height: 215,
 }));
-const BestDeal = styled("div")(() => ({}));
-const HistoryDeals = styled("div")(() => ({}));
+const BestDeal = styled("div")(() => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: 8,
+  flex: 1,
+}));
+const HistoryDeals = styled("div")(() => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: 8,
+  flex: 1,
+}));
 interface IProps {
   data: IMarketDepth;
 }
@@ -17,22 +31,28 @@ const MarketDepth = ({ data }: IProps) => {
   const t = useTranslations("dashboard");
   const bestDealCols: IColumn[] = [
     {
-      title: t("en_sb_best_price"),
-      dataIndex: "price",
-      key: "price",
-      align: "left",
-      width: 100,
+      title: t("en_sb_best_buyQty"),
+      render: (row: IDealPrice) => (
+        <Typography variant="subtitle1">
+          {formatBigNumber(row.buyVol)}
+        </Typography>
+      ),
+      align: "right",
     },
     {
-      title: t("en_sb_best_buyQty"),
-      dataIndex: "buyAmount",
-      key: "amount",
+      title: t("en_sb_best_price"),
+      render: (row: IDealPrice) => (
+        <Typography variant="subtitle1">{row.price}</Typography>
+      ),
       align: "right",
     },
     {
       title: t("en_sb_best_sellQty"),
-      dataIndex: "sellAmount",
-      key: "amount",
+      render: (row: IDealPrice) => (
+        <Typography variant="subtitle1">
+          {formatBigNumber(row.sellVol)}
+        </Typography>
+      ),
       align: "right",
     },
   ];
@@ -40,26 +60,36 @@ const MarketDepth = ({ data }: IProps) => {
   const historyDealsCols: IColumn[] = [
     {
       title: t("en_sb_match_time"),
-      dataIndex: "time",
-      key: "time",
       align: "center",
+      render: (row: IHistoryDeal) => (
+        <Typography variant="subtitle1">{row.time}</Typography>
+      ),
     },
     {
       title: t("en_sb_match_price"),
-      dataIndex: "price",
-      key: "price",
       align: "right",
+      render: (row: IHistoryDeal) => (
+        <Typography variant="subtitle1">{row.price}</Typography>
+      ),
     },
     {
       title: t("en_sb_match_qty"),
-      dataIndex: "volumn",
-      key: "amount",
+      render: (row: IHistoryDeal) => (
+        <Typography variant="subtitle1">{formatBigNumber(row.vol)}</Typography>
+      ),
       align: "right",
     },
     {
       title: "",
-      dataIndex: "side",
-      key: "side",
+      render: (row: IHistoryDeal) => (
+        <Typography
+          variant="subtitle1"
+          color={row.side === "buy" ? "text.success" : "text.error"}
+        >
+          {row.side === "buy" ? "B" : "S"}
+        </Typography>
+      ),
+
       align: "center",
     },
   ];
