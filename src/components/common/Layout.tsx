@@ -5,6 +5,7 @@ import colors from "@/src/themes/colors";
 import { ReactElement, useEffect } from "react";
 import { PageWrapper, MainContent } from "@/src/styles/common";
 import { ToastContainer } from "react-toastify";
+import { usePathname } from "next/navigation";
 import Menu from "./Menu";
 import Header from "./Header";
 const Loading = dynamic(() => import("@/src/components/common/Loading"));
@@ -26,7 +27,8 @@ const Wrapper = styled("main")(({ theme }) => ({
 
 const Layout = (props: Props) => {
   const { children, loading } = props;
-
+  const pathname = usePathname();
+  console.log(pathname);
   return (
     <Wrapper>
       <Header />

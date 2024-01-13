@@ -30,7 +30,12 @@ export function middleware(req: NextRequest) {
   }
   //logged
   if (token && isPublic) {
-    return NextResponse.redirect(new URL(`/${locale}`, req.url));
+    return NextResponse.redirect(
+      new URL(
+        `/${locale}/${process.env.NEXT_PUBLIC_DEFAULT_PAGE}?s=${process.env.NEXT_PUBLIC_DEFAULT_SYMBOL}`,
+        req.url
+      )
+    );
   }
   if (token || isPublic) {
     return intlMiddleware(req);
