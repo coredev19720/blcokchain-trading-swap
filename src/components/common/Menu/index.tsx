@@ -12,6 +12,6 @@ const Menu = ({ children, required, variant }: any) => {
       </div>
     );
   });
-  return <Wrapper>{Menu}</Wrapper>;
+  return <Wrapper>Hello pikachu</Wrapper>;
 };
 export default Menu;

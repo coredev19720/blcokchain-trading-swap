@@ -4,6 +4,12 @@ export const PageWrapper = styled("div")(({ theme }) => ({
   maxWidth: 600,
   height: "100vh",
   width: "100%",
+  display: "flex",
+  flexDirection: "column",
+}));
+
+export const MainContent = styled("div")(({ theme }) => ({
+  flex: 1,
 }));
 
 export const RowContent = styled("div")(({ theme }) => ({

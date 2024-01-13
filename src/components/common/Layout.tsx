@@ -3,8 +3,9 @@ import dynamic from "next/dynamic";
 import { styled } from "@mui/system";
 import colors from "@/src/themes/colors";
 import { ReactElement } from "react";
-import { PageWrapper } from "@/src/styles/common";
+import { PageWrapper, MainContent } from "@/src/styles/common";
 import { ToastContainer } from "react-toastify";
+import Menu from "./Menu";
 const Loading = dynamic(() => import("@/src/components/common/Loading"));
 
 interface Props {
@@ -27,7 +28,10 @@ const Layout = (props: Props) => {
 
   return (
     <Wrapper>
-      <PageWrapper>{children}</PageWrapper>
+      <PageWrapper>
+        <MainContent>{children}</MainContent>
+        <Menu />
+      </PageWrapper>
       {loading && <Loading />}
       <ToastContainer
         position="bottom-center"
