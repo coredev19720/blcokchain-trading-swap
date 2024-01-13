@@ -13,13 +13,13 @@ const Content = () => {
   const params = useParams();
   const router = useRouter();
   const t = useTranslations("login");
-  const tLogin = useTranslations("login");
+  const tNoti = useTranslations("notification");
   const handleLogin = (data: ILoginForm) => {
     if (process.env.NEXT_PUBLIC_TOKEN_COOKIE) {
       cookies.set(process.env.NEXT_PUBLIC_TOKEN_COOKIE, "logged", {
         expires: dayjs().add(data.expireTime, "minutes").toDate(),
       });
-      toast.info(tLogin("txt_login_success"));
+      toast.info(tNoti("txt_login_success"));
       router.push(
         `/${params?.locale}?s=${
           params?.s || process.env.NEXT_PUBLIC_DEFAUL_SYMBOL
@@ -56,7 +56,7 @@ const Content = () => {
           onClick={redirectToCashTransfer}
           variant="subtitle1"
         >
-          {t("txt_cash_transfer")}
+          {t("fn_login_cta_ctInstruct")}
         </Typography>
         <Typography
           align="center"
@@ -64,7 +64,7 @@ const Content = () => {
           onClick={redirectToOnlTrading}
           variant="subtitle1"
         >
-          {t("txt_online_trading")}
+          {t("fn_login_cta_otInstruct")}
         </Typography>
       </HelpLinkWraper>
     </Wrapper>

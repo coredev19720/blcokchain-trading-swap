@@ -1,8 +1,13 @@
 import FieldLabel from "@/src/components/common/FieldLabel";
 import StyledTable from "@/src/components/common/StyledTable";
-import { IDealPrice, IHistoryDeal, IMarketDepth } from "@/src/interface/common";
+import {
+  IDealPrice,
+  IHistoryDeal,
+  IMarketDepth,
+  ITickerData,
+} from "@/src/interface/common";
 import { IColumn } from "@/src/interface/table";
-import { formatBigNumber } from "@/src/utils/helpers";
+import { formatBigNumber, genPriceColor } from "@/src/utils/helpers";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTranslations } from "next-intl";
@@ -25,9 +30,9 @@ const HistoryDeals = styled("div")(() => ({
   flex: 1,
 }));
 interface IProps {
-  data: IMarketDepth;
+  ticker: ITickerData;
 }
-const MarketDepth = ({ data }: IProps) => {
+const MarketDepth = ({ ticker }: IProps) => {
   const t = useTranslations("dashboard");
   const bestDealCols: IColumn[] = [
     {
@@ -42,7 +47,17 @@ const MarketDepth = ({ data }: IProps) => {
     {
       title: t("en_sb_best_price"),
       render: (row: IDealPrice) => (
-        <Typography variant="subtitle1">{row.price}</Typography>
+        <Typography
+          variant="subtitle1"
+          color={genPriceColor(
+            ticker.ref,
+            row.price,
+            ticker.ceil,
+            ticker.floor
+          )}
+        >
+          {row.price}
+        </Typography>
       ),
       align: "right",
     },
@@ -69,7 +84,17 @@ const MarketDepth = ({ data }: IProps) => {
       title: t("en_sb_match_price"),
       align: "right",
       render: (row: IHistoryDeal) => (
-        <Typography variant="subtitle1">{row.price}</Typography>
+        <Typography
+          variant="subtitle1"
+          color={genPriceColor(
+            ticker.ref,
+            row.price,
+            ticker.ceil,
+            ticker.floor
+          )}
+        >
+          {row.price}
+        </Typography>
       ),
     },
     {
@@ -97,13 +122,17 @@ const MarketDepth = ({ data }: IProps) => {
     <Wrapper>
       <BestDeal>
         <FieldLabel>{t("fn_symbol_txt_bestQuote")}</FieldLabel>
-        <StyledTable columns={bestDealCols} dataSource={data.deals} />
+        <StyledTable
+          columns={bestDealCols}
+          dataSource={ticker.marketDepth.deals}
+        />
       </BestDeal>
       <HistoryDeals>
         <FieldLabel>{t("fn_symbol_txt_ordHist")}</FieldLabel>
         <StyledTable
           columns={historyDealsCols}
-          dataSource={data.historyDeals}
+          dataSource={ticker.marketDepth.historyDeals}
+          stickyHeader
         />
       </HistoryDeals>
     </Wrapper>
