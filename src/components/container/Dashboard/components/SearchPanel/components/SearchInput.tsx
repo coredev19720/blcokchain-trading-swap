@@ -51,6 +51,7 @@ const SearchInput = ({
   return (
     <Wrapper>
       <Input
+        autoFocus
         onFocus={() => setOpenPanel(true)}
         value={searchText}
         onChange={handleChangeSearchText}

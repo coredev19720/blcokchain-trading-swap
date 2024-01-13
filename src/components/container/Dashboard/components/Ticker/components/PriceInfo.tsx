@@ -3,7 +3,7 @@ import Line from "@/src/components/common/Line";
 import { ITickerData } from "@/src/interface/common";
 import { RowContent } from "@/src/styles/common";
 import colors from "@/src/themes/colors";
-import { genTextColor } from "@/src/utils/helpers";
+import { genPriceColor } from "@/src/utils/helpers";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTranslations } from "next-intl";
@@ -30,7 +30,7 @@ const PriceInfo = ({ ticker }: IProps) => {
           <Typography
             fontWeight={500}
             variant="body2"
-            color={genTextColor(
+            color={genPriceColor(
               ticker.ref,
               ticker.open,
               ticker.ceil,
@@ -45,7 +45,7 @@ const PriceInfo = ({ ticker }: IProps) => {
           <Typography
             fontWeight={500}
             variant="body2"
-            color={genTextColor(
+            color={genPriceColor(
               ticker.ref,
               ticker.high,
               ticker.ceil,
@@ -60,7 +60,7 @@ const PriceInfo = ({ ticker }: IProps) => {
           <Typography
             fontWeight={500}
             variant="body2"
-            color={genTextColor(
+            color={genPriceColor(
               ticker.ref,
               ticker.low,
               ticker.ceil,

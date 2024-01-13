@@ -4,7 +4,7 @@ import { tickerOpts } from "@/src/constants/dumpData";
 import { ITickerData, ITickerOpt } from "@/src/interface/common";
 import { tickers } from "@/src/constants/dumpData/dashboard";
 import SearchInput from "./components/SearchInput";
-import { useState } from "react";
+import { useRef, useState } from "react";
 interface IProps {
   open: boolean;
   setTicker: (val: ITickerData) => void;

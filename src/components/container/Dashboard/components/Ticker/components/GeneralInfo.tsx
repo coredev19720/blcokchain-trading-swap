@@ -2,7 +2,7 @@ import { ITickerData } from "@/src/interface/common";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { RowContent } from "@/src/styles/common";
-import { genTextColor, genTextWithPrefix } from "@/src/utils/helpers";
+import { genPriceColor, genTextWithPrefix } from "@/src/utils/helpers";
 
 const Wrapper = styled("div")(() => ({}));
 interface IProps {
@@ -18,7 +18,7 @@ const GeneralInfo = ({ ticker }: IProps) => {
         <Typography
           variant="h4"
           fontWeight={600}
-          color={genTextColor(
+          color={genPriceColor(
             ticker.ref,
             ticker.price,
             ticker.ceil,
@@ -36,7 +36,7 @@ const GeneralInfo = ({ ticker }: IProps) => {
         <Typography
           style={{ whiteSpace: "nowrap" }}
           variant="subtitle1"
-          color={genTextColor(
+          color={genPriceColor(
             ticker.ref,
             ticker.price,
             ticker.ceil,

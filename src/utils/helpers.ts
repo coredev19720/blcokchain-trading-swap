@@ -10,7 +10,7 @@ export const validTicker = (val: string) => {
   return false;
 };
 
-export const genTextColor = (
+export const genPriceColor = (
   ref: number,
   price: number,
   ceil: number,
