@@ -44,6 +44,15 @@ export interface IDealPrice {
   sellVol: number;
 }
 
+export interface IMarketInfo {
+  name: string;
+  index: number;
+  chg: number;
+  pctChg: number;
+  vol: number;
+  value: number;
+}
+
 export interface IHistoryDeal {
   time: string;
   side: TSide;

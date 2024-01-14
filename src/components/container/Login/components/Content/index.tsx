@@ -21,7 +21,7 @@ const Content = () => {
       });
       toast.info(tNoti("txt_login_success"));
       router.push(
-        `/${params?.locale}?s=${
+        `/${params?.locale}/${process.env.NEXT_PUBLIC_DEFAULT_PAGE}?s=${
           params?.s || process.env.NEXT_PUBLIC_DEFAULT_SYMBOL
         }`
       );
