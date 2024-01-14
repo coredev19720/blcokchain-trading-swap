@@ -17,17 +17,17 @@ const Content = () => {
   const tNoti = useTranslations("notification");
 
   const handleLogin = (data: ILoginForm) => {
-    const lastSymbol = process.env.LAST_SYMBOL
-      ? window.localStorage.get(process.env.LAST_SYMBOL)
+    const lastSymbol = process.env.NEXT_PUBLIC_LAST_SYM_KEY
+      ? window.localStorage.get(process.env.NEXT_PUBLIC_LAST_SYM_KEY)
       : null;
-    if (process.env.TOKEN_COOKIE) {
-      cookies.set(process.env.TOKEN_COOKIE, "logged", {
+    if (process.env.NEXT_PUBLIC_TOKEN_COOKIE) {
+      cookies.set(process.env.NEXT_PUBLIC_TOKEN_COOKIE, "logged", {
         expires: dayjs().add(data.expireTime, "minutes").toDate(),
       });
       toast.info(tNoti("txt_login_success"));
       router.push(
         `/${params?.locale}/${process.env.NEXT_PUBLIC_DEFAULT_PAGE}?s=${
-          params?.s || lastSymbol || process.env.DEFAULT_SYMBOL
+          params?.s || lastSymbol || process.env.NEXT_PUBLIC_DEFAULT_SYMBOL
         }`
       );
     }

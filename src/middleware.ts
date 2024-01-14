@@ -32,7 +32,7 @@ export function middleware(req: NextRequest) {
   if (token && isPublic) {
     return NextResponse.redirect(
       new URL(
-        `/${locale}/${process.env.DEFAULT_PAGE}?s=${process.env.DEFAULT_SYMBOL}`,
+        `/${locale}/${process.env.NEXT_PUBLIC_DEFAULT_PAGE}?s=${process.env.NEXT_PUBLIC_DEFAULT_SYMBOL}`,
         req.url
       )
     );
