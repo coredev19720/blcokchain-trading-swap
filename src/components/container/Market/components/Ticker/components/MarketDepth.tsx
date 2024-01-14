@@ -1,5 +1,6 @@
 import FieldLabel from "@/src/components/common/FieldLabel";
 import StyledTable from "@/src/components/common/StyledTable";
+import { TSide } from "@/src/enum";
 import {
   IDealPrice,
   IHistoryDeal,
@@ -33,7 +34,7 @@ interface IProps {
   ticker: ITickerData;
 }
 const MarketDepth = ({ ticker }: IProps) => {
-  const t = useTranslations("dashboard");
+  const t = useTranslations("market");
   const bestDealCols: IColumn[] = [
     {
       title: t("en_sb_best_buyQty"),
@@ -109,9 +110,9 @@ const MarketDepth = ({ ticker }: IProps) => {
       render: (row: IHistoryDeal) => (
         <Typography
           variant="subtitle1"
-          color={row.side === "buy" ? "text.success" : "text.error"}
+          color={row.side === TSide.BUY ? "text.success" : "text.error"}
         >
-          {row.side === "buy" ? "B" : "S"}
+          {row.side === TSide.BUY ? "B" : "S"}
         </Typography>
       ),
 

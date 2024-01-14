@@ -4,6 +4,7 @@ const Wrapper = styled("div")(() => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  padding: 16,
 }));
 const EmptyState = () => (
   <Wrapper>

@@ -1,33 +1,32 @@
 import FieldLabel from "@/src/components/common/FieldLabel";
 import StyledTable from "@/src/components/common/StyledTable";
-import {
-  IDealPrice,
-  IHistoryDeal,
-  IMarketDepth,
-  ITickerData,
-} from "@/src/interface/common";
+import { IMarketInfo, ITickerData } from "@/src/interface/common";
 import { IColumn } from "@/src/interface/table";
-import { formatBigNumber, genPriceColor } from "@/src/utils/helpers";
+import {
+  formatBigNumber,
+  formatNumber,
+  genIndexColor,
+  genPriceColor,
+  genTextWithPrefix,
+} from "@/src/utils/helpers";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTranslations } from "next-intl";
-
+import { marketIndex } from "@/src/constants/dumpData/dashboard";
 const Wrapper = styled("div")(() => ({
   display: "flex",
   gap: 8,
-  height: 215,
+  flexDirection: "column",
 }));
-interface IProps {
-  ticker: ITickerData;
-}
-const MarketIndex = ({ ticker }: IProps) => {
-  const t = useTranslations("dashboard");
+
+const MarketIndex = () => {
+  const t = useTranslations("market");
   const columns: IColumn[] = [
     {
       title: t("en_idx_code"),
       render: (row: IMarketInfo) => (
-        <Typography variant="subtitle1">
-          {formatBigNumber(row.buyVol)}
+        <Typography variant="subtitle1" fontWeight={700} color="text.primary">
+          {row.name}
         </Typography>
       ),
       align: "right",
@@ -35,16 +34,8 @@ const MarketIndex = ({ ticker }: IProps) => {
     {
       title: t("en_idx_price_last"),
       render: (row: IMarketInfo) => (
-        <Typography
-          variant="subtitle1"
-          color={genPriceColor(
-            ticker.ref,
-            row.price,
-            ticker.ceil,
-            ticker.floor
-          )}
-        >
-          {row.price}
+        <Typography variant="subtitle1" color={genIndexColor(row.chg)}>
+          {formatNumber(row.index)}
         </Typography>
       ),
       align: "right",
@@ -52,9 +43,13 @@ const MarketIndex = ({ ticker }: IProps) => {
     {
       title: t("en_idx_price_change"),
       render: (row: IMarketInfo) => (
-        <Typography variant="subtitle1">
-          {formatBigNumber(row.sellVol)}
-        </Typography>
+        <Typography
+          fontWeight={500}
+          variant="subtitle1"
+          color={genIndexColor(row.chg)}
+        >{`${genTextWithPrefix(row.chg)}(${genTextWithPrefix(
+          row.pctChg
+        )}%)`}</Typography>
       ),
       align: "right",
     },
@@ -62,18 +57,17 @@ const MarketIndex = ({ ticker }: IProps) => {
       title: t("en_idx_value"),
       render: (row: IMarketInfo) => (
         <Typography variant="subtitle1">
-          {formatBigNumber(row.sellVol)}
+          {formatBigNumber(row.value)}
         </Typography>
       ),
       align: "right",
     },
-    ,
   ];
 
   return (
     <Wrapper>
       <FieldLabel>{t("fn_symbol_txt_bestQuote")}</FieldLabel>
-      <StyledTable columns={columns} dataSource={ticker.marketDepth.deals} />
+      <StyledTable columns={columns} dataSource={marketIndex} />
     </Wrapper>
   );
 };

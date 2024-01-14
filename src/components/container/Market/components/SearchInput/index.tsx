@@ -6,10 +6,12 @@ interface IProps {
   setOpenPanel: (val: boolean) => void;
 }
 
-const Wrapper = styled("div")(() => ({
+const Wrapper = styled("div")(({ theme }) => ({
   display: "flex",
   gap: 8,
   alignItems: "center",
+  padding: theme.spacing(0, 4),
+  marginTop: 8,
 }));
 const Input = styled(OutlinedInput)(() => ({
   backgroundColor: "#f0f0f0",
@@ -20,7 +22,7 @@ const Input = styled(OutlinedInput)(() => ({
 }));
 
 const SearchInput = ({ setOpenPanel }: IProps) => {
-  const t = useTranslations("dashboard");
+  const t = useTranslations("market");
   return (
     <Wrapper>
       <Input

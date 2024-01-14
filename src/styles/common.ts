@@ -10,6 +10,7 @@ export const PageWrapper = styled("div")(({ theme }) => ({
 
 export const MainContent = styled("div")(({ theme }) => ({
   flex: 1,
+  maxHeight: "calc(100vh - 117px)",
 }));
 
 export const RowContent = styled("div")(({ theme }) => ({

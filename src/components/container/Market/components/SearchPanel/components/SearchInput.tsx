@@ -37,7 +37,7 @@ const SearchInput = ({
   setOpenPanel,
   openPanel,
 }: IProps) => {
-  const t = useTranslations("dashboard");
+  const t = useTranslations("market");
   const handleClearSearchText = () => {
     setSearchText("");
   };

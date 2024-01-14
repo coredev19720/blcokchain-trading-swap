@@ -9,20 +9,25 @@ import CustomerService from "./comonents/CustomerService";
 import cookies from "js-cookie";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
+
 const Content = () => {
   const params = useParams();
   const router = useRouter();
   const t = useTranslations("login");
   const tNoti = useTranslations("notification");
+
   const handleLogin = (data: ILoginForm) => {
-    if (process.env.NEXT_PUBLIC_TOKEN_COOKIE) {
-      cookies.set(process.env.NEXT_PUBLIC_TOKEN_COOKIE, "logged", {
+    const lastSymbol = process.env.LAST_SYMBOL
+      ? window.localStorage.get(process.env.LAST_SYMBOL)
+      : null;
+    if (process.env.TOKEN_COOKIE) {
+      cookies.set(process.env.TOKEN_COOKIE, "logged", {
         expires: dayjs().add(data.expireTime, "minutes").toDate(),
       });
       toast.info(tNoti("txt_login_success"));
       router.push(
         `/${params?.locale}/${process.env.NEXT_PUBLIC_DEFAULT_PAGE}?s=${
-          params?.s || process.env.NEXT_PUBLIC_DEFAULT_SYMBOL
+          params?.s || lastSymbol || process.env.DEFAULT_SYMBOL
         }`
       );
     }

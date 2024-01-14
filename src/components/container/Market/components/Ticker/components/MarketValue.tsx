@@ -14,7 +14,7 @@ interface IProps {
   ticker: ITickerData;
 }
 const MarketValue = ({ ticker }: IProps) => {
-  const t = useTranslations("dashboard");
+  const t = useTranslations("market");
   return (
     <Wrapper>
       <ColContent>
