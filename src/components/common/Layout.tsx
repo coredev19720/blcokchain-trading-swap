@@ -7,7 +7,6 @@ import { PageWrapper, MainContent } from "@/src/styles/common";
 import { ToastContainer } from "react-toastify";
 import { usePathname } from "next/navigation";
 import Menu from "./Menu";
-import Header from "./Header";
 const Loading = dynamic(() => import("@/src/components/common/Loading"));
 
 interface Props {
@@ -31,7 +30,6 @@ const Layout = (props: Props) => {
   console.log(pathname);
   return (
     <Wrapper>
-      <Header />
       <PageWrapper>
         <MainContent>{children}</MainContent>
         <Menu />

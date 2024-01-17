@@ -15,6 +15,13 @@ const SearchPanel = ({ open, setTicker, setOpenPanel }: IProps) => {
   const handleClickTicker = (val: ITickerOpt) => {
     const ticker = tickers.find((t) => t.ticker === val.value);
     if (ticker) {
+      console.log(ticker);
+      window.localStorage.setItem(
+        process.env.NEXT_PUBLIC_LAST_SYM_KEY
+          ? process.env.NEXT_PUBLIC_LAST_SYM_KEY
+          : "lastSym",
+        JSON.stringify(ticker.ticker)
+      );
       setTicker(ticker);
     }
     setOpenPanel(false);

@@ -21,6 +21,17 @@ const Market = () => {
         setTicker(ticker);
       }
     }
+    const lastSymbol = localStorage.getItem(
+      process.env.NEXT_PUBLIC_LAST_SYM_KEY
+        ? process.env.NEXT_PUBLIC_LAST_SYM_KEY
+        : "lastSymbol"
+    );
+    if (lastSymbol && JSON.parse(lastSymbol)) {
+      const ticker = tickers.find((t) => t.ticker === JSON.parse(lastSymbol));
+      if (ticker) {
+        setTicker(ticker);
+      }
+    }
   }, []);
 
   return (

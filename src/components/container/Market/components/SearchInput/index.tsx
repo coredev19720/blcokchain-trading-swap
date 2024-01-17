@@ -11,7 +11,7 @@ const Wrapper = styled("div")(({ theme }) => ({
   gap: 8,
   alignItems: "center",
   padding: theme.spacing(0, 4),
-  marginTop: 8,
+  paddingTop: theme.spacing(4),
 }));
 const Input = styled(OutlinedInput)(() => ({
   backgroundColor: "#f0f0f0",

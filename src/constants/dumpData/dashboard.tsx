@@ -369,4 +369,12 @@ export const marketIndex: IMarketInfo[] = [
     vol: 100000000,
     value: 500000000000,
   },
+  {
+    name: "VNFINLEAD",
+    index: 1000,
+    chg: 10,
+    pctChg: 0.72,
+    vol: 100000000,
+    value: 500000000000,
+  },
 ];

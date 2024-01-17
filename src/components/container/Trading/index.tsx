@@ -1,5 +1,5 @@
 "use client";
-import Header from "../../common/Header";
+import Header from "../Login/Header";
 const Trading = () => {
   return <div>Trading</div>;
 };

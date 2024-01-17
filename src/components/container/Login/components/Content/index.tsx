@@ -18,7 +18,7 @@ const Content = () => {
 
   const handleLogin = (data: ILoginForm) => {
     const lastSymbol = process.env.NEXT_PUBLIC_LAST_SYM_KEY
-      ? window.localStorage.get(process.env.NEXT_PUBLIC_LAST_SYM_KEY)
+      ? window.localStorage.getItem(process.env.NEXT_PUBLIC_LAST_SYM_KEY)
       : null;
     if (process.env.NEXT_PUBLIC_TOKEN_COOKIE) {
       cookies.set(process.env.NEXT_PUBLIC_TOKEN_COOKIE, "logged", {
