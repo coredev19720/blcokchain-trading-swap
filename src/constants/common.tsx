@@ -1,4 +1,4 @@
-import { IMenuItem } from "../interface/common";
+import { ILang, IMenuItem } from "../interface/common";
 import {
   menuIconAccount,
   menuIconTrading,
@@ -9,6 +9,8 @@ import {
   activeMenuIconOrderBook,
   activeMenuIconPort,
   activeMenuIconTrading,
+  engFlag,
+  vieFlag,
 } from "../images";
 
 export const menus: IMenuItem[] = [
@@ -42,4 +44,9 @@ export const menus: IMenuItem[] = [
     activeIcon: menuIconAccount,
     url: "/account",
   },
+];
+
+export const languages: ILang[] = [
+  { label: "English", value: "en", icon: engFlag },
+  { label: "Tiếng Việt", value: "vi", icon: vieFlag },
 ];

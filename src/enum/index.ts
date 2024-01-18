@@ -17,3 +17,12 @@ export enum TSide {
   SELL = "SELL",
   BUY = "BUY",
 }
+
+export enum TAccountType {
+  CASH = "CASH",
+  MARGIN = "MARGIN",
+  MARGIN_CASH = "MARGIN_CASH",
+  MARGIN_STOCK = "MARGIN_STOCK",
+}
+
+export type Language = "en" | "vi";

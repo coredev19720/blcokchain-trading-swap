@@ -9,7 +9,8 @@ import activeMenuIconOrderBook from "@/public/images/icon/active_menu_order_book
 import menuIconTrading from "@/public/images/icon/menu_trading_icon.svg";
 import activeMenuIconTrading from "@/public/images/icon/active_menu_trading_icon.svg";
 import menuIconAccount from "@/public/images/icon/menu_account_icon.svg";
-
+import engFlag from "@/public/images/eng-flag.svg";
+import vieFlag from "@/public/images/vie-flag.svg";
 export {
   logo,
   csIcon,
@@ -22,4 +23,6 @@ export {
   activeMenuIconOrderBook,
   activeMenuIconPort,
   activeMenuIconMarket,
+  engFlag,
+  vieFlag,
 };

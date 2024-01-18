@@ -1,4 +1,4 @@
-import { TSide } from "../enum";
+import { TAccountType, TSide } from "../enum";
 
 export interface IUserInfo {
   name: string;
@@ -65,4 +65,23 @@ export interface IMenuItem {
   icon: any;
   url: string;
   activeIcon: any;
+}
+
+export interface IAccount {
+  type: TAccountType;
+  accountNo: string;
+  totalAsset: number;
+  cashPayables: number;
+  receivingCash: number;
+  buyingPower: number;
+  cashBalance: number;
+  coh: number;
+  accessEquity: number;
+  portValue: number;
+}
+
+export interface ILang {
+  label: string;
+  value: string;
+  icon: any;
 }
