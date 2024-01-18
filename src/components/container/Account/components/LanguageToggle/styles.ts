@@ -1,6 +1,5 @@
 import colors from "@/src/themes/colors";
 import { styled } from "@mui/system";
-import Link from "next/link";
 
 export const Wrapper = styled("div")(() => ({
   padding: 16,
@@ -9,7 +8,7 @@ export const Wrapper = styled("div")(() => ({
   justifyContent: "center",
 }));
 
-export const Language = styled(Link)(() => ({
+export const Language = styled("div")(() => ({
   borderRadius: 4,
   padding: 4,
   cursor: "pointer",

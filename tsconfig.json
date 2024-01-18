@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "libs/Env.mjs",
-    "src/components/container/Dashboard/components/SearchInput.txs"
+    "src/components/container/Dashboard/components/SearchInput.txs",
+    "src/app/not-found.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -4,18 +4,23 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Language, Wrapper } from "./styles";
 import { languages } from "@/src/constants/common";
-import { usePathname, useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import {
+  usePathname,
+  useRouter,
+  useParams,
+  useSearchParams,
+} from "next/navigation";
 import Image from "next/image";
 const LanguageToggle = () => {
   const t = useTranslations("account");
   const pathname = usePathname();
   const router = useRouter();
+  const params = useParams();
+  console.log(pathname);
+  console.log(router);
   const handleChangeLanguage = (val: string) => {
-    console.log(val);
-    console.log(pathname);
-    if (pathname) {
-      router.push(pathname, pathname, { locale: val });
-    }
+    Cookies.set("NEXT_LOCALE", val);
   };
   return (
     <Wrapper>

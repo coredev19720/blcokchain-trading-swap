@@ -1,6 +1,6 @@
 import { locales, defaultLocale } from "../constants";
 export const AppConfig = {
   name: "Resp trading App",
-  locales: locales,
-  defaultLocale: defaultLocale,
+  locales,
+  defaultLocale,
 };

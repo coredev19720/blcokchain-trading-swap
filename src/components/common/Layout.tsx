@@ -2,17 +2,12 @@
 import dynamic from "next/dynamic";
 import { styled } from "@mui/system";
 import colors from "@/src/themes/colors";
-import { ReactElement, useEffect } from "react";
+import { ReactElement, ReactNode, useEffect } from "react";
 import { PageWrapper, MainContent } from "@/src/styles/common";
 import { ToastContainer } from "react-toastify";
 import { usePathname } from "next/navigation";
 import Menu from "./Menu";
 const Loading = dynamic(() => import("@/src/components/common/Loading"));
-
-interface Props {
-  children: ReactElement;
-  loading: boolean;
-}
 
 const Wrapper = styled("main")(({ theme }) => ({
   height: "100vh",
@@ -24,17 +19,13 @@ const Wrapper = styled("main")(({ theme }) => ({
   alignItems: "center",
 }));
 
-const Layout = (props: Props) => {
-  const { children, loading } = props;
-  const pathname = usePathname();
-  console.log(pathname);
+export default function Layout({ children }: { children: ReactNode }) {
   return (
     <Wrapper>
       <PageWrapper>
         <MainContent>{children}</MainContent>
         <Menu />
       </PageWrapper>
-      {loading && <Loading />}
       <ToastContainer
         position="bottom-center"
         autoClose={5000}
@@ -47,6 +38,4 @@ const Layout = (props: Props) => {
       />
     </Wrapper>
   );
-};
-
-export default Layout;
+}

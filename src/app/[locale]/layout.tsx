@@ -6,6 +6,7 @@ import { NextIntlClientProvider, useMessages } from "next-intl";
 import { AppConfig } from "@/src/utils/AppConfig";
 import ThemeRegistry from "../ThemeRegistry";
 import { Providers } from "@/src/redux/provider";
+import Layout from "@/src/components/common/Layout";
 
 export const metadata: Metadata = {
   icons: [
@@ -39,6 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  console.log("RootLayout");
   if (!AppConfig.locales.includes(locale)) notFound();
 
   const messages = useMessages();
@@ -47,7 +49,9 @@ export default function RootLayout({
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeRegistry options={{ key: "mui" }}>
-            <Providers>{children}</Providers>
+            <Providers>
+              <Layout>{children}</Layout>
+            </Providers>
           </ThemeRegistry>
         </NextIntlClientProvider>
       </body>

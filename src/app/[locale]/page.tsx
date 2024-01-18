@@ -2,7 +2,7 @@ import Layout from "@/src/components/common/Layout";
 
 const DashboardPage = () => {
   return (
-    <Layout loading={false}>
+    <Layout>
       <div>dashboard</div>
     </Layout>
   );
