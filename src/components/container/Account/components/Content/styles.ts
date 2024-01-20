@@ -8,8 +8,20 @@ export const Wrapper = styled("div")(() => ({
   flexDirection: "column",
 }));
 
-export const RowWrapper = styled("div")(() => ({
+export const RowWrapper = styled("div")<{
+  isHeader?: boolean;
+  bgColor?: string;
+}>(({ theme, isHeader, bgColor }) => ({
   display: "flex",
   gap: 8,
   justifyContent: "space-between",
+  borderRadius: 8,
+  ...(isHeader
+    ? {
+        padding: theme.spacing(2, 4),
+      }
+    : {
+        padding: theme.spacing(0, 4),
+      }),
+  ...(bgColor ? { backgroundColor: bgColor } : {}),
 }));

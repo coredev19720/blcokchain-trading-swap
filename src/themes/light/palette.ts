@@ -40,6 +40,7 @@ const palette = {
     success: colors.sg70,
     error: colors.sr60,
     colorPrimary: colors.p100,
+    white: colors.p300,
   },
   background: {
     paper: colors.p300,

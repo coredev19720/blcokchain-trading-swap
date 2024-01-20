@@ -8,9 +8,9 @@ export const Wrapper = styled("div")(() => ({
   justifyContent: "center",
 }));
 
-export const Language = styled("div")(() => ({
+export const Language = styled("div")<{ active?: boolean }>((props) => ({
   borderRadius: 4,
   padding: 4,
   cursor: "pointer",
-  // ...(active ? { border: `1px solid ${colors.sb60}` } : {}),
+  ...(props.active ? { border: `1px solid ${colors.sb60}` } : {}),
 }));

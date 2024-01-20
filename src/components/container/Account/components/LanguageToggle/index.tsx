@@ -17,8 +17,7 @@ const LanguageToggle = () => {
   const pathname = usePathname();
   const router = useRouter();
   const params = useParams();
-  console.log(pathname);
-  console.log(router);
+  const { locale } = params;
   const handleChangeLanguage = (val: string) => {
     Cookies.set("NEXT_LOCALE", val);
   };
@@ -30,8 +29,9 @@ const LanguageToggle = () => {
           onClick={() => {
             handleChangeLanguage(item.value);
           }}
+          active={item.value === locale}
         >
-          <Image src={item.icon} alt={item.label} width={24} height={24} />
+          <Image src={item.icon} alt={item.label} width={24} height={18} />
         </Language>
       ))}
     </Wrapper>

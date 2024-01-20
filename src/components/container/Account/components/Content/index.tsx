@@ -3,6 +3,7 @@ import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { IAccount } from "@/src/interface/common";
 import { TAccountType } from "@/src/enum";
+import colors from "@/src/themes/colors";
 
 const data: IAccount = {
   type: TAccountType.CASH,
@@ -20,13 +21,17 @@ const Content = () => {
   const t = useTranslations("account");
   return (
     <S.Wrapper>
-      <S.RowWrapper>
-        <Typography>{t("en_cu_asset_total")}</Typography>
-        <Typography>{data.totalAsset}</Typography>
+      <S.RowWrapper isHeader bgColor={colors.sy80}>
+        <Typography color={colors.sb60}>{t("en_cu_asset_total")}</Typography>
+        <Typography fontWeight={600} color={colors.sb60}>
+          {data.totalAsset}
+        </Typography>
       </S.RowWrapper>
-      <S.RowWrapper>
-        <Typography>{t("en_cu_cash_total")}</Typography>
-        <Typography>{data.cashBalance}</Typography>
+      <S.RowWrapper isHeader bgColor={colors.sb60}>
+        <Typography color={colors.p300}>{t("en_cu_cash_total")}</Typography>
+        <Typography fontWeight={600} color={colors.p300}>
+          {data.cashBalance}
+        </Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("en_cu_cash_onHand")}</Typography>
@@ -52,9 +57,13 @@ const Content = () => {
         <Typography>{t("en_cu_stock_sum_total")}</Typography>
         <Typography>{data.portValue}</Typography>
       </S.RowWrapper>
-      <S.RowWrapper>
-        <Typography>{t("en_cu_stock_sum_onhandVal")}</Typography>
-        <Typography>{data.portValue}</Typography>
+      <S.RowWrapper isHeader bgColor={colors.sb60}>
+        <Typography color={colors.p300}>
+          {t("en_cu_stock_sum_onhandVal")}
+        </Typography>
+        <Typography fontWeight={600} color={colors.p300}>
+          {data.portValue}
+        </Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("en_cu_stock_sum_receivingVal")}</Typography>

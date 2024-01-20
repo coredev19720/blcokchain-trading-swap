@@ -1,8 +1,13 @@
 "use client";
 import Content from "./components/Content";
 import Header from "@/src/components/container/Login/Header";
-
+import { Wrapper } from "./styles";
 const Login = () => {
-  return <Content />;
+  return (
+    <Wrapper>
+      <Header />
+      <Content />
+    </Wrapper>
+  );
 };
 export default Login;

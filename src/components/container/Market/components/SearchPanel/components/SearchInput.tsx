@@ -69,7 +69,7 @@ const SearchInput = ({
       />
       {openPanel && (
         <CloseBtn onClick={() => setOpenPanel(false)}>
-          {t("txt_close_search")}
+          {t("fn_symbol_cta_close")}
         </CloseBtn>
       )}
     </Wrapper>

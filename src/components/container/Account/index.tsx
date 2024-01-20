@@ -1,6 +1,6 @@
 "use client";
-import { Wrapper } from "./styles";
-import { use, useEffect } from "react";
+import { ButtonWrapper, Wrapper, ContentWrapper } from "./styles";
+import { useEffect } from "react";
 import Header from "./components/Header";
 import Content from "./components/Content";
 import { Button } from "@mui/material";
@@ -12,10 +12,16 @@ const Account = () => {
 
   return (
     <Wrapper>
-      <Header />
-      <Content />
-      <LanguageToggle />
-      <Button>{t("fn_acc_cta_logout")}</Button>
+      <ContentWrapper>
+        <Header />
+        <Content />
+        <LanguageToggle />
+      </ContentWrapper>
+      <ButtonWrapper>
+        <Button fullWidth variant="outlined">
+          {t("fn_acc_cta_logout")}
+        </Button>
+      </ButtonWrapper>
     </Wrapper>
   );
 };

@@ -1,13 +1,10 @@
 "use client";
-import dynamic from "next/dynamic";
 import { styled } from "@mui/system";
 import colors from "@/src/themes/colors";
-import { ReactElement, ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import { PageWrapper, MainContent } from "@/src/styles/common";
 import { ToastContainer } from "react-toastify";
-import { usePathname } from "next/navigation";
 import Menu from "./Menu";
-const Loading = dynamic(() => import("@/src/components/common/Loading"));
 
 const Wrapper = styled("main")(({ theme }) => ({
   height: "100vh",

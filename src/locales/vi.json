@@ -23,7 +23,7 @@
   },
   "market": {
     "fn_symbol_cta_search": "Tìm kiếm",
-    "txt_close_search": "Đóng",
+    "fn_symbol_cta_close": "Đóng",
     "en_sb_price_open": "Mở cửa",
     "en_sb_price_highest": "Cao nhất",
     "en_sb_price_lowest": "Thấp nhất",

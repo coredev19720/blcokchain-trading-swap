@@ -14,7 +14,17 @@ const Select = {
         borderColor: "transparent",
       },
     },
+    standard: {
+      background: "none",
+      border: "none",
+      "&:before": {
+        borderBottom: "none",
+      },
+      "&:after": {
+        borderBottom: "none",
+      },
+    },
   },
-}
+};
 
 export default Select;

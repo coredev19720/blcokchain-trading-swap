@@ -21,8 +21,9 @@
     "txt_otp": "Input OTP",
     "txt_new_pwd": "New password"
   },
-  "dashboard": {
+  "market": {
     "fn_symbol_cta_search": "Search",
+    "fn_symbol_cta_close": "Close",
     "en_sb_price_open": "Open",
     "en_sb_price_highest": "High",
     "en_sb_price_lowest": "Low",
