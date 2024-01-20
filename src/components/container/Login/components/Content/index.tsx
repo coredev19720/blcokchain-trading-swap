@@ -15,8 +15,15 @@ const Content = () => {
   const router = useRouter();
   const t = useTranslations("login");
   const tNoti = useTranslations("notification");
-
+  const loginSuccess = (data: ILoginForm) => {
+    if (data.username !== "admin" || data.pwd !== "admin") return false;
+    return true;
+  };
   const handleLogin = (data: ILoginForm) => {
+    if (!loginSuccess(data)) {
+      toast.error(tNoti("txt_login_fail"));
+      return;
+    }
     const lastSymbol = process.env.NEXT_PUBLIC_LAST_SYM_KEY
       ? window.localStorage.getItem(process.env.NEXT_PUBLIC_LAST_SYM_KEY)
       : null;

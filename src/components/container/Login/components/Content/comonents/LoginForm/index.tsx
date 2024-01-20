@@ -20,7 +20,7 @@ import HelpText from "@/src/components/common/HelpText";
 import { Wrapper, FieldWrapper, AdormentWrapper } from "./styles";
 import FieldLabel from "@/src/components/common/FieldLabel";
 interface IProps {
-  onSubmit: any;
+  onSubmit: (data: any) => void;
 }
 const LoginForm = ({ onSubmit }: IProps) => {
   const t = useTranslations("login");

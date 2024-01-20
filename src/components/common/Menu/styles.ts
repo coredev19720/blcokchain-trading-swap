@@ -16,6 +16,7 @@ export const MenuItem = styled("div")(({ theme }) => ({
   padding: theme.spacing(2),
   alignItems: "center",
   justifyContent: "center",
+  cursor: "pointer",
 }));
 
 export const MenuImage = styled(Image)(() => ({}));
