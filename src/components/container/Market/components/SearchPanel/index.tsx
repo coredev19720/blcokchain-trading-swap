@@ -1,28 +1,30 @@
 import { TickerWrapper, Wrapper, Tickers } from "./styles";
 import { Backdrop, Slide, Typography } from "@mui/material";
 import { tickerOpts } from "@/src/constants/dumpData";
-import { ITickerData, ITickerOpt } from "@/src/interface/common";
+import { ITickerOpt } from "@/src/interface/common";
 import { tickers } from "@/src/constants/dumpData/dashboard";
 import SearchInput from "./components/SearchInput";
-import { useRef, useState } from "react";
+import { useState } from "react";
+import { useAppDispatch } from "@/src/redux/hooks";
+import { setTicker } from "@/src/redux/features/marketSlice";
+
 interface IProps {
   open: boolean;
-  setTicker: (val: ITickerData) => void;
   setOpenPanel: (val: boolean) => void;
 }
-const SearchPanel = ({ open, setTicker, setOpenPanel }: IProps) => {
+const SearchPanel = ({ open, setOpenPanel }: IProps) => {
+  const dispatch = useAppDispatch();
   const [searchText, setSearchText] = useState<string>("");
   const handleClickTicker = (val: ITickerOpt) => {
-    const ticker = tickers.find((t) => t.ticker === val.value);
-    if (ticker) {
-      console.log(ticker);
+    const availTicker = tickers.find((t) => t.ticker === val.value);
+    if (availTicker) {
       window.localStorage.setItem(
         process.env.NEXT_PUBLIC_LAST_SYM_KEY
           ? process.env.NEXT_PUBLIC_LAST_SYM_KEY
           : "lastSym",
-        JSON.stringify(ticker.ticker)
+        JSON.stringify(availTicker.ticker)
       );
-      setTicker(ticker);
+      dispatch(setTicker(availTicker));
     }
     setOpenPanel(false);
   };

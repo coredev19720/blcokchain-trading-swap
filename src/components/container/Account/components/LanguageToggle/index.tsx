@@ -17,7 +17,6 @@ const LanguageToggle = () => {
   const pathname = usePathname();
   const router = useRouter();
   const params = useParams();
-  console.log("params", params);
   const handleChangeLanguage = (val: string) => {
     Cookies.set("NEXT_LOCALE", val);
   };

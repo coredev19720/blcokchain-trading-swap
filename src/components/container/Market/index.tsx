@@ -2,46 +2,47 @@
 import { Wrapper } from "./styles";
 import SearchInput from "./components/SearchInput";
 import { useEffect, useState } from "react";
-import { ITickerData } from "@/src/interface/common";
 import SearchPanel from "./components/SearchPanel";
 import { useSearchParams } from "next/navigation";
 import { validTicker } from "@/src/utils/helpers";
 import { tickers } from "@/src/constants/dumpData/dashboard";
 import Ticker from "./components/Ticker";
 import EmptyState from "./components/EmptyState";
+import { useAppSelector, useAppDispatch } from "@/src/redux/hooks";
+import { setTicker } from "@/src/redux/features/marketSlice";
 const Market = () => {
   const searchParams = useSearchParams();
+  const ticker = useAppSelector((state) => state.market.ticker);
+  const dispatch = useAppDispatch();
   const [openPanel, setOpenPanel] = useState<boolean>(false);
-  const [ticker, setTicker] = useState<ITickerData | null>(null);
   useEffect(() => {
-    const s = searchParams?.get("s");
-    if (s && validTicker(s.toUpperCase())) {
-      const ticker = tickers.find((t) => t.ticker === s.toUpperCase());
-      if (ticker) {
-        setTicker(ticker);
+    if (!ticker) {
+      const s = searchParams?.get("s");
+      if (s && validTicker(s.toUpperCase())) {
+        const availTicker = tickers.find((t) => t.ticker === s.toUpperCase());
+        if (availTicker) {
+          dispatch(setTicker(availTicker));
+        }
       }
-    }
-    const lastSymbol = localStorage.getItem(
-      process.env.NEXT_PUBLIC_LAST_SYM_KEY
-        ? process.env.NEXT_PUBLIC_LAST_SYM_KEY
-        : "lastSymbol"
-    );
-    if (lastSymbol && JSON.parse(lastSymbol)) {
-      const ticker = tickers.find((t) => t.ticker === JSON.parse(lastSymbol));
-      if (ticker) {
-        setTicker(ticker);
+      const lastSymbol = localStorage.getItem(
+        process.env.NEXT_PUBLIC_LAST_SYM_KEY
+          ? process.env.NEXT_PUBLIC_LAST_SYM_KEY
+          : "lastSymbol"
+      );
+      if (lastSymbol && JSON.parse(lastSymbol)) {
+        const availTicker = tickers.find(
+          (t) => t.ticker === JSON.parse(lastSymbol)
+        );
+        if (availTicker) {
+          dispatch(setTicker(availTicker));
+        }
       }
     }
   }, []);
-
   return (
     <Wrapper>
       <SearchInput setOpenPanel={setOpenPanel} />
-      <SearchPanel
-        open={openPanel}
-        setTicker={setTicker}
-        setOpenPanel={setOpenPanel}
-      />
+      <SearchPanel open={openPanel} setOpenPanel={setOpenPanel} />
       {ticker ? <Ticker ticker={ticker} /> : <EmptyState />}
     </Wrapper>
   );

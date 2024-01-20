@@ -3,13 +3,15 @@ import { ITickerData } from "@/src/interface/common";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type CounterState = {
-  ticker: ITickerData;
-  side: TSide;
-  price: number;
+  ticker: ITickerData | null;
+  side: TSide | null;
+  price: number | null;
 };
 
 const initialState = {
-  ticker: {},
+  ticker: null,
+  side: null,
+  price: null,
 } as CounterState;
 
 export const market = createSlice({
@@ -20,8 +22,11 @@ export const market = createSlice({
     setTicker: (state, action: PayloadAction<ITickerData>) => {
       state.ticker = action.payload;
     },
+    setSide: (state, action: PayloadAction<TSide>) => {
+      state.side = action.payload;
+    },
   },
 });
 
-export const { setTicker, reset } = market.actions;
+export const { setTicker, reset, setSide } = market.actions;
 export default market.reducer;

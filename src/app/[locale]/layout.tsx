@@ -40,7 +40,6 @@ export default function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  console.log("RootLayout");
   if (!AppConfig.locales.includes(locale)) notFound();
 
   const messages = useMessages();

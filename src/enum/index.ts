@@ -26,3 +26,7 @@ export enum TAccountType {
 }
 
 export type Language = "en" | "vi";
+
+export enum TReduxAction {
+  SET_TICKER = "SET_TICKER",
+}

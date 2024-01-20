@@ -10,7 +10,6 @@ const intlMiddleware = createMiddleware({
 });
 
 export function middleware(req: NextRequest) {
-  console.log("req.nextUrl.pathname", req.nextUrl.pathname);
   const localeCookie = req.cookies.get("NEXT_LOCALE");
   let locale = localeCookie ? localeCookie.value : defaultLocale;
   const token = req.cookies.get("token");
@@ -29,8 +28,6 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL(`/${locale}/login`, req.url));
   }
   if (token) {
-    console.log("locale", locale);
-
     if (req.nextUrl.pathname.includes("login")) {
       return NextResponse.redirect(
         new URL(`/${locale}/${process.env.NEXT_PUBLIC_DEFAULT_PAGE}`, req.url)
