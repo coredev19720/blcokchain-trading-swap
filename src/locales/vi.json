@@ -97,7 +97,8 @@
     "fn_trade_inp_ordPrice": "Giá",
     "fn_trade_inp_ordQty": "Số lượng",
     "fn_trade_inp_ordMulti": "Nhân lệnh",
-    "fn_trade_txt_accStatus": "Trạng thái tiểu khoản"
+    "fn_trade_txt_accStatus": "Trạng thái tiểu khoản",
+    "fn_trade_txt_can_sell": "Có thể bán"
   },
   "order_book": {
     "fn_ob_txt_title": "Sổ lệnh",

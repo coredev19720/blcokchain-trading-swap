@@ -30,3 +30,15 @@ export type Language = "en" | "vi";
 export enum TReduxAction {
   SET_TICKER = "SET_TICKER",
 }
+
+export enum TOrderKind {
+  LO = "LO",
+  MP = "MP",
+  MAK = "MAK",
+  MOK = "MOK",
+  MTL = "MTL",
+  RP = "RP",
+  PLO = "PLO",
+  ATO = "ATO",
+  ATC = "ATC",
+}

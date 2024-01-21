@@ -41,6 +41,11 @@ const palette = {
     error: colors.sr60,
     colorPrimary: colors.p100,
     white: colors.p300,
+    up: colors.lightUpText,
+    ref: colors.lightRefText,
+    down: colors.lightDownText,
+    ceil: colors.lightCeilText,
+    floor: colors.lightFloorText,
   },
   background: {
     paper: colors.p300,

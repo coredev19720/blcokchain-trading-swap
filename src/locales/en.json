@@ -97,7 +97,9 @@
     "fn_trade_inp_ordPrice": "Price",
     "fn_trade_inp_ordQty": "Quantity",
     "fn_trade_inp_ordMulti": "Duplication",
-    "fn_trade_txt_accStatus": "Account status"
+    "fn_trade_txt_accStatus": "Account status",
+    "fn_trade_txt_can_buy": "Can buy",
+    "fn_trade_txt_can_sell": "Can sell"
   },
   "order_book": {
     "fn_ob_txt_title": "Order book",

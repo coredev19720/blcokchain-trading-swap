@@ -1,6 +1,7 @@
 import StepIcon from "./StepIcon";
 import Typography from "./Typography";
 import Button from "./Button";
+import ButtonGroup from "./ButtonGroup";
 import InputBase from "./InputBase";
 import OutlinedInput from "./OutlinedInput";
 import TextField from "./TextField";
@@ -22,16 +23,17 @@ import List from "./List";
 import ListItem from "./ListItem";
 import Tabs from "./Tabs";
 import Tab from "./Tab";
-import Menu from './Menu';
-import Switch from './Switch';
-import Box from './Box';
-import Backdrop from './Backdrop';
+import Menu from "./Menu";
+import Switch from "./Switch";
+import Box from "./Box";
+import Backdrop from "./Backdrop";
 import Pagination from "./Pagination";
 
 const Components = {
   MuiStepIcon: StepIcon,
   MuiTypography: Typography,
   MuiButton: Button,
+  MuiButtonGroup: ButtonGroup,
   MuiInputBase: InputBase,
   MuiOutlinedInput: OutlinedInput,
   MuiTextField: TextField,
@@ -40,24 +42,24 @@ const Components = {
   MuiCheckbox: Checkbox,
   MuiRadio: Radio,
   MuiPaper: Paper,
-  MuiMenu:Menu,
+  MuiMenu: Menu,
   MuiMenuItem: MenuItem,
   MuiListItemText: ListItemText,
   MuiTooltip: Tooltip,
   MuiAlert: Alert,
   MuiSnackbar: Snackbar,
-  MuiChip:Chip,
-  MuiFormControlLabel:FormControlLabel,
+  MuiChip: Chip,
+  MuiFormControlLabel: FormControlLabel,
   MuiTable: Table,
-  MuiTableCell:TableCell ,
+  MuiTableCell: TableCell,
   MuiList: List,
-  MuiListItem:ListItem,
-  MuiTab:Tab,
-  MuiTabs:Tabs,
-  MuiSwitch:Switch,
-  MuiBox:Box,
-  MuiModal:Backdrop,
-  MuiPagination:Pagination
+  MuiListItem: ListItem,
+  MuiTab: Tab,
+  MuiTabs: Tabs,
+  MuiSwitch: Switch,
+  MuiBox: Box,
+  MuiModal: Backdrop,
+  MuiPagination: Pagination,
 };
 
 export default Components;

@@ -6,7 +6,7 @@ const colors = {
   p300: "#FFFFFF",
 
   //Yellow
-  sy10: "#FFFBE5",
+  sy10: "#FFF0C7",
   sy20: "#FFF2B2",
   sy30: "#FFEA80",
   sy40: "#FFE14D",

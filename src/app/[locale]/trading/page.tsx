@@ -1,4 +1,3 @@
-import Layout from "@/src/components/common/Layout";
 import Trading from "@/src/components/container/Trading";
 
 const TradingPage = () => {

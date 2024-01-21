@@ -12,6 +12,7 @@ import {
   engFlag,
   vieFlag,
 } from "../images";
+import { TOrderKind } from "../enum";
 
 export const menus: IMenuItem[] = [
   {
@@ -50,3 +51,15 @@ export const languages: ILang[] = [
   { label: "English", value: "en", icon: engFlag },
   { label: "Tiếng Việt", value: "vi", icon: vieFlag },
 ];
+export const orderTypeOpts = [
+  { label: "Lệnh thông thường", value: "normal" },
+  { label: "Lệnh dự kiến", value: "conditional" },
+];
+
+export const orderKindOpts: {
+  label: string;
+  value: TOrderKind;
+}[] = Object.values(TOrderKind).map((value) => ({
+  label: value,
+  value: value,
+}));

@@ -10,7 +10,7 @@ type CounterState = {
 
 const initialState = {
   ticker: null,
-  side: null,
+  side: TSide.BUY,
   price: null,
 } as CounterState;
 

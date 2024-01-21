@@ -14,6 +14,16 @@ export function middleware(req: NextRequest) {
   let locale = localeCookie ? localeCookie.value : defaultLocale;
   const token = req.cookies.get("token");
 
+  //redirect to default locale
+  const urlLocale = req.nextUrl.pathname.split("/")[1];
+  if (urlLocale !== locale) {
+    const newPathname = req.nextUrl.pathname.replace(
+      `/${urlLocale}/`,
+      `/${locale}/`
+    );
+    return NextResponse.redirect(new URL(newPathname, req.url));
+  }
+
   let isPublic = false;
   publicUrls.forEach((x) => {
     if (`/${locale}/${x}` === req.nextUrl.pathname) {
