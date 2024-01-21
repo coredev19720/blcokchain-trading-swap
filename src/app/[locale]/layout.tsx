@@ -7,7 +7,6 @@ import { AppConfig } from "@/src/utils/AppConfig";
 import ThemeRegistry from "../ThemeRegistry";
 import { Providers } from "@/src/redux/provider";
 import Layout from "@/src/components/common/Layout";
-
 export const metadata: Metadata = {
   icons: [
     {

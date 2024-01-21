@@ -3,6 +3,7 @@ import { locales, defaultLocale } from "./constants";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { publicUrls } from "@/src/constants/routes";
+console.log("middware");
 const intlMiddleware = createMiddleware({
   locales,
   defaultLocale,
@@ -41,6 +42,9 @@ export function middleware(req: NextRequest) {
   }
   return intlMiddleware(req);
 }
+// export const config = {
+//   matcher: ["/", "/(vi|en)/:path*"],
+// };
 export const config = {
-  matcher: ["/", "/(vi|en)/:path*"],
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };

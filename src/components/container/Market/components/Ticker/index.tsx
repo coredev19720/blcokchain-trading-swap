@@ -13,6 +13,7 @@ const Wrapper = styled("div")(() => ({
   flexDirection: "column",
   gap: 8,
   overflow: "auto",
+  flex: 1,
 }));
 const InforSection = styled("div")(({ theme }) => ({
   flex: 1,

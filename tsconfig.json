@@ -29,7 +29,8 @@
     ".next/types/**/*.ts",
     "libs/Env.mjs",
     "src/components/container/Dashboard/components/SearchInput.txs",
-    "src/app/not-found.js"
+    "src/app/not-found/not-found.js",
+    "src/pages/404.`js"
   ],
   "exclude": ["node_modules"]
 }

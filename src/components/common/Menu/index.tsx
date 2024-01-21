@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Wrapper, MenuItem, MenuImage } from "./styles";
+import { Wrapper, MenuItem, MenuImage, MenuText } from "./styles";
 import { menus } from "@/src/constants/common";
 import { useTranslations } from "next-intl";
 import { Typography } from "@mui/material";
@@ -14,6 +14,9 @@ const Menu = () => {
   const goToDestination = (url: string) => () => {
     router.push(`/${params?.locale}${url}`);
   };
+  useEffect(() => {
+    console.log("mounted");
+  }, []);
   const Menu = menus.map((menu, index) => {
     return (
       <MenuItem
@@ -30,11 +33,17 @@ const Menu = () => {
           width={pathname?.includes(menu.url) ? 40 : 24}
           height={pathname?.includes(menu.url) ? 40 : 24}
         />
-        {!pathname?.includes(menu.url) && (
-          <Typography variant="subtitle2" noWrap color={colors.threeRest}>
-            {t(menu.label)}
-          </Typography>
-        )}
+        <MenuText
+          variant="subtitle2"
+          noWrap
+          color={colors.threeRest}
+          style={{
+            fontSize: pathname?.includes(menu.url) ? 0 : 13,
+            lineHeight: pathname?.includes(menu.url) ? 0 : 1,
+          }}
+        >
+          {t(menu.label)}
+        </MenuText>
       </MenuItem>
     );
   });
