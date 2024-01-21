@@ -2,7 +2,6 @@
 import { Wrapper } from "./styles";
 import SearchInput from "./components/SearchInput";
 import { useEffect, useState } from "react";
-import SearchPanel from "./components/SearchPanel";
 import { useSearchParams } from "next/navigation";
 import { validTicker } from "@/src/utils/helpers";
 import { tickers } from "@/src/constants/dumpData/dashboard";
@@ -10,6 +9,7 @@ import Ticker from "./components/Ticker";
 import EmptyState from "./components/EmptyState";
 import { useAppSelector, useAppDispatch } from "@/src/redux/hooks";
 import { setTicker } from "@/src/redux/features/marketSlice";
+import SearchPanel from "../../common/SearchPanel";
 const Market = () => {
   const searchParams = useSearchParams();
   const ticker = useAppSelector((state) => state.market.ticker);

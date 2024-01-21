@@ -5,11 +5,11 @@ export const Wrapper = styled("div")(({ theme }) => ({
   gap: 8,
   display: "flex",
   flexDirection: "column",
-  height: "100vh",
+  height: "100%",
   background: colors.p300,
   overflow: "auto",
   padding: 16,
-  width: "100vw",
+  width: "100%",
 }));
 
 export const TickerWrapper = styled("div")(({ theme }) => ({
