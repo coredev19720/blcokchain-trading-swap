@@ -1,6 +1,11 @@
 "use client";
-import Header from "../Login/Header";
+import Header from "./components/Header";
+import * as S from "./styles";
 const OrderBook = () => {
-  return <div>OrderBook</div>;
+  return (
+    <S.Wrapper>
+      <Header />
+    </S.Wrapper>
+  );
 };
 export default OrderBook;
