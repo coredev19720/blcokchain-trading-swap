@@ -18,7 +18,6 @@ const TicketInfo = () => {
   const t = useTranslations("trade");
   const dispatch = useAppDispatch();
   const ticket = useAppSelector((state) => state.market.ticket);
-  console.log("ticket", ticket);
   const handleChangeOrderType = (e: SelectChangeEvent<unknown>) => {
     dispatch(setTicket({ ...ticket, type: e.target.value as TOrderType }));
   };
@@ -75,19 +74,15 @@ const TicketInfo = () => {
           <FieldLabel>{t("fn_trade_inp_ordQty")}</FieldLabel>
           <TextField
             fullWidth
-            value={ticket.vol}
+            value={ticket.vol || null}
             onChange={handleChangeVol}
             type="number"
           />
         </S.FieldBlock>
         <S.FieldBlock item xs={6}>
           <FieldLabel>{t("fn_trade_inp_ordMulti")}</FieldLabel>
-          <TextField
-            fullWidth
-            value={ticket.price}
-            onChange={handleChangePrice}
-            type="number"
-          />
+          {/* fix me */}
+          <TextField fullWidth value={0} type="number" />
         </S.FieldBlock>
       </Grid>
     </S.Wrapper>

@@ -5,6 +5,7 @@ import { TSide } from "@/src/enum";
 import { useTranslations } from "next-intl";
 import colors from "@/src/themes/colors";
 import { formatNumber } from "@/src/utils/helpers";
+import OtpConfirm from "./components/otpConfirm";
 interface IProps {
   open: boolean;
   setOpen: (val: boolean) => void;
@@ -100,6 +101,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
               mapping
             </Typography>
           </S.FlexContent>
+          <OtpConfirm />
         </S.Wrapper>
       </Slide>
     </Backdrop>
