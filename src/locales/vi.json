@@ -84,6 +84,8 @@
     "fn_trade_cta_sellToggle": "BÁN",
     "fn_trade_cta_buy": "MUA",
     "fn_trade_cta_sell": "BÁN",
+    "txt_trade_confirm_buy": "Mua",
+    "txt_trade_confirm_sell": "Bán",
     "fn_trade_cu_stock_buyPower": "Sức mua",
     "en_sb_price_celling": "Trần",
     "en_sb_price_floor": "Sàn",

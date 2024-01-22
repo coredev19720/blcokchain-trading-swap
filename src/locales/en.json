@@ -84,6 +84,8 @@
     "fn_trade_cta_sellToggle": "SELL",
     "fn_trade_cta_buy": "BUY",
     "fn_trade_cta_sell": "SELL",
+    "txt_trade_confirm_buy": "Buy",
+    "txt_trade_confirm_sell": "Sell",
     "fn_trade_cu_stock_buyPower": "Buying power",
     "en_sb_price_celling": "Ceiling",
     "en_sb_price_floor": "Floor",

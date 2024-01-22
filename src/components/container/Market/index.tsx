@@ -8,11 +8,12 @@ import { tickers } from "@/src/constants/dumpData/dashboard";
 import Ticker from "./components/Ticker";
 import EmptyState from "./components/EmptyState";
 import { useAppSelector, useAppDispatch } from "@/src/redux/hooks";
-import { setTicker } from "@/src/redux/features/marketSlice";
+import { setTicker, setTicket } from "@/src/redux/features/marketSlice";
 import SearchPanel from "../../common/SearchPanel";
 const Market = () => {
   const searchParams = useSearchParams();
   const ticker = useAppSelector((state) => state.market.ticker);
+  const ticket = useAppSelector((state) => state.market.ticket);
   const dispatch = useAppDispatch();
   const [openPanel, setOpenPanel] = useState<boolean>(false);
   useEffect(() => {
@@ -22,6 +23,13 @@ const Market = () => {
         const availTicker = tickers.find((t) => t.ticker === s.toUpperCase());
         if (availTicker) {
           dispatch(setTicker(availTicker));
+          dispatch(
+            setTicket({
+              ...ticket,
+              ticker: availTicker.ticker,
+              price: availTicker.ref,
+            })
+          );
         }
       }
       const lastSymbol = localStorage.getItem(
@@ -35,6 +43,13 @@ const Market = () => {
         );
         if (availTicker) {
           dispatch(setTicker(availTicker));
+          dispatch(
+            setTicket({
+              ...ticket,
+              ticker: availTicker.ticker,
+              price: availTicker.ref,
+            })
+          );
         }
       }
     }

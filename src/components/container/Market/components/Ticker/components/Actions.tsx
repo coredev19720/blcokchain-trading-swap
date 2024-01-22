@@ -4,8 +4,8 @@ import { styled } from "@mui/system";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
-import { useAppDispatch } from "@/src/redux/hooks";
-import { setSide } from "@/src/redux/features/marketSlice";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import { setTicket } from "@/src/redux/features/marketSlice";
 import { TSide } from "@/src/enum";
 const Wrapper = styled("div")(({ theme }) => ({
   display: "flex",
@@ -21,8 +21,9 @@ const Actions = () => {
   const params = useParams();
   const router = useRouter();
   const t = useTranslations("market");
+  const ticket = useAppSelector((state) => state.market.ticket);
   const handleClick = (side: TSide) => {
-    dispatch(setSide(side));
+    dispatch(setTicket({ ...ticket, side }));
     if (params?.locale) {
       router.push(`/${params?.locale}/trading`);
     }

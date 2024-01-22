@@ -8,10 +8,16 @@ import { useTranslations } from "next-intl";
 import { useAppSelector } from "@/src/redux/hooks";
 import * as S from "./styles";
 import { TSide } from "@/src/enum";
+import TicketConfirm from "./components/TicketConfirm";
+import { useState } from "react";
 const Trading = () => {
   const t = useTranslations("trade");
-  const side = useAppSelector((state) => state.market.side);
+  const ticket = useAppSelector((state) => state.market.ticket);
   const ticker = useAppSelector((state) => state.market.ticker);
+  const [isConfirm, setIsConfirm] = useState<boolean>(false);
+  const handleClickTrade = () => {
+    setIsConfirm(true);
+  };
   return (
     <S.Wrapper>
       <Header />
@@ -28,14 +34,18 @@ const Trading = () => {
       </S.MainContent>
       <S.ButtonWrapper>
         <Button
-          disabled={!ticker}
+          disabled={!ticker || !ticket.price || !ticket.vol}
           fullWidth
           variant="contained"
-          color={side === TSide.BUY ? "success" : "error"}
+          color={ticket.side === TSide.BUY ? "success" : "error"}
+          onClick={handleClickTrade}
         >
-          {t(side === TSide.BUY ? "fn_trade_cta_buy" : "fn_trade_cta_sell")}
+          {t(
+            ticket.side === TSide.BUY ? "fn_trade_cta_buy" : "fn_trade_cta_sell"
+          )}
         </Button>
       </S.ButtonWrapper>
+      <TicketConfirm open={isConfirm} setOpen={setIsConfirm} />
     </S.Wrapper>
   );
 };

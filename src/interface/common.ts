@@ -1,4 +1,4 @@
-import { TAccountType, TSide } from "../enum";
+import { TAccountType, TOrderKind, TOrderType, TSide } from "../enum";
 
 export interface IUserInfo {
   name: string;
@@ -84,4 +84,13 @@ export interface ILang {
   label: string;
   value: string;
   icon: any;
+}
+
+export interface ITicket {
+  ticker: string;
+  side: TSide;
+  price: number;
+  vol: number;
+  kind: TOrderKind;
+  type: TOrderType;
 }

@@ -5,16 +5,18 @@ import { ITickerOpt } from "@/src/interface/common";
 import { tickers } from "@/src/constants/dumpData/dashboard";
 import SearchInput from "./components/SearchInput";
 import { useState } from "react";
-import { useAppDispatch } from "@/src/redux/hooks";
-import { setTicker } from "@/src/redux/features/marketSlice";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import { setTicker, setTicket } from "@/src/redux/features/marketSlice";
 
 interface IProps {
   open: boolean;
   setOpenPanel: (val: boolean) => void;
 }
 const SearchPanel = ({ open, setOpenPanel }: IProps) => {
+  const ticket = useAppSelector((state) => state.market.ticket);
   const dispatch = useAppDispatch();
   const [searchText, setSearchText] = useState<string>("");
+
   const handleClickTicker = (val: ITickerOpt) => {
     const availTicker = tickers.find((t) => t.ticker === val.value);
     if (availTicker) {
@@ -25,9 +27,17 @@ const SearchPanel = ({ open, setOpenPanel }: IProps) => {
         JSON.stringify(availTicker.ticker)
       );
       dispatch(setTicker(availTicker));
+      dispatch(
+        setTicket({
+          ...ticket,
+          ticker: availTicker.ticker,
+          price: availTicker.ref,
+        })
+      );
     }
     setOpenPanel(false);
   };
+
   return (
     <Backdrop open={open}>
       <Slide direction="left" in={open} mountOnEnter unmountOnExit>

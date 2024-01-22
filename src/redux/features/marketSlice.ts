@@ -1,17 +1,22 @@
-import { TSide } from "@/src/enum";
-import { ITickerData } from "@/src/interface/common";
+import { TOrderKind, TOrderType, TSide } from "@/src/enum";
+import { ITickerData, ITicket } from "@/src/interface/common";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type CounterState = {
   ticker: ITickerData | null;
-  side: TSide | null;
-  price: number | null;
+  ticket: ITicket;
 };
 
 const initialState = {
   ticker: null,
-  side: TSide.BUY,
-  price: null,
+  ticket: {
+    side: TSide.BUY,
+    price: 0,
+    vol: 0,
+    ticker: "",
+    type: TOrderType.LO,
+    kind: "normal" as TOrderKind,
+  },
 } as CounterState;
 
 export const market = createSlice({
@@ -22,11 +27,11 @@ export const market = createSlice({
     setTicker: (state, action: PayloadAction<ITickerData>) => {
       state.ticker = action.payload;
     },
-    setSide: (state, action: PayloadAction<TSide>) => {
-      state.side = action.payload;
+    setTicket: (state, action: PayloadAction<ITicket>) => {
+      state.ticket = action.payload;
     },
   },
 });
 
-export const { setTicker, reset, setSide } = market.actions;
+export const { setTicker, reset, setTicket } = market.actions;
 export default market.reducer;

@@ -10,7 +10,7 @@ import { IDealPrice } from "@/src/interface/common";
 import { formatBigNumber, genPriceColor } from "@/src/utils/helpers";
 const TickerInfo = () => {
   const ticker = useAppSelector((state) => state.market.ticker);
-  const side = useAppSelector((state) => state.market.side);
+  const ticket = useAppSelector((state) => state.market.ticket);
   const t = useTranslations("trade");
   const columns: IColumn[] = [
     {
@@ -65,7 +65,7 @@ const TickerInfo = () => {
   return (
     <S.Wrapper>
       {/* buying */}
-      {side === TSide.SELL && (
+      {ticket.side === TSide.SELL && (
         <S.PowerBuying>
           <Typography variant="body2">{t("fn_trade_txt_can_sell")}</Typography>
           <Typography fontWeight={700} variant="body2">
