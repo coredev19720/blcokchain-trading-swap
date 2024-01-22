@@ -13,10 +13,6 @@ import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { setSide } from "@/src/redux/features/marketSlice";
 import { TSide } from "@/src/enum";
 import SearchPanel from "@/src/components/common/SearchPanel";
-const accounts = [
-  { title: "Thường - 00011111111", value: "00011111111" },
-  { title: "Phái sinh - 00022222222", value: "00022222222" },
-];
 const Search = () => {
   const t = useTranslations("trade");
   const dispatch = useAppDispatch();
