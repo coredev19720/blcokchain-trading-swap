@@ -7,8 +7,8 @@ import { ToastContainer } from "react-toastify";
 import Menu from "./Menu";
 
 const Wrapper = styled("main")(({ theme }) => ({
-  height: "100vh",
-  width: "100vw",
+  height: "100%",
+  width: "100%",
   overflow: "hidden",
   background: theme.palette.mode === "light" ? colors.p300 : colors.dn50,
   display: "flex",
