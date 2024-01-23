@@ -5,7 +5,8 @@ import { ReactNode } from "react";
 import { PageWrapper, MainContent } from "@/src/styles/common";
 import { ToastContainer } from "react-toastify";
 import Menu from "./Menu";
-
+import { publicUrls } from "@/src/constants/routes";
+import { usePathname, useParams } from "next/navigation";
 const Wrapper = styled("main")(({ theme }) => ({
   height: "100%",
   width: "100%",
@@ -17,11 +18,15 @@ const Wrapper = styled("main")(({ theme }) => ({
 }));
 
 export default function Layout({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+  const params = useParams();
+  let isPublic = publicUrls.some((x) => `/${params?.locale}/${x}` === pathname);
+
   return (
     <Wrapper>
       <PageWrapper>
         <MainContent>{children}</MainContent>
-        <Menu />
+        {!isPublic && <Menu />}
       </PageWrapper>
       <ToastContainer
         position="bottom-center"
