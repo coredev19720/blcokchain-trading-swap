@@ -1,5 +1,5 @@
-import { TSide } from "@/src/enum";
-import { IMarketInfo, ITickerData } from "@/src/interface/common";
+import { TAccountType, TSide } from "@/src/enum";
+import { IAccount, IMarketInfo, ITickerData } from "@/src/interface/common";
 
 export const tickers: ITickerData[] = [
   {
@@ -376,5 +376,32 @@ export const marketIndex: IMarketInfo[] = [
     pctChg: 0.72,
     vol: 100000000,
     value: 500000000000,
+  },
+];
+
+export const accounts: IAccount[] = [
+  {
+    type: TAccountType.CASH,
+    accountNo: "22222222",
+    totalAsset: 100000000,
+    cashPayables: 0,
+    buyingPower: 140000000,
+    cashBalance: 100000000,
+    coh: 100000000,
+    receivingCash: 0,
+    accessEquity: 0,
+    portValue: 40000000,
+  },
+  {
+    type: TAccountType.MARGIN,
+    accountNo: "11111111",
+    totalAsset: 200000000,
+    cashPayables: 500000,
+    buyingPower: 130000000,
+    cashBalance: 50000000,
+    coh: 220000000,
+    receivingCash: 0,
+    accessEquity: 0,
+    portValue: 36000000,
   },
 ];

@@ -94,3 +94,8 @@ export interface ITicket {
   kind: TOrderKind;
   type: TOrderType;
 }
+
+export interface IStringOpts {
+  label: string;
+  value: string;
+}

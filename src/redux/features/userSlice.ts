@@ -1,15 +1,17 @@
-import { IUserInfo } from "@/src/interface/common";
+import { IAccount, IUserInfo } from "@/src/interface/common";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+import { accounts } from "@/src/constants/dumpData/dashboard";
 type CounterState = {
   userInfo: IUserInfo;
+  account: IAccount | null;
 };
 
 const initialState = {
   userInfo: {
-    name: "Default Name",
-    email: "email@default.com",
+    name: "Xuan dieu",
+    email: "lxdieu90@gmail.com",
   },
+  account: accounts[0],
 } as CounterState;
 
 export const user = createSlice({
@@ -20,8 +22,11 @@ export const user = createSlice({
     setUser: (state, action: PayloadAction<IUserInfo>) => {
       state.userInfo = action.payload;
     },
+    setAccount: (state, action: PayloadAction<IAccount>) => {
+      state.account = action.payload;
+    },
   },
 });
 
-export const { setUser, reset } = user.actions;
+export const { setUser, reset, setAccount } = user.actions;
 export default user.reducer;

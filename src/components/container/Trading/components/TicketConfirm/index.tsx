@@ -86,7 +86,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
           <S.FlexContent>
             {/* not trans */}
             <Typography variant="body2" color="text.secondary">
-              Số lưu ký
+              {t("en_trade_custodyCd")}
             </Typography>
             <Typography variant="body2" fontWeight={600} color="text.primary">
               mapping
@@ -95,7 +95,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
           <S.FlexContent>
             {/* not trans */}
             <Typography variant="body2" color="text.secondary">
-              Tiểu khoản
+              {t("en_trade_accNo")}
             </Typography>
             <Typography variant="body2" fontWeight={600} color="text.primary">
               mapping

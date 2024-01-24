@@ -1,15 +1,16 @@
 "use client";
+import { useState } from "react";
 import { Button, Typography } from "@mui/material";
-import Header from "./components/Header";
-import Search from "./components/Search";
-import TickerInfo from "./components/TickerInfo";
-import TicketInfo from "./components/TicketInfo";
 import { useTranslations } from "next-intl";
 import { useAppSelector } from "@/src/redux/hooks";
 import * as S from "./styles";
 import { TSide } from "@/src/enum";
+import Header from "./components/Header";
+import Search from "./components/Search";
+import TickerInfo from "./components/TickerInfo";
+import TicketInfo from "./components/TicketInfo";
 import TicketConfirm from "./components/TicketConfirm";
-import { useState } from "react";
+
 const Trading = () => {
   const t = useTranslations("trade");
   const ticket = useAppSelector((state) => state.market.ticket);
