@@ -2,6 +2,7 @@ import { OutlinedInput } from "@mui/material";
 import { styled } from "@mui/system";
 import { Search } from "@mui/icons-material";
 import { useTranslations } from "next-intl";
+import colors from "@/src/themes/colors";
 interface IProps {
   setOpenPanel: (val: boolean) => void;
 }
@@ -14,7 +15,7 @@ const Wrapper = styled("div")(({ theme }) => ({
   paddingTop: theme.spacing(4),
 }));
 const Input = styled(OutlinedInput)(() => ({
-  backgroundColor: "#f0f0f0",
+  backgroundColor: colors.nb5,
   borderRadius: 12,
   "& input": {
     padding: 8,

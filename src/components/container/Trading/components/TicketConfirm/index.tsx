@@ -19,88 +19,108 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
     setOpen(false);
   };
   return (
-    <Backdrop open={open} onClick={() => setOpen(false)}>
+    <Backdrop open={open}>
       <Slide direction="up" in={open} mountOnEnter unmountOnExit>
         <S.Wrapper>
-          <Typography variant="h5" fontWeight={600} color="text.primary">
-            Duyệt lệnh
-          </Typography>
-          <S.Block>
-            <S.FlexContent>
-              <Typography variant="h4" fontWeight={600}>
-                {ticket.ticker}
-              </Typography>
-              <S.TicketSide side={ticket.side}>
+          <S.TicketInfo>
+            <Typography variant="h5" fontWeight={600} color="text.primary">
+              {`Duyệt lệnh ${ticket.side === TSide.BUY ? "mua" : "bán"}`}
+            </Typography>
+            <S.Block>
+              <S.FlexContent>
+                <Typography variant="h4" fontWeight={600}>
+                  {ticket.ticker}
+                </Typography>
+                <S.TicketSide side={ticket.side}>
+                  <Typography
+                    variant="body2"
+                    color={
+                      ticket.side === TSide.BUY ? colors.sg40 : colors.sr40
+                    }
+                    style={{ textTransform: "capitalize" }}
+                  >
+                    {t(
+                      ticket.side === TSide.BUY
+                        ? "txt_trade_confirm_buy"
+                        : "txt_trade_confirm_sell"
+                    )}
+                  </Typography>
+                </S.TicketSide>
+              </S.FlexContent>
+            </S.Block>
+            <S.Block>
+              <S.FlexContent>
+                {/* not trans */}
+                <Typography variant="body2" color="text.secondary">
+                  Loại lệnh
+                </Typography>
                 <Typography
                   variant="body2"
-                  color={ticket.side === TSide.BUY ? colors.sg40 : colors.sr40}
-                  style={{ textTransform: "capitalize" }}
+                  fontWeight={600}
+                  color="text.primary"
                 >
-                  {t(
-                    ticket.side === TSide.BUY
-                      ? "txt_trade_confirm_buy"
-                      : "txt_trade_confirm_sell"
-                  )}
+                  {ticket.type}
                 </Typography>
-              </S.TicketSide>
-            </S.FlexContent>
-          </S.Block>
-          <S.Block>
+              </S.FlexContent>
+              <S.FlexContent>
+                {/* not trans */}
+                <Typography variant="body2" color="text.secondary">
+                  Khối lượng đặt
+                </Typography>
+                <Typography
+                  variant="body2"
+                  fontWeight={600}
+                  color="text.primary"
+                >
+                  {ticket.vol}
+                </Typography>
+              </S.FlexContent>
+              <S.FlexContent>
+                {/* not trans */}
+                <Typography variant="body2" color="text.secondary">
+                  Giá đặt
+                </Typography>
+                <Typography
+                  variant="body2"
+                  fontWeight={600}
+                  color="text.primary"
+                >
+                  {ticket.price}
+                </Typography>
+              </S.FlexContent>
+              <S.FlexContent>
+                {/* not trans */}
+                <Typography variant="body2" color="text.secondary">
+                  Giá trị dự kiến
+                </Typography>
+                <Typography
+                  variant="body2"
+                  fontWeight={600}
+                  color="text.primary"
+                >
+                  {formatNumber(ticket.price * ticket.vol)}
+                </Typography>
+              </S.FlexContent>
+            </S.Block>
             <S.FlexContent>
               {/* not trans */}
               <Typography variant="body2" color="text.secondary">
-                Loại lệnh
+                {t("en_trade_custodyCd")}
               </Typography>
               <Typography variant="body2" fontWeight={600} color="text.primary">
-                {ticket.type}
+                mapping
               </Typography>
             </S.FlexContent>
             <S.FlexContent>
               {/* not trans */}
               <Typography variant="body2" color="text.secondary">
-                Khối lượng đặt
+                {t("en_trade_accNo")}
               </Typography>
               <Typography variant="body2" fontWeight={600} color="text.primary">
-                {ticket.vol}
+                mapping
               </Typography>
             </S.FlexContent>
-            <S.FlexContent>
-              {/* not trans */}
-              <Typography variant="body2" color="text.secondary">
-                Giá đặt
-              </Typography>
-              <Typography variant="body2" fontWeight={600} color="text.primary">
-                {ticket.price}
-              </Typography>
-            </S.FlexContent>
-            <S.FlexContent>
-              {/* not trans */}
-              <Typography variant="body2" color="text.secondary">
-                Giá trị dự kiến
-              </Typography>
-              <Typography variant="body2" fontWeight={600} color="text.primary">
-                {formatNumber(ticket.price * ticket.vol)}
-              </Typography>
-            </S.FlexContent>
-          </S.Block>
-          <S.FlexContent>
-            {/* not trans */}
-            <Typography variant="body2" color="text.secondary">
-              {t("en_trade_custodyCd")}
-            </Typography>
-            <Typography variant="body2" fontWeight={600} color="text.primary">
-              mapping
-            </Typography>
-          </S.FlexContent>
-          <S.FlexContent>
-            {/* not trans */}
-            <Typography variant="body2" color="text.secondary">
-              {t("en_trade_accNo")}
-            </Typography>
-            <Typography variant="body2" fontWeight={600} color="text.primary">
-              mapping
-            </Typography>
-          </S.FlexContent>
+          </S.TicketInfo>
           <OtpConfirm />
         </S.Wrapper>
       </Slide>

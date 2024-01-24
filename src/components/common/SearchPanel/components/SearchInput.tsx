@@ -2,6 +2,7 @@ import { Typography, OutlinedInput } from "@mui/material";
 import { styled } from "@mui/system";
 import { Cancel, Search } from "@mui/icons-material";
 import { useTranslations } from "next-intl";
+import colors from "@/src/themes/colors";
 
 interface IProps {
   searchText: string;
@@ -24,7 +25,7 @@ const CancelIcon = styled(Cancel)(() => ({
 }));
 
 const Input = styled(OutlinedInput)(() => ({
-  backgroundColor: "#f0f0f0",
+  backgroundColor: colors.nb5,
   borderRadius: 12,
   "& input": {
     padding: 8,

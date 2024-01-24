@@ -30,3 +30,10 @@ export enum TOrderType {
   ATO = "ATO",
   ATC = "ATC",
 }
+
+export enum TTransactionStatus {
+  open = "open",
+  filled = "filled",
+  canceled = "canceled",
+  partial_filled = "partial filled",
+}

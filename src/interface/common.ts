@@ -99,3 +99,11 @@ export interface IStringOpts {
   label: string;
   value: string;
 }
+export interface ITransaction {
+  time: string;
+  side: TSide;
+  price: number;
+  vol: number;
+  status: string;
+  code: string;
+}

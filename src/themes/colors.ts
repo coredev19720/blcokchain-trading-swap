@@ -122,5 +122,6 @@ const colors = {
 
   //custom colors
   threeRest: "#ADADAD",
+  nb5: "#f0f0f0",
 };
 export default colors;
