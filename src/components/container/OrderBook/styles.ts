@@ -5,3 +5,5 @@ export const Wrapper = styled("div")(() => ({
   flexDirection: "column",
   height: "100%",
 }));
+
+export const OrderList = styled("div")(() => ({}));
