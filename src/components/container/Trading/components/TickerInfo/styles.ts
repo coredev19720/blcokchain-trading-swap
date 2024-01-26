@@ -6,7 +6,6 @@ export const Wrapper = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
   gap: 8,
-  padding: 16,
 }));
 
 export const PowerBuying = styled("div")(({ theme }) => ({
