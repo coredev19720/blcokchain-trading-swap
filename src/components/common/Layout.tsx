@@ -30,7 +30,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       </PageWrapper>
       <ToastContainer
         position="bottom-center"
-        autoClose={3000}
+        autoClose={2000}
         hideProgressBar={true}
         newestOnTop={false}
         closeOnClick

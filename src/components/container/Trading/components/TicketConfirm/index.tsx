@@ -1,4 +1,5 @@
 import * as S from "./styles";
+import { FlexContent } from "@/src/styles/common";
 import { Backdrop, Slide, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { TSide } from "@/src/enum";
@@ -27,9 +28,9 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
               {`Duyệt lệnh ${ticket.side === TSide.BUY ? "mua" : "bán"}`}
             </Typography>
             <S.Block>
-              <S.FlexContent>
+              <FlexContent>
                 <Typography variant="h4" fontWeight={600}>
-                  {ticket.ticker}
+                  {ticket.symbol}
                 </Typography>
                 <S.TicketSide side={ticket.side}>
                   <Typography
@@ -46,10 +47,10 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                     )}
                   </Typography>
                 </S.TicketSide>
-              </S.FlexContent>
+              </FlexContent>
             </S.Block>
             <S.Block>
-              <S.FlexContent>
+              <FlexContent>
                 {/* not trans */}
                 <Typography variant="body2" color="text.secondary">
                   Loại lệnh
@@ -61,8 +62,8 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                 >
                   {ticket.type}
                 </Typography>
-              </S.FlexContent>
-              <S.FlexContent>
+              </FlexContent>
+              <FlexContent>
                 {/* not trans */}
                 <Typography variant="body2" color="text.secondary">
                   Khối lượng đặt
@@ -74,8 +75,8 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                 >
                   {ticket.vol}
                 </Typography>
-              </S.FlexContent>
-              <S.FlexContent>
+              </FlexContent>
+              <FlexContent>
                 {/* not trans */}
                 <Typography variant="body2" color="text.secondary">
                   Giá đặt
@@ -87,8 +88,8 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                 >
                   {ticket.price}
                 </Typography>
-              </S.FlexContent>
-              <S.FlexContent>
+              </FlexContent>
+              <FlexContent>
                 {/* not trans */}
                 <Typography variant="body2" color="text.secondary">
                   Giá trị dự kiến
@@ -100,9 +101,9 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                 >
                   {formatNumber(ticket.price * ticket.vol)}
                 </Typography>
-              </S.FlexContent>
+              </FlexContent>
             </S.Block>
-            <S.FlexContent>
+            <FlexContent>
               {/* not trans */}
               <Typography variant="body2" color="text.secondary">
                 {t("en_trade_custodyCd")}
@@ -110,8 +111,8 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
               <Typography variant="body2" fontWeight={600} color="text.primary">
                 mapping
               </Typography>
-            </S.FlexContent>
-            <S.FlexContent>
+            </FlexContent>
+            <FlexContent>
               {/* not trans */}
               <Typography variant="body2" color="text.secondary">
                 {t("en_trade_accNo")}
@@ -119,7 +120,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
               <Typography variant="body2" fontWeight={600} color="text.primary">
                 mapping
               </Typography>
-            </S.FlexContent>
+            </FlexContent>
           </S.TicketInfo>
           <OtpConfirm />
         </S.Wrapper>

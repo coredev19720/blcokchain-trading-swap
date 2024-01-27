@@ -14,7 +14,7 @@ const initialState = {
     side: TSide.BUY,
     price: 0,
     vol: 0,
-    ticker: "",
+    symbol: "",
     type: TOrderType.LO,
     kind: "normal" as TOrderKind,
   },

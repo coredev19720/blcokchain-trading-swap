@@ -1,4 +1,5 @@
 import * as S from "./styles";
+import { FlexContent } from "@/src/styles/common";
 import { Button, SelectChangeEvent, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -12,7 +13,7 @@ const Order = ({ data }: IProps) => {
   return (
     <S.Wrapper>
       <S.Content>
-        <Typography>{data.code}</Typography>
+        <FlexContent></FlexContent>
       </S.Content>
       <S.Actions>
         <S.Action color="error" variant="contained" fullWidth>

@@ -25,3 +25,9 @@ export const ColContent = styled("div")(({ theme }) => ({
   flexDirection: "column",
   alignItems: "center",
 }));
+
+export const FlexContent = styled("div")(() => ({
+  display: "flex",
+  justifyContent: "space-between",
+  gap: 8,
+}));

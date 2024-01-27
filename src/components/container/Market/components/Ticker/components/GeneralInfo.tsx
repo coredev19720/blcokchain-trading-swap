@@ -13,7 +13,7 @@ const GeneralInfo = ({ ticker }: IProps) => {
     <Wrapper>
       <RowContent>
         <Typography variant="h4" color="text.primary" fontWeight={600}>
-          {ticker.ticker}
+          {ticker.symbol}
         </Typography>
         <Typography
           variant="h4"

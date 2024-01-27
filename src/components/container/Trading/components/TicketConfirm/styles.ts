@@ -31,12 +31,6 @@ export const Block = styled("div")(({ theme }) => ({
   background: theme.palette.mode === "dark" ? colors.p100 : colors.p300,
 }));
 
-export const FlexContent = styled("div")(() => ({
-  display: "flex",
-  justifyContent: "space-between",
-  gap: 8,
-}));
-
 export const TicketSide = styled("div")<{ side: TSide }>(({ theme, side }) => ({
   padding: theme.spacing(1),
   borderRadius: 4,

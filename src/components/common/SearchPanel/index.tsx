@@ -18,19 +18,19 @@ const SearchPanel = ({ open, setOpenPanel }: IProps) => {
   const [searchText, setSearchText] = useState<string>("");
 
   const handleClickTicker = (val: ITickerOpt) => {
-    const availTicker = tickers.find((t) => t.ticker === val.value);
+    const availTicker = tickers.find((t) => t.symbol === val.value);
     if (availTicker) {
       window.localStorage.setItem(
         process.env.NEXT_PUBLIC_LAST_SYM_KEY
           ? process.env.NEXT_PUBLIC_LAST_SYM_KEY
           : "lastSym",
-        JSON.stringify(availTicker.ticker)
+        JSON.stringify(availTicker.symbol)
       );
       dispatch(setTicker(availTicker));
       dispatch(
         setTicket({
           ...ticket,
-          ticker: availTicker.ticker,
+          symbol: availTicker.symbol,
           price: availTicker.ref,
         })
       );

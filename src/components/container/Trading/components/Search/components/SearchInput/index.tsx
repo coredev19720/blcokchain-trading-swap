@@ -32,7 +32,7 @@ const SearchInput = ({ setOpenPanel }: IProps) => {
   return (
     <Wrapper>
       <Input
-        placeholder={ticker?.ticker}
+        placeholder={ticker?.symbol}
         onFocus={() => setOpenPanel(true)}
         fullWidth
         startAdornment={<Search fontSize="large" color="secondary" />}

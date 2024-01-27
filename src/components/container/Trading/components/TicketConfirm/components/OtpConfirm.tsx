@@ -11,6 +11,7 @@ import { TTransactionStatus } from "@/src/enum";
 import { useRouter } from "next/navigation";
 const OtpConfirm = () => {
   const ticket = useAppSelector((state) => state.market.ticket);
+  const account = useAppSelector((state) => state.user.account);
   const dispatch = useAppDispatch();
   const t = useTranslations("order_book");
   const [otp, setOtp] = useState<string>("");
@@ -27,6 +28,11 @@ const OtpConfirm = () => {
       time: new Date().toISOString(),
       code: genCode(),
       status: TTransactionStatus.open,
+      totalValue: ticket.price * ticket.vol,
+      execQty: 0,
+      execValue: 0,
+      pendingQty: ticket.vol,
+      accountNo: account?.accountNo || "",
     };
     dispatch(setTransaction(trans));
     router.push(`/order-book`);

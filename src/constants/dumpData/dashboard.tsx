@@ -4,7 +4,7 @@ import { IAccount, IMarketInfo, ITickerData } from "@/src/interface/common";
 export const tickers: ITickerData[] = [
   {
     companyName: "Công ty Cổ phần Chứng khoán Thành phố Hồ Chí Minh",
-    ticker: "HCM",
+    symbol: "HCM",
     open: 32.75,
     ref: 32.75,
     low: 32.45,
@@ -47,7 +47,7 @@ export const tickers: ITickerData[] = [
   },
   {
     companyName: "Công ty Cổ phần Tập đoàn Hòa Phát",
-    ticker: "HPG",
+    symbol: "HPG",
     open: 27.8,
     ref: 27.8,
     low: 27.85,
@@ -86,7 +86,7 @@ export const tickers: ITickerData[] = [
   },
   {
     companyName: "Công ty Cổ phần Chứng khoán SSI",
-    ticker: "SSI",
+    symbol: "SSI",
     open: 32.75,
     ref: 32.75,
     low: 32.8,
@@ -125,7 +125,7 @@ export const tickers: ITickerData[] = [
   },
   {
     companyName: "Ngân hàng Thương mại Cổ phần Ngoại thương Việt Nam",
-    ticker: "VCB",
+    symbol: "VCB",
     open: 82.5,
     ref: 82.8,
     low: 82.5,
@@ -164,7 +164,7 @@ export const tickers: ITickerData[] = [
   },
   {
     companyName: "Ngân hàng Thương mại Cổ phần Á Châu",
-    ticker: "ACB",
+    symbol: "ACB",
     open: 23.2,
     ref: 23.25,
     low: 23.2,
@@ -203,7 +203,7 @@ export const tickers: ITickerData[] = [
   },
   {
     companyName: "Công ty Cổ phần Đầu tư Thế Giới Di Động",
-    ticker: "MWG",
+    symbol: "MWG",
     open: 42.8,
     ref: 42.7,
     low: 42.55,
@@ -242,7 +242,7 @@ export const tickers: ITickerData[] = [
   },
   {
     companyName: "Công ty Cổ phần Chứng khoán FPT",
-    ticker: "FTS",
+    symbol: "FTS",
     open: 44.5,
     ref: 44.6,
     low: 44.35,
@@ -281,7 +281,7 @@ export const tickers: ITickerData[] = [
   },
   {
     companyName: "Ngân hàng Thương mại Cổ phần Việt Nam Thịnh Vượng",
-    ticker: "VPB",
+    symbol: "VPB",
     open: 18.4,
     ref: 18.5,
     low: 18.35,

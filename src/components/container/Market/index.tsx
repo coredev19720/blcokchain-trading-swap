@@ -20,13 +20,13 @@ const Market = () => {
     if (!ticker) {
       const s = searchParams?.get("s");
       if (s && validTicker(s.toUpperCase())) {
-        const availTicker = tickers.find((t) => t.ticker === s.toUpperCase());
+        const availTicker = tickers.find((t) => t.symbol === s.toUpperCase());
         if (availTicker) {
           dispatch(setTicker(availTicker));
           dispatch(
             setTicket({
               ...ticket,
-              ticker: availTicker.ticker,
+              symbol: availTicker.symbol,
               price: availTicker.ref,
             })
           );
@@ -39,14 +39,14 @@ const Market = () => {
       );
       if (lastSymbol && JSON.parse(lastSymbol)) {
         const availTicker = tickers.find(
-          (t) => t.ticker === JSON.parse(lastSymbol)
+          (t) => t.symbol === JSON.parse(lastSymbol)
         );
         if (availTicker) {
           dispatch(setTicker(availTicker));
           dispatch(
             setTicket({
               ...ticket,
-              ticker: availTicker.ticker,
+              symbol: availTicker.symbol,
               price: availTicker.ref,
             })
           );

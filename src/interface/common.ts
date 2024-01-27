@@ -1,4 +1,10 @@
-import { TAccountType, TOrderKind, TOrderType, TSide } from "../enum";
+import {
+  TAccountType,
+  TOrderKind,
+  TOrderType,
+  TSide,
+  TTransactionStatus,
+} from "../enum";
 
 export interface IUserInfo {
   name: string;
@@ -17,7 +23,7 @@ export interface ITickerOpt {
 }
 
 export interface ITickerData {
-  ticker: string;
+  symbol: string;
   companyName: string;
   open: number;
   ref: number;
@@ -87,7 +93,7 @@ export interface ILang {
 }
 
 export interface ITicket {
-  ticker: string;
+  symbol: string;
   side: TSide;
   price: number;
   vol: number;
@@ -99,11 +105,13 @@ export interface IStringOpts {
   label: string;
   value: string;
 }
-export interface ITransaction {
+export interface ITransaction extends ITicket {
   time: string;
-  side: TSide;
-  price: number;
-  vol: number;
-  status: string;
+  totalValue: number;
+  execQty: number;
+  execValue: number;
+  pendingQty: number;
   code: string;
+  accountNo: string;
+  status: TTransactionStatus;
 }
