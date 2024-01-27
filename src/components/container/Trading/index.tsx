@@ -22,30 +22,36 @@ const Trading = () => {
   return (
     <S.Wrapper>
       <Header />
-      <S.MainContent>
-        <Search />
-        <TickerInfo />
-        <TicketInfo />
-        <S.AccStatus>
-          <Typography variant="body2">{t("fn_trade_txt_accStatus")}</Typography>
-          <Typography color="text.success" variant="body2">
-            mapping
-          </Typography>
-        </S.AccStatus>
-      </S.MainContent>
-      <S.ButtonWrapper>
-        <Button
-          disabled={!ticker || !ticket.price || !ticket.vol}
-          fullWidth
-          variant="contained"
-          color={ticket.side === TSide.BUY ? "success" : "error"}
-          onClick={handleClickTrade}
-        >
-          {t(
-            ticket.side === TSide.BUY ? "fn_trade_cta_buy" : "fn_trade_cta_sell"
-          )}
-        </Button>
-      </S.ButtonWrapper>
+      <S.Content>
+        <S.MainContent>
+          <Search />
+          <TickerInfo />
+          <TicketInfo />
+          <S.AccStatus>
+            <Typography variant="body2">
+              {t("fn_trade_txt_accStatus")}
+            </Typography>
+            <Typography color="text.success" variant="body2">
+              mapping
+            </Typography>
+          </S.AccStatus>
+        </S.MainContent>
+        <S.ButtonWrapper>
+          <Button
+            disabled={!ticker || !ticket.price || !ticket.vol}
+            fullWidth
+            variant="contained"
+            color={ticket.side === TSide.BUY ? "success" : "error"}
+            onClick={handleClickTrade}
+          >
+            {t(
+              ticket.side === TSide.BUY
+                ? "fn_trade_cta_buy"
+                : "fn_trade_cta_sell"
+            )}
+          </Button>
+        </S.ButtonWrapper>
+      </S.Content>
       <TicketConfirm open={isConfirm} setOpen={setIsConfirm} />
     </S.Wrapper>
   );

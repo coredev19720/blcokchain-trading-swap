@@ -6,7 +6,6 @@ export const Wrapper = styled("div")(() => ({
   display: "flex",
   gap: 16,
   justifyContent: "space-between",
-  padding: 16,
   alignItems: "center",
 }));
 export const FieldBlock = styled(Grid)(() => ({
