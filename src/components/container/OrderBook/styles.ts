@@ -6,4 +6,9 @@ export const Wrapper = styled("div")(() => ({
   height: "100%",
 }));
 
-export const OrderList = styled("div")(() => ({}));
+export const OrderList = styled("div")(() => ({
+  display: "flex",
+  flexDirection: "column",
+  overflow: "auto",
+  flex: 1,
+}));

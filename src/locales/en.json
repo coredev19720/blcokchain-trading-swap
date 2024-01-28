@@ -101,7 +101,9 @@
     "fn_trade_inp_ordMulti": "Duplication",
     "fn_trade_txt_accStatus": "Account status",
     "fn_trade_txt_can_buy": "Can buy",
-    "fn_trade_txt_can_sell": "Can sell"
+    "fn_trade_txt_can_sell": "Can sell",
+    "en_trade_custodyCd": "Code",
+    "en_trade_accNo": "Account"
   },
   "order_book": {
     "fn_ob_txt_title": "Order book",

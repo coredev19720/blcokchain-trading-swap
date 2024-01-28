@@ -37,3 +37,9 @@ export enum TTransactionStatus {
   canceled = "canceled",
   partial_filled = "partial filled",
 }
+
+export enum TOrderActionType {
+  detail = "detail",
+  cancel = "cancel",
+  update = "update",
+}
