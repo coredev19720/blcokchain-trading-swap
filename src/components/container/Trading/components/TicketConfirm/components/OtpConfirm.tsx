@@ -17,7 +17,9 @@ const OtpConfirm = () => {
   const [otp, setOtp] = useState<string>("");
   const router = useRouter();
   const handleChangeOtp = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOtp(e.target.value);
+    if (e.target.value.length <= 6) {
+      setOtp(e.target.value);
+    }
   };
   const handleRequestOtp = () => {
     console.log("request otp");

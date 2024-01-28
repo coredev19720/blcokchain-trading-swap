@@ -101,6 +101,7 @@ const LoginForm = ({ onSubmit }: IProps) => {
     const { value } = field;
     return (
       <TextField
+        autoFocus
         onChange={handleChangeUsername}
         value={value}
         type="textbox"
