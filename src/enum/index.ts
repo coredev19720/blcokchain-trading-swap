@@ -1,4 +1,8 @@
-export type TMarket = "HOSE" | "HNX" | "UPCOM";
+export enum TMarket {
+  HOSE = "HOSE",
+  HNX = "HNX",
+  UPCOM = "UPCOM",
+}
 export type TOrderStatus = "open" | "done" | "cancel";
 
 export enum TSide {

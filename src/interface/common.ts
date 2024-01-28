@@ -1,5 +1,6 @@
 import {
   TAccountType,
+  TMarket,
   TOrderKind,
   TOrderType,
   TSide,
@@ -39,6 +40,7 @@ export interface ITickerData {
   klnnBuy: number;
   klnnSell: number;
   marketDepth: IMarketDepth;
+  market: TMarket;
 }
 export interface IMarketDepth {
   deals: IDealPrice[];
@@ -99,6 +101,7 @@ export interface ITicket {
   vol: number;
   kind: TOrderKind;
   type: TOrderType;
+  market: TMarket;
 }
 
 export interface IStringOpts {

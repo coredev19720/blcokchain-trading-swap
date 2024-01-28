@@ -3,6 +3,7 @@ import {
   TSide,
   TOrderType,
   TTransactionStatus,
+  TMarket,
 } from "@/src/enum";
 import {
   IAccount,
@@ -28,6 +29,7 @@ export const tickers: ITickerData[] = [
     marketValue: 14000000 * 33.4,
     klnnBuy: 1000000,
     klnnSell: 1000000,
+    market: TMarket.HOSE,
     marketDepth: {
       deals: [
         {
@@ -71,6 +73,7 @@ export const tickers: ITickerData[] = [
     marketValue: 20000000 * 27.75,
     klnnBuy: 1000000,
     klnnSell: 1000000,
+    market: TMarket.UPCOM,
     marketDepth: {
       deals: [
         { price: 27.75, sellVol: 1000000, buyVol: 1000000 },
@@ -110,6 +113,7 @@ export const tickers: ITickerData[] = [
     marketValue: 16000000 * 32.8,
     klnnBuy: 1000000,
     klnnSell: 1000000,
+    market: TMarket.UPCOM,
     marketDepth: {
       deals: [
         { price: 32.8, sellVol: 1000000, buyVol: 1000000 },
@@ -149,6 +153,7 @@ export const tickers: ITickerData[] = [
     marketValue: 900000 * 82.7,
     klnnBuy: 1000000,
     klnnSell: 1000000,
+    market: TMarket.UPCOM,
     marketDepth: {
       deals: [
         { price: 82.7, sellVol: 1000000, buyVol: 1000000 },
@@ -188,6 +193,7 @@ export const tickers: ITickerData[] = [
     marketValue: 48700000 * 23.3,
     klnnBuy: 1000000,
     klnnSell: 1000000,
+    market: TMarket.HNX,
     marketDepth: {
       deals: [
         { price: 23.3, sellVol: 1000000, buyVol: 1000000 },
@@ -227,6 +233,7 @@ export const tickers: ITickerData[] = [
     marketValue: 5000000 * 42.85,
     klnnBuy: 1000000,
     klnnSell: 1000000,
+    market: TMarket.HNX,
     marketDepth: {
       deals: [
         { price: 42.85, sellVol: 1000000, buyVol: 1000000 },
@@ -266,6 +273,7 @@ export const tickers: ITickerData[] = [
     marketValue: 1000000 * 44.7,
     klnnBuy: 1000000,
     klnnSell: 1000000,
+    market: TMarket.HOSE,
     marketDepth: {
       deals: [
         { price: 44.7, sellVol: 1000000, buyVol: 1000000 },
@@ -305,6 +313,7 @@ export const tickers: ITickerData[] = [
     marketValue: 8000000 * 18.5,
     klnnBuy: 1000000,
     klnnSell: 1000000,
+    market: TMarket.HNX,
     marketDepth: {
       deals: [
         { price: 18.5, sellVol: 1000000, buyVol: 1000000 },
@@ -432,6 +441,7 @@ export const dumpOrders: IOrder[] = [
     code: "CODE_001",
     accountNo: "22222222",
     status: TTransactionStatus.partial_filled,
+    market: TMarket.HNX,
   },
   {
     symbol: "HCM",
@@ -448,6 +458,7 @@ export const dumpOrders: IOrder[] = [
     code: "CODE_002",
     accountNo: "22222222",
     status: TTransactionStatus.partial_filled,
+    market: TMarket.HNX,
   },
   {
     symbol: "HPG",
@@ -464,5 +475,6 @@ export const dumpOrders: IOrder[] = [
     code: "CODE_003",
     accountNo: "22222222",
     status: TTransactionStatus.partial_filled,
+    market: TMarket.UPCOM,
   },
 ];
