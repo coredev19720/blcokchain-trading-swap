@@ -1,11 +1,12 @@
+import { dumpOrders } from "@/src/constants/dumpData/dashboard";
 import { TOrderKind, TOrderType, TSide } from "@/src/enum";
-import { ITickerData, ITicket, ITransaction } from "@/src/interface/common";
+import { ITickerData, ITicket, IOrder } from "@/src/interface/common";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type CounterState = {
   ticker: ITickerData | null;
   ticket: ITicket;
-  transactions: ITransaction[];
+  orders: IOrder[];
 };
 
 const initialState = {
@@ -18,7 +19,7 @@ const initialState = {
     type: TOrderType.LO,
     kind: "normal" as TOrderKind,
   },
-  transactions: [],
+  orders: dumpOrders,
 } as CounterState;
 
 export const market = createSlice({
@@ -32,8 +33,8 @@ export const market = createSlice({
     setTicket: (state, action: PayloadAction<ITicket>) => {
       state.ticket = action.payload;
     },
-    setTransaction: (state, action: PayloadAction<ITransaction>) => {
-      state.transactions = [action.payload, ...state.transactions];
+    setTransaction: (state, action: PayloadAction<IOrder>) => {
+      state.orders = [action.payload, ...state.orders];
     },
   },
 });

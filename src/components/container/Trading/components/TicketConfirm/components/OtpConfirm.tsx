@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { setTransaction } from "@/src/redux/features/marketSlice";
 import { genCode } from "@/src/utils/helpers";
-import { ITransaction } from "@/src/interface/common";
+import { IOrder } from "@/src/interface/common";
 import { TTransactionStatus } from "@/src/enum";
 import { useRouter } from "next/navigation";
 const OtpConfirm = () => {
@@ -29,7 +29,7 @@ const OtpConfirm = () => {
     console.log(e.target.checked);
   };
   const handleConfirm = () => {
-    const trans: ITransaction = {
+    const trans: IOrder = {
       ...ticket,
       time: new Date().toISOString(),
       code,

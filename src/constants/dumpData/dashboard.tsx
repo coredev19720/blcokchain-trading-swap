@@ -1,5 +1,15 @@
-import { TAccountType, TSide } from "@/src/enum";
-import { IAccount, IMarketInfo, ITickerData } from "@/src/interface/common";
+import {
+  TAccountType,
+  TSide,
+  TOrderType,
+  TTransactionStatus,
+} from "@/src/enum";
+import {
+  IAccount,
+  IMarketInfo,
+  IOrder,
+  ITickerData,
+} from "@/src/interface/common";
 
 export const tickers: ITickerData[] = [
   {
@@ -403,5 +413,56 @@ export const accounts: IAccount[] = [
     receivingCash: 0,
     accessEquity: 0,
     portValue: 36000000,
+  },
+];
+
+export const dumpOrders: IOrder[] = [
+  {
+    symbol: "HCM",
+    side: TSide.BUY,
+    price: 33.05,
+    vol: 1000,
+    kind: "normal",
+    type: TOrderType.LO,
+    time: "14:46:30 - 28/01/2024",
+    totalValue: 33050000,
+    execQty: 100,
+    execValue: 3305000,
+    pendingQty: 900,
+    code: "CODE_001",
+    accountNo: "22222222",
+    status: TTransactionStatus.partial_filled,
+  },
+  {
+    symbol: "HCM",
+    side: TSide.SELL,
+    price: 33.05,
+    vol: 1000,
+    kind: "normal",
+    type: TOrderType.LO,
+    time: "14:46:30 - 28/01/2024",
+    totalValue: 33050000,
+    execQty: 100,
+    execValue: 3305000,
+    pendingQty: 900,
+    code: "CODE_002",
+    accountNo: "22222222",
+    status: TTransactionStatus.partial_filled,
+  },
+  {
+    symbol: "HPG",
+    side: TSide.SELL,
+    price: 27.85,
+    vol: 1000,
+    kind: "normal",
+    type: TOrderType.LO,
+    time: "14:46:30 - 28/01/2024",
+    totalValue: 27850000,
+    execQty: 100,
+    execValue: 2785000,
+    pendingQty: 900,
+    code: "CODE_003",
+    accountNo: "22222222",
+    status: TTransactionStatus.partial_filled,
   },
 ];

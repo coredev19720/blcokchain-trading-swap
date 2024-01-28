@@ -7,8 +7,9 @@ import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { useState } from "react";
 import OrderDetail from "./components/Order Detail";
 import { TOrderActionType } from "@/src/enum";
+
 const OrderBook = () => {
-  const transactions = useAppSelector((state) => state.market.transactions);
+  const orders = useAppSelector((state) => state.market.orders);
   const [selectedOrder, setSelectedOrder] = useState<IOrder | null>(null);
   const [type, setType] = useState<TOrderActionType>(TOrderActionType.detail);
   const handleClickOrder = (order: IOrder, type: TOrderActionType) => {
@@ -21,7 +22,7 @@ const OrderBook = () => {
     <S.Wrapper>
       <Header />
       <S.OrderList>
-        {transactions.map((x) => (
+        {orders.map((x) => (
           <Order data={x} key={x.code} handleClick={handleClickOrder} />
         ))}
       </S.OrderList>
