@@ -1,9 +1,7 @@
 import * as S from "./styles";
 import { FlexContent } from "@/src/styles/common";
-import { Button, SelectChangeEvent, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
-import dayjs from "dayjs";
 import { IOrder } from "@/src/interface/common";
 import { TOrderActionType, TSide } from "@/src/enum";
 import colors from "@/src/themes/colors";
@@ -70,7 +68,7 @@ const Order = ({ data, handleClick }: IProps) => {
             {t("en_ord_order_value")}
           </Typography>
           <Typography variant="body2" fontWeight={600} color="text.primary">
-            {formatNumber(data.totalValue)}
+            {formatNumber(data ? data.vol * data.price : 0)}
           </Typography>
         </FlexContent>
       </S.Content>

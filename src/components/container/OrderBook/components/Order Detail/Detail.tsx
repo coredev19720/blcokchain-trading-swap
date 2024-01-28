@@ -1,78 +1,64 @@
-import { FlexContent } from "@/src/styles/common";
 import * as S from "./styles";
-import { Typography } from "@mui/material";
 import { IOrder } from "@/src/interface/common";
 import { formatNumber } from "@/src/utils/helpers";
 import Line from "@/src/components/common/Line";
 import { useTranslations } from "next-intl";
+import dayjs from "dayjs";
+import RowContent from "@/src/components/common/RowContent";
 interface IProps {
   data: IOrder | null;
-  handleClose: () => void;
 }
-const Detail = ({ data, handleClose }: IProps) => {
+
+const Detail = ({ data }: IProps) => {
   const t = useTranslations("order_book");
   return (
     <>
       <S.Content>
-        <FlexContent>
-          <Typography variant="body2" color="text.secondary">
-            {t("en_ord_order_type")}
-          </Typography>
-          <Typography variant="body2" fontWeight={600} color="text.primary">
-            {data?.type}
-          </Typography>
-        </FlexContent>
-        <FlexContent>
-          <Typography variant="body2" color="text.secondary">
-            {t("en_ord_order_status")}
-          </Typography>
-          <Typography variant="body2" fontWeight={600} color="text.primary">
-            {data?.status}
-          </Typography>
-        </FlexContent>
+        <RowContent leftTxt={t("en_ord_order_type")} rightTxt={data?.type} />
+        <RowContent
+          leftTxt={t("en_ord_order_status")}
+          rightTxt={data?.status}
+        />
         <Line />
-        <FlexContent>
-          <Typography variant="body2" color="text.secondary">
-            {t("en_ord_order_qty")}
-          </Typography>
-          <Typography variant="body2" fontWeight={600} color="text.primary">
-            {data?.vol}
-          </Typography>
-        </FlexContent>
-        <FlexContent>
-          <Typography variant="body2" color="text.secondary">
-            {t("en_ord_order_value")}
-          </Typography>
-          <Typography variant="body2" fontWeight={600} color="text.primary">
-            {formatNumber(data?.totalValue || 0)}
-          </Typography>
-        </FlexContent>
-        <FlexContent>
-          <Typography variant="body2" color="text.secondary">
-            {t("en_ord_match_qty")}
-          </Typography>
-          <Typography variant="body2" fontWeight={600} color="text.primary">
-            {formatNumber(data?.execQty || 0)}
-          </Typography>
-        </FlexContent>
+        <RowContent
+          leftTxt={t("en_ord_order_qty")}
+          rightTxt={formatNumber(data?.vol || 0)}
+        />
+        <RowContent
+          leftTxt={t("en_ord_order_value")}
+          rightTxt={formatNumber(data ? data.vol * data.price : 0)}
+        />
+        <RowContent
+          leftTxt={t("en_ord_match_qty")}
+          rightTxt={formatNumber(data?.execQty || 0)}
+        />
         <Line />
-        <FlexContent>
-          <Typography variant="body2" color="text.secondary">
-            {t("en_ord_match_remainQty")}
-          </Typography>
-          <Typography variant="body2" fontWeight={600} color="text.primary">
-            {formatNumber(data?.pendingQty || 0)}
-          </Typography>
-        </FlexContent>
-        <FlexContent>
-          <Typography variant="body2" color="text.secondary">
-            {t("en_ord_match_value")}
-          </Typography>
-          <Typography variant="body2" fontWeight={600} color="text.primary">
-            {formatNumber(data?.execValue || 0)}
-          </Typography>
-        </FlexContent>
+        <RowContent
+          leftTxt={t("en_ord_match_remainQty")}
+          rightTxt={formatNumber(data?.pendingQty || 0)}
+        />
+        <RowContent
+          leftTxt={t("en_ord_match_value")}
+          rightTxt={formatNumber(data ? data.execQty * data.price : 0)}
+        />
       </S.Content>
+      <RowContent
+        leftTxt={t("en_ord_order_custodyCd")}
+        rightTxt={data?.code}
+        isChild
+      />
+      <RowContent
+        leftTxt={t("en_ord_order_accNo")}
+        rightTxt={data?.accountNo}
+        isChild
+      />
+      <RowContent
+        leftTxt={t("en_ord_order_timestamp")}
+        rightTxt={
+          data?.time ? dayjs(data.time).format("YYYY-MM-DD HH:mm:ss") : "-"
+        }
+        isChild
+      />
     </>
   );
 };

@@ -103,7 +103,8 @@
     "fn_trade_txt_can_buy": "Can buy",
     "fn_trade_txt_can_sell": "Can sell",
     "en_trade_custodyCd": "Code",
-    "en_trade_accNo": "Account"
+    "en_trade_accNo": "Account",
+    "fn_trade_cta_confirm": "Confirm"
   },
   "order_book": {
     "fn_ob_txt_title": "Order book",

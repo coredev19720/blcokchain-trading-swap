@@ -1,27 +1,17 @@
 import { IconButton, TextField, Typography, Button } from "@mui/material";
-import {
-  createRef,
-  useRef,
-  useState,
-  KeyboardEvent,
-  ReactEventHandler,
-} from "react";
-import {
-  useForm,
-  Controller,
-  ControllerRenderProps,
-  ControllerFieldState,
-  UseFormStateReturn,
-} from "react-hook-form";
+import { createRef, useRef, useState, KeyboardEvent } from "react";
+import { useForm, Controller } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { uIdGen } from "@/src/utils/helpers";
 import HelpText from "@/src/components/common/HelpText";
 import { Wrapper, FieldWrapper, AdormentWrapper } from "./styles";
 import FieldLabel from "@/src/components/common/FieldLabel";
+
 interface IProps {
   onSubmit: (data: any) => void;
 }
+
 const LoginForm = ({ onSubmit }: IProps) => {
   const t = useTranslations("login");
   const tMess = useTranslations("mess");
@@ -200,7 +190,7 @@ const LoginForm = ({ onSubmit }: IProps) => {
           {errors.username && (
             <HelpText
               stt="error"
-              text={(errors.username.message as string) || ""}
+              txt={(errors.username.message as string) || ""}
             />
           )}
         </FieldWrapper>
@@ -216,7 +206,7 @@ const LoginForm = ({ onSubmit }: IProps) => {
             }}
           />
           {errors.pwd && (
-            <HelpText stt="error" text={(errors.pwd.message as string) || ""} />
+            <HelpText stt="error" txt={(errors.pwd.message as string) || ""} />
           )}
         </FieldWrapper>
         <FieldWrapper>
@@ -228,7 +218,10 @@ const LoginForm = ({ onSubmit }: IProps) => {
             defaultValue={60}
           />
           {errors.expireTime && (
-            <HelpText text={(errors.expireTime.message as string) || ""} />
+            <HelpText
+              txt={(errors.expireTime.message as string) || ""}
+              stt="error"
+            />
           )}
         </FieldWrapper>
         <Button variant="contained" onClick={handleSubmit(onSubmit)}>

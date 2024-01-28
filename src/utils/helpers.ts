@@ -71,3 +71,11 @@ export const genCode = () => {
 
   return randomString;
 };
+
+export const genValidPrice = (val: number, ceil?: number, floor?: number) => {
+  if (ceil && floor) {
+    if (val > ceil) return ceil;
+    if (val < floor) return floor;
+  }
+  return val;
+};

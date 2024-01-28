@@ -8,7 +8,7 @@ import colors from "@/src/themes/colors";
 import Detail from "./Detail";
 import Cancel from "./Cancel";
 import Update from "./Update";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IProps {
   data: IOrder | null;
@@ -102,9 +102,7 @@ const OrderDetail = ({ data, type, handleClose }: IProps) => {
               </S.TicketSide>
             </FlexContent>
           </S.Content>
-          {type === "detail" && (
-            <Detail data={data} handleClose={handleClose} />
-          )}
+          {type === "detail" && <Detail data={data} />}
           {type === "cancel" && (
             <Cancel data={data} handleClose={handleClose} />
           )}

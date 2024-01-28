@@ -50,3 +50,8 @@ export const SlideLine = styled("div")(({ theme }) => ({
     top: 12,
   },
 }));
+export const FieldBlock = styled("div")(() => ({
+  display: "flex",
+  gap: 4,
+  flexDirection: "column",
+}));

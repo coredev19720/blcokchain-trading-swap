@@ -110,9 +110,7 @@ export interface IStringOpts {
 }
 export interface IOrder extends ITicket {
   time: string;
-  totalValue: number;
   execQty: number;
-  execValue: number;
   pendingQty: number;
   code: string;
   accountNo: string;

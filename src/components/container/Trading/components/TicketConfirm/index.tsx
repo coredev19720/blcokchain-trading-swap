@@ -39,9 +39,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
         time: new Date().toISOString(),
         code: genCode(),
         status: TTransactionStatus.open,
-        totalValue: ticket.price * ticket.vol,
         execQty: 0,
-        execValue: 0,
         pendingQty: ticket.vol,
         accountNo: account?.accountNo || "",
       };
@@ -179,7 +177,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
               disabled={otp.length !== 6}
               onClick={handleSubmit}
             >
-              Xác nhận
+              {t("fn_trade_cta_confirm")}
             </Button>
           </S.Actions>
         </S.Wrapper>

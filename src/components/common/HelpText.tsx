@@ -3,7 +3,7 @@ import { styled } from "@mui/system";
 import { Typography } from "@mui/material";
 import colors from "@/src/themes/colors";
 interface IProps {
-  text: string;
+  txt: string;
   icon?: ReactElement;
   stt?: "info" | "primary" | "secondary" | "warning" | "success" | "error";
   icoPos?: "left" | "right";
@@ -22,14 +22,15 @@ const colorMapping = {
   success: colors.sg70,
   error: colors.sr60,
 };
-const HelpText = ({ text, icon, stt, icoPos }: IProps) => {
+const HelpText = ({ txt, icon, stt, icoPos }: IProps) => {
   return (
     <Wrapper>
       {icoPos !== "right" && icon}
       <Typography
         color={colorMapping[stt as keyof typeof colorMapping] || "secondary"}
+        variant="subtitle2"
       >
-        {text}
+        {txt}
       </Typography>
       {icoPos === "right" && icon}
     </Wrapper>
