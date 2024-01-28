@@ -8,12 +8,15 @@ export const Wrapper = styled("div")(() => ({
   flexDirection: "column",
   gap: 16,
   padding: 16,
+  paddingTop: 0,
   borderBottom: `1px solid ${colors.mn20}`,
   background: colors.neutral4,
   width: "100%",
   position: "absolute",
   bottom: 0,
   left: 0,
+  borderTopLeftRadius: 8,
+  borderTopRightRadius: 8,
 }));
 
 export const Content = styled("div")(({ theme }) => ({
@@ -35,11 +38,13 @@ export const Actions = styled("div")(({ theme }) => ({
 export const Action = styled(Button)(({ theme }) => ({
   flex: 1,
 }));
-export const TicketSide = styled("div")<{ side: TSide }>(({ theme, side }) => ({
-  padding: theme.spacing(1),
-  borderRadius: 4,
-  backgroundColor: side === TSide.BUY ? colors.sg10 : colors.sr10,
-}));
+export const TicketSide = styled("div")<{ side?: TSide }>(
+  ({ theme, side }) => ({
+    padding: theme.spacing(1),
+    borderRadius: 4,
+    backgroundColor: side === TSide.BUY ? colors.sg10 : colors.sr10,
+  })
+);
 
 export const StatusBar = styled("div")<{ fillPct: number }>(
   ({ theme, fillPct }) => ({

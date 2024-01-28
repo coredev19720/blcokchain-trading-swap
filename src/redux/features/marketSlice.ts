@@ -7,6 +7,7 @@ type CounterState = {
   ticker: ITickerData | null;
   ticket: ITicket;
   orders: IOrder[];
+  order: IOrder | null;
 };
 
 const initialState = {
@@ -33,11 +34,30 @@ export const market = createSlice({
     setTicket: (state, action: PayloadAction<ITicket>) => {
       state.ticket = action.payload;
     },
-    setTransaction: (state, action: PayloadAction<IOrder>) => {
+    appendOrder: (state, action: PayloadAction<IOrder>) => {
       state.orders = [action.payload, ...state.orders];
+    },
+    updateOrders: (state, action: PayloadAction<IOrder>) => {
+      const orders = state.orders.map((o) => {
+        if (o.code === action.payload.code) {
+          return action.payload;
+        }
+        return o;
+      });
+      state.orders = orders;
+    },
+    setOrder: (state, action: PayloadAction<IOrder | null>) => {
+      state.order = action.payload;
     },
   },
 });
 
-export const { setTicker, reset, setTicket, setTransaction } = market.actions;
+export const {
+  setTicker,
+  reset,
+  setTicket,
+  appendOrder,
+  setOrder,
+  updateOrders,
+} = market.actions;
 export default market.reducer;

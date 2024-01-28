@@ -1,12 +1,17 @@
+import { useState } from "react";
 import * as S from "./styles";
 import { FlexContent } from "@/src/styles/common";
-import { Backdrop, Slide, Typography } from "@mui/material";
+import { Backdrop, Button, Slide, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
-import { TSide } from "@/src/enum";
+import { TSide, TTransactionStatus } from "@/src/enum";
 import { useTranslations } from "next-intl";
 import colors from "@/src/themes/colors";
 import { formatNumber } from "@/src/utils/helpers";
-import OtpConfirm from "./components/OtpConfirm";
+import OTPConfirm from "@/src/components/common/OTPConfirm";
+import { appendOrder } from "@/src/redux/features/marketSlice";
+import { genCode } from "@/src/utils/helpers";
+import { IOrder } from "@/src/interface/common";
+import { useRouter } from "next/navigation";
 interface IProps {
   open: boolean;
   setOpen: (val: boolean) => void;
@@ -16,12 +21,49 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
   const ticket = useAppSelector((state) => state.market.ticket);
   const account = useAppSelector((state) => state.user.account);
   const dispatch = useAppDispatch();
+  const router = useRouter();
+  const [otp, setOTP] = useState<string>("");
+
+  const handleChangeOTP = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length <= 6) {
+      setOTP(e.target.value);
+    }
+  };
+  const handleRequestOTP = () => {
+    console.log("handleRequestOTP");
+  };
   const handleSubmit = () => {
-    setOpen(false);
+    try {
+      const order: IOrder = {
+        ...ticket,
+        time: new Date().toISOString(),
+        code: genCode(),
+        status: TTransactionStatus.open,
+        totalValue: ticket.price * ticket.vol,
+        execQty: 0,
+        execValue: 0,
+        pendingQty: ticket.vol,
+        accountNo: account?.accountNo || "",
+      };
+      dispatch(appendOrder(order));
+      router.push(`/order-book`);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setOpen(false);
+    }
   };
   return (
-    <Backdrop open={open}>
-      <Slide direction="up" in={open} mountOnEnter unmountOnExit>
+    <Backdrop open={open} onClick={() => setOpen(false)}>
+      <Slide
+        direction="up"
+        in={open}
+        mountOnEnter
+        unmountOnExit
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <S.Wrapper>
           <S.TicketInfo>
             <Typography variant="h5" fontWeight={600} color="text.primary">
@@ -124,7 +166,22 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
               </Typography>
             </FlexContent>
           </S.TicketInfo>
-          <OtpConfirm />
+          <S.Actions>
+            <OTPConfirm
+              handleRequest={handleRequestOTP}
+              handleChangeOTP={handleChangeOTP}
+              otp={otp}
+            />
+            <Button
+              color="primary"
+              variant="contained"
+              fullWidth
+              disabled={otp.length !== 6}
+              onClick={handleSubmit}
+            >
+              Xác nhận
+            </Button>
+          </S.Actions>
         </S.Wrapper>
       </Slide>
     </Backdrop>

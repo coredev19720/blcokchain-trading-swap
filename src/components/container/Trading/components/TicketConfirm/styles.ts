@@ -1,6 +1,6 @@
 import { TSide } from "@/src/enum";
 import colors from "@/src/themes/colors";
-import { Grid, Select, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const Wrapper = styled("div")(({ theme }) => ({
@@ -35,4 +35,12 @@ export const TicketSide = styled("div")<{ side: TSide }>(({ theme, side }) => ({
   padding: theme.spacing(1),
   borderRadius: 4,
   backgroundColor: side === TSide.BUY ? colors.sg10 : colors.sr10,
+}));
+
+export const Actions = styled("div")(({ theme }) => ({
+  background: theme.palette.mode === "dark" ? colors.dn10 : colors.p300,
+  padding: theme.spacing(4),
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(2),
 }));

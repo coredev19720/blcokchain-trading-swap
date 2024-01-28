@@ -1,4 +1,5 @@
 import { styled } from "@mui/system";
+import colors from "../themes/colors";
 
 export const PageWrapper = styled("div")(({ theme }) => ({
   maxWidth: 600,
@@ -30,4 +31,22 @@ export const FlexContent = styled("div")(() => ({
   display: "flex",
   justifyContent: "space-between",
   gap: 8,
+}));
+
+export const SlideLine = styled("div")(({ theme }) => ({
+  width: "100%",
+  height: 12,
+  position: "relative",
+  "&::before": {
+    position: "absolute",
+    content: '""',
+    width: 36,
+    height: 4,
+    borderRadius: 4,
+    backgroundColor:
+      theme.palette.mode === "dark" ? colors.p100 : colors.neutral1,
+    left: "50%",
+    transform: "translateX(-50%)",
+    top: 12,
+  },
 }));

@@ -7,16 +7,18 @@ import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { useState } from "react";
 import OrderDetail from "./components/Order Detail";
 import { TOrderActionType } from "@/src/enum";
-
+import { setOrder } from "@/src/redux/features/marketSlice";
 const OrderBook = () => {
   const orders = useAppSelector((state) => state.market.orders);
-  const [selectedOrder, setSelectedOrder] = useState<IOrder | null>(null);
+  const order = useAppSelector((state) => state.market.order);
+  const dispatch = useAppDispatch();
   const [type, setType] = useState<TOrderActionType>(TOrderActionType.detail);
   const handleClickOrder = (order: IOrder, type: TOrderActionType) => {
-    setSelectedOrder(order);
+    dispatch(setOrder(order));
+    setType(type);
   };
   const handleClose = () => {
-    setSelectedOrder(null);
+    dispatch(setOrder(null));
   };
   return (
     <S.Wrapper>
@@ -26,13 +28,7 @@ const OrderBook = () => {
           <Order data={x} key={x.code} handleClick={handleClickOrder} />
         ))}
       </S.OrderList>
-      {selectedOrder && (
-        <OrderDetail
-          data={selectedOrder}
-          type={type}
-          handleClose={handleClose}
-        />
-      )}
+      <OrderDetail data={order} type={type} handleClose={handleClose} />
     </S.Wrapper>
   );
 };
