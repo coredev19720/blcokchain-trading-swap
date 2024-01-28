@@ -10,6 +10,10 @@ export const Wrapper = styled("div")(() => ({
   padding: 16,
   borderBottom: `1px solid ${colors.mn20}`,
   background: colors.neutral4,
+  width: "100%",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
 }));
 
 export const Content = styled("div")(({ theme }) => ({

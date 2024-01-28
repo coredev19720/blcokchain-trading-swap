@@ -14,9 +14,9 @@ interface IProps {
 const TicketConfirm = ({ open, setOpen }: IProps) => {
   const t = useTranslations("trade");
   const ticket = useAppSelector((state) => state.market.ticket);
+  const account = useAppSelector((state) => state.user.account);
   const dispatch = useAppDispatch();
   const handleSubmit = () => {
-    console.log("ticket", ticket);
     setOpen(false);
   };
   return (
@@ -36,7 +36,9 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                   <Typography
                     variant="body2"
                     color={
-                      ticket.side === TSide.BUY ? colors.sg40 : colors.sr40
+                      ticket.side === TSide.BUY
+                        ? colors.lightUpText
+                        : colors.lightDownText
                     }
                     style={{ textTransform: "capitalize" }}
                   >
@@ -109,7 +111,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                 {t("en_trade_custodyCd")}
               </Typography>
               <Typography variant="body2" fontWeight={600} color="text.primary">
-                mapping
+                {/* {ticket.code} */}
               </Typography>
             </FlexContent>
             <FlexContent>
@@ -118,7 +120,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                 {t("en_trade_accNo")}
               </Typography>
               <Typography variant="body2" fontWeight={600} color="text.primary">
-                mapping
+                {account?.accountNo || ""}
               </Typography>
             </FlexContent>
           </S.TicketInfo>

@@ -105,7 +105,7 @@ export interface IStringOpts {
   label: string;
   value: string;
 }
-export interface ITransaction extends ITicket {
+export interface IOrder extends ITicket {
   time: string;
   totalValue: number;
   execQty: number;

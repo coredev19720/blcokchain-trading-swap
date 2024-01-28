@@ -1,6 +1,6 @@
 import FieldLabel from "@/src/components/common/FieldLabel";
 import * as S from "./styles";
-import { Button, TextField } from "@mui/material";
+import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
@@ -15,6 +15,7 @@ const OtpConfirm = () => {
   const dispatch = useAppDispatch();
   const t = useTranslations("order_book");
   const [otp, setOtp] = useState<string>("");
+  const [code, setCode] = useState<string>(genCode());
   const router = useRouter();
   const handleChangeOtp = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length <= 6) {
@@ -24,11 +25,14 @@ const OtpConfirm = () => {
   const handleRequestOtp = () => {
     console.log("request otp");
   };
+  const handleClickCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.checked);
+  };
   const handleConfirm = () => {
     const trans: ITransaction = {
       ...ticket,
       time: new Date().toISOString(),
-      code: genCode(),
+      code,
       status: TTransactionStatus.open,
       totalValue: ticket.price * ticket.vol,
       execQty: 0,
@@ -49,11 +53,15 @@ const OtpConfirm = () => {
             onChange={handleChangeOtp}
             type="number"
           />
-          <Button onClick={handleRequestOtp} variant="outlined">
+          <S.OTPButton onClick={handleRequestOtp} variant="outlined">
             {t("fn_ob_cta_token")}
-          </Button>
+          </S.OTPButton>
         </S.OTPInput>
       </S.OTP>
+      <FormControlLabel
+        label={t("fn_ob_inp_saveToken")}
+        control={<Checkbox onChange={handleClickCheckBox} />}
+      />
       <Button
         onClick={handleConfirm}
         disabled={otp.length < 6}
