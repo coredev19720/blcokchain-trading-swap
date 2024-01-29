@@ -8,13 +8,20 @@ import { IPortItem } from "@/src/interface/table";
 import RowContent from "@/src/components/common/RowContent";
 import { formatNumber } from "@/src/utils/helpers";
 import Line from "@/src/components/common/Line";
-
+import { setTicker, setTicket } from "@/src/redux/features/marketSlice";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import { TSide } from "@/src/enum";
+import { tickers } from "@/src/constants/dumpData/dashboard";
+import { useRouter } from "next/navigation";
 interface IProps {
   data: IPortItem | null;
   handleClose: () => void;
 }
 const PortItemDetail = ({ data, handleClose }: IProps) => {
   const t = useTranslations("portfolio");
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const ticket = useAppSelector((state) => state.market.ticket);
   const [startY, setStartY] = useState(null);
   const [currentY, setCurrentY] = useState(null);
   const [isSliding, setIsSliding] = useState(false);
@@ -54,6 +61,23 @@ const PortItemDetail = ({ data, handleClose }: IProps) => {
       window.removeEventListener("touchend", handleTouchEnd);
     };
   }, [isSliding, currentY, startY]);
+  const handleClickAction = (side: TSide) => {
+    const availTicker = tickers.find((t) => t.symbol === data?.symbol);
+    console.log(availTicker);
+    if (availTicker) {
+      dispatch(setTicker(availTicker));
+      dispatch(
+        setTicket({
+          ...ticket,
+          symbol: availTicker.symbol,
+          price: availTicker.ref,
+          side: side,
+        })
+      );
+      handleClose();
+      router.push("/trading");
+    }
+  };
   return (
     <Backdrop open={!!data} onClick={handleClose}>
       <Slide
@@ -122,10 +146,18 @@ const PortItemDetail = ({ data, handleClose }: IProps) => {
             />
           </S.Content>
           <S.Actions>
-            <S.Action variant="contained" color="success">
+            <S.Action
+              variant="contained"
+              color="error"
+              onClick={() => handleClickAction(TSide.SELL)}
+            >
               {t("fn_port_detail_cta_sell")}
             </S.Action>
-            <S.Action variant="contained" color="error">
+            <S.Action
+              variant="contained"
+              color="success"
+              onClick={() => handleClickAction(TSide.BUY)}
+            >
               {t("fn_port_detail_cta_buy")}
             </S.Action>
           </S.Actions>
