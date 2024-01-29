@@ -16,14 +16,13 @@ const Portfolio = () => {
     dispatch(setOrder(order));
     setType(type);
   };
-  const handleClose = () => {
-    dispatch(setOrder(null));
-  };
   return (
     <S.Wrapper>
       <Header />
-      <PortInfo />
-      <DataTable />
+      <S.Content>
+        <PortInfo />
+        <DataTable />
+      </S.Content>
     </S.Wrapper>
   );
 };

@@ -71,11 +71,34 @@ export const genCode = () => {
 
   return randomString;
 };
+export const findDiffIndex = (str1: string, str2: string) => {
+  const minLength = Math.min(str1.length, str2.length);
 
-export const genValidPrice = (val: number, ceil?: number, floor?: number) => {
-  if (ceil && floor) {
-    if (val > ceil) return ceil;
-    if (val < floor) return floor;
+  for (let i = 0; i < minLength; i++) {
+    if (str1[i] !== str2[i]) {
+      return i;
+    }
   }
-  return val;
+  return null;
+};
+export const genValidPrice = (
+  valStr: string,
+  currentVal: string,
+  floorPrice: number
+) => {
+  const currentValStr = currentVal.toString();
+  const floorPriceStr = floorPrice.toString();
+  if (valStr.length >= currentValStr.length || valStr.length === 1) {
+    const diffIndex = findDiffIndex(valStr, floorPriceStr);
+    if (diffIndex !== null) {
+      const valStrArr = valStr.split("");
+      const floorPriceStrArr = floorPriceStr.split("");
+      if (valStrArr[diffIndex] < floorPriceStrArr[diffIndex]) {
+        valStrArr[diffIndex] = floorPriceStrArr[diffIndex];
+        return floorPrice;
+      }
+    }
+  }
+
+  return valStr;
 };

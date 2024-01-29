@@ -63,7 +63,7 @@ const TicketInfo = () => {
             fullWidth
             value={ticket.price}
             onChange={handleChangePrice}
-            type="decimal"
+            type="number"
             onBlur={handleValidPrice}
           />
         </S.FieldBlock>

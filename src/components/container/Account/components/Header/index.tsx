@@ -19,7 +19,9 @@ const Header = () => {
   };
   return (
     <S.Wrapper>
-      <Typography fontWeight={700}>{t("fn_acc_txt_title")}</Typography>
+      <Typography fontWeight={700} color="text.primary">
+        {t("fn_acc_txt_title")}
+      </Typography>
       <S.AccountSelect
         value={account?.accountNo}
         onChange={handleChangeAccount}

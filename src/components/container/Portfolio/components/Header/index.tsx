@@ -23,7 +23,9 @@ const Header = () => {
   return (
     <S.Wrapper>
       <S.Title>
-        <Typography fontWeight={700}>{t("fn_port_txt_title")}</Typography>
+        <Typography fontWeight={700} color="text.primary">
+          {t("fn_port_txt_title")}
+        </Typography>
         <Sync fontSize="large" onClick={handleRefresh} />
       </S.Title>
       <S.AccountSelect

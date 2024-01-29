@@ -25,14 +25,25 @@ const Update = ({ data, handleClose }: IProps) => {
   const [otp, setOtp] = useState<string>("");
   const [updatePrice, setUpdatePrice] = useState<number>(data?.price || 0);
   const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const validPrice = genValidPrice(
-      Number(e.target.value),
-      availTicker?.ceil,
-      availTicker?.floor
-    );
-    setUpdatePrice(validPrice);
+    if (availTicker) {
+      if (Number(e.target.value) > availTicker.ceil) {
+        setUpdatePrice(availTicker.ceil);
+        return;
+      }
+      const validPrice = genValidPrice(
+        e.target.value,
+        updatePrice.toString(),
+        availTicker.floor
+      );
+      setUpdatePrice(Number(validPrice));
+    }
   };
-  const handleValidPrice = () => {};
+  const handleValidPrice = () => {
+    if (availTicker && updatePrice < availTicker.floor) {
+      setUpdatePrice(availTicker.floor);
+      return;
+    }
+  };
   const handleRequestOTP = () => {
     console.log("handleRequestOTP");
   };
@@ -94,7 +105,7 @@ const Update = ({ data, handleClose }: IProps) => {
             fullWidth
             value={updatePrice}
             onChange={handleChangePrice}
-            type="decimal"
+            type="number"
             onBlur={handleValidPrice}
           />
         </FieldBlock>
