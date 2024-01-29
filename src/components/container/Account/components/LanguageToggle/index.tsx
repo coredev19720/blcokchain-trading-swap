@@ -19,6 +19,7 @@ const LanguageToggle = () => {
   const params = useParams();
   const handleChangeLanguage = (val: string) => {
     Cookies.set("NEXT_LOCALE", val);
+    pathname && router.push(`/${val}/account`);
   };
   return (
     <Wrapper>
