@@ -10,6 +10,7 @@ const Button = {
       "&:hover": {
         boxShadow: "none",
       },
+      textTransform: "none" as const,
     },
     containedPrimary: {
       backgroundColor: colors.sb60,
