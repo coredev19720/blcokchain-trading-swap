@@ -3,13 +3,19 @@ import colors from "@/src/themes/colors";
 import { Button, Select } from "@mui/material";
 import { styled } from "@mui/system";
 
-export const Wrapper = styled("div")(() => ({
+export const Wrapper = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  gap: 16,
-  padding: 16,
+  gap: theme.spacing(2),
+  padding: theme.spacing(0, 4),
   borderBottom: `1px solid ${colors.mn20}`,
   background: colors.neutral4,
+  width: "100%",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  borderTopLeftRadius: theme.spacing(2),
+  borderTopRightRadius: theme.spacing(2),
 }));
 
 export const Content = styled("div")(({ theme }) => ({
@@ -22,20 +28,24 @@ export const Content = styled("div")(({ theme }) => ({
 }));
 
 export const Actions = styled("div")(({ theme }) => ({
-  display: "flex",
   gap: theme.spacing(2),
-  alignItems: "center",
-  width: "100%",
+  display: "flex",
+  padding: theme.spacing(2, 4),
+  marginLeft: theme.spacing(-4),
+  width: "calc(100% + 32px)",
+  background: theme.palette.mode === "dark" ? colors.p100 : colors.p300,
 }));
 
-export const Action = styled(Button)(({ theme }) => ({
+export const Action = styled(Button)(() => ({
   flex: 1,
 }));
-export const TicketSide = styled("div")<{ side: TSide }>(({ theme, side }) => ({
-  padding: theme.spacing(1),
-  borderRadius: 4,
-  backgroundColor: side === TSide.BUY ? colors.sg10 : colors.sr10,
-}));
+export const TicketSide = styled("div")<{ side?: TSide }>(
+  ({ theme, side }) => ({
+    padding: theme.spacing(1),
+    borderRadius: theme.spacing(1),
+    backgroundColor: side === TSide.BUY ? colors.sg10 : colors.sr10,
+  })
+);
 
 export const StatusBar = styled("div")<{ fillPct: number }>(
   ({ theme, fillPct }) => ({

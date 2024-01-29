@@ -17,12 +17,15 @@ const Header = () => {
       }
     }
   };
+  const handleRefresh = () => {
+    console.log("refresh");
+  };
   return (
     <S.Wrapper>
-      <div>
+      <S.Title>
         <Typography fontWeight={700}>{t("fn_port_txt_title")}</Typography>
-        <Sync />
-      </div>
+        <Sync fontSize="large" onClick={handleRefresh} />
+      </S.Title>
       <S.AccountSelect
         value={account?.accountNo}
         onChange={handleChangeAccount}

@@ -17,7 +17,7 @@ const Cell = ({ col, sortKey, sortWay, handleClick }: IProps) => {
         <HeadCellWrapper className={col.isSort ? "isSort" : ""}>
           <Typography
             align={col.align || "left"}
-            variant="body2"
+            variant="subtitle2"
             fontWeight="400"
             color={colors.p300}
           >

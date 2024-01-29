@@ -5,7 +5,7 @@ import Order from "./components/Order";
 import * as S from "./styles";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { useState } from "react";
-import OrderDetail from "./components/Order Detail";
+import OrderDetail from "./components/OrderDetail";
 import { TOrderActionType } from "@/src/enum";
 import { setOrder } from "@/src/redux/features/marketSlice";
 const OrderBook = () => {

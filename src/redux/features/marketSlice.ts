@@ -1,6 +1,8 @@
+import { dumpPorts } from "@/src/constants/dumpData";
 import { dumpOrders } from "@/src/constants/dumpData/dashboard";
 import { TOrderKind, TOrderType, TSide } from "@/src/enum";
 import { ITickerData, ITicket, IOrder } from "@/src/interface/common";
+import { IPortItem } from "@/src/interface/table";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type CounterState = {
@@ -8,6 +10,8 @@ type CounterState = {
   ticket: ITicket;
   orders: IOrder[];
   order: IOrder | null;
+  ports: IPortItem[];
+  port: IPortItem | null;
 };
 
 const initialState = {
@@ -21,6 +25,9 @@ const initialState = {
     kind: "normal" as TOrderKind,
   },
   orders: dumpOrders,
+  ports: dumpPorts,
+  port: null,
+  order: null,
 } as CounterState;
 
 export const market = createSlice({
@@ -49,6 +56,9 @@ export const market = createSlice({
     setOrder: (state, action: PayloadAction<IOrder | null>) => {
       state.order = action.payload;
     },
+    setPort: (state, action: PayloadAction<IPortItem | null>) => {
+      state.port = action.payload;
+    },
   },
 });
 
@@ -59,5 +69,6 @@ export const {
   appendOrder,
   setOrder,
   updateOrders,
+  setPort,
 } = market.actions;
 export default market.reducer;

@@ -25,3 +25,9 @@ export const AccountSelect = styled(Select)(() => ({
     },
   },
 }));
+
+export const Title = styled("div")(() => ({
+  display: "flex",
+  alignItems: "center",
+  gap: 8,
+}));

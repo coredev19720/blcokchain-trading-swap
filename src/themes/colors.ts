@@ -126,5 +126,6 @@ const colors = {
   neutral1: "#D1D1D1",
   neutral4: "#FAFAFA",
   brand1: "#FFC114",
+  black: "#000",
 };
 export default colors;

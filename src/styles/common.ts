@@ -31,6 +31,7 @@ export const FlexContent = styled("div")(() => ({
   display: "flex",
   justifyContent: "space-between",
   gap: 8,
+  width: "100%",
 }));
 
 export const SlideLine = styled("div")(({ theme }) => ({
@@ -54,4 +55,14 @@ export const FieldBlock = styled("div")(() => ({
   display: "flex",
   gap: 4,
   flexDirection: "column",
+}));
+
+export const MuiIcon = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: 24,
+  height: 24,
+  color: theme.palette.mode === "dark" ? colors.neutral1 : colors.black,
+  fontSize: 24,
 }));
