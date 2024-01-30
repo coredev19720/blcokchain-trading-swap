@@ -22,7 +22,7 @@ const Header = () => {
         <ArrowBack />
         Trở về
       </BackButton>
-      <Image alt="logo" src={logo} />
+      <Image alt="logo" src={logo} height={40} />
     </Wrapper>
   );
 };

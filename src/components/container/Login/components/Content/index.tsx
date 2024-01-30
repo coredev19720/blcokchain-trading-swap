@@ -19,7 +19,8 @@ const Content = () => {
     if (data.username !== "admin" || data.pwd !== "admin") return false;
     return true;
   };
-  const handleLogin = (data: ILoginForm) => {
+  const handleLogin = (data: ILoginForm, recaptchaVal: string) => {
+    console.log("recaptchaVal", recaptchaVal);
     if (!loginSuccess(data)) {
       toast.error(tNoti("txt_login_fail"));
       return;

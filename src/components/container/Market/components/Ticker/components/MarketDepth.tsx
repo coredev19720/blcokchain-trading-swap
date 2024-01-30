@@ -16,7 +16,7 @@ import { useTranslations } from "next-intl";
 const Wrapper = styled("div")(() => ({
   display: "flex",
   gap: 8,
-  height: 215,
+  height: 211,
 }));
 const BestDeal = styled("div")(() => ({
   display: "flex",

@@ -7,6 +7,7 @@ import { uIdGen } from "@/src/utils/helpers";
 import HelpText from "@/src/components/common/HelpText";
 import { Wrapper, FieldWrapper, AdormentWrapper } from "./styles";
 import FieldLabel from "@/src/components/common/FieldLabel";
+import ReCAPTCHA from "react-google-recaptcha";
 
 interface IProps {
   onSubmit: (data: any) => void;
@@ -24,7 +25,7 @@ const LoginForm = ({ onSubmit }: IProps) => {
   } = useForm({
     reValidateMode: "onSubmit",
   });
-
+  const recaptchaRef = createRef<ReCAPTCHA>();
   const usernameRef = useRef(null);
   const pwdRef: React.RefObject<HTMLInputElement> = createRef();
   const expireTimeRef: React.RefObject<HTMLInputElement> = createRef();
@@ -48,12 +49,19 @@ const LoginForm = ({ onSubmit }: IProps) => {
           return;
         }
         default:
-          handleSubmit(onSubmit)();
+          handleSubmit(onSubmitWithCaptcha);
           return;
       }
     }
   };
-
+  const onSubmitWithCaptcha = (data: any) => {
+    const recaptchaVal = recaptchaRef.current?.getValue();
+    if (recaptchaRef.current) {
+      if (recaptchaVal) {
+        onSubmit({ ...data, recaptcha: recaptchaVal });
+      }
+    }
+  };
   const handleClickShowPwd = () => {
     setShowPwd((prev) => !prev);
   };
@@ -224,6 +232,11 @@ const LoginForm = ({ onSubmit }: IProps) => {
             />
           )}
         </FieldWrapper>
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+          // onChange={onRecaptchaChange}
+        />
         <Button
           variant="contained"
           onClick={handleSubmit(onSubmit)}

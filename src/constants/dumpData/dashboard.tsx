@@ -364,38 +364,6 @@ export const marketIndex: IMarketInfo[] = [
     vol: 100000000,
     value: 100000000000,
   },
-  {
-    name: "VN30",
-    index: 1100,
-    chg: 10,
-    pctChg: 0.92,
-    vol: 100000000,
-    value: 200000000000,
-  },
-  {
-    name: "HNX30",
-    index: 507.75,
-    chg: 22.15,
-    pctChg: 4.56,
-    vol: 100000000,
-    value: 400000000000,
-  },
-  {
-    name: "VNFINLEAD",
-    index: 1000,
-    chg: 10,
-    pctChg: 0.72,
-    vol: 100000000,
-    value: 500000000000,
-  },
-  {
-    name: "VNFINLEAD",
-    index: 1000,
-    chg: 10,
-    pctChg: 0.72,
-    vol: 100000000,
-    value: 500000000000,
-  },
 ];
 
 export const accounts: IAccount[] = [
