@@ -30,7 +30,6 @@ const LoginForm = ({ onSubmit }: IProps) => {
   const pwdRef: React.RefObject<HTMLInputElement> = createRef();
   const expireTimeRef: React.RefObject<HTMLInputElement> = createRef();
   const [showPwd, setShowPwd] = useState(false);
-
   const handleKeyDownEnter = (
     e: KeyboardEvent<HTMLDivElement>,
     field: string
