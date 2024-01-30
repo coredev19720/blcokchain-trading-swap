@@ -47,6 +47,7 @@ const OTPConfirm = ({ handleRequest, handleChangeOTP, otp }: IProps) => {
             onChange={handleChangeOTP}
             type="number"
             fullWidth
+            autoFocus
           />
           <S.OTPButton
             onClick={() => {
