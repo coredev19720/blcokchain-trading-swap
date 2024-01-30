@@ -11,6 +11,7 @@ import activeMenuIconTrading from "@/public/images/icon/active_menu_trading_icon
 import menuIconAccount from "@/public/images/icon/menu_account_icon.svg";
 import engFlag from "@/public/images/eng-flag.svg";
 import vieFlag from "@/public/images/vie-flag.svg";
+import multiKey from "@/public/images/multi-key.svg";
 export {
   logo,
   csIcon,
@@ -25,4 +26,5 @@ export {
   activeMenuIconMarket,
   engFlag,
   vieFlag,
+  multiKey,
 };

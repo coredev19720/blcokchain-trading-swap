@@ -16,8 +16,8 @@ const ForgotPassword = () => {
       <Header />
       <S.Content>
         {step === 0 && <FillInformation setStep={setStep} />}
-        {step === 1 && <FillPassword setStep={setStep} />}
-        {step === 2 && <FillOTP setStep={setStep} />}
+        {step === 1 && <FillOTP setStep={setStep} />}
+        {step === 2 && <FillPassword setStep={setStep} />}
         {step === 3 && <Success />}
       </S.Content>
     </S.Wrapper>
