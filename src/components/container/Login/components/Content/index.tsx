@@ -55,7 +55,7 @@ const Content = () => {
         fontWeight={600}
         color={colors.sb60}
         onClick={redirectToForgotPwd}
-        variant="body2"
+        variant="subtitle1"
       >
         {t("fn_login_forgot_pwd")}
       </Typography>

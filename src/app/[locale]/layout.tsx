@@ -1,4 +1,3 @@
-import "@/src/styles/global/common.scss";
 import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";

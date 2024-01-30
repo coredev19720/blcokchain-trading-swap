@@ -224,7 +224,11 @@ const LoginForm = ({ onSubmit }: IProps) => {
             />
           )}
         </FieldWrapper>
-        <Button variant="contained" onClick={handleSubmit(onSubmit)}>
+        <Button
+          variant="contained"
+          onClick={handleSubmit(onSubmit)}
+          size="large"
+        >
           {t("fn_login_cta_login")}
         </Button>
       </Wrapper>

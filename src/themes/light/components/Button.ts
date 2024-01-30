@@ -14,6 +14,12 @@ const Button = {
       },
       textTransform: "none" as const,
     },
+    sizeLarge: {
+      height: 52,
+      fontSize: "1.7rem",
+      lineHeight: "2.2rem",
+      borderRadius: 12,
+    },
     containedPrimary: {
       backgroundColor: colors.sb60,
       "&:hover": {
