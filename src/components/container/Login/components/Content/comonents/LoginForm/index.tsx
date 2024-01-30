@@ -10,7 +10,7 @@ import FieldLabel from "@/src/components/common/FieldLabel";
 import ReCAPTCHA from "react-google-recaptcha";
 
 interface IProps {
-  onSubmit: (data: any) => void;
+  onSubmit: (data: any, recaptchaVal: string) => void;
 }
 
 const LoginForm = ({ onSubmit }: IProps) => {
@@ -58,7 +58,7 @@ const LoginForm = ({ onSubmit }: IProps) => {
     const recaptchaVal = recaptchaRef.current?.getValue();
     if (recaptchaRef.current) {
       if (recaptchaVal) {
-        onSubmit({ ...data, recaptcha: recaptchaVal });
+        onSubmit(data, recaptchaVal);
       }
     }
   };
@@ -239,7 +239,7 @@ const LoginForm = ({ onSubmit }: IProps) => {
         />
         <Button
           variant="contained"
-          onClick={handleSubmit(onSubmit)}
+          onClick={handleSubmit(onSubmitWithCaptcha)}
           size="large"
         >
           {t("fn_login_cta_login")}
