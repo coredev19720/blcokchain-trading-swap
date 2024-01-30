@@ -102,3 +102,16 @@ export const genValidPrice = (
 
   return valStr;
 };
+
+export const lastSymLocalKey: string = process.env.NEXT_PUBLIC_LAST_SYM_KEY
+  ? process.env.NEXT_PUBLIC_LAST_SYM_KEY
+  : "lastSym";
+export const setLastSymbolToLocalStorage = (symbol: string) => {
+  window.localStorage.setItem(lastSymLocalKey, symbol);
+};
+
+export const genChgTextClass = (chg: number) => {
+  if (chg > 0) return colors.lightUpText;
+  if (chg < 0) return colors.lightDownText;
+  return "text.primary";
+};

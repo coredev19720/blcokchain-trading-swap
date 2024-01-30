@@ -7,6 +7,7 @@ import SearchInput from "./components/SearchInput";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { setTicker, setTicket } from "@/src/redux/features/marketSlice";
+import { setLastSymbolToLocalStorage } from "@/src/utils/helpers";
 
 interface IProps {
   open: boolean;
@@ -20,12 +21,7 @@ const SearchPanel = ({ open, setOpenPanel }: IProps) => {
   const handleClickTicker = (val: ITickerOpt) => {
     const availTicker = tickers.find((t) => t.symbol === val.value);
     if (availTicker) {
-      window.localStorage.setItem(
-        process.env.NEXT_PUBLIC_LAST_SYM_KEY
-          ? process.env.NEXT_PUBLIC_LAST_SYM_KEY
-          : "lastSym",
-        JSON.stringify(availTicker.symbol)
-      );
+      setLastSymbolToLocalStorage(availTicker.symbol);
       dispatch(setTicker(availTicker));
       dispatch(
         setTicket({

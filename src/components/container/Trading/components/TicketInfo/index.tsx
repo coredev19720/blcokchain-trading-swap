@@ -13,6 +13,7 @@ import { orderKindOpts, orderTypeOpts } from "@/src/constants/common";
 import { TOrderKind, TOrderType } from "@/src/enum";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { setTicket } from "@/src/redux/features/marketSlice";
+import { genValidPrice } from "@/src/utils/helpers";
 const TicketInfo = () => {
   const t = useTranslations("trade");
   const dispatch = useAppDispatch();
@@ -22,12 +23,18 @@ const TicketInfo = () => {
     dispatch(setTicket({ ...ticket, type: e.target.value as TOrderType }));
   };
   const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(typeof e.target.value);
-    if (ticker && Number(e.target.value) > ticker.ceil) {
-      dispatch(setTicket({ ...ticket, price: ticker.ceil }));
-      return;
+    if (ticker) {
+      if (Number(e.target.value) > ticker.ceil) {
+        dispatch(setTicket({ ...ticket, price: ticker.ceil }));
+        return;
+      }
+      const validPrice = genValidPrice(
+        e.target.value,
+        ticket.price.toString(),
+        ticker?.floor
+      );
+      dispatch(setTicket({ ...ticket, price: Number(validPrice) }));
     }
-    dispatch(setTicket({ ...ticket, price: Number(e.target.value) }));
   };
   const handleChangeOrderKind = (e: SelectChangeEvent<unknown>) => {
     dispatch(setTicket({ ...ticket, kind: e.target.value as TOrderKind }));
@@ -61,7 +68,7 @@ const TicketInfo = () => {
           <FieldLabel>{t("fn_trade_inp_ordPrice")}</FieldLabel>
           <TextField
             fullWidth
-            value={ticket.price}
+            value={ticket.price || null}
             onChange={handleChangePrice}
             type="number"
             onBlur={handleValidPrice}

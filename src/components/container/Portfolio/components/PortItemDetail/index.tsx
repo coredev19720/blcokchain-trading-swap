@@ -6,7 +6,7 @@ import colors from "@/src/themes/colors";
 import { useEffect, useState } from "react";
 import { IPortItem } from "@/src/interface/table";
 import RowContent from "@/src/components/common/RowContent";
-import { formatNumber } from "@/src/utils/helpers";
+import { formatNumber, setLastSymbolToLocalStorage } from "@/src/utils/helpers";
 import Line from "@/src/components/common/Line";
 import { setTicker, setTicket } from "@/src/redux/features/marketSlice";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
@@ -61,10 +61,11 @@ const PortItemDetail = ({ data, handleClose }: IProps) => {
       window.removeEventListener("touchend", handleTouchEnd);
     };
   }, [isSliding, currentY, startY]);
+
   const handleClickAction = (side: TSide) => {
     const availTicker = tickers.find((t) => t.symbol === data?.symbol);
-    console.log(availTicker);
     if (availTicker) {
+      setLastSymbolToLocalStorage(availTicker.symbol);
       dispatch(setTicker(availTicker));
       dispatch(
         setTicket({

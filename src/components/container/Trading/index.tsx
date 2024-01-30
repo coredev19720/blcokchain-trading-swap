@@ -1,8 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { useAppSelector } from "@/src/redux/hooks";
 import * as S from "./styles";
 import { TSide } from "@/src/enum";
 import Header from "./components/Header";
@@ -10,12 +9,39 @@ import Search from "./components/Search";
 import TickerInfo from "./components/TickerInfo";
 import TicketInfo from "./components/TicketInfo";
 import TicketConfirm from "./components/TicketConfirm";
-
+import { lastSymLocalKey } from "@/src/utils/helpers";
+import { tickers } from "@/src/constants/dumpData/dashboard";
+import { setTicker, setTicket } from "@/src/redux/features/marketSlice";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 const Trading = () => {
   const t = useTranslations("trade");
   const ticket = useAppSelector((state) => state.market.ticket);
   const ticker = useAppSelector((state) => state.market.ticker);
+  const dispatch = useAppDispatch();
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
+  useEffect(() => {
+    initTicker();
+  }, []);
+
+  const initTicker = () => {
+    if (!ticker) {
+      const lastSymbol = localStorage.getItem(lastSymLocalKey);
+      const availTicker = lastSymbol
+        ? tickers.find((t) => t.symbol === lastSymbol.toUpperCase())
+        : null;
+      if (availTicker) {
+        dispatch(setTicker(availTicker));
+        dispatch(
+          setTicket({
+            ...ticket,
+            symbol: availTicker.symbol,
+            price: availTicker.ref,
+            side: TSide.BUY,
+          })
+        );
+      }
+    }
+  };
   const handleClickTrade = () => {
     setIsConfirm(true);
   };

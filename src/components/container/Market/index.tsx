@@ -3,57 +3,59 @@ import { Wrapper } from "./styles";
 import SearchInput from "./components/SearchInput";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { validTicker } from "@/src/utils/helpers";
 import { tickers } from "@/src/constants/dumpData/dashboard";
 import Ticker from "./components/Ticker";
 import EmptyState from "./components/EmptyState";
 import { useAppSelector, useAppDispatch } from "@/src/redux/hooks";
 import { setTicker, setTicket } from "@/src/redux/features/marketSlice";
 import SearchPanel from "../../common/SearchPanel";
+import {
+  setLastSymbolToLocalStorage,
+  lastSymLocalKey,
+} from "@/src/utils/helpers";
 const Market = () => {
   const searchParams = useSearchParams();
   const ticker = useAppSelector((state) => state.market.ticker);
   const ticket = useAppSelector((state) => state.market.ticket);
   const dispatch = useAppDispatch();
   const [openPanel, setOpenPanel] = useState<boolean>(false);
+
   useEffect(() => {
-    if (!ticker) {
-      const s = searchParams?.get("s");
-      if (s && validTicker(s.toUpperCase())) {
-        const availTicker = tickers.find((t) => t.symbol === s.toUpperCase());
-        if (availTicker) {
-          dispatch(setTicker(availTicker));
-          dispatch(
-            setTicket({
-              ...ticket,
-              symbol: availTicker.symbol,
-              price: availTicker.ref,
-            })
-          );
-        }
-      }
-      const lastSymbol = localStorage.getItem(
-        process.env.NEXT_PUBLIC_LAST_SYM_KEY
-          ? process.env.NEXT_PUBLIC_LAST_SYM_KEY
-          : "lastSymbol"
+    initTicker();
+  }, []);
+
+  const initTicker = () => {
+    const s = searchParams?.get("s");
+    const availTicker = s && tickers.find((t) => t.symbol === s.toUpperCase());
+    if (availTicker) {
+      setLastSymbolToLocalStorage(availTicker.symbol);
+      dispatch(setTicker(availTicker));
+      dispatch(
+        setTicket({
+          ...ticket,
+          symbol: availTicker.symbol,
+          price: availTicker.ref,
+        })
       );
-      if (lastSymbol && JSON.parse(lastSymbol)) {
-        const availTicker = tickers.find(
-          (t) => t.symbol === JSON.parse(lastSymbol)
+      return;
+    }
+    if (!ticker) {
+      const lastSymbol = localStorage.getItem(lastSymLocalKey);
+      const availTicker = lastSymbol
+        ? tickers.find((t) => t.symbol === lastSymbol.toUpperCase())
+        : null;
+      if (availTicker) {
+        dispatch(setTicker(availTicker));
+        dispatch(
+          setTicket({
+            ...ticket,
+            symbol: availTicker.symbol,
+            price: availTicker.ref,
+          })
         );
-        if (availTicker) {
-          dispatch(setTicker(availTicker));
-          dispatch(
-            setTicket({
-              ...ticket,
-              symbol: availTicker.symbol,
-              price: availTicker.ref,
-            })
-          );
-        }
       }
     }
-  }, []);
+  };
   return (
     <Wrapper>
       <SearchInput setOpenPanel={setOpenPanel} />

@@ -17,7 +17,6 @@ const Search = () => {
   const t = useTranslations("trade");
   const dispatch = useAppDispatch();
   const ticket = useAppSelector((state) => state.market.ticket);
-
   const [openPanel, setOpenPanel] = useState<boolean>(false);
   const handleChangeSide = (side: TSide) => {
     dispatch(setTicket({ ...ticket, side }));
