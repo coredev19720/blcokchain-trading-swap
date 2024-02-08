@@ -6,7 +6,6 @@ import { AppConfig } from "@/src/utils/AppConfig";
 import ThemeRegistry from "../ThemeRegistry";
 import { Providers } from "@/src/redux/provider";
 import Layout from "@/src/components/common/Layout";
-import { sfpro } from "@/src/app/ui/fonts";
 
 export const metadata: Metadata = {
   icons: [
@@ -45,7 +44,7 @@ export default function RootLayout({
   const messages = useMessages();
   return (
     <html lang={locale}>
-      <body className={`${sfpro.className} antialiased`}>
+      <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeRegistry options={{ key: "mui" }}>
             <Providers>

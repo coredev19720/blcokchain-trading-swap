@@ -1,7 +1,7 @@
 // app/ThemeRegistry.tsx
 "use client";
 import React from "react";
-import "@/src/app/ui/global.scss";
+import "@/public/global.scss";
 import createCache from "@emotion/cache";
 import { useServerInsertedHTML } from "next/navigation";
 import { CacheProvider, ThemeProvider } from "@emotion/react";
