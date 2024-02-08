@@ -1,3 +1,4 @@
+import { sfpro } from "../app/ui/fonts";
 import breakpoints from "./breakpoints";
 
 const typography = {
@@ -55,17 +56,7 @@ const typography = {
     extraBold: 800,
     black: 900,
   },
-  fontFamily: [
-    '"Sf-pro-display"',
-    '"Segoe UI"',
-    "Roboto",
-    '"Helvetica Neue"',
-    "Arial",
-    "sans-serif",
-    '"Apple Color Emoji"',
-    '"Segoe UI Emoji"',
-    '"Segoe UI Symbol"',
-  ].join(","),
+  fontFamily: sfpro.style.fontFamily,
 };
 
 export default typography;
