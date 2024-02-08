@@ -1,5 +1,4 @@
-// import { sfpro } from "../app/ui/fonts.js";
-// import breakpoints from "./breakpoints";
+import { sfpro } from "@/src/app/ui/fonts";
 
 const typography = {
   h1: {
@@ -56,7 +55,7 @@ const typography = {
     extraBold: 800,
     black: 900,
   },
-  // fontFamily: sfpro.style.fontFamily,
+  fontFamily: sfpro.style.fontFamily,
 };
 
 export default typography;
