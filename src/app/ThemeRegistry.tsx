@@ -4,13 +4,11 @@ import React from "react";
 import "@/public/global.scss";
 import createCache from "@emotion/cache";
 import { useServerInsertedHTML } from "next/navigation";
-import { CacheProvider, ThemeProvider } from "@emotion/react";
-import lightThemes from "../themes/light";
-// import darkThemes from "../themes/dark";
-
+import { CacheProvider } from "@emotion/react";
+import { Experimental_CssVarsProvider as CssVarsProvider } from "@mui/material";
+import theme from "@/src/themes";
 export default function ThemeRegistry(props: any) {
   const { options, children } = props;
-
   const [{ cache, flush }] = React.useState(() => {
     const cache = createCache(options);
     cache.compat = true;
@@ -50,10 +48,10 @@ export default function ThemeRegistry(props: any) {
       />
     );
   });
-
+  console.log(123);
   return (
     <CacheProvider value={cache}>
-      <ThemeProvider theme={lightThemes}>{children}</ThemeProvider>
+      <CssVarsProvider theme={theme}>{children}</CssVarsProvider>
     </CacheProvider>
   );
 }

@@ -5,7 +5,7 @@ import { ITickerData, ITicket, IOrder } from "@/src/interface/common";
 import { IPortItem } from "@/src/interface/table";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type CounterState = {
+type MarketState = {
   ticker: ITickerData | null;
   ticket: ITicket;
   orders: IOrder[];
@@ -28,7 +28,7 @@ const initialState = {
   ports: dumpPorts,
   port: null,
   order: null,
-} as CounterState;
+} as MarketState;
 
 export const market = createSlice({
   name: "market",

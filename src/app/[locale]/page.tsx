@@ -1,11 +1,7 @@
 import Layout from "@/src/components/common/Layout";
 
 const DashboardPage = () => {
-  return (
-    <Layout>
-      <div>dashboard</div>
-    </Layout>
-  );
+  return <div>dashboard</div>;
 };
 
 export default DashboardPage;

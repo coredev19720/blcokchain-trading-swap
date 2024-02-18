@@ -14,9 +14,7 @@ const Menu = () => {
   const goToDestination = (url: string) => () => {
     router.push(`/${params?.locale}${url}`);
   };
-  useEffect(() => {
-    console.log("mounted");
-  }, []);
+
   const Menu = menus.map((menu, index) => {
     return (
       <MenuItem

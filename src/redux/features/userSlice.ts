@@ -1,7 +1,7 @@
 import { IAccount, IUserInfo } from "@/src/interface/common";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { accounts } from "@/src/constants/dumpData/dashboard";
-type CounterState = {
+type UserState = {
   userInfo: IUserInfo;
   account: IAccount | null;
 };
@@ -12,7 +12,7 @@ const initialState = {
     email: "lxdieu90@gmail.com",
   },
   account: accounts[0],
-} as CounterState;
+} as UserState;
 
 export const user = createSlice({
   name: "user",

@@ -55,11 +55,12 @@ const LoginForm = ({ onSubmit }: IProps) => {
   };
   const onSubmitWithCaptcha = (data: any) => {
     const recaptchaVal = recaptchaRef.current?.getValue();
-    if (recaptchaRef.current) {
-      if (recaptchaVal) {
-        onSubmit(data, recaptchaVal);
-      }
-    }
+    // if (recaptchaRef.current) {
+    //   if (recaptchaVal) {
+    //     onSubmit(data, recaptchaVal);
+    //   }
+    // }
+    onSubmit(data, recaptchaVal || "");
   };
   const handleClickShowPwd = () => {
     setShowPwd((prev) => !prev);
