@@ -48,7 +48,6 @@ export default function ThemeRegistry(props: any) {
       />
     );
   });
-  console.log(123);
   return (
     <CacheProvider value={cache}>
       <CssVarsProvider theme={theme}>{children}</CssVarsProvider>

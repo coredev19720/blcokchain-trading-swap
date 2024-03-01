@@ -9,36 +9,47 @@ import CustomerService from "./comonents/CustomerService";
 import cookies from "js-cookie";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
-
+import { handleRestApi } from "@/src/services";
+import { encrypt } from "@/src/libs/hash";
 const Content = () => {
   const params = useParams();
   const router = useRouter();
   const t = useTranslations("login");
   const tNoti = useTranslations("notification");
-  const loginSuccess = (data: ILoginForm) => {
-    if (data.username !== "admin" || data.pwd !== "admin") return false;
-    return true;
-  };
+
   const handleLogin = (data: ILoginForm, recaptchaVal: string) => {
-    console.log("recaptchaVal", recaptchaVal);
-    if (!loginSuccess(data)) {
-      toast.error(tNoti("txt_login_fail"));
-      return;
-    }
-    const lastSymbol = process.env.NEXT_PUBLIC_LAST_SYM_KEY
-      ? window.localStorage.getItem(process.env.NEXT_PUBLIC_LAST_SYM_KEY)
-      : null;
-    if (process.env.NEXT_PUBLIC_TOKEN_COOKIE) {
-      cookies.set(process.env.NEXT_PUBLIC_TOKEN_COOKIE, "logged", {
-        expires: dayjs().add(data.expireTime, "minutes").toDate(),
+    try {
+      // if (!recaptchaVal) {
+      //   toast.error(tNoti("txt_recaptcha_fail"));
+      //   return;
+      // }
+      const res = handleRestApi({
+        method: "post",
+        url: `/api/login`,
+        data: {
+          username: data.username,
+          password: encrypt(data.pwd),
+        },
       });
-      toast.info(tNoti("txt_login_success"));
-      router.push(
-        `/${params?.locale}/${process.env.NEXT_PUBLIC_DEFAULT_PAGE}?s=${
-          params?.s || lastSymbol || process.env.NEXT_PUBLIC_DEFAULT_SYMBOL
-        }`
-      );
+      console.log("res", res);
+      const lastSymbol = process.env.NEXT_PUBLIC_LAST_SYM_KEY
+        ? window.localStorage.getItem(process.env.NEXT_PUBLIC_LAST_SYM_KEY)
+        : null;
+      if (process.env.NEXT_PUBLIC_TOKEN_COOKIE) {
+        cookies.set(process.env.NEXT_PUBLIC_TOKEN_COOKIE, "logged", {
+          expires: dayjs().add(data.expireTime, "minutes").toDate(),
+        });
+        toast.info(tNoti("txt_login_success"));
+        router.push(
+          `/${params?.locale}/${process.env.NEXT_PUBLIC_DEFAULT_PAGE}?s=${
+            params?.s || lastSymbol || process.env.NEXT_PUBLIC_DEFAULT_SYMBOL
+          }`
+        );
+      }
+    } catch (e) {
+      console.log(e);
     }
+    console.log("recaptchaVal", recaptchaVal);
   };
   const redirectToForgotPwd = () =>
     router.push(`/${params?.locale}/forgot-password`);

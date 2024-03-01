@@ -4,9 +4,10 @@ import { z } from "zod";
 
 export const Env = createEnv({
   server: {
-    // TOKEN_COOKIE: z.string().min(1),
-    // DATABASE_URL: z.string().min(1),
-    // DATABASE_AUTH_TOKEN: z.string().optional(),
+    TOKEN_AL: z.string().min(1),
+    TOKEN_FORMAT: z.string().min(1),
+    TOKEN_SK: z.string().min(1),
+    TOKEN_IV: z.string().min(1),
   },
   client: {
     NEXT_PUBLIC_TOKEN_COOKIE: z.string().min(1),

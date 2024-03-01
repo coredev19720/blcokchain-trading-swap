@@ -36,9 +36,10 @@ export function middleware(req: NextRequest) {
   }
   return intlMiddleware(req);
 }
-// export const config = {
-//   matcher: ["/", "/(vi|en)/:path*"],
-// };
+//fix me
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: ["/", "/(vi|en)/:path*"],
 };
+// export const config = {
+//   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+// };

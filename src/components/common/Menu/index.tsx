@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Wrapper, MenuItem, MenuImage, MenuText } from "./styles";
 import { menus } from "@/src/constants/common";
 import { useTranslations } from "next-intl";
-import { Typography } from "@mui/material";
 import colors from "@/src/themes/colors";
 import { useRouter, usePathname, useParams } from "next/navigation";
 const Menu = () => {

@@ -47,3 +47,7 @@ export enum TOrderActionType {
   cancel = "cancel",
   update = "update",
 }
+
+export enum authType {
+  password = "password",
+}
