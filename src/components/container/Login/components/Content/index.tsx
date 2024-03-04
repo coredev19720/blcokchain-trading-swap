@@ -17,39 +17,33 @@ const Content = () => {
   const t = useTranslations("login");
   const tNoti = useTranslations("notification");
 
-  const handleLogin = (data: ILoginForm, recaptchaVal: string) => {
+  const handleLogin = async (data: ILoginForm) => {
     try {
-      // if (!recaptchaVal) {
-      //   toast.error(tNoti("txt_recaptcha_fail"));
-      //   return;
-      // }
-      const res = handleRestApi({
+      const res = await handleRestApi({
         method: "post",
         url: `/api/login`,
         data: {
-          username: data.username,
+          username: `${process.env.NEXT_PUBLIC_PREFIX_ACCOUNT}${data.username}`,
           password: encrypt(data.pwd),
         },
       });
-      console.log("res", res);
-      const lastSymbol = process.env.NEXT_PUBLIC_LAST_SYM_KEY
-        ? window.localStorage.getItem(process.env.NEXT_PUBLIC_LAST_SYM_KEY)
-        : null;
-      if (process.env.NEXT_PUBLIC_TOKEN_COOKIE) {
-        cookies.set(process.env.NEXT_PUBLIC_TOKEN_COOKIE, "logged", {
-          expires: dayjs().add(data.expireTime, "minutes").toDate(),
-        });
-        toast.info(tNoti("txt_login_success"));
-        router.push(
-          `/${params?.locale}/${process.env.NEXT_PUBLIC_DEFAULT_PAGE}?s=${
-            params?.s || lastSymbol || process.env.NEXT_PUBLIC_DEFAULT_SYMBOL
-          }`
-        );
-      }
+      // const lastSymbol = process.env.NEXT_PUBLIC_LAST_SYM_KEY
+      //   ? window.localStorage.getItem(process.env.NEXT_PUBLIC_LAST_SYM_KEY)
+      //   : null;
+      // if (process.env.NEXT_PUBLIC_TOKEN_COOKIE) {
+      //   cookies.set(process.env.NEXT_PUBLIC_TOKEN_COOKIE, "logged", {
+      //     expires: dayjs().add(data.expireTime, "minutes").toDate(),
+      //   });
+      //   toast.info(tNoti("txt_login_success"));
+      //   router.push(
+      //     `/${params?.locale}/${process.env.NEXT_PUBLIC_DEFAULT_PAGE}?s=${
+      //       params?.s || lastSymbol || process.env.NEXT_PUBLIC_DEFAULT_SYMBOL
+      //     }`
+      //   );
+      // }
     } catch (e) {
       console.log(e);
     }
-    console.log("recaptchaVal", recaptchaVal);
   };
   const redirectToForgotPwd = () =>
     router.push(`/${params?.locale}/forgot-password`);

@@ -48,6 +48,6 @@ export enum TOrderActionType {
   update = "update",
 }
 
-export enum authType {
+export enum TAuthType {
   password = "password",
 }

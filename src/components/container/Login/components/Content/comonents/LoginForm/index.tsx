@@ -8,12 +8,14 @@ import HelpText from "@/src/components/common/HelpText";
 import { Wrapper, FieldWrapper, AdormentWrapper } from "./styles";
 import FieldLabel from "@/src/components/common/FieldLabel";
 import ReCAPTCHA from "react-google-recaptcha";
+import { toast } from "react-toastify";
 
 interface IProps {
-  onSubmit: (data: any, recaptchaVal: string) => void;
+  onSubmit: (data: any) => void;
 }
 
 const LoginForm = ({ onSubmit }: IProps) => {
+  const tNoti = useTranslations("notification");
   const t = useTranslations("login");
   const tMess = useTranslations("mess");
   const {
@@ -55,12 +57,14 @@ const LoginForm = ({ onSubmit }: IProps) => {
   };
   const onSubmitWithCaptcha = (data: any) => {
     const recaptchaVal = recaptchaRef.current?.getValue();
-    // if (recaptchaRef.current) {
-    //   if (recaptchaVal) {
-    //     onSubmit(data, recaptchaVal);
-    //   }
-    // }
-    onSubmit(data, recaptchaVal || "");
+    console.log(recaptchaVal);
+    if (recaptchaRef.current) {
+      if (!recaptchaVal) {
+        toast.error(tNoti("txt_recaptcha_fail"));
+        return;
+      }
+      onSubmit(data);
+    }
   };
   const handleClickShowPwd = () => {
     setShowPwd((prev) => !prev);
