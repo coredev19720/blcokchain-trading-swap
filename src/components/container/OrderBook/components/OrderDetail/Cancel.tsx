@@ -1,13 +1,13 @@
 import * as S from "./styles";
-import { IOrder } from "@/src/interface/common";
+import { IOrder } from "@interface/common";
 import { useTranslations } from "next-intl";
-import { formatNumber } from "@/src/utils/helpers";
-import OTPConfirm from "@/src/components/common/OTPConfirm";
-import { TTransactionStatus } from "@/src/enum";
-import { updateOrders } from "@/src/redux/features/marketSlice";
-import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import { formatNumber } from "@src/utils/helpers";
+import OTPConfirm from "@components/common/OTPConfirm";
+import { TTransactionStatus } from "@enum/common";
+import { updateOrders } from "@src/redux/features/marketSlice";
+import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { useState } from "react";
-import RowContent from "@/src/components/common/RowContent";
+import RowContent from "@components/common/RowContent";
 import dayjs from "dayjs";
 interface IProps {
   data: IOrder | null;

@@ -1,9 +1,9 @@
 import * as S from "./styles";
 import { MenuItem, SelectChangeEvent, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { accounts } from "@/src/constants/dumpData/dashboard";
-import { useAppSelector, useAppDispatch } from "@/src/redux/hooks";
-import { setAccount } from "@/src/redux/features/userSlice";
+import { accounts } from "@src/constants/dumpData/dashboard";
+import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
+import { setAccount } from "@src/redux/features/userSlice";
 import { Sync } from "@mui/icons-material";
 const Header = () => {
   const t = useTranslations("portfolio");

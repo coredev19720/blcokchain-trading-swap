@@ -1,7 +1,7 @@
 import React from "react";
 import { TableCell, Typography } from "@mui/material";
 import { HeadCellWrapper } from "../../../styles";
-import colors from "@/src/themes/colors";
+import colors from "@src/themes/colors";
 interface IProps {
   col: any;
   handleClick: (e: string) => void;

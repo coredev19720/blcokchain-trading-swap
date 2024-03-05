@@ -1,5 +1,5 @@
-import Layout from "@/src/components/common/Layout";
-import Market from "@/src/components/container/Market";
+import Layout from "@components/common/Layout";
+import Market from "@components/container/Market";
 const MarketPage = () => {
   return <Market />;
 };

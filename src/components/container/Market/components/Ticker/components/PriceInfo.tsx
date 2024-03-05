@@ -1,9 +1,9 @@
-import FieldLabel from "@/src/components/common/FieldLabel";
-import Line from "@/src/components/common/Line";
-import { ITickerData } from "@/src/interface/common";
-import { RowContent } from "@/src/styles/common";
-import colors from "@/src/themes/colors";
-import { genPriceColor } from "@/src/utils/helpers";
+import FieldLabel from "@components/common/FieldLabel";
+import Line from "@components/common/Line";
+import { ITickerData } from "@interface/common";
+import { RowContent } from "@src/styles/common";
+import colors from "@src/themes/colors";
+import { genPriceColor } from "@src/utils/helpers";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTranslations } from "next-intl";

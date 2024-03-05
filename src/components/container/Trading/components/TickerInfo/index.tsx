@@ -1,13 +1,13 @@
 import * as S from "./styles";
 import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { useAppSelector } from "@/src/redux/hooks";
-import { TSide } from "@/src/enum";
-import FieldLabel from "@/src/components/common/FieldLabel";
-import StyledTable from "@/src/components/common/StyledTable";
-import { IColumn } from "@/src/interface/table";
-import { IDealPrice } from "@/src/interface/common";
-import { formatBigNumber, genPriceColor } from "@/src/utils/helpers";
+import { useAppSelector } from "@src/redux/hooks";
+import { TSide } from "@enum/common";
+import FieldLabel from "@components/common/FieldLabel";
+import StyledTable from "@components/common/StyledTable";
+import { IColumn } from "@interface/table";
+import { IDealPrice } from "@interface/common";
+import { formatBigNumber, genPriceColor } from "@src/utils/helpers";
 const TickerInfo = () => {
   const ticker = useAppSelector((state) => state.market.ticker);
   const ticket = useAppSelector((state) => state.market.ticket);

@@ -1,11 +1,11 @@
 import * as S from "./styles";
-import { FlexContent } from "@/src/styles/common";
+import { FlexContent } from "@src/styles/common";
 import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { IOrder } from "@/src/interface/common";
-import { TOrderActionType, TSide } from "@/src/enum";
-import colors from "@/src/themes/colors";
-import { formatNumber } from "@/src/utils/helpers";
+import { IOrder } from "@interface/common";
+import { TOrderActionType, TSide } from "@enum/common";
+import colors from "@src/themes/colors";
+import { formatNumber } from "@src/utils/helpers";
 interface IProps {
   data: IOrder;
   handleClick: (order: IOrder, type: TOrderActionType) => void;

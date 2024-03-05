@@ -2,11 +2,11 @@ import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, useMessages } from "next-intl";
-import { AppConfig } from "@/src/utils/AppConfig";
+import { AppConfig } from "@src/utils/AppConfig";
 import ThemeRegistry from "../ThemeRegistry";
-import { Providers } from "@/src/redux/provider";
-import Layout from "@/src/components/common/Layout";
-import { useAppSelector } from "@/src/redux/hooks";
+import { Providers } from "@src/redux/provider";
+import Layout from "@components/common/Layout";
+import { useAppSelector } from "@src/redux/hooks";
 export const metadata: Metadata = {
   icons: [
     {

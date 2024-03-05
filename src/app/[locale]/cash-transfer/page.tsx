@@ -1,5 +1,5 @@
-import Layout from "@/src/components/common/Layout";
-import CashTransfer from "@/src/components/container/CashTransfer";
+import Layout from "@components/common/Layout";
+import CashTransfer from "@components/container/CashTransfer";
 
 const CashTransferPage = () => {
   return <CashTransfer />;

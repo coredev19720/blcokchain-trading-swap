@@ -1,6 +1,6 @@
 import React from "react";
 import { TableFooter, TableRow, TableCell, Typography } from "@mui/material";
-import { IColumn } from "@/src/interface/table";
+import { IColumn } from "@interface/table";
 
 interface IProps {
   columns: IColumn[];

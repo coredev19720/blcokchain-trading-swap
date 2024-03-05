@@ -1,17 +1,17 @@
 import * as S from "./styles";
-import { SlideLine } from "@/src/styles/common";
+import { SlideLine } from "@src/styles/common";
 import { Backdrop, Slide, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import colors from "@/src/themes/colors";
+import colors from "@src/themes/colors";
 import { useEffect, useState } from "react";
-import { IPortItem } from "@/src/interface/table";
-import RowContent from "@/src/components/common/RowContent";
-import { formatNumber, setLastSymbolToLocalStorage } from "@/src/utils/helpers";
-import Line from "@/src/components/common/Line";
-import { setTicker, setTicket } from "@/src/redux/features/marketSlice";
-import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
-import { TSide } from "@/src/enum";
-import { tickers } from "@/src/constants/dumpData/dashboard";
+import { IPortItem } from "@interface/table";
+import RowContent from "@components/common/RowContent";
+import { formatNumber, setLastSymbolToLocalStorage } from "@src/utils/helpers";
+import Line from "@components/common/Line";
+import { setTicker, setTicket } from "@src/redux/features/marketSlice";
+import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
+import { TSide } from "@enum/common";
+import { tickers } from "@src/constants/dumpData/dashboard";
 import { useRouter } from "next/navigation";
 interface IProps {
   data: IPortItem | null;

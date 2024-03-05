@@ -1,6 +1,6 @@
-import { IAccount, IUserInfo } from "@/src/interface/common";
+import { IAccount, IUserInfo } from "@interface/common";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { accounts } from "@/src/constants/dumpData/dashboard";
+import { accounts } from "@src/constants/dumpData/dashboard";
 type UserState = {
   userInfo: IUserInfo;
   account: IAccount | null;

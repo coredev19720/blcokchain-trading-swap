@@ -1,8 +1,8 @@
 import { Typography } from "@mui/material";
 import * as S from "./styles";
 import { useTranslations } from "next-intl";
-import { formatNumber } from "@/src/utils/helpers";
-import { FlexContent } from "@/src/styles/common";
+import { formatNumber } from "@src/utils/helpers";
+import { FlexContent } from "@src/styles/common";
 const PortInfo = () => {
   const t = useTranslations("portfolio");
 

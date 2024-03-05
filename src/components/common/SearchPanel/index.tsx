@@ -1,13 +1,13 @@
+import { useState } from "react";
 import { TickerWrapper, Wrapper, Tickers } from "./styles";
 import { Backdrop, Slide, Typography } from "@mui/material";
-import { tickerOpts } from "@/src/constants/dumpData";
-import { ITickerOpt } from "@/src/interface/common";
-import { tickers } from "@/src/constants/dumpData/dashboard";
+import { tickerOpts } from "@src/constants/dumpData";
+import { ITickerOpt } from "@interface/common";
+import { tickers } from "@constants/dumpData/dashboard";
 import SearchInput from "./components/SearchInput";
-import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
-import { setTicker, setTicket } from "@/src/redux/features/marketSlice";
-import { setLastSymbolToLocalStorage } from "@/src/utils/helpers";
+import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
+import { setTicker, setTicket } from "@src/redux/features/marketSlice";
+import { setLastSymbolToLocalStorage } from "@src/utils/helpers";
 
 interface IProps {
   open: boolean;

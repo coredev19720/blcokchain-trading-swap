@@ -1,7 +1,7 @@
 "use client";
 import { Button, Slide, TextField, Typography } from "@mui/material";
 import * as S from "../styles";
-import FieldLabel from "@/src/components/common/FieldLabel";
+import FieldLabel from "@components/common/FieldLabel";
 import { useState } from "react";
 interface IProps {
   setStep: (step: number) => void;

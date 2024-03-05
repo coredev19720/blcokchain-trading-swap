@@ -1,9 +1,9 @@
 import { OutlinedInput } from "@mui/material";
 import { styled } from "@mui/system";
 import { Search } from "@mui/icons-material";
-import { useAppSelector } from "@/src/redux/hooks";
+import { useAppSelector } from "@src/redux/hooks";
 import { useEffect } from "react";
-import colors from "@/src/themes/colors";
+import colors from "@src/themes/colors";
 interface IProps {
   setOpenPanel: (val: boolean) => void;
 }

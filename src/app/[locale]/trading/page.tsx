@@ -1,4 +1,4 @@
-import Trading from "@/src/components/container/Trading";
+import Trading from "@components/container/Trading";
 
 const TradingPage = () => {
   return <Trading />;

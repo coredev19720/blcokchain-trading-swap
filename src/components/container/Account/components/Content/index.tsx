@@ -1,8 +1,8 @@
 import * as S from "./styles";
 import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import colors from "@/src/themes/colors";
-import { useAppSelector } from "@/src/redux/hooks";
+import colors from "@src/themes/colors";
+import { useAppSelector } from "@src/redux/hooks";
 const Content = () => {
   const t = useTranslations("account");
   const account = useAppSelector((state) => state.user.account);

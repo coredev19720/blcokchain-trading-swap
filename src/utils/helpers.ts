@@ -1,5 +1,5 @@
 import { tickerOpts } from "../constants/dumpData";
-import colors from "@/src/themes/colors";
+import colors from "@src/themes/colors";
 export const uIdGen = () => {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
 };

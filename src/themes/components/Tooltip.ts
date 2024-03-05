@@ -1,5 +1,5 @@
-import colors from "@/src/themes/colors";
-import breakpoints from "@/src/themes/breakpoints";
+import colors from "@src/themes/colors";
+import breakpoints from "@src/themes/breakpoints";
 
 const Tooltip = {
   styleOverrides: {

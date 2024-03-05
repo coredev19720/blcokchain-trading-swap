@@ -1,4 +1,4 @@
-import colors from "@/src/themes/colors";
+import colors from "@src/themes/colors";
 import { Button } from "@mui/material";
 import { styled } from "@mui/system";
 

@@ -1,16 +1,16 @@
 import { Typography } from "@mui/material";
-import colors from "@/src/themes/colors";
+import colors from "@src/themes/colors";
 import { Wrapper, HelpLinkWraper } from "./styles";
 import LoginForm from "./comonents/LoginForm";
 import { useTranslations } from "next-intl";
-import { ILoginForm } from "@/src/interface/common";
+import { ILoginForm } from "@interface/common";
 import { useRouter, useParams } from "next/navigation";
 import CustomerService from "./comonents/CustomerService";
 import cookies from "js-cookie";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
-import { handleRestApi } from "@/src/services";
-import { encrypt } from "@/src/libs/hash";
+import { handleRestApi } from "@src/services";
+import { encrypt } from "@src/libs/hash";
 const Content = () => {
   const params = useParams();
   const router = useRouter();

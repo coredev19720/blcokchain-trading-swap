@@ -1,5 +1,5 @@
-import { ITickerOpt } from "@/src/interface/common";
-import { IPortItem } from "@/src/interface/table";
+import { ITickerOpt } from "@interface/common";
+import { IPortItem } from "@interface/table";
 
 export const tickerOpts: ITickerOpt[] = [
   {

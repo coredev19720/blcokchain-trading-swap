@@ -19,7 +19,12 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      // "@/*": ["./*"],
+      "@src/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@enum/*": ["./src/constraints/enum/*"],
+      "@interface/*": ["./src/constraints/interface/*"],
+      "@constants/*": ["./src/constants/*"],  
     }
   },
   "include": [

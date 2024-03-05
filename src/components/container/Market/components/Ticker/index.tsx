@@ -3,8 +3,8 @@ import GeneralInfo from "./components/GeneralInfo";
 import MarketDepth from "./components/MarketDepth";
 import MarketValue from "./components/MarketValue";
 import PriceInfo from "./components/PriceInfo";
-import Line from "@/src/components/common/Line";
-import { ITickerData } from "@/src/interface/common";
+import Line from "@components/common/Line";
+import { ITickerData } from "@interface/common";
 import MarketIndex from "./components/MarketIndex";
 import Actions from "./components/Actions";
 

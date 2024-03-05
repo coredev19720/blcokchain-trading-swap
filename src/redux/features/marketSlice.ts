@@ -1,8 +1,8 @@
-import { dumpPorts } from "@/src/constants/dumpData";
-import { dumpOrders } from "@/src/constants/dumpData/dashboard";
-import { TOrderKind, TOrderType, TSide } from "@/src/enum";
-import { ITickerData, ITicket, IOrder } from "@/src/interface/common";
-import { IPortItem } from "@/src/interface/table";
+import { dumpPorts } from "@src/constants/dumpData";
+import { dumpOrders } from "@src/constants/dumpData/dashboard";
+import { TOrderKind, TOrderType, TSide } from "@enum/common";
+import { ITickerData, ITicket, IOrder } from "@interface/common";
+import { IPortItem } from "@interface/table";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type MarketState = {

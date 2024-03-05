@@ -1,8 +1,8 @@
-import { ITickerData } from "@/src/interface/common";
+import { ITickerData } from "@interface/common";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
-import { RowContent } from "@/src/styles/common";
-import { genPriceColor, genTextWithPrefix } from "@/src/utils/helpers";
+import { RowContent } from "@src/styles/common";
+import { genPriceColor, genTextWithPrefix } from "@src/utils/helpers";
 
 const Wrapper = styled("div")(() => ({}));
 interface IProps {

@@ -1,14 +1,14 @@
-import FieldLabel from "@/src/components/common/FieldLabel";
-import StyledTable from "@/src/components/common/StyledTable";
-import { TSide } from "@/src/enum";
+import FieldLabel from "@components/common/FieldLabel";
+import StyledTable from "@components/common/StyledTable";
+import { TSide } from "@enum/common";
 import {
   IDealPrice,
   IHistoryDeal,
   IMarketDepth,
   ITickerData,
-} from "@/src/interface/common";
-import { IColumn } from "@/src/interface/table";
-import { formatBigNumber, genPriceColor } from "@/src/utils/helpers";
+} from "@interface/common";
+import { IColumn } from "@interface/table";
+import { formatBigNumber, genPriceColor } from "@src/utils/helpers";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTranslations } from "next-intl";

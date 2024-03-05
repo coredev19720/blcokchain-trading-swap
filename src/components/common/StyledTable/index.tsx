@@ -6,7 +6,7 @@ import { TableWrapper } from "./styles";
 import Loading from "./components/Loading";
 import NoData from "./components/NoData";
 import Body from "./components/Body";
-import { IColumn } from "@/src/interface/table";
+import { IColumn } from "@interface/table";
 
 export interface IProps {
   dataSource: any[];

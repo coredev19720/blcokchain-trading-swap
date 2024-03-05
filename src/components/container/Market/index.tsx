@@ -3,16 +3,16 @@ import { Wrapper } from "./styles";
 import SearchInput from "./components/SearchInput";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { tickers } from "@/src/constants/dumpData/dashboard";
+import { tickers } from "@src/constants/dumpData/dashboard";
 import Ticker from "./components/Ticker";
 import EmptyState from "./components/EmptyState";
-import { useAppSelector, useAppDispatch } from "@/src/redux/hooks";
-import { setTicker, setTicket } from "@/src/redux/features/marketSlice";
+import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
+import { setTicker, setTicket } from "@src/redux/features/marketSlice";
 import SearchPanel from "../../common/SearchPanel";
 import {
   setLastSymbolToLocalStorage,
   lastSymLocalKey,
-} from "@/src/utils/helpers";
+} from "@src/utils/helpers";
 const Market = () => {
   const searchParams = useSearchParams();
   const ticker = useAppSelector((state) => state.market.ticker);

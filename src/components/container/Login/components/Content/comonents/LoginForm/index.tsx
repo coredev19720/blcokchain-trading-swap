@@ -3,10 +3,10 @@ import { createRef, useRef, useState, KeyboardEvent } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { uIdGen } from "@/src/utils/helpers";
-import HelpText from "@/src/components/common/HelpText";
+import { uIdGen } from "@src/utils/helpers";
+import HelpText from "@components/common/HelpText";
 import { Wrapper, FieldWrapper, AdormentWrapper } from "./styles";
-import FieldLabel from "@/src/components/common/FieldLabel";
+import FieldLabel from "@components/common/FieldLabel";
 import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "react-toastify";
 

@@ -1,13 +1,13 @@
 import * as S from "./styles";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { languages } from "@/src/constants/common";
+import { languages } from "@src/constants/common";
 import Cookies from "js-cookie";
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { usePathname, useRouter, useParams } from "next/navigation";
 import Image from "next/image";
-import { setTheme } from "@/src/redux/features/layoutSlice";
-import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import { setTheme } from "@src/redux/features/layoutSlice";
+import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 
 const LanguageToggle = () => {
   const dispatch = useAppDispatch();

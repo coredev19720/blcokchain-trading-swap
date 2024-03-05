@@ -1,5 +1,5 @@
 import { TableRow } from "@mui/material";
-import colors from "@/src/themes/colors";
+import colors from "@src/themes/colors";
 import { styled } from "@mui/system";
 interface IRowProps {
   hoverable: boolean;

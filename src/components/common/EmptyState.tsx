@@ -1,5 +1,5 @@
 import React from "react";
-import colors from "@/src/themes/colors";
+import colors from "@src/themes/colors";
 import { styled } from "@mui/system";
 interface IProps {
   margin?: number;

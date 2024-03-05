@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "@mui/system";
 import { Typography } from "@mui/material";
-import colors from "@/src/themes/colors";
+import colors from "@src/themes/colors";
 
 const Label = styled(Typography)(() => ({
   color: colors.mn70,

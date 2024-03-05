@@ -4,13 +4,13 @@ import {
   TOrderType,
   TTransactionStatus,
   TMarket,
-} from "@/src/enum";
+} from "@enum/common";
 import {
   IAccount,
   IMarketInfo,
   IOrder,
   ITickerData,
-} from "@/src/interface/common";
+} from "@interface/common";
 
 export const tickers: ITickerData[] = [
   {

@@ -2,7 +2,7 @@
 import { Button, Slide, Typography } from "@mui/material";
 import * as S from "../styles";
 import { useRouter } from "next/navigation";
-import { multiKey } from "@/src/images";
+import { multiKey } from "@src/images";
 const Success = () => {
   const router = useRouter();
   const handleNext = () => {

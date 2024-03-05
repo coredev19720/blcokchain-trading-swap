@@ -2,7 +2,7 @@ import { OutlinedInput } from "@mui/material";
 import { styled } from "@mui/system";
 import { Search } from "@mui/icons-material";
 import { useTranslations } from "next-intl";
-import colors from "@/src/themes/colors";
+import colors from "@src/themes/colors";
 interface IProps {
   setOpenPanel: (val: boolean) => void;
 }

@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import { csIcon } from "@/src/images";
+import { csIcon } from "@src/images";
 import Image from "next/image";
 import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";

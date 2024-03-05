@@ -1,18 +1,18 @@
-import { FieldBlock } from "@/src/styles/common";
+import { FieldBlock } from "@src/styles/common";
 import * as S from "./styles";
 import { TextField } from "@mui/material";
-import { IOrder } from "@/src/interface/common";
-import { formatNumber, genValidPrice } from "@/src/utils/helpers";
+import { IOrder } from "@interface/common";
+import { formatNumber, genValidPrice } from "@src/utils/helpers";
 import { useTranslations } from "next-intl";
-import RowContent from "@/src/components/common/RowContent";
+import RowContent from "@components/common/RowContent";
 import dayjs from "dayjs";
-import FieldLabel from "@/src/components/common/FieldLabel";
-import OTPConfirm from "@/src/components/common/OTPConfirm";
+import FieldLabel from "@components/common/FieldLabel";
+import OTPConfirm from "@components/common/OTPConfirm";
 import { useState } from "react";
-import HelpText from "@/src/components/common/HelpText";
-import { useAppSelector, useAppDispatch } from "@/src/redux/hooks";
-import { updateOrders } from "@/src/redux/features/marketSlice";
-import { tickers } from "@/src/constants/dumpData/dashboard";
+import HelpText from "@components/common/HelpText";
+import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
+import { updateOrders } from "@src/redux/features/marketSlice";
+import { tickers } from "@src/constants/dumpData/dashboard";
 interface IProps {
   data: IOrder | null;
   handleClose: () => void;

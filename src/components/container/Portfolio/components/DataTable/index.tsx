@@ -1,13 +1,13 @@
-import StyledTable from "@/src/components/common/StyledTable";
-import { IColumn, IPortItem } from "@/src/interface/table";
-import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
-import { formatNumber, genChgTextClass } from "@/src/utils/helpers";
+import StyledTable from "@components/common/StyledTable";
+import { IColumn, IPortItem } from "@interface/table";
+import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
+import { formatNumber, genChgTextClass } from "@src/utils/helpers";
 import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { ArrowForwardIos } from "@mui/icons-material";
-import { MuiIcon } from "@/src/styles/common";
+import { MuiIcon } from "@src/styles/common";
 import PortItemDetail from "../PortItemDetail";
-import { setPort } from "@/src/redux/features/marketSlice";
+import { setPort } from "@src/redux/features/marketSlice";
 import { useRouter } from "next/navigation";
 const MarketDepth = () => {
   const t = useTranslations("portfolio");

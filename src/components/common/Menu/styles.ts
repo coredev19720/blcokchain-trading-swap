@@ -1,4 +1,4 @@
-import colors from "@/src/themes/colors";
+import colors from "@src/themes/colors";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import Image from "next/image";

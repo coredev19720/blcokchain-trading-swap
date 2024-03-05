@@ -1,11 +1,11 @@
 "use client";
 import { styled } from "@mui/system";
-import colors from "@/src/themes/colors";
+import colors from "@src/themes/colors";
 import { ReactNode, useEffect } from "react";
-import { PageWrapper, MainContent } from "@/src/styles/common";
+import { PageWrapper, MainContent } from "@src/styles/common";
 import { ToastContainer } from "react-toastify";
 import Menu from "./Menu";
-import { publicUrls } from "@/src/constants/routes";
+import { publicUrls } from "@src/constants/routes";
 import { usePathname, useParams } from "next/navigation";
 // import io from "socket.io-client/dist/socket.io";
 

@@ -1,10 +1,10 @@
 import * as S from "./styles";
-import { IOrder } from "@/src/interface/common";
-import { formatNumber } from "@/src/utils/helpers";
-import Line from "@/src/components/common/Line";
+import { IOrder } from "@interface/common";
+import { formatNumber } from "@src/utils/helpers";
+import Line from "@components/common/Line";
 import { useTranslations } from "next-intl";
 import dayjs from "dayjs";
-import RowContent from "@/src/components/common/RowContent";
+import RowContent from "@components/common/RowContent";
 interface IProps {
   data: IOrder | null;
 }

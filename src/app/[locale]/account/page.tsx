@@ -1,5 +1,5 @@
-import Layout from "@/src/components/common/Layout";
-import Account from "@/src/components/container/Account";
+import Layout from "@components/common/Layout";
+import Account from "@components/container/Account";
 const AccountPage = () => {
   return <Account />;
 };

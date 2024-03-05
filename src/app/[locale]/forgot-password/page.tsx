@@ -1,5 +1,5 @@
-import Layout from "@/src/components/common/Layout";
-import ForgotPassword from "@/src/components/container/ForgotPassword";
+import Layout from "@components/common/Layout";
+import ForgotPassword from "@components/container/ForgotPassword";
 
 const ForgotPasswordPage = () => {
   return <ForgotPassword />;

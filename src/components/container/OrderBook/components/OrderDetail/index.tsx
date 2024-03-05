@@ -1,10 +1,10 @@
 import * as S from "./styles";
-import { FlexContent, SlideLine } from "@/src/styles/common";
+import { FlexContent, SlideLine } from "@src/styles/common";
 import { Backdrop, Slide, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { IOrder } from "@/src/interface/common";
-import { TOrderActionType, TSide } from "@/src/enum";
-import colors from "@/src/themes/colors";
+import { IOrder } from "@interface/common";
+import { TOrderActionType, TSide } from "@enum/common";
+import colors from "@src/themes/colors";
 import Detail from "./Detail";
 import Cancel from "./Cancel";
 import Update from "./Update";

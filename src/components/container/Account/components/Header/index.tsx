@@ -2,9 +2,9 @@ import * as S from "./styles";
 import { MenuItem, SelectChangeEvent, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { accounts } from "@/src/constants/dumpData/dashboard";
-import { useAppSelector, useAppDispatch } from "@/src/redux/hooks";
-import { setAccount } from "@/src/redux/features/userSlice";
+import { accounts } from "@src/constants/dumpData/dashboard";
+import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
+import { setAccount } from "@src/redux/features/userSlice";
 const Header = () => {
   const t = useTranslations("account");
   const dispatch = useAppDispatch();

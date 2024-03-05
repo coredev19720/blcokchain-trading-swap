@@ -1,16 +1,16 @@
 import { useState } from "react";
 import * as S from "./styles";
-import { FlexContent } from "@/src/styles/common";
+import { FlexContent } from "@src/styles/common";
 import { Backdrop, Button, Slide, Typography } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
-import { TSide, TTransactionStatus } from "@/src/enum";
+import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
+import { TSide, TTransactionStatus } from "@enum/common";
 import { useTranslations } from "next-intl";
-import colors from "@/src/themes/colors";
-import { formatNumber } from "@/src/utils/helpers";
-import OTPConfirm from "@/src/components/common/OTPConfirm";
-import { appendOrder } from "@/src/redux/features/marketSlice";
-import { genCode } from "@/src/utils/helpers";
-import { IOrder } from "@/src/interface/common";
+import colors from "@src/themes/colors";
+import { formatNumber } from "@src/utils/helpers";
+import OTPConfirm from "@components/common/OTPConfirm";
+import { appendOrder } from "@src/redux/features/marketSlice";
+import { genCode } from "@src/utils/helpers";
+import { IOrder } from "@interface/common";
 import { useRouter } from "next/navigation";
 interface IProps {
   open: boolean;

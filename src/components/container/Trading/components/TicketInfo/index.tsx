@@ -1,4 +1,4 @@
-import FieldLabel from "@/src/components/common/FieldLabel";
+import FieldLabel from "@components/common/FieldLabel";
 import * as S from "./styles";
 import {
   Grid,
@@ -9,11 +9,11 @@ import {
   Typography,
 } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { orderKindOpts, orderTypeOpts } from "@/src/constants/common";
-import { TOrderKind, TOrderType } from "@/src/enum";
-import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
-import { setTicket } from "@/src/redux/features/marketSlice";
-import { genValidPrice } from "@/src/utils/helpers";
+import { orderKindOpts, orderTypeOpts } from "@src/constants/common";
+import { TOrderKind, TOrderType } from "@enum/common";
+import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
+import { setTicket } from "@src/redux/features/marketSlice";
+import { genValidPrice } from "@src/utils/helpers";
 const TicketInfo = () => {
   const t = useTranslations("trade");
   const dispatch = useAppDispatch();

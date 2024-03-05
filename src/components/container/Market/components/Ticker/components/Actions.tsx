@@ -1,12 +1,12 @@
-import { ITickerData } from "@/src/interface/common";
+import { ITickerData } from "@interface/common";
 import { Button } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
-import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
-import { setTicket } from "@/src/redux/features/marketSlice";
-import { TSide } from "@/src/enum";
+import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
+import { setTicket } from "@src/redux/features/marketSlice";
+import { TSide } from "@enum/common";
 import { toast } from "react-toastify";
 const Wrapper = styled("div")(({ theme }) => ({
   display: "flex",

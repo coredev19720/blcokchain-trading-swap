@@ -1,5 +1,5 @@
-import Layout from "@/src/components/common/Layout";
-import OnlTrading from "@/src/components/container/OnlTrading";
+import Layout from "@components/common/Layout";
+import OnlTrading from "@components/container/OnlTrading";
 
 const OnlTradingPage = () => {
   return <OnlTrading />;

@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Wrapper, MenuItem, MenuImage, MenuText } from "./styles";
-import { menus } from "@/src/constants/common";
+import { menus } from "@src/constants/common";
 import { useTranslations } from "next-intl";
-import colors from "@/src/themes/colors";
+import colors from "@src/themes/colors";
 import { useRouter, usePathname, useParams } from "next/navigation";
 const Menu = () => {
   const pathname = usePathname();

@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { TableBody, TableCell, Typography } from "@mui/material";
-import { IColumn } from "@/src/interface/table";
+import { IColumn } from "@interface/table";
 import { StyledRow } from "./styles";
 interface IProps {
   data: any[];

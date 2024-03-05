@@ -2,7 +2,7 @@ import createMiddleware from "next-intl/middleware";
 import { locales, defaultLocale } from "./constants";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { publicUrls } from "@/src/constants/routes";
+import { publicUrls } from "@src/constants/routes";
 
 const intlMiddleware = createMiddleware({
   locales,

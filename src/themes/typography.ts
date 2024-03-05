@@ -1,4 +1,4 @@
-import { sfpro } from "@/src/app/ui/fonts";
+import { sfpro } from "@src/app/ui/fonts";
 
 const typography = {
   h1: {

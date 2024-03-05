@@ -1,18 +1,18 @@
-import FieldLabel from "@/src/components/common/FieldLabel";
-import StyledTable from "@/src/components/common/StyledTable";
-import { IMarketInfo, ITickerData } from "@/src/interface/common";
-import { IColumn } from "@/src/interface/table";
+import FieldLabel from "@components/common/FieldLabel";
+import StyledTable from "@components/common/StyledTable";
+import { IMarketInfo, ITickerData } from "@interface/common";
+import { IColumn } from "@interface/table";
 import {
   formatBigNumber,
   formatNumber,
   genIndexColor,
   genPriceColor,
   genTextWithPrefix,
-} from "@/src/utils/helpers";
+} from "@src/utils/helpers";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTranslations } from "next-intl";
-import { marketIndex } from "@/src/constants/dumpData/dashboard";
+import { marketIndex } from "@src/constants/dumpData/dashboard";
 const Wrapper = styled("div")(() => ({
   display: "flex",
   gap: 8,

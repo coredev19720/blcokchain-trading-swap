@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { decrypt } from "@/src/libs/hash";
-import { TAuthType } from "@/src/enum";
+import { decrypt } from "@src/libs/hash";
+import { TAuthType } from "@enum/common";
 const axios = require("axios");
 
 export async function POST(req: Request) {

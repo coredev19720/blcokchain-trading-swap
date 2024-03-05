@@ -1,5 +1,5 @@
-import { TSide } from "@/src/enum";
-import colors from "@/src/themes/colors";
+import { TSide } from "@enum/common";
+import colors from "@src/themes/colors";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
