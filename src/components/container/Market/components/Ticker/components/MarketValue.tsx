@@ -1,4 +1,4 @@
-import FieldLabel from "@components/common/FieldLabel";
+import {FieldLabel } from "@components/common";
 import { ITickerData } from "@interface/common";
 import { ColContent } from "@src/styles/common";
 import { formatBigNumber, formatNumber } from "@src/utils/helpers";

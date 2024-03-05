@@ -1,12 +1,10 @@
-import FieldLabel from "@components/common/FieldLabel";
-import StyledTable from "@components/common/StyledTable";
-import { IMarketInfo, ITickerData } from "@interface/common";
+import {FieldLabel,StyledTable} from "@components/common";
+import { IMarketInfo } from "@interface/common";
 import { IColumn } from "@interface/table";
 import {
   formatBigNumber,
   formatNumber,
   genIndexColor,
-  genPriceColor,
   genTextWithPrefix,
 } from "@src/utils/helpers";
 import { Typography } from "@mui/material";

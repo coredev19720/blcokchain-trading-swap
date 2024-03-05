@@ -1,6 +1,6 @@
 "use client";
 import { Button, Slide, TextField } from "@mui/material";
-import FieldLabel from "@components/common/FieldLabel";
+import {FieldLabel} from "@components/common";
 import { useState } from "react";
 import dayjs from "dayjs";
 import * as S from "../styles";

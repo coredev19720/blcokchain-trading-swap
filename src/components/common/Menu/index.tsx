@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Wrapper, MenuItem, MenuImage, MenuText } from "./styles";
-import { menus } from "@src/constants/common";
+import { menus } from "@constants/common";
 import { useTranslations } from "next-intl";
 import colors from "@src/themes/colors";
 import { useRouter, usePathname, useParams } from "next/navigation";

@@ -1,5 +1,4 @@
-import FieldLabel from "@components/common/FieldLabel";
-import Line from "@components/common/Line";
+import {FieldLabel,Line} from "@components/common";
 import { ITickerData } from "@interface/common";
 import { RowContent } from "@src/styles/common";
 import colors from "@src/themes/colors";

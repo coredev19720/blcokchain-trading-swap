@@ -7,7 +7,7 @@ import { TSide, TTransactionStatus } from "@enum/common";
 import { useTranslations } from "next-intl";
 import colors from "@src/themes/colors";
 import { formatNumber } from "@src/utils/helpers";
-import OTPConfirm from "@components/common/OTPConfirm";
+import {OTPConfirm} from "@components/common";
 import { appendOrder } from "@src/redux/features/marketSlice";
 import { genCode } from "@src/utils/helpers";
 import { IOrder } from "@interface/common";

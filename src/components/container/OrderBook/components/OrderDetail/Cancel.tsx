@@ -2,12 +2,11 @@ import * as S from "./styles";
 import { IOrder } from "@interface/common";
 import { useTranslations } from "next-intl";
 import { formatNumber } from "@src/utils/helpers";
-import OTPConfirm from "@components/common/OTPConfirm";
 import { TTransactionStatus } from "@enum/common";
 import { updateOrders } from "@src/redux/features/marketSlice";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { useState } from "react";
-import RowContent from "@components/common/RowContent";
+import {OTPConfirm,RowContent} from "@components/common";
 import dayjs from "dayjs";
 interface IProps {
   data: IOrder | null;

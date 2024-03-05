@@ -1,5 +1,5 @@
-import FieldLabel from "@components/common/FieldLabel";
-import StyledTable from "@components/common/StyledTable";
+import {FieldLabel } from "@components/common";
+import {StyledTable} from "@components/common";
 import { TSide } from "@enum/common";
 import {
   IDealPrice,

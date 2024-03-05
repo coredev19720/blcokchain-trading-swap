@@ -4,9 +4,9 @@ import { useForm, Controller } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { uIdGen } from "@src/utils/helpers";
-import HelpText from "@components/common/HelpText";
+import {HelpText} from "@components/common";
 import { Wrapper, FieldWrapper, AdormentWrapper } from "./styles";
-import FieldLabel from "@components/common/FieldLabel";
+import {FieldLabel } from "@components/common";
 import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "react-toastify";
 

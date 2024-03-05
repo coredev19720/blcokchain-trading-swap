@@ -1,4 +1,4 @@
-import StyledTable from "@components/common/StyledTable";
+import {StyledTable} from "@components/common";
 import { IColumn, IPortItem } from "@interface/table";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { formatNumber, genChgTextClass } from "@src/utils/helpers";

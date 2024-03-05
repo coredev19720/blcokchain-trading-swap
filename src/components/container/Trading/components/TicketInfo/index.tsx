@@ -1,4 +1,4 @@
-import FieldLabel from "@components/common/FieldLabel";
+import {FieldLabel } from "@components/common";
 import * as S from "./styles";
 import {
   Grid,

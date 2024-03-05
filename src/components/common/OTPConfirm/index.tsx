@@ -1,6 +1,6 @@
-import FieldLabel from "@components/common/FieldLabel";
+import {FieldLabel} from "@components/common";
 import * as S from "./styles";
-import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
+import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import {
