@@ -16,15 +16,16 @@ export const encrypt = (text: string) => {
 
 export const decrypt = (token: string) => {
   try {
-    const algorithm = process.env.TOKEN_AL || "aes-128-cbc";
-    const secretKey = process.env.TOKEN_SK || "";
-    const iv = process.env.TOKEN_IV || "";
+    const algorithm = process.env.NEXT_PUBLIC_TOKEN_AL || "aes-128-cbc";
+    const secretKey = process.env.NEXT_PUBLIC_TOKEN_SK || "";
+    const iv = process.env.NEXT_PUBLIC_TOKEN_IV || "";
+    console.log("decrypt", token, algorithm, secretKey, iv);
     const decipher = crypto.createDecipheriv(algorithm, secretKey, iv);
     const firstPart = decipher.update(token, "hex");
     const lastPart = decipher.final();
     console.log("decrypted", `${firstPart}${lastPart}`);
     return `${firstPart}${lastPart}`;
   } catch (error) {
-    throw new Error(`MSG_002`); // encrypt error
+    throw new Error(`MSG_002`); // decrypt error
   }
 };

@@ -1,14 +1,17 @@
+import { useEffect, useState } from "react";
 import * as S from "./styles";
 import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import colors from "@src/themes/colors";
 import { useAppSelector } from "@src/redux/hooks";
+import { AccountInfo } from "@interface/services/response";
 const Content = () => {
   const t = useTranslations("account");
-  const account = useAppSelector((state) => state.user.account);
-  return account ? (
+  const { accounts, activeAccount } = useAppSelector((state) => state.user);
+  const [account, setAccount] = useState<AccountInfo | null>(null);
+  return activeAccount ? (
     <S.Wrapper>
-      <S.RowWrapper isHeader bgColor={colors.sy80}>
+      {/* <S.RowWrapper isHeader bgColor={colors.sy80}>
         <Typography color={colors.sb60}>{t("en_cu_asset_total")}</Typography>
         <Typography fontWeight={600} color={colors.sb60}>
           {account.totalAsset}
@@ -58,7 +61,7 @@ const Content = () => {
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("fn_acc_cta_port")}</Typography>
-      </S.RowWrapper>
+      </S.RowWrapper> */}
     </S.Wrapper>
   ) : null;
 };

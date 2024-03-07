@@ -1,5 +1,5 @@
 import { IconButton, TextField, Typography, Button } from "@mui/material";
-import { createRef, useRef, useState, KeyboardEvent } from "react";
+import { createRef, useRef, useState, KeyboardEvent, useEffect } from "react";
 import { useForm, Controller, FieldValues } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -11,11 +11,14 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "react-toastify";
 import { useLogin } from "@src/services/hooks/useLogin";
 import { encrypt } from "@src/libs/hash";
+import { useRouter, usePathname, useParams } from "next/navigation";
 const LoginForm = () => {
-  const { onLogin } = useLogin();
+  const { onLogin, isError, isSuccess } = useLogin();
   const tNoti = useTranslations("notification");
   const t = useTranslations("login");
   const tMess = useTranslations("mess");
+  const router = useRouter();
+  const params = useParams();
   const {
     control,
     handleSubmit,
@@ -30,6 +33,14 @@ const LoginForm = () => {
   const pwdRef: React.RefObject<HTMLInputElement> = createRef();
   const expireTimeRef: React.RefObject<HTMLInputElement> = createRef();
   const [showPwd, setShowPwd] = useState(false);
+  useEffect(() => {
+    if (isError) {
+      toast.error(tNoti("txt_login_fail"));
+    }
+    if (isSuccess) {
+      router.push(`/${params?.locale}/market`);
+    }
+  }, [isError, isSuccess]);
   const handleKeyDownEnter = (
     e: KeyboardEvent<HTMLDivElement>,
     field: string
@@ -176,7 +187,7 @@ const LoginForm = () => {
         toast.error(tNoti("txt_recaptcha_fail"));
         return;
       }
-      onLogin({ u: data.username, p: encrypt(data.pwd) });
+      onLogin({ u: data.username, p: encrypt(data.pwd), t: data.expireTime });
     }
   };
   return (

@@ -1,3 +1,5 @@
+import { TPwdType } from "../../enum/common";
+
 export interface LoginRequest {
   grant_type: string;
   client_id: string;
@@ -15,9 +17,8 @@ export interface ForgotPasswordRequest {
   dateofbirth: string;
 }
 
-export interface PasswordChangeRequest {
-  pwtType: string;
+export interface ChangePasswordRequest {
+  pwtType: TPwdType;
   oldPassword: string;
   password: string;
 }
-

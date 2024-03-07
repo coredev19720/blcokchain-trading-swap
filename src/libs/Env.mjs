@@ -20,6 +20,10 @@ export const Env = createEnv({
     NEXT_PUBLIC_TOKEN_SK: z.string().min(1),
     NEXT_PUBLIC_TOKEN_IV: z.string().min(1),
     NEXT_PUBLIC_PREFIX_ACCOUNT: z.string().min(1),
+    NEXT_PUBLIC_ROOT_URL: z.string().min(1),
+    NEXT_PUBLIC_TOKEN: z.string().min(1),
+    NEXT_PUBLIC_REFRESH_TOKEN: z.string().min(1),
+    NEXT_PUBLIC_SESSION: z.string().min(1),
   },
   runtimeEnv: {
     NEXT_PUBLIC_TOKEN_COOKIE: process.env.NEXT_PUBLIC_TOKEN_COOKIE,
@@ -36,5 +40,9 @@ export const Env = createEnv({
     TOKEN_SK: process.env.TOKEN_SK,
     TOKEN_IV: process.env.TOKEN_IV,
     NEXT_PUBLIC_PREFIX_ACCOUNT: process.env.NEXT_PUBLIC_PREFIX_ACCOUNT,
+    NEXT_PUBLIC_ROOT_URL: process.env.NEXT_PUBLIC_ROOT_URL,
+    NEXT_PUBLIC_TOKEN: process.env.NEXT_PUBLIC_TOKEN,
+    NEXT_PUBLIC_REFRESH_TOKEN: process.env.NEXT_PUBLIC_REFRESH_TOKEN,
+    NEXT_PUBLIC_SESSION: process.env.NEXT_PUBLIC_SESSION,
   },
 });

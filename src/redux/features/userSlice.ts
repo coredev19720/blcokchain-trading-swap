@@ -1,32 +1,41 @@
-import { IAccount, IUserInfo } from "@interface/common";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { accounts } from "@src/constants/dumpData/dashboard";
+import {
+  AccountDetails,
+  AccountInfo,
+  AccountsResponse,
+  GetPermissionInfoResponse,
+} from "@interface/services/response";
+
 type UserState = {
-  userInfo: IUserInfo;
-  account: IAccount | null;
+  permissions: GetPermissionInfoResponse | null;
+  accounts: AccountsResponse | null;
+  activeAccount: AccountInfo | null;
 };
 
 const initialState = {
-  userInfo: {
-    name: "Xuan dieu",
-    email: "lxdieu90@gmail.com",
-  },
-  account: accounts[0],
+  permissions: null,
+  accounts: null,
+  activeAccount: null,
 } as UserState;
 
 export const user = createSlice({
   name: "user",
   initialState,
   reducers: {
-    reset: () => initialState,
-    setUser: (state, action: PayloadAction<IUserInfo>) => {
-      state.userInfo = action.payload;
+    setPermission: (
+      state,
+      action: PayloadAction<GetPermissionInfoResponse>
+    ) => {
+      state.permissions = action.payload;
     },
-    setAccount: (state, action: PayloadAction<IAccount>) => {
-      state.account = action.payload;
+    setAccounts: (state, action: PayloadAction<AccountsResponse>) => {
+      state.accounts = action.payload;
+    },
+    setActiveAccount: (state, action: PayloadAction<AccountInfo>) => {
+      state.activeAccount = action.payload;
     },
   },
 });
 
-export const { setUser, reset, setAccount } = user.actions;
+export const { setPermission, setAccounts, setActiveAccount } = user.actions;
 export default user.reducer;

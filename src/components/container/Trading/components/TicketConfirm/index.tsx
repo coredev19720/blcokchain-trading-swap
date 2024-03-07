@@ -18,8 +18,9 @@ interface IProps {
 }
 const TicketConfirm = ({ open, setOpen }: IProps) => {
   const t = useTranslations("trade");
-  const ticket = useAppSelector((state) => state.market.ticket);
-  const account = useAppSelector((state) => state.user.account);
+  const { ticket } = useAppSelector((state) => state.market);
+  const { activeAccount } = useAppSelector((state) => state.user);
+
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [otp, setOTP] = useState<string>("");
@@ -41,7 +42,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
         status: TTransactionStatus.open,
         execQty: 0,
         pendingQty: ticket.vol,
-        accountNo: account?.accountNo || "",
+        accountNo: activeAccount?.custodycd || "",
       };
       dispatch(appendOrder(order));
       router.push(`/order-book`);
@@ -160,7 +161,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                 {t("en_trade_accNo")}
               </Typography>
               <Typography variant="body2" fontWeight={600} color="text.primary">
-                {account?.accountNo || ""}
+                {activeAccount?.custodycd || ""}
               </Typography>
             </FlexContent>
           </S.TicketInfo>

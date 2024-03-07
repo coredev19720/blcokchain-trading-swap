@@ -52,14 +52,13 @@ export enum TAuthType {
   password = "password",
 }
 
-
 export enum TPwdType {
   LOGINPWD = "LOGINPWD",
+  TRADINGPWD = "TRADINGPWD",
 }
 
-
-export enum TPinAuthType{
-  OTP =1,
-  SMSOTP =5,
-  DIGI_SIGN = 4
+export enum TPinAuthType {
+  OTP = 1,
+  SMSOTP = 5,
+  DIGI_SIGN = 4,
 }
