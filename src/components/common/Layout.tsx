@@ -1,12 +1,13 @@
 "use client";
 import { styled } from "@mui/system";
 import colors from "@src/themes/colors";
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import { PageWrapper, MainContent } from "@src/styles/common";
 import { ToastContainer } from "react-toastify";
 import Menu from "./Menu";
 import { publicUrls } from "@src/constants/routes";
 import { usePathname, useParams } from "next/navigation";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import io from "socket.io-client/dist/socket.io";
 
 const Wrapper = styled("main")(({ theme }) => ({
@@ -23,6 +24,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const params = useParams();
   let isPublic = publicUrls.some((x) => `/${params?.locale}/${x}` === pathname);
+  const queryClient = new QueryClient();
   // useEffect(() => {
   //   let socket: io.Socket;
 
@@ -49,21 +51,23 @@ export default function Layout({ children }: { children: ReactNode }) {
   //   console.log("Connected to the server");
   // };
   return (
-    <Wrapper>
-      <PageWrapper>
-        <MainContent>{children}</MainContent>
-        {!isPublic && <Menu />}
-      </PageWrapper>
-      <ToastContainer
-        position="bottom-center"
-        autoClose={2000}
-        hideProgressBar={true}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnHover
-        theme="light"
-      />
-    </Wrapper>
+    <QueryClientProvider client={queryClient}>
+      <Wrapper>
+        <PageWrapper>
+          <MainContent>{children}</MainContent>
+          {!isPublic && <Menu />}
+        </PageWrapper>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={2000}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnHover
+          theme="light"
+        />
+      </Wrapper>
+    </QueryClientProvider>
   );
 }

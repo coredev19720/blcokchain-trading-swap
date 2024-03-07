@@ -1,18 +1,11 @@
 import * as S from "./styles";
-import {
-  Button,
-  ButtonGroup,
-  MenuItem,
-  SelectChangeEvent,
-  Typography,
-} from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import SearchInput from "./components/SearchInput";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { setTicket } from "@src/redux/features/marketSlice";
 import { TSide } from "@enum/common";
-import {SearchPanel} from "@components/common";
+import SearchPanel from "@components/common/SearchPanel";
 const Search = () => {
   const t = useTranslations("trade");
   const dispatch = useAppDispatch();

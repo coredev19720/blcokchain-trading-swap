@@ -3,7 +3,9 @@ import { IOrder } from "@interface/common";
 import { formatNumber } from "@src/utils/helpers";
 import { useTranslations } from "next-intl";
 import dayjs from "dayjs";
-import {RowContent,Line} from "@components/common";
+import Line from "@components/common/Line";
+import RowContent from "@components/common/RowContent";
+
 interface IProps {
   data: IOrder | null;
 }

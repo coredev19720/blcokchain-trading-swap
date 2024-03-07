@@ -1,6 +1,6 @@
 "use client";
 import { Button, Slide, TextField } from "@mui/material";
-import {FieldLabel } from "@components/common";
+import FieldLabel from "@components/common/FieldLabel";
 import { useState } from "react";
 import * as S from "../styles";
 interface IProps {

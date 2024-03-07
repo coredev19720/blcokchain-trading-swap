@@ -1,4 +1,5 @@
-import {FieldLabel} from "@components/common";
+"use client";
+import FieldLabel from "../FieldLabel";
 import * as S from "./styles";
 import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { useEffect, useState } from "react";

@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { Table } from "@mui/material";
 import Header from "./components/Header";

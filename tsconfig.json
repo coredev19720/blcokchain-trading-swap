@@ -19,12 +19,14 @@
       }
     ],
     "paths": {
-      // "@/*": ["./*"],
+      "@/*": ["./*"],
+      "@public/*": ["./public/*"],
       "@src/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
       "@enum/*": ["./src/constraints/enum/*"],
       "@interface/*": ["./src/constraints/interface/*"],
-      "@constants/*": ["./src/constants/*"],  
+      "@constants/*": ["./src/constants/*"],
+      "@images/*": ["./src/images/*"]
     }
   },
   "include": [

@@ -20,3 +20,4 @@ export interface PasswordChangeRequest {
   oldPassword: string;
   password: string;
 }
+

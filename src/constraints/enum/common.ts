@@ -51,3 +51,15 @@ export enum TOrderActionType {
 export enum TAuthType {
   password = "password",
 }
+
+
+export enum TPwdType {
+  LOGINPWD = "LOGINPWD",
+}
+
+
+export enum TPinAuthType{
+  OTP =1,
+  SMSOTP =5,
+  DIGI_SIGN = 4
+}

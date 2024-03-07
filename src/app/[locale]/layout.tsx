@@ -5,7 +5,7 @@ import { NextIntlClientProvider, useMessages } from "next-intl";
 import { AppConfig } from "@src/utils/AppConfig";
 import ThemeRegistry from "../ThemeRegistry";
 import { Providers } from "@src/redux/provider";
-import {Layout} from "@components/common";
+import Layout from "@components/common/Layout";
 export const metadata: Metadata = {
   icons: [
     {

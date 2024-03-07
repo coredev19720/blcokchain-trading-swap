@@ -6,7 +6,8 @@ import { TTransactionStatus } from "@enum/common";
 import { updateOrders } from "@src/redux/features/marketSlice";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { useState } from "react";
-import {OTPConfirm,RowContent} from "@components/common";
+import RowContent from "@components/common/RowContent";
+import OTPConfirm from "@components/common/OTPConfirm";
 import dayjs from "dayjs";
 interface IProps {
   data: IOrder | null;

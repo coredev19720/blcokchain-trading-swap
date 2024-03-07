@@ -1,7 +1,7 @@
-import {FieldLabel } from "@components/common";
-import { ITickerData } from "@interface/common";
+import FieldLabel from "@components/common/FieldLabel";
 import { ColContent } from "@src/styles/common";
-import { formatBigNumber, formatNumber } from "@src/utils/helpers";
+import { ITickerData } from "@interface/common";
+import { formatBigNumber } from "@src/utils/helpers";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTranslations } from "next-intl";

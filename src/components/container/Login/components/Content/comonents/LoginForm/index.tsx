@@ -1,20 +1,18 @@
 import { IconButton, TextField, Typography, Button } from "@mui/material";
 import { createRef, useRef, useState, KeyboardEvent } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, FieldValues } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { uIdGen } from "@src/utils/helpers";
-import {HelpText} from "@components/common";
+import HelpText from "@components/common/HelpText";
+import FieldLabel from "@components/common/FieldLabel";
 import { Wrapper, FieldWrapper, AdormentWrapper } from "./styles";
-import {FieldLabel } from "@components/common";
 import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "react-toastify";
-
-interface IProps {
-  onSubmit: (data: any) => void;
-}
-
-const LoginForm = ({ onSubmit }: IProps) => {
+import { useLogin } from "@src/services/hooks/useLogin";
+import { encrypt } from "@src/libs/hash";
+const LoginForm = () => {
+  const { onLogin } = useLogin();
   const tNoti = useTranslations("notification");
   const t = useTranslations("login");
   const tMess = useTranslations("mess");
@@ -50,20 +48,9 @@ const LoginForm = ({ onSubmit }: IProps) => {
           return;
         }
         default:
-          handleSubmit(onSubmitWithCaptcha);
+          handleSubmit(handleLogin);
           return;
       }
-    }
-  };
-  const onSubmitWithCaptcha = (data: any) => {
-    const recaptchaVal = recaptchaRef.current?.getValue();
-    console.log(recaptchaVal);
-    if (recaptchaRef.current) {
-      if (!recaptchaVal) {
-        toast.error(tNoti("txt_recaptcha_fail"));
-        return;
-      }
-      onSubmit(data);
     }
   };
   const handleClickShowPwd = () => {
@@ -182,6 +169,16 @@ const LoginForm = ({ onSubmit }: IProps) => {
     );
   };
 
+  const handleLogin = async (data: FieldValues) => {
+    const recaptchaVal = recaptchaRef.current?.getValue();
+    if (recaptchaRef.current) {
+      if (!recaptchaVal) {
+        toast.error(tNoti("txt_recaptcha_fail"));
+        return;
+      }
+      onLogin({ u: data.username, p: encrypt(data.pwd) });
+    }
+  };
   return (
     <form>
       <Wrapper>
@@ -243,7 +240,7 @@ const LoginForm = ({ onSubmit }: IProps) => {
         />
         <Button
           variant="contained"
-          onClick={handleSubmit(onSubmitWithCaptcha)}
+          onClick={handleSubmit(handleLogin)}
           size="large"
         >
           {t("fn_login_cta_login")}

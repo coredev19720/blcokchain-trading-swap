@@ -4,7 +4,11 @@ import { TextField } from "@mui/material";
 import { IOrder } from "@interface/common";
 import { formatNumber, genValidPrice } from "@src/utils/helpers";
 import { useTranslations } from "next-intl";
-import {RowContent,FieldLabel,OTPConfirm,HelpText} from "@components/common";
+import RowContent from "@components/common/RowContent";
+import FieldLabel from "@components/common/FieldLabel";
+import OTPConfirm from "@components/common/OTPConfirm";
+import HelpText from "@components/common/HelpText";
+
 import dayjs from "dayjs";
 import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "@src/redux/hooks";

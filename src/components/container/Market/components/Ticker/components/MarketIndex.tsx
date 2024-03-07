@@ -1,4 +1,5 @@
-import {FieldLabel,StyledTable} from "@components/common";
+import FieldLabel from "@components/common/FieldLabel";
+import StyledTable from "@components/common/StyledTable";
 import { IMarketInfo } from "@interface/common";
 import { IColumn } from "@interface/table";
 import {

@@ -1,4 +1,4 @@
-import { IAccount, ILang, IMenuItem, IStringOpts } from "@interface/common";
+import { ILang, IMenuItem, IStringOpts } from "@interface/common";
 import {
   menuIconAccount,
   menuIconTrading,
@@ -12,7 +12,7 @@ import {
   engFlag,
   vieFlag,
 } from "../images";
-import { TAccountType, TOrderKind, TOrderType } from "@enum/common";
+import { TOrderType } from "@enum/common";
 
 export const menus: IMenuItem[] = [
   {

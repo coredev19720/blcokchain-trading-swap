@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { TickerWrapper, Wrapper, Tickers } from "./styles";
 import { Backdrop, Slide, Typography } from "@mui/material";
