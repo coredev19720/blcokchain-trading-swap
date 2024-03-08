@@ -3,18 +3,25 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import apiUrls from "@/src/services/apiUrls";
 import Cookies from "js-cookie";
-import { useRouter } from "next/router";
 interface UseLogin {
-  onLogin: (data: { u: string; p: string; t: number }) => void;
+  onLogin: (data: { u: string; p: string; captchaToken: string }) => void;
   isError: boolean;
   isSuccess: boolean;
 }
 const handleLogin = async (data: {
   u: string;
   p: string;
-  t: number;
+  captchaToken: string;
 }): Promise<LoginResponse> => {
   try {
+    // const validateCaptcha = await axios.post(
+    //   process.env.NEXT_PUBLIC_RECAPTCHA_VERIFY_URL as string,
+    //   {
+    //     secret: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+    //     response: data.captchaToken,
+    //   }
+    // );
+    // console.log("validateCaptcha", validateCaptcha.data);
     const res = await axios.post(apiUrls.login, {
       data: { u: data.u, p: data.p },
     });
@@ -29,22 +36,30 @@ const handleLogin = async (data: {
 
 const handleLoginSuccess = (data: LoginResponse) => {
   if (data.access_token) {
-    Cookies.set(process.env.NEXT_PUBLIC_TOKEN as string, data.access_token, {
-      expires: data.expires_in,
-      path: "/",
-    });
     Cookies.set(
-      process.env.NEXT_PUBLIC_REFRESH_TOKEN as string,
+      process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME as string,
       data.access_token,
       {
         expires: data.expires_in,
         path: "/",
       }
     );
-    Cookies.set(process.env.NEXT_PUBLIC_SESSION as string, data.access_token, {
-      expires: data.expires_in,
-      path: "/",
-    });
+    Cookies.set(
+      process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME as string,
+      data.access_token,
+      {
+        expires: data.expires_in,
+        path: "/",
+      }
+    );
+    Cookies.set(
+      process.env.NEXT_PUBLIC_SESSION_COOKIE_NAME as string,
+      data.access_token,
+      {
+        expires: data.expires_in,
+        path: "/",
+      }
+    );
   }
   if (!data.access_token) {
     console.log("error", data);

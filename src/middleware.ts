@@ -13,14 +13,14 @@ const intlMiddleware = createMiddleware({
 export function middleware(req: NextRequest) {
   const localeCookie = req.cookies.get("NEXT_LOCALE");
   let locale = localeCookie ? localeCookie.value : defaultLocale;
-  const token = req.cookies.get("token");
-
+  const tokenCookiesName =
+    process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME || "access_token";
+  const token = req.cookies.get(tokenCookiesName);
   let isPublic = publicUrls.some(
     (x) => `/${locale}/${x}` === req.nextUrl.pathname
   );
 
   //not login
-
   if (!token) {
     if (isPublic) return intlMiddleware(req);
     return NextResponse.redirect(new URL(`/${locale}/login`, req.url));

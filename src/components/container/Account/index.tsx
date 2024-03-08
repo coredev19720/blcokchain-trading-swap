@@ -8,24 +8,23 @@ import { useTranslations } from "next-intl";
 import { useRouter, useParams } from "next/navigation";
 import Cookies from "js-cookie";
 import LanguageToggle from "./components/LanguageToggle";
-
+import { useLogout } from "@src/services/hooks/useLogout";
 const Account = () => {
   const t = useTranslations("account");
   const router = useRouter();
   const params = useParams();
-  useEffect(() => {}, []);
-  const handleLogout = () => {
-    const locale = params?.locale;
-    Cookies.remove(
-      process.env.NEXT_PUBLIC_TOKEN_COOKIE
-        ? process.env.NEXT_PUBLIC_TOKEN_COOKIE
-        : "token"
-    );
-    if (locale) {
-      router.push(`/${locale}/login`);
+  const { onLogout, isSuccess, isError } = useLogout();
+
+  useEffect(() => {
+    if (isSuccess || isError) {
+      const locale = params?.locale;
+      if (locale) {
+        router.push(`/${locale}/login`);
+      }
+      router.push("/");
     }
-    router.push("/");
-  };
+  }, [isSuccess, isError]);
+
   return (
     <Wrapper>
       <ContentWrapper>
@@ -34,7 +33,7 @@ const Account = () => {
         <LanguageToggle />
       </ContentWrapper>
       <ButtonWrapper>
-        <Button fullWidth variant="outlined" onClick={handleLogout}>
+        <Button fullWidth variant="outlined" onClick={onLogout}>
           {t("fn_acc_cta_logout")}
         </Button>
       </ButtonWrapper>

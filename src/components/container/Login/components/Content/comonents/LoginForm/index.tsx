@@ -11,7 +11,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "react-toastify";
 import { useLogin } from "@src/services/hooks/useLogin";
 import { encrypt } from "@src/libs/hash";
-import { useRouter, usePathname, useParams } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 const LoginForm = () => {
   const { onLogin, isError, isSuccess } = useLogin();
   const tNoti = useTranslations("notification");
@@ -116,7 +116,9 @@ const LoginForm = () => {
         fullWidth
         InputProps={{
           startAdornment: (
-            <Typography style={{ paddingLeft: 4 }}>086C-</Typography>
+            <Typography
+              style={{ paddingLeft: 4 }}
+            >{`${process.env.NEXT_PUBLIC_PREFIX_ACCOUNT}-`}</Typography>
           ),
         }}
       />
@@ -187,7 +189,11 @@ const LoginForm = () => {
         toast.error(tNoti("txt_recaptcha_fail"));
         return;
       }
-      onLogin({ u: data.username, p: encrypt(data.pwd), t: data.expireTime });
+      onLogin({
+        u: data.username,
+        p: encrypt(data.pwd),
+        captchaToken: recaptchaVal,
+      });
     }
   };
   return (

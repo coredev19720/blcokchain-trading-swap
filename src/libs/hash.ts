@@ -23,7 +23,6 @@ export const decrypt = (token: string) => {
     const decipher = crypto.createDecipheriv(algorithm, secretKey, iv);
     const firstPart = decipher.update(token, "hex");
     const lastPart = decipher.final();
-    console.log("decrypted", `${firstPart}${lastPart}`);
     return `${firstPart}${lastPart}`;
   } catch (error) {
     throw new Error(`MSG_002`); // decrypt error
