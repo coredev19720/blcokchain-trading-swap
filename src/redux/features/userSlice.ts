@@ -2,19 +2,20 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   AccountDetails,
   AccountInfo,
+  AccountsPermissions,
   AccountsResponse,
   GetPermissionInfoResponse,
 } from "@interface/services/response";
 
 type UserState = {
-  permissions: GetPermissionInfoResponse | null;
-  accounts: AccountsResponse | null;
+  permissions: AccountsPermissions[] | [];
+  accounts: AccountInfo[] | [];
   activeAccount: AccountInfo | null;
 };
 
 const initialState = {
-  permissions: null,
-  accounts: null,
+  permissions: [],
+  accounts: [],
   activeAccount: null,
 } as UserState;
 
@@ -22,13 +23,10 @@ export const user = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setPermission: (
-      state,
-      action: PayloadAction<GetPermissionInfoResponse>
-    ) => {
+    setPermission: (state, action: PayloadAction<AccountsPermissions[]>) => {
       state.permissions = action.payload;
     },
-    setAccounts: (state, action: PayloadAction<AccountsResponse>) => {
+    setAccounts: (state, action: PayloadAction<AccountInfo[]>) => {
       state.accounts = action.payload;
     },
     setActiveAccount: (state, action: PayloadAction<AccountInfo>) => {

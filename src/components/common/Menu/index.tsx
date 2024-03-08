@@ -3,16 +3,23 @@ import { Wrapper, MenuItem, MenuImage, MenuText } from "./styles";
 import { menus } from "@constants/common";
 import { useTranslations } from "next-intl";
 import colors from "@src/themes/colors";
-import { useLogout } from "@/src/services/hooks/useLogout";
 import { useRouter, usePathname, useParams } from "next/navigation";
 import { useIdleTimer } from "react-idle-timer";
-
+import { useLogout } from "@/src/services/hooks/useLogout";
+import { useGetAccounts } from "@/src/services/hooks/useGetAccounts";
+import { useGetPermissionInfo } from "@/src/services/hooks/useGetPermissionInfo";
+import { useAppSelector } from "@/src/redux/hooks";
+import Cookies from "js-cookie";
 const Menu = () => {
+  const { accounts, permissions } = useAppSelector((state) => state.user);
   const { onLogout, isError, isSuccess } = useLogout();
+  const { onGetAccounts } = useGetAccounts();
+  const { onGetPermission } = useGetPermissionInfo();
   const pathname = usePathname();
   const router = useRouter();
   const params = useParams();
-
+  console.log("permissions", permissions);
+  console.log("accounts", accounts);
   const t = useTranslations("menu");
   const [idleTime, setIdleTime] = useState<number>(1800);
 
@@ -22,6 +29,13 @@ const Menu = () => {
     );
     if (idle) {
       setIdleTime(parseInt(idle));
+    }
+    const accessToken = Cookies.get(
+      process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME as string
+    );
+    if (accessToken) {
+      !accounts.length && onGetAccounts();
+      !permissions.length && onGetPermission();
     }
   }, []);
   useEffect(() => {

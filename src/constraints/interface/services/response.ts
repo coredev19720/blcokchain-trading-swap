@@ -16,7 +16,9 @@ export interface LoginResponse extends BaseResponse {
 
 //permission
 export interface GetPermissionInfoResponse extends BaseResponse {
-  accounts: AccountsPermissions;
+  d: {
+    accounts: AccountsPermissions[];
+  };
 }
 
 export interface AccountPermissions {

@@ -1,19 +1,18 @@
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import apiUrls from "@/src/services/apiUrls";
-import Cookies from "js-cookie";
-import { ForgotPasswordRequest } from "@/src/constraints/interface/services/request";
+import { ChangePasswordRequest } from "@/src/constraints/interface/services/request";
 import { BaseResponse } from "@/src/constraints/interface/services/response";
+import axiosInst from "../Interceptors";
 interface UseLogin {
-  onForgotPwd: (data: ForgotPasswordRequest) => void;
+  onChangePwd: (data: ChangePasswordRequest) => void;
   isError: boolean;
   isSuccess: boolean;
 }
-const handleForgotPwd = async (
-  data: ForgotPasswordRequest
+const handleChangePwd = async (
+  data: ChangePasswordRequest
 ): Promise<BaseResponse> => {
   try {
-    const res = await axios.post(apiUrls.login, data);
+    const res = await axiosInst.post(apiUrls.changePwd, data);
     if (res.data.access_token) {
       return res.data;
     }
@@ -25,12 +24,12 @@ const handleForgotPwd = async (
 
 export const usePostForgotPwd = (): UseLogin => {
   const {
-    mutate: onForgotPwd,
+    mutate: onChangePwd,
     isError,
     isSuccess,
   } = useMutation({
-    mutationFn: handleForgotPwd,
+    mutationFn: handleChangePwd,
   });
 
-  return { onForgotPwd, isError, isSuccess };
+  return { onChangePwd, isError, isSuccess };
 };

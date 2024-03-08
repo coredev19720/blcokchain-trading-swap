@@ -12,10 +12,8 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const { activeAccount, accounts } = useAppSelector((state) => state.user);
   const handleChangeAccount = (e: SelectChangeEvent<unknown>) => {
-    if (typeof e.target.value === "string" && accounts?.d?.length) {
-      const availAcc = accounts.d.find(
-        (acc) => acc.custodycd === e.target.value
-      );
+    if (typeof e.target.value === "string" && accounts?.length) {
+      const availAcc = accounts.find((acc) => acc.custodycd === e.target.value);
       if (availAcc) {
         dispatch(setActiveAccount(availAcc));
       }
@@ -38,7 +36,7 @@ const Header = () => {
         variant="standard"
       >
         {accounts &&
-          accounts.d.map((acc: AccountInfo) => (
+          accounts.map((acc: AccountInfo) => (
             <MenuItem value={acc.custodycd} key={`account_${acc.custodycd}`}>
               {`${acc.accounttype} - ${acc.custodycd}`}
             </MenuItem>

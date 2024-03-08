@@ -8,7 +8,9 @@ const axiosInst = axios.create({
 
 const reqFullfiled = (config: InternalAxiosRequestConfig) => {
   // Do something before request is sent
-  const token = localStorage.getItem("accessToken");
+  const token = Cookies.get(
+    process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME as string
+  );
   if (token) {
     config.headers["Authorization"] = `Bearer ${token}`;
   }
