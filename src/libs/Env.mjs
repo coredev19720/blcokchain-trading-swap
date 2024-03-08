@@ -22,7 +22,9 @@ export const Env = createEnv({
     NEXT_PUBLIC_ROOT_URL: z.string().min(1),
     NEXT_PUBLIC_TOKEN_COOKIE_NAME: z.string().min(1),
     NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME: z.string().min(1),
-    NEXT_PUBLIC_SESSION_COOKIE_NAME: z.string().min(1),
+    NEXT_PUBLIC_IDLE_STO_NAME: z.string().min(1),
+    NEXT_PUBLIC_MIN_IDLE_TIME: z.number().int().min(1),
+    NEXT_PUBLIC_MAX_IDLE_TIME: z.number().int().min(1),
   },
   runtimeEnv: {
     NEXT_PUBLIC_DEFAULT_SYMBOL: process.env.NEXT_PUBLIC_DEFAULT_SYMBOL,
@@ -38,7 +40,8 @@ export const Env = createEnv({
     NEXT_PUBLIC_TOKEN_COOKIE_NAME: process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME,
     NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME:
       process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME,
-    NEXT_PUBLIC_SESSION_COOKIE_NAME:
-      process.env.NEXT_PUBLIC_SESSION_COOKIE_NAME,
+    NEXT_PUBLIC_IDLE_STO_NAME: process.env.NEXT_PUBLIC_IDLE_STO_NAME,
+    NEXT_PUBLIC_MIN_IDLE_TIME: process.env.NEXT_PUBLIC_MIN_IDLE_TIME,
+    NEXT_PUBLIC_MAX_IDLE_TIME: process.env.NEXT_PUBLIC_MAX_IDLE_TIME,
   },
 });

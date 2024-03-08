@@ -100,7 +100,6 @@
     "fn_trade_inp_ordQty": "Số lượng",
     "fn_trade_inp_ordMulti": "Nhân lệnh",
     "fn_trade_txt_accStatus": "Trạng thái tiểu khoản",
-    "fn_trade_txt_can_sell": "Có thể bán",
     "en_trade_custodyCd": "Số lưu ký",
     "en_trade_accNo": "Tiểu khoản",
     "fn_trade_cta_confirm": "Xác nhận"
@@ -160,6 +159,7 @@
   "notification": {
     "txt_login_success": "Đăng nhập thành công",
     "txt_login_fail": "Đăng nhập thất bại, vui lòng thử lại",
-    "txt_pwd_updated": "Mật khẩu mới đã được cập nhật"
+    "txt_pwd_updated": "Mật khẩu mới đã được cập nhật",
+    "txt_recaptcha_fail": "Vui lòng xác nhận bạn không phải là robot"
   }
 }

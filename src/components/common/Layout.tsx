@@ -8,8 +8,9 @@ import Menu from "./Menu";
 import { publicUrls } from "@src/constants/routes";
 import { usePathname, useParams } from "next/navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-// import io from "socket.io-client/dist/socket.io";
+import { useGetPermissionInfo } from "@/src/services/hooks/useGetPermissionInfo";
 
+// import io from "socket.io-client/dist/socket.io";
 const Wrapper = styled("main")(({ theme }) => ({
   height: "100%",
   width: "100%",
@@ -25,6 +26,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const params = useParams();
   let isPublic = publicUrls.some((x) => `/${params?.locale}/${x}` === pathname);
   const queryClient = new QueryClient();
+
   // useEffect(() => {
   //   let socket: io.Socket;
 

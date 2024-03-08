@@ -6,9 +6,8 @@ import Content from "./components/Content";
 import { Button } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useRouter, useParams } from "next/navigation";
-import Cookies from "js-cookie";
 import LanguageToggle from "./components/LanguageToggle";
-import { useLogout } from "@src/services/hooks/useLogout";
+import { useLogout } from "@/src/services/hooks/useLogout";
 const Account = () => {
   const t = useTranslations("account");
   const router = useRouter();

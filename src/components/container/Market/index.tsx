@@ -13,6 +13,7 @@ import {
   setLastSymbolToLocalStorage,
   lastSymLocalKey,
 } from "@src/utils/helpers";
+
 const Market = () => {
   const searchParams = useSearchParams();
   const ticker = useAppSelector((state) => state.market.ticker);

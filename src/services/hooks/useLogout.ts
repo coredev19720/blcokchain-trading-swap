@@ -22,7 +22,6 @@ const handleLogout = async () => {
   } finally {
     Cookies.remove(process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME as string);
     Cookies.remove(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME as string);
-    Cookies.remove(process.env.NEXT_PUBLIC_SESSION_COOKIE_NAME as string);
   }
 };
 export const useLogout = (): UseLogout => {

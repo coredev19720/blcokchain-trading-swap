@@ -50,6 +50,7 @@ export enum TOrderActionType {
 
 export enum TAuthType {
   password = "password",
+  refresh_token = "refresh_token",
 }
 
 export enum TPwdType {

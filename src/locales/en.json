@@ -161,6 +161,7 @@
   "notification": {
     "txt_login_success": "Login successfully",
     "txt_login_fail": "Login failed. Please try again",
-    "txt_pwd_updated": "Password updated"
+    "txt_pwd_updated": "Password updated",
+    "txt_recaptcha_fail": "Please verify reCAPTCHA"
   }
 }

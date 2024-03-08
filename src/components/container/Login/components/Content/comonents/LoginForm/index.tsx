@@ -9,7 +9,7 @@ import FieldLabel from "@components/common/FieldLabel";
 import { Wrapper, FieldWrapper, AdormentWrapper } from "./styles";
 import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "react-toastify";
-import { useLogin } from "@src/services/hooks/useLogin";
+import { useLogin } from "@/src/services/hooks/useLogin";
 import { encrypt } from "@src/libs/hash";
 import { useRouter, useParams } from "next/navigation";
 const LoginForm = () => {
@@ -33,6 +33,7 @@ const LoginForm = () => {
   const pwdRef: React.RefObject<HTMLInputElement> = createRef();
   const expireTimeRef: React.RefObject<HTMLInputElement> = createRef();
   const [showPwd, setShowPwd] = useState(false);
+
   useEffect(() => {
     if (isError) {
       toast.error(tNoti("txt_login_fail"));
@@ -68,17 +69,23 @@ const LoginForm = () => {
     setShowPwd((prev) => !prev);
   };
   const handleChangeExpireTime = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (Number(e.target.value) > 120) {
-      setValue("expireTime", 120);
+    const maxIdleTime: number = Number(
+      process.env.NEXT_PUBLIC_MAX_IDLE_TIME || 120
+    );
+    if (Number(e.target.value) > maxIdleTime) {
+      setValue("expireTime", maxIdleTime);
       return;
     }
     setValue("expireTime", Number(e.target.value));
   };
 
   const handleBlurExpireTime = () => {
+    const minIdleTime: number = Number(
+      process.env.NEXT_PUBLIC_MIN_IDLE_TIME || 1
+    );
     const expireTime = getValues("expireTime");
-    if (expireTime < 5) {
-      setValue("expireTime", 5);
+    if (expireTime < minIdleTime) {
+      setValue("expireTime", minIdleTime);
       return;
     }
   };
@@ -192,6 +199,7 @@ const LoginForm = () => {
       onLogin({
         u: data.username,
         p: encrypt(data.pwd),
+        t: data.expireTime * 60,
         captchaToken: recaptchaVal,
       });
     }

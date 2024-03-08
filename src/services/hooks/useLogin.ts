@@ -1,19 +1,26 @@
 import { LoginResponse } from "@src/constraints/interface/services/response";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import apiUrls from "@/src/services/apiUrls";
 import Cookies from "js-cookie";
+import axiosInst from "../Interceptors";
 interface UseLogin {
-  onLogin: (data: { u: string; p: string; captchaToken: string }) => void;
+  onLogin: (data: {
+    u: string;
+    p: string;
+    t: number;
+    captchaToken: string;
+  }) => void;
   isError: boolean;
   isSuccess: boolean;
 }
 const handleLogin = async (data: {
   u: string;
   p: string;
+  t: number;
   captchaToken: string;
 }): Promise<LoginResponse> => {
   try {
+    //fix me
     // const validateCaptcha = await axios.post(
     //   process.env.NEXT_PUBLIC_RECAPTCHA_VERIFY_URL as string,
     //   {
@@ -22,10 +29,14 @@ const handleLogin = async (data: {
     //   }
     // );
     // console.log("validateCaptcha", validateCaptcha.data);
-    const res = await axios.post(apiUrls.login, {
+    const res = await axiosInst.post(apiUrls.login, {
       data: { u: data.u, p: data.p },
     });
     if (res.data.access_token) {
+      window.localStorage.setItem(
+        process.env.NEXT_PUBLIC_IDLE_STO_NAME || "idle_time",
+        data.t.toString()
+      );
       return res.data;
     }
     throw new Error(res.data.ec);
@@ -46,15 +57,7 @@ const handleLoginSuccess = (data: LoginResponse) => {
     );
     Cookies.set(
       process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME as string,
-      data.access_token,
-      {
-        expires: data.expires_in,
-        path: "/",
-      }
-    );
-    Cookies.set(
-      process.env.NEXT_PUBLIC_SESSION_COOKIE_NAME as string,
-      data.access_token,
+      data.refresh_token,
       {
         expires: data.expires_in,
         path: "/",
