@@ -18,11 +18,6 @@ export interface ILoginForm {
   expireTime: number;
 }
 
-export interface ITickerOpt {
-  title: string;
-  value: string;
-}
-
 export interface ITickerData {
   symbol: string;
   companyName: string;

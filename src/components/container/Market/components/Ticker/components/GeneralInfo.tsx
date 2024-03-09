@@ -1,3 +1,4 @@
+import { Stock } from "@/src/constraints/interface/services/response";
 import { ITickerData } from "@interface/common";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
@@ -5,10 +6,10 @@ import { RowContent } from "@src/styles/common";
 import { genPriceColor, genTextWithPrefix } from "@src/utils/helpers";
 
 const Wrapper = styled("div")(() => ({}));
-interface IProps {
-  ticker: ITickerData;
-}
-const GeneralInfo = ({ ticker }: IProps) => {
+type Props = {
+  ticker: Stock;
+};
+const GeneralInfo = ({ ticker }: Props) => {
   return (
     <Wrapper>
       <RowContent>
@@ -19,9 +20,9 @@ const GeneralInfo = ({ ticker }: IProps) => {
           variant="h4"
           fontWeight={600}
           color={genPriceColor(
-            ticker.ref,
+            ticker.reference,
             ticker.price,
-            ticker.ceil,
+            ticker.ceiling,
             ticker.floor
           )}
         >
@@ -31,15 +32,15 @@ const GeneralInfo = ({ ticker }: IProps) => {
 
       <RowContent>
         <Typography variant="subtitle1" noWrap>
-          {ticker.companyName}
+          {ticker.FullName}
         </Typography>
         <Typography
           style={{ whiteSpace: "nowrap" }}
           variant="subtitle1"
           color={genPriceColor(
-            ticker.ref,
+            ticker.reference,
             ticker.price,
-            ticker.ceil,
+            ticker.ceiling,
             ticker.floor
           )}
         >

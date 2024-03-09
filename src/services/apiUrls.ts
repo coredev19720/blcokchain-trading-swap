@@ -5,6 +5,15 @@ const apiUrls = {
   forgotPwd: `${baseUrl}/sso/genResetPass`,
   changePwd: `${baseUrl}/tran/changePass`,
   getPermissionInfo: `${baseUrl}/sso/info/getPermissionInfo`,
+  getAuthorityInfo: `${baseUrl}/inq/authorityInfo`,
+  getInstruments: `${baseUrl}/datafeed/instruments`,
   getAcounts: `${baseUrl}/accounts`,
 };
+
+export const getAccountSummaryUrl = (accountId: string) =>
+  `${baseUrl}/inq/accounts/${accountId}/summaryAccount`;
+
+export const getAvailTradeUrl = (accountId: string) =>
+  `${baseUrl}/inq/accounts/${accountId}/availableTrade`;
+
 export default apiUrls;

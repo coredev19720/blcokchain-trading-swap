@@ -8,18 +8,25 @@ import { useIdleTimer } from "react-idle-timer";
 import { useLogout } from "@/src/services/hooks/useLogout";
 import { useGetAccounts } from "@/src/services/hooks/useGetAccounts";
 import { useGetPermissionInfo } from "@/src/services/hooks/useGetPermissionInfo";
+import { useGetAuthorityInfo } from "@/src/services/hooks/useGetAuthorityInfo";
+import { useGetAccountSummary } from "@/src/services/hooks/useGetAccountSummary";
+import { useGetInstruments } from "@/src/services/hooks/useGetInstruments";
 import { useAppSelector } from "@/src/redux/hooks";
 import Cookies from "js-cookie";
 const Menu = () => {
-  const { accounts, permissions } = useAppSelector((state) => state.user);
+  const { accounts, permissions, customerInfo, activeAccount } = useAppSelector(
+    (state) => state.user
+  );
+  const { stocks } = useAppSelector((state) => state.market);
   const { onLogout, isError, isSuccess } = useLogout();
   const { onGetAccounts } = useGetAccounts();
   const { onGetPermission } = useGetPermissionInfo();
+  const { onGetAuthorityInfo } = useGetAuthorityInfo();
+  const { onGetAccountSummary } = useGetAccountSummary();
+  const { onGetInstruments } = useGetInstruments();
   const pathname = usePathname();
   const router = useRouter();
   const params = useParams();
-  console.log("permissions", permissions);
-  console.log("accounts", accounts);
   const t = useTranslations("menu");
   const [idleTime, setIdleTime] = useState<number>(1800);
 
@@ -35,7 +42,9 @@ const Menu = () => {
     );
     if (accessToken) {
       !accounts.length && onGetAccounts();
-      !permissions.length && onGetPermission();
+      !permissions?.length && onGetPermission();
+      !customerInfo && onGetAuthorityInfo();
+      !stocks.length && onGetInstruments();
     }
   }, []);
   useEffect(() => {
@@ -48,8 +57,14 @@ const Menu = () => {
     }
   }, [isSuccess, isError]);
 
+  useEffect(() => {
+    if (activeAccount) {
+      const { id } = activeAccount;
+      onGetAccountSummary(id);
+    }
+  }, [activeAccount]);
+
   const onIdle = () => {
-    console.log("idle timeout");
     onLogout();
   };
   useIdleTimer({

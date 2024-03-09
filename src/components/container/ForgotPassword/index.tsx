@@ -10,7 +10,6 @@ type step = "fill_information" | "fill_otp" | "fill_password" | "success";
 const steps = ["fill_information", "fill_otp", "fill_password", "success"];
 const ForgotPassword = () => {
   const [step, setStep] = useState(0);
-  console.log(step);
   return (
     <S.Wrapper>
       <Header />

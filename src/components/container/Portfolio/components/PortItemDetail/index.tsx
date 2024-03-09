@@ -10,7 +10,6 @@ import { formatNumber, setLastSymbolToLocalStorage } from "@src/utils/helpers";
 import { setTicker, setTicket } from "@src/redux/features/marketSlice";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { TSide } from "@enum/common";
-import { tickers } from "@src/constants/dumpData/dashboard";
 import { useRouter } from "next/navigation";
 interface IProps {
   data: IPortItem | null;
@@ -20,7 +19,7 @@ const PortItemDetail = ({ data, handleClose }: IProps) => {
   const t = useTranslations("portfolio");
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const ticket = useAppSelector((state) => state.market.ticket);
+  const { ticket, stocks } = useAppSelector((state) => state.market);
   const [startY, setStartY] = useState(null);
   const [currentY, setCurrentY] = useState(null);
   const [isSliding, setIsSliding] = useState(false);
@@ -62,7 +61,7 @@ const PortItemDetail = ({ data, handleClose }: IProps) => {
   }, [isSliding, currentY, startY]);
 
   const handleClickAction = (side: TSide) => {
-    const availTicker = tickers.find((t) => t.symbol === data?.symbol);
+    const availTicker = stocks.find((t) => t.symbol === data?.symbol);
     if (availTicker) {
       setLastSymbolToLocalStorage(availTicker.symbol);
       dispatch(setTicker(availTicker));
@@ -70,7 +69,7 @@ const PortItemDetail = ({ data, handleClose }: IProps) => {
         setTicket({
           ...ticket,
           symbol: availTicker.symbol,
-          price: availTicker.ref,
+          price: availTicker.reference,
           side: side,
         })
       );

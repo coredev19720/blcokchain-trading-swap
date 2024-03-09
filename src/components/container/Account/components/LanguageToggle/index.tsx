@@ -46,9 +46,9 @@ const LanguageToggle = () => {
           </S.Language>
         ))}
       </S.Languages>
-      <S.ThemeWrapper onClick={handleToggleTheme}>
+      {/* <S.ThemeWrapper onClick={handleToggleTheme}>
         {theme === "light" ? <LightMode /> : <DarkMode />}
-      </S.ThemeWrapper>
+      </S.ThemeWrapper> */}
     </S.Wrapper>
   );
 };

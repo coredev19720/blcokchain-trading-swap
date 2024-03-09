@@ -13,7 +13,6 @@ const handleGetPermission = async (): Promise<AccountsPermissions[]> => {
   try {
     const res = await axiosInst.get(apiUrls.getPermissionInfo);
     const { accounts } = res.data;
-    console.log(" res.data", res.data);
     return accounts;
   } catch (e) {
     throw e;

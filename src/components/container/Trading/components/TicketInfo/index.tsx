@@ -24,8 +24,8 @@ const TicketInfo = () => {
   };
   const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (ticker) {
-      if (Number(e.target.value) > ticker.ceil) {
-        dispatch(setTicket({ ...ticket, price: ticker.ceil }));
+      if (Number(e.target.value) > ticker.ceiling) {
+        dispatch(setTicket({ ...ticket, price: ticker.ceiling }));
         return;
       }
       const validPrice = genValidPrice(

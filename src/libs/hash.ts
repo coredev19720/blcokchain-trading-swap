@@ -19,7 +19,6 @@ export const decrypt = (token: string) => {
     const algorithm = process.env.NEXT_PUBLIC_TOKEN_AL || "aes-128-cbc";
     const secretKey = process.env.NEXT_PUBLIC_TOKEN_SK || "";
     const iv = process.env.NEXT_PUBLIC_TOKEN_IV || "";
-    console.log("decrypt", token, algorithm, secretKey, iv);
     const decipher = crypto.createDecipheriv(algorithm, secretKey, iv);
     const firstPart = decipher.update(token, "hex");
     const lastPart = decipher.final();

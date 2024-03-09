@@ -3,7 +3,6 @@ import { Wrapper } from "./styles";
 import SearchInput from "./components/SearchInput";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { tickers } from "@src/constants/dumpData/dashboard";
 import Ticker from "./components/Ticker";
 import EmptyState from "./components/EmptyState";
 import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
@@ -16,8 +15,7 @@ import {
 
 const Market = () => {
   const searchParams = useSearchParams();
-  const ticker = useAppSelector((state) => state.market.ticker);
-  const ticket = useAppSelector((state) => state.market.ticket);
+  const { ticker, ticket, stocks } = useAppSelector((state) => state.market);
   const dispatch = useAppDispatch();
   const [openPanel, setOpenPanel] = useState<boolean>(false);
 
@@ -27,7 +25,7 @@ const Market = () => {
 
   const initTicker = () => {
     const s = searchParams?.get("s");
-    const availTicker = s && tickers.find((t) => t.symbol === s.toUpperCase());
+    const availTicker = s && stocks.find((t) => t.symbol === s.toUpperCase());
     if (availTicker) {
       setLastSymbolToLocalStorage(availTicker.symbol);
       dispatch(setTicker(availTicker));
@@ -35,7 +33,7 @@ const Market = () => {
         setTicket({
           ...ticket,
           symbol: availTicker.symbol,
-          price: availTicker.ref,
+          price: availTicker.reference,
         })
       );
       return;
@@ -43,7 +41,7 @@ const Market = () => {
     if (!ticker) {
       const lastSymbol = localStorage.getItem(lastSymLocalKey);
       const availTicker = lastSymbol
-        ? tickers.find((t) => t.symbol === lastSymbol.toUpperCase())
+        ? stocks.find((t) => t.symbol === lastSymbol.toUpperCase())
         : null;
       if (availTicker) {
         dispatch(setTicker(availTicker));
@@ -51,7 +49,7 @@ const Market = () => {
           setTicket({
             ...ticket,
             symbol: availTicker.symbol,
-            price: availTicker.ref,
+            price: availTicker.reference,
           })
         );
       }

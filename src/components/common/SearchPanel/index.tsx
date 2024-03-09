@@ -2,36 +2,31 @@
 import { useState } from "react";
 import { TickerWrapper, Wrapper, Tickers } from "./styles";
 import { Backdrop, Slide, Typography } from "@mui/material";
-import { tickerOpts } from "@src/constants/dumpData";
-import { ITickerOpt } from "@interface/common";
-import { tickers } from "@constants/dumpData/dashboard";
 import SearchInput from "./components/SearchInput";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { setTicker, setTicket } from "@src/redux/features/marketSlice";
 import { setLastSymbolToLocalStorage } from "@src/utils/helpers";
+import { Stock } from "@/src/constraints/interface/services/response";
 
 interface IProps {
   open: boolean;
   setOpenPanel: (val: boolean) => void;
 }
 const SearchPanel = ({ open, setOpenPanel }: IProps) => {
-  const ticket = useAppSelector((state) => state.market.ticket);
+  const { ticket, stocks } = useAppSelector((state) => state.market);
   const dispatch = useAppDispatch();
   const [searchText, setSearchText] = useState<string>("");
 
-  const handleClickTicker = (val: ITickerOpt) => {
-    const availTicker = tickers.find((t) => t.symbol === val.value);
-    if (availTicker) {
-      setLastSymbolToLocalStorage(availTicker.symbol);
-      dispatch(setTicker(availTicker));
-      dispatch(
-        setTicket({
-          ...ticket,
-          symbol: availTicker.symbol,
-          price: availTicker.ref,
-        })
-      );
-    }
+  const handleClickTicker = (val: Stock) => {
+    setLastSymbolToLocalStorage(val.symbol);
+    dispatch(setTicker(val));
+    dispatch(
+      setTicket({
+        ...ticket,
+        symbol: val.symbol,
+        price: val.reference,
+      })
+    );
     setOpenPanel(false);
   };
 
@@ -46,18 +41,18 @@ const SearchPanel = ({ open, setOpenPanel }: IProps) => {
             setSearchText={setSearchText}
           />
           <Tickers>
-            {tickerOpts
-              .filter((x) => x.value.includes(searchText))
+            {stocks
+              .filter((x) => x.symbol.includes(searchText))
               .map((x) => (
                 <TickerWrapper
-                  key={x.value}
+                  key={x.symbol}
                   onClick={() => handleClickTicker(x)}
                 >
                   <Typography fontWeight={600} color="text.primary">
-                    {x.value}
+                    {x.symbol}
                   </Typography>
                   <Typography variant="subtitle2" fontWeight={400}>
-                    {x.title}
+                    {x.FullName}
                   </Typography>
                 </TickerWrapper>
               ))}

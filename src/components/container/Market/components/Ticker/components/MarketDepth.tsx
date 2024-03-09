@@ -12,6 +12,7 @@ import { formatBigNumber, genPriceColor } from "@src/utils/helpers";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTranslations } from "next-intl";
+import { Stock } from "@/src/constraints/interface/services/response";
 
 const Wrapper = styled("div")(() => ({
   display: "flex",
@@ -30,10 +31,10 @@ const HistoryDeals = styled("div")(() => ({
   gap: 8,
   flex: 1,
 }));
-interface IProps {
-  ticker: ITickerData;
-}
-const MarketDepth = ({ ticker }: IProps) => {
+type Props = {
+  ticker: Stock;
+};
+const MarketDepth = ({ ticker }: Props) => {
   const t = useTranslations("market");
   const bestDealCols: IColumn[] = [
     {
@@ -51,9 +52,9 @@ const MarketDepth = ({ ticker }: IProps) => {
         <Typography
           variant="subtitle1"
           color={genPriceColor(
-            ticker.ref,
+            ticker.reference,
             row.price,
-            ticker.ceil,
+            ticker.ceiling,
             ticker.floor
           )}
         >
@@ -88,9 +89,9 @@ const MarketDepth = ({ ticker }: IProps) => {
         <Typography
           variant="subtitle1"
           color={genPriceColor(
-            ticker.ref,
+            ticker.reference,
             row.price,
-            ticker.ceil,
+            ticker.ceiling,
             ticker.floor
           )}
         >
@@ -123,18 +124,18 @@ const MarketDepth = ({ ticker }: IProps) => {
     <Wrapper>
       <BestDeal>
         <FieldLabel>{t("fn_symbol_txt_bestQuote")}</FieldLabel>
-        <StyledTable
+        {/* <StyledTable
           columns={bestDealCols}
           dataSource={ticker.marketDepth.deals}
-        />
+        /> */}
       </BestDeal>
       <HistoryDeals>
         <FieldLabel>{t("fn_symbol_txt_ordHist")}</FieldLabel>
-        <StyledTable
+        {/* <StyledTable
           columns={historyDealsCols}
           dataSource={ticker.marketDepth.historyDeals}
           stickyHeader
-        />
+        /> */}
       </HistoryDeals>
     </Wrapper>
   );

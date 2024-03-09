@@ -28,7 +28,12 @@ const TickerInfo = () => {
           variant="body2"
           color={
             ticker
-              ? genPriceColor(ticker.ref, row.price, ticker.ceil, ticker.floor)
+              ? genPriceColor(
+                  ticker.reference,
+                  row.price,
+                  ticker.ceiling,
+                  ticker.floor
+                )
               : "text.primary"
           }
         >
@@ -45,7 +50,12 @@ const TickerInfo = () => {
           fontWeight={600}
           color={
             ticker
-              ? genPriceColor(ticker.ref, row.price, ticker.ceil, ticker.floor)
+              ? genPriceColor(
+                  ticker.reference,
+                  row.price,
+                  ticker.ceiling,
+                  ticker.floor
+                )
               : "text.primary"
           }
         >
@@ -65,14 +75,14 @@ const TickerInfo = () => {
   return (
     <S.Wrapper>
       {/* buying */}
-      {ticket.side === TSide.SELL && (
+      {/* {ticket.side === TSide.SELL && (
         <S.PowerBuying>
           <Typography variant="body2">{t("fn_trade_txt_can_sell")}</Typography>
           <Typography fontWeight={700} variant="body2">
             0
           </Typography>
         </S.PowerBuying>
-      )}
+      )} */}
       {/* Price info */}
       <S.PriceInfo>
         <S.PriceBlock>
@@ -84,21 +94,21 @@ const TickerInfo = () => {
         <S.PriceBlock>
           <FieldLabel>{t("en_sb_price_avg")}</FieldLabel>
           <Typography color="text.primary" variant="body2" fontWeight={600}>
-            {ticker?.ref}
+            {ticker?.reference}
           </Typography>
         </S.PriceBlock>
         <S.PriceBlock>
           <FieldLabel>{t("en_sb_price_celling")}</FieldLabel>
           <Typography color="text.ceil" variant="body2" fontWeight={600}>
-            {ticker?.ceil}
+            {ticker?.ceiling}
           </Typography>
         </S.PriceBlock>
       </S.PriceInfo>
 
       {/* Deals */}
-      {ticker && (
+      {/* {ticker && (
         <StyledTable columns={columns} dataSource={ticker.marketDepth.deals} />
-      )}
+      )} */}
     </S.Wrapper>
   );
 };

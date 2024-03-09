@@ -39,6 +39,9 @@ const resRejected = async (error: any) => {
         refresh_token: refreshToken,
         grant_type: TAuthType.refresh_token,
       });
+      if (!response.data.access_token || !response.data.refresh_token) {
+        throw new Error("Invalid token response");
+      }
       Cookies.set(
         process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME as string,
         response.data.access_token,
@@ -57,11 +60,15 @@ const resRejected = async (error: any) => {
       );
       return axiosInst(originalRequest);
     } catch (error) {
+      const locale = Cookies.get("NEXT_LOCALE");
       console.log("Error refreshing token:", error);
       // Clear tokens and log out the user
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
+      Cookies.remove(process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME as string);
+      Cookies.remove(
+        process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME as string
+      );
       // Redirect to login page or any other logic
+      window.location.href = `/${locale}/login`;
     }
   }
   // Return error if it's not related to token refresh

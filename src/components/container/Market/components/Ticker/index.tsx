@@ -7,6 +7,7 @@ import Line from "@components/common/Line";
 import { ITickerData } from "@interface/common";
 import MarketIndex from "./components/MarketIndex";
 import Actions from "./components/Actions";
+import { Stock } from "@/src/constraints/interface/services/response";
 
 const Wrapper = styled("div")(() => ({
   display: "flex",
@@ -23,10 +24,10 @@ const InforSection = styled("div")(({ theme }) => ({
   gap: 8,
   padding: theme.spacing(0, 4),
 }));
-interface IProps {
-  ticker: ITickerData;
-}
-const Ticker = ({ ticker }: IProps) => {
+type Props = {
+  ticker: Stock;
+};
+const Ticker = ({ ticker }: Props) => {
   return (
     <Wrapper>
       <InforSection>

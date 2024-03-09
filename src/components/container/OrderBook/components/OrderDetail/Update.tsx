@@ -13,23 +13,22 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
 import { updateOrders } from "@src/redux/features/marketSlice";
-import { tickers } from "@src/constants/dumpData/dashboard";
 interface IProps {
   data: IOrder | null;
   handleClose: () => void;
 }
 const Update = ({ data, handleClose }: IProps) => {
   const t = useTranslations("order_book");
-  const order = useAppSelector((state) => state.market.order);
-  const availTicker = tickers.find((x) => x.symbol === data?.symbol);
+  const { order, stocks } = useAppSelector((state) => state.market);
+  const availTicker = stocks.find((x) => x.symbol === data?.symbol);
   const dispatch = useAppDispatch();
   const [otp, setOtp] = useState<string>("");
   const [updatePrice, setUpdatePrice] = useState<number>(data?.price || 0);
 
   const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (availTicker) {
-      if (Number(e.target.value) > availTicker.ceil) {
-        setUpdatePrice(availTicker.ceil);
+      if (Number(e.target.value) > availTicker.ceiling) {
+        setUpdatePrice(availTicker.ceiling);
         return;
       }
       const validPrice = genValidPrice(

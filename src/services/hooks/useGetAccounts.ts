@@ -1,8 +1,4 @@
-import {
-  AccountDetails,
-  AccountInfo,
-  AccountsResponse,
-} from "@src/constraints/interface/services/response";
+import { AccountInfo } from "@src/constraints/interface/services/response";
 import { useMutation } from "@tanstack/react-query";
 import apiUrls from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";

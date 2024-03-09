@@ -1,13 +1,15 @@
 import { dumpPorts } from "@src/constants/dumpData";
 import { dumpOrders } from "@src/constants/dumpData/dashboard";
-import { TOrderKind, TOrderType, TSide } from "@enum/common";
+import { TMarket, TOrderKind, TOrderType, TSide } from "@enum/common";
 import { ITickerData, ITicket, IOrder } from "@interface/common";
 import { IPortItem } from "@interface/table";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Stock } from "@/src/constraints/interface/services/response";
 
 type MarketState = {
-  ticker: ITickerData | null;
+  ticker: Stock | null;
   ticket: ITicket;
+  stocks: Stock[];
   orders: IOrder[];
   order: IOrder | null;
   ports: IPortItem[];
@@ -23,11 +25,13 @@ const initialState = {
     symbol: "",
     type: TOrderType.LO,
     kind: "normal" as TOrderKind,
+    market: TMarket.HOSE,
   },
-  orders: dumpOrders,
-  ports: dumpPorts,
-  port: null,
+  stocks: [],
+  orders: [],
   order: null,
+  ports: [],
+  port: null,
 } as MarketState;
 
 export const market = createSlice({
@@ -35,7 +39,7 @@ export const market = createSlice({
   initialState,
   reducers: {
     reset: () => initialState,
-    setTicker: (state, action: PayloadAction<ITickerData>) => {
+    setTicker: (state, action: PayloadAction<Stock>) => {
       state.ticker = action.payload;
     },
     setTicket: (state, action: PayloadAction<ITicket>) => {
@@ -59,6 +63,12 @@ export const market = createSlice({
     setPort: (state, action: PayloadAction<IPortItem | null>) => {
       state.port = action.payload;
     },
+    setPorts: (state, action: PayloadAction<IPortItem[]>) => {
+      state.ports = action.payload;
+    },
+    setStocks: (state, action: PayloadAction<Stock[]>) => {
+      state.stocks = action.payload;
+    },
   },
 });
 
@@ -70,5 +80,7 @@ export const {
   setOrder,
   updateOrders,
   setPort,
+  setPorts,
+  setStocks,
 } = market.actions;
 export default market.reducer;

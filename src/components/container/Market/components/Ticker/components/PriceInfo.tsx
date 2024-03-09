@@ -7,6 +7,7 @@ import { genPriceColor } from "@src/utils/helpers";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTranslations } from "next-intl";
+import { Stock } from "@/src/constraints/interface/services/response";
 const Wrapper = styled("div")(() => ({
   display: "flex",
   gap: 8,
@@ -17,10 +18,10 @@ const ContentBlock = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
 }));
-interface IProps {
-  ticker: ITickerData;
-}
-const PriceInfo = ({ ticker }: IProps) => {
+type Props = {
+  ticker: Stock;
+};
+const PriceInfo = ({ ticker }: Props) => {
   const t = useTranslations("market");
   return (
     <Wrapper>
@@ -31,9 +32,9 @@ const PriceInfo = ({ ticker }: IProps) => {
             fontWeight={500}
             variant="body2"
             color={genPriceColor(
-              ticker.ref,
+              ticker.reference,
               ticker.open,
-              ticker.ceil,
+              ticker.ceiling,
               ticker.floor
             )}
           >
@@ -46,9 +47,9 @@ const PriceInfo = ({ ticker }: IProps) => {
             fontWeight={500}
             variant="body2"
             color={genPriceColor(
-              ticker.ref,
+              ticker.reference,
               ticker.high,
-              ticker.ceil,
+              ticker.ceiling,
               ticker.floor
             )}
           >
@@ -61,9 +62,9 @@ const PriceInfo = ({ ticker }: IProps) => {
             fontWeight={500}
             variant="body2"
             color={genPriceColor(
-              ticker.ref,
+              ticker.reference,
               ticker.low,
-              ticker.ceil,
+              ticker.ceiling,
               ticker.floor
             )}
           >
@@ -80,7 +81,7 @@ const PriceInfo = ({ ticker }: IProps) => {
             color={colors.lightRefText}
             variant="body2"
           >
-            {ticker.ref}
+            {ticker.reference}
           </Typography>
         </RowContent>
         <RowContent>
@@ -91,7 +92,7 @@ const PriceInfo = ({ ticker }: IProps) => {
             color={colors.lightCeilText}
             variant="body2"
           >
-            {ticker.ceil}
+            {ticker.ceiling}
           </Typography>
         </RowContent>
         <RowContent>

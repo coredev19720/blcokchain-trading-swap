@@ -39,11 +39,6 @@ export interface AccountsPermissions {
   [key: string]: AccountPermissions;
 }
 
-//Accounts info
-export interface AccountsResponse {
-  d: AccountInfo[];
-}
-
 export interface AccountInfo {
   cftype: string;
   custodycd: string;
@@ -56,10 +51,7 @@ export interface AccountInfo {
   autoadv: string;
 }
 
-export interface AccountsDetailsResponse extends BaseResponse {
-  d: AccountDetails;
-}
-export interface AccountDetails {
+export interface CustomerInfo {
   custodycd: string; // Số tài khoản
   dateofbirth: string; // Ngày sinh
   fullname: string; // Họ và tên
@@ -105,4 +97,95 @@ export interface AccountDetails {
   benefitaccount_account3: string; // Số tài khoản thụ hưởng chuyển tiền thứ 3
   benefitaccount_bank3: string; // Ngân hàng thụ hưởng của TK chuyển tiền thứ 3
   benefitaccount_branch3: string; // Chi nhánh ngân hàng thụ hưởng của TK chuyển tiền thứ 3
+}
+
+export interface Stock {
+  symbol: string;
+  FullName: string;
+  ceiling: number;
+  floor: number;
+  reference: number;
+  exchange: string;
+  StockType: string;
+  //fix me
+  price: number;
+  open: number;
+  high: number;
+  low: number;
+  chg: number;
+  pctChg: number;
+}
+
+export interface AccountSummary {
+  ismargin: string; // Là tiểu khoản Margin (N: không, Y: Có)
+  balance: number; // Tiền mặt thực có
+  cibalance: number; // Tiền không kỳ hạn
+  tdbalance: number; // Tiền có kỳ hạn
+  avladvance: number; // Số tiền có thể ứng
+  intbalance: number; // Lãi tiền gửi cộng dồn
+  totalseamt: number; // Tổng giá trị chứng khoán
+  totalbuyamt: number; // Chứng khoán mua đã khớp tính theo giá tham chiếu
+  dfqttyamt: number; // Chứng khoán cầm cố
+  totalodamt: number; // Tổng phải trả
+  trfbuyamt: number; // Chậm trả T3
+  secureamt: number; // Nợ ký quỹ trong ngày
+  t0amt: number; // Nợ bảo lãnh
+  mramt: number; // Nợ đã phát vay margin
+  rcvadvamt: number; // Nợ ứng trước
+  dfodamt: number; // Nợ vay cầm cố
+  tdodamt: number; // Nợ vay cầm cố tiền gửi
+  depofeeamt: number; // Phí lưu ký đến hạn
+  depofeeamtacr: number; // Phí lưu ký cộng dồn
+  netassval: number; // Tài sản thực có (Tiền tại BMSC + Tổng giá trị chứng khoán - Phải trả)
+  cibalance2: number; // Tiền mặt thực có + Tiền hold
+  mrcrlimit: number; // HM đảm bảo
+  bankavlbal: number; // Số dư khả dụng NH
+  totalodamt2: number; // Nợ phải trả
+  mrcrlimitmax: number; // HM vay tối đa
+  advanceline: number; // Hạn mức bảo lãnh
+  bankinqirydt: string; // Thời gian truy vấn cuối
+  holdbalance: number; // Số tiền hold
+  cash_receiving_t1: number; // Tiền chờ về T1
+  avlwithdraw: number; // Số tiền rút trên sức mua
+  callamt: number; // Số tiền call
+  cash_receiving_t2: number; // Tiền chờ về T2
+  cash_receiving_t3: number; // Tiền chờ về T3
+  careceiving: number; // Quyền chờ về
+  pp: number; // Sức mua cơ bản
+  marginrate: number; // Tỷ lệ margin
+  afstatus: string; // Trạng thái tiểu khoản
+  add_to_mrcrate: number; // Dự tính p/v trong ngày
+  add_to_mrirate: number; // Dự tính p/m trong ngày
+  se_to_mrcrate: number; // Dự tính thoát HM trong ngày
+  se_to_mrirate: number; // Dự tính thoát M trong ngày
+  se_to_mrcrateub: number; // Dự tính thoát HM trên giá trị trong ngày
+  se_to_mrirateub: number; // Dự tính thoát M trên giá trị trong ngày
+  baldefovd: number; // Số tiền được rút
+  buyqtty: number; // Giá trị mua
+  margin_execbuyamt: number; // Dự tính p/v trong ngày
+  rptmrirate: number; // Tỷ lệ an toàn
+  rptmrmrate: number; // Tỷ lệ duy trì
+  rptmrlrate: number; // Tỷ lệ xử lý
+  rptmrcrate: number; // Tỷ lệ thoát call
+  rptmrwrate: number; // Tỷ lệ cảnh báo
+  addvnd: number; // Số tiền nộp thêm
+  receivingamt: number; // Số tiền bán chờ về
+  addamount: number; // Số tiền nộp thêm
+  addamounti: number; // Số tiền nộp thêm (lãi)
+  bamt: number; // Giá trị mua
+  dclamtlimit: number; // HM đảm bảo
+  clamtlimit: number; // HM phải trả
+  afstatus_en: string; // Trạng thái tiểu khoản tiếng anh
+}
+
+export interface AccountAvailTrade {
+  ppse: number; // Sức mua cơ bản (khi chưa nhập mã CK)
+  maxqtty: number; // Số lượng mua tối đa
+  trade: number; // Số lượng GD
+  mrratioloan: string; // Tỷ lệ vay MR
+  pp0: number; // Sức mua (khi đã nhập mã CK)
+  balance: number; // Tiền mặt thực có
+  cash_pending_send: number; // Tiền chờ thanh toán
+  mortgage: number; // Thế chấp
+  marginrate: number; // Tỷ lệ thực tế
 }
