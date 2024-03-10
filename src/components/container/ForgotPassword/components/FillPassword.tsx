@@ -111,7 +111,7 @@ const FillPassword = () => {
           errMsg={errors.password?.message as string}
           onChangeValue={handleChangeConfPwd}
           handleEnter={handleKeyDownEnter}
-          ref={confPwdRef}
+          inputRef={confPwdRef}
           type={showConfPwd ? "text" : "password"}
           inputProps={{
             endAdornment: (
