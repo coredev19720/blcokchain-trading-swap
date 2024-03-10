@@ -5,7 +5,7 @@ import * as S from "../styles";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-import TextInput from "./TextInput";
+import TextInput from "../../../common/TextInput";
 import { usePostConfirmOTP } from "@/src/services/hooks/usePostConfirmOTP";
 import { useParams, useRouter } from "next/navigation";
 const FillOTP = () => {

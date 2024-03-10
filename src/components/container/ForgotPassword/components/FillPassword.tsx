@@ -5,7 +5,7 @@ import { KeyboardEvent, createRef, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-import TextInput from "./TextInput";
+import TextInput from "../../../common/TextInput";
 import { usePostCreatePwd } from "@/src/services/hooks/usePostCreatePwd";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useParams, useRouter } from "next/navigation";

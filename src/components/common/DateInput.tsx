@@ -1,6 +1,6 @@
 import { Control, Controller, FieldValues } from "react-hook-form";
 import FieldLabel from "@/src/components/common/FieldLabel";
-import * as S from "../styles";
+import { FieldBlock } from "@src/styles/common";
 import { useTranslations } from "next-intl";
 import HelpText from "@/src/components/common/HelpText";
 import StyledDatePicker from "@/src/components/common/StyledDatePicker";
@@ -33,7 +33,7 @@ const DateInput = ({
     );
   };
   return (
-    <S.FieldBlock>
+    <FieldBlock>
       <FieldLabel>{label}</FieldLabel>
       <Controller
         control={control}
@@ -45,7 +45,7 @@ const DateInput = ({
         }}
       />
       {isError && <HelpText stt="error" txt={errMsg} />}
-    </S.FieldBlock>
+    </FieldBlock>
   );
 };
 

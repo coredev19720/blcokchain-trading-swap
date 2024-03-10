@@ -3,16 +3,17 @@ import { TextField } from "@mui/material";
 import { Control, Controller, FieldValues } from "react-hook-form";
 import { KeyboardEvent } from "react";
 import FieldLabel from "@/src/components/common/FieldLabel";
-import * as S from "../styles";
 import { useTranslations } from "next-intl";
 import HelpText from "@/src/components/common/HelpText";
 import { InputProps } from "@mui/material";
+import { FieldBlock } from "@src/styles/common";
 type Partial<T> = {
   [P in keyof T]?: T[P];
 };
 type Props = {
   autofocus?: boolean;
   onChangeValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   handleEnter?: (e: KeyboardEvent<HTMLDivElement>, field: string) => void;
   inputRef?: React.RefObject<HTMLInputElement>;
   isError: boolean;
@@ -20,7 +21,7 @@ type Props = {
   errMsg: string;
   name: string;
   label: string;
-  defaultValue?: string;
+  defaultValue?: string | number;
   inputProps?: Partial<InputProps>;
   required?: boolean;
   min?: number;
@@ -68,7 +69,7 @@ const TextInput = ({
     );
   };
   return (
-    <S.FieldBlock>
+    <FieldBlock>
       <FieldLabel>{label}</FieldLabel>
       <Controller
         control={control}
@@ -96,7 +97,7 @@ const TextInput = ({
         }}
       />
       {isError && <HelpText stt="error" txt={errMsg} />}
-    </S.FieldBlock>
+    </FieldBlock>
   );
 };
 

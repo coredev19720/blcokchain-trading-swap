@@ -1,17 +1,17 @@
 import { IconButton, TextField, Typography, Button } from "@mui/material";
-import { createRef, useRef, useState, KeyboardEvent, useEffect } from "react";
-import { useForm, Controller, FieldValues } from "react-hook-form";
+import { createRef, useState, KeyboardEvent, useEffect } from "react";
+import { useForm, FieldValues } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { uIdGen } from "@src/utils/helpers";
-import HelpText from "@components/common/HelpText";
-import FieldLabel from "@components/common/FieldLabel";
-import { Wrapper, FieldWrapper, AdormentWrapper } from "./styles";
+import { Wrapper, AdormentWrapper } from "./styles";
 import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "react-toastify";
 import { useLogin } from "@/src/services/hooks/useLogin";
 import { encrypt } from "@src/libs/hash";
 import { useRouter, useParams } from "next/navigation";
+import TextInput from "@/src/components/common/TextInput";
+
 const LoginForm = () => {
   const { onLogin, isError, isSuccess } = useLogin();
   const tNoti = useTranslations("notification");
@@ -40,26 +40,24 @@ const LoginForm = () => {
       router.push(`/${params?.locale}/market`);
     }
   }, [isError, isSuccess]);
+
   const handleKeyDownEnter = (
     e: KeyboardEvent<HTMLDivElement>,
     field: string
   ) => {
     if (e.keyCode === 13) {
+      console.log(field);
       switch (field) {
         case "username":
-          console.log(pwdRef.current);
-          if (pwdRef.current) {
-            pwdRef.current.focus();
-          }
+          pwdRef.current?.focus();
+
           return;
         case "pwd": {
-          if (expireTimeRef.current) {
-            expireTimeRef.current.focus();
-          }
+          expireTimeRef.current?.focus();
           return;
         }
         default:
-          handleSubmit(handleLogin);
+          handleSubmit(handleLogin)();
           return;
       }
     }
@@ -103,111 +101,27 @@ const LoginForm = () => {
     }
     setValue("pwd", txt);
   };
-  const renderUsernameInput = ({ field }: any) => {
-    const { value } = field;
-    return (
-      <TextField
-        autoFocus
-        onChange={handleChangeUsername}
-        value={value}
-        type="textbox"
-        variant="outlined"
-        id={uIdGen()}
-        autoComplete="off"
-        onKeyDown={(e) => {
-          handleKeyDownEnter(e, "username");
-        }}
-        error={!!errors.username}
-        fullWidth
-        InputProps={{
-          startAdornment: (
-            <Typography
-              style={{ paddingLeft: 4 }}
-            >{`${process.env.NEXT_PUBLIC_PREFIX_ACCOUNT}-`}</Typography>
-          ),
-        }}
-      />
-    );
-  };
-
-  const renderPwdInput = ({ field }: any) => {
-    const { value } = field;
-    return (
-      <TextField
-        onChange={handleChangePwd}
-        value={value}
-        variant="outlined"
-        type={showPwd ? "textbox" : "password"}
-        id={uIdGen()}
-        autoComplete="off"
-        onKeyDown={(e) => {
-          handleKeyDownEnter(e, "pwd");
-        }}
-        error={!!errors.pwd}
-        inputRef={pwdRef}
-        InputProps={{
-          endAdornment: (
-            <AdormentWrapper>
-              <IconButton onClick={handleClickShowPwd} edge="end">
-                {showPwd ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </AdormentWrapper>
-          ),
-        }}
-        fullWidth
-      />
-    );
-  };
-
-  const renderExpireTime = ({ field }: any) => {
-    const { value } = field;
-    return (
-      <TextField
-        onChange={handleChangeExpireTime}
-        onBlur={handleBlurExpireTime}
-        value={value || ""}
-        variant="outlined"
-        type="number"
-        id={uIdGen()}
-        autoComplete="off"
-        onKeyDown={(e) => {
-          handleKeyDownEnter(e, "expireTime");
-        }}
-        error={!!errors.expireTime}
-        inputRef={expireTimeRef}
-        InputProps={{
-          endAdornment: (
-            <AdormentWrapper>
-              <Typography>{t("txt_minute")}</Typography>
-            </AdormentWrapper>
-          ),
-        }}
-        fullWidth
-      />
-    );
-  };
 
   const handleLogin = async (data: FieldValues) => {
-    //fix me
-    // const recaptchaVal = recaptchaRef.current?.getValue();
-    // if (recaptchaRef.current) {
-    //   if (!recaptchaVal) {
-    //     toast.error(tNoti("txt_recaptcha_fail"));
-    //     return;
-    //   }
-    //   onLogin({
-    //     u: data.username,
-    //     p: encrypt(data.pwd),
-    //     t: data.expireTime * 60,
-    //     captchaToken: recaptchaVal,
-    //   });
-    // }
-    onLogin({
-      u: data.username,
-      p: encrypt(data.pwd),
-      t: data.expireTime * 60,
-      captchaToken: "",
-    });
+    const recaptchaVal = recaptchaRef.current?.getValue();
+    if (recaptchaRef.current) {
+      if (!recaptchaVal) {
+        toast.error(tNoti("txt_recaptcha_fail"));
+        return;
+      }
+      onLogin({
+        u: data.username,
+        p: encrypt(data.pwd),
+        t: data.expireTime * 60,
+        captchaToken: recaptchaVal,
+      });
+    }
+    // onLogin({
+    //   u: data.username,
+    //   p: encrypt(data.pwd),
+    //   t: data.expireTime * 60,
+    //   captchaToken: "",
+    // });
   };
   return (
     <form>
@@ -215,54 +129,66 @@ const LoginForm = () => {
         <Typography variant="h5" fontWeight={600} color="text.primary">
           {t("fn_login_txt_title")}
         </Typography>
-        <FieldWrapper>
-          <FieldLabel>{t("fn_login_inp_username")}</FieldLabel>
-          <Controller
-            control={control}
-            name="username"
-            render={renderUsernameInput}
-            defaultValue=""
-            rules={{
-              required: { value: true, message: tMess("required_field") },
-            }}
-          />
-          {errors.username && (
-            <HelpText
-              stt="error"
-              txt={(errors.username.message as string) || ""}
-            />
-          )}
-        </FieldWrapper>
-        <FieldWrapper>
-          <FieldLabel>{t("fn_login_inp_password")}</FieldLabel>
-          <Controller
-            control={control}
-            name="pwd"
-            render={renderPwdInput}
-            defaultValue=""
-            rules={{
-              required: { value: true, message: tMess("required_field") },
-            }}
-          />
-          {errors.pwd && (
-            <HelpText stt="error" txt={(errors.pwd.message as string) || ""} />
-          )}
-        </FieldWrapper>
-        <FieldWrapper>
-          <FieldLabel>{t("fn_login_inp_autoLogout")}</FieldLabel>
-          <Controller
-            control={control}
-            name="expireTime"
-            render={renderExpireTime}
-            defaultValue={60}
-          />
-          {errors.expireTime && (
-            <HelpText
-              txt={(errors.expireTime.message as string) || ""}
-              stt="error"
-            />
-          )}
-        </FieldWrapper>
+        <TextInput
+          label={t("fn_login_inp_username")}
+          autofocus
+          isError={!!errors.username}
+          control={control}
+          errMsg={(errors.username?.message as string) || ""}
+          name="username"
+          required
+          handleEnter={handleKeyDownEnter}
+          onChangeValue={handleChangeUsername}
+          inputProps={{
+            startAdornment: (
+              <Typography
+                style={{ paddingLeft: 4 }}
+              >{`${process.env.NEXT_PUBLIC_PREFIX_ACCOUNT}-`}</Typography>
+            ),
+          }}
+        />
+        <TextInput
+          label={t("fn_login_inp_password")}
+          isError={!!errors.pwd}
+          control={control}
+          errMsg={(errors.pwd?.message as string) || ""}
+          name="pwd"
+          type={showPwd ? "textbox" : "password"}
+          required
+          handleEnter={handleKeyDownEnter}
+          onChangeValue={handleChangePwd}
+          inputRef={pwdRef}
+          inputProps={{
+            endAdornment: (
+              <AdormentWrapper>
+                <IconButton onClick={handleClickShowPwd} edge="end">
+                  {showPwd ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </AdormentWrapper>
+            ),
+          }}
+        />
+        <TextInput
+          label={t("fn_login_inp_autoLogout")}
+          isError={!!errors.expireTime}
+          control={control}
+          errMsg={(errors.expireTime?.message as string) || ""}
+          name="expireTime"
+          type="number"
+          required
+          handleEnter={handleKeyDownEnter}
+          onChangeValue={handleChangeExpireTime}
+          inputRef={expireTimeRef}
+          onBlur={handleBlurExpireTime}
+          defaultValue={60}
+          inputProps={{
+            endAdornment: (
+              <AdormentWrapper>
+                <Typography>{t("txt_minute")}</Typography>
+              </AdormentWrapper>
+            ),
+          }}
+        />
         <ReCAPTCHA
           ref={recaptchaRef}
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
