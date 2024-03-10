@@ -6,7 +6,7 @@ export const Wrapper = styled("div")(() => ({
   display: "flex",
   gap: 16,
   justifyContent: "space-between",
-  padding: 16,
+  padding: "8px 16px",
   borderBottom: `1px solid ${colors.mn20}`,
   alignItems: "center",
 }));

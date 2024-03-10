@@ -6,6 +6,14 @@ export interface BaseResponse {
   em: string;
 }
 
+export interface BaseErrorResponse {
+  s: string;
+  errcode: string | number;
+  errmsg: string;
+  ec: string | number;
+  em: string;
+}
+
 export interface LoginResponse extends BaseResponse {
   access_token: string;
   refresh_token: string;

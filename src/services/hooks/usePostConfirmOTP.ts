@@ -1,17 +1,18 @@
 import { useMutation } from "@tanstack/react-query";
 import apiUrls from "@/src/services/apiUrls";
-import { ForgotPasswordRequest } from "@/src/constraints/interface/services/request";
+import { ConfirmOTPRequest } from "@/src/constraints/interface/services/request";
 import { BaseResponse } from "@/src/constraints/interface/services/response";
 import axiosInst from "../Interceptors";
-interface UsePortForgotPwd {
-  onForgotPwd: (data: ForgotPasswordRequest) => void;
+interface UsePostConfirmOTP {
+  onConfirmOTP: (data: ConfirmOTPRequest) => void;
   isError: boolean;
   isSuccess: boolean;
   error: unknown;
 }
 
-const handleForgotPwd = async (
-  data: ForgotPasswordRequest
+//unimplemented
+const handleConfirmOTP = async (
+  data: ConfirmOTPRequest
 ): Promise<BaseResponse> => {
   try {
     const res = await axiosInst.post(apiUrls.forgotPwd, data);
@@ -24,16 +25,16 @@ const handleForgotPwd = async (
   }
 };
 
-export const usePostForgotPwd = (): UsePortForgotPwd => {
+export const usePostConfirmOTP = (): UsePostConfirmOTP => {
   const {
-    mutate: onForgotPwd,
+    mutate: onConfirmOTP,
     isError,
     isSuccess,
     data,
     error,
   } = useMutation({
-    mutationFn: handleForgotPwd,
+    mutationFn: handleConfirmOTP,
   });
 
-  return { onForgotPwd, isError, isSuccess, error };
+  return { onConfirmOTP, isError, isSuccess, error };
 };

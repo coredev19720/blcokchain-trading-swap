@@ -17,9 +17,26 @@
     "txt_minute": "phút"
   },
   "forgotPwd": {
-    "txt_forgot_pwd": "Quên mật khẩu",
-    "txt_otp": "Nhập mã xác thực",
-    "txt_new_pwd": "Tạo mật khẩu mới"
+    "fn_forgotpwd_txt_step_1_title": "Quên mật khẩu",
+    "fn_forgotpwd_txt_step_2_title": "Nhập mã xác thực",
+    "fn_forgotpwd_txt_step_3_title": "Tạo mật khẩu mới",
+    "fn_forgotpwd_txt_step_4_title": "Mật khẩu mới đã được cập nhật",
+    "fn_forgotpwd_txt_otp_input": "Quý khách hàng vui lòng nhập mã xác thực OTP đã được gửi về số di động đăng ký nhận thông báo.",
+    "fn_forgotpwd_txt_pwd_input": "Mật khẩu mới của quý khách sử dụng tối thiểu 8 ký tự bao gồm số, chữ thường, chữ in hoa và ký tự đặc biệt.",
+    "fn_forgotpwd_txt_success": "Mật khẩu của Quý khách dã được thay đổi thành công. Vui lòng đăng nhập lại để tiếp tục",
+    "fn_forgotpwd_cta_submit": "Đồng ý",
+    "fn_forgotpwd_cta_otp_submit": "Xác nhận",
+    "fn_forgotpwd_cta_new_pwd_submit": "Cập nhật",
+    "fn_forgotpwd_cta_success": "Đăng nhập lại",
+    "fn_forgotpwd_inp_username": "Tên đăng nhập",
+    "fn_forgotpwd_inp_fullname": "Họ và tên(không dấu, có khoảng trắng)",
+    "fn_forgotpwd_inp_birthdate": "Ngày sinh(dd/mm/yyyy)",
+    "fn_forgotpwd_inp_idcode": "Số ĐKSH (CMND, hộ chiếu…)",
+    "fn_forgotpwd_inp_issue_date": "Ngày cấp(dd/mm/yyyy)",
+    "fn_forgotpwd_inp_phone": "Số điện thoại di động đăng ký nhận thông báo",
+    "fn_forgotpwd_inp_otp": "Mã xác nhận",
+    "fn_forgotpwd_inp_pwd": "Mật khẩu mới",
+    "fn_forgotpwd_inp_pwd_confirm": "Xác nhận mật khẩu mới"
   },
   "market": {
     "fn_symbol_cta_search": "Tìm kiếm",
@@ -151,7 +168,10 @@
     "fn_acc_txt_language": "Ngôn ngữ hiển thị"
   },
   "mess": {
-    "required_field": "Cần điền vào trường còn trống"
+    "required_field": "Cần điền vào trường còn trống",
+    "required_min_length": "Cần nhập ít nhất {min} ký tự",
+    "limit_max_length": "Nhiều nhất {max} ký tự",
+    "pwd_not_match": "Mật khẩu không trùng khớp"
   },
   "common": {
     "txt_empty_state": "Không có dữ liệu"

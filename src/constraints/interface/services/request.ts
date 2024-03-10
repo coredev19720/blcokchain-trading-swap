@@ -22,3 +22,15 @@ export interface ChangePasswordRequest {
   oldPassword: string;
   password: string;
 }
+
+//demo fix me
+export interface ConfirmOTPRequest {
+  username: string;
+  otp: string;
+}
+
+//demo fix me
+export interface CreatePwdRequest {
+  pwd: string;
+  confirmPwd: string;
+}

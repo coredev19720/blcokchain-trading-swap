@@ -27,7 +27,7 @@ const PageHeader = ({ title, refresh }: Props) => {
   return (
     <S.Wrapper>
       <S.Title>
-        <Typography fontWeight={700} color="text.primary">
+        <Typography fontWeight={700} color="text.primary" variant="h5">
           {title}
         </Typography>
         {refresh && <Sync fontSize="large" onClick={handleRefresh} />}

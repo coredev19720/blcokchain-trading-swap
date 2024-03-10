@@ -28,3 +28,6 @@ export const SuccessContent = styled("div")(({ theme }) => ({
 }));
 
 export const SuccessIcon = styled(Image)(({ theme }) => ({}));
+export const AdormentWrapper = styled("div")({
+  marginRight: 16,
+});

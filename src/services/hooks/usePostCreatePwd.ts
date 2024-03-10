@@ -1,17 +1,19 @@
 import { useMutation } from "@tanstack/react-query";
 import apiUrls from "@/src/services/apiUrls";
-import { ForgotPasswordRequest } from "@/src/constraints/interface/services/request";
+import { CreatePwdRequest } from "@/src/constraints/interface/services/request";
 import { BaseResponse } from "@/src/constraints/interface/services/response";
 import axiosInst from "../Interceptors";
-interface UsePortForgotPwd {
-  onForgotPwd: (data: ForgotPasswordRequest) => void;
+
+//unimplemented
+interface UsePostCreatePwd {
+  onCreatePwd: (data: CreatePwdRequest) => void;
   isError: boolean;
   isSuccess: boolean;
   error: unknown;
 }
 
-const handleForgotPwd = async (
-  data: ForgotPasswordRequest
+const handleCreatePwd = async (
+  data: CreatePwdRequest
 ): Promise<BaseResponse> => {
   try {
     const res = await axiosInst.post(apiUrls.forgotPwd, data);
@@ -24,16 +26,16 @@ const handleForgotPwd = async (
   }
 };
 
-export const usePostForgotPwd = (): UsePortForgotPwd => {
+export const usePostCreatePwd = (): UsePostCreatePwd => {
   const {
-    mutate: onForgotPwd,
+    mutate: onCreatePwd,
     isError,
     isSuccess,
     data,
     error,
   } = useMutation({
-    mutationFn: handleForgotPwd,
+    mutationFn: handleCreatePwd,
   });
 
-  return { onForgotPwd, isError, isSuccess, error };
+  return { onCreatePwd, isError, isSuccess, error };
 };

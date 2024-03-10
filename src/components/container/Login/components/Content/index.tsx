@@ -12,8 +12,10 @@ const Content = () => {
   const t = useTranslations("login");
   const tNoti = useTranslations("notification");
 
-  const redirectToForgotPwd = () =>
-    router.push(`/${params?.locale}/forgot-password`);
+  const redirectToForgotPwd = () => {
+    router.push(`/${params?.locale}/forgot-password?s=fi`);
+  };
+
   const redirectToCashTransfer = () =>
     router.push(`/${params?.locale}/cash-transfer`);
   const redirectToOnlTrading = () => {

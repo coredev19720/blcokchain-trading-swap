@@ -1,30 +1,78 @@
 "use client";
-import { Button, Slide, TextField } from "@mui/material";
-import FieldLabel from "@components/common/FieldLabel";
-import { useState } from "react";
+import { Button, Slide } from "@mui/material";
+import { useEffect, KeyboardEvent } from "react";
 import * as S from "../styles";
-interface IProps {
-  setStep: (step: number) => void;
-}
-const FillOTP = ({ setStep }: IProps) => {
-  const [otp, setOtp] = useState<string>("");
+import { useTranslations } from "next-intl";
+import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+import TextInput from "./TextInput";
+import { usePostConfirmOTP } from "@/src/services/hooks/usePostConfirmOTP";
+import { useParams, useRouter } from "next/navigation";
+const FillOTP = () => {
+  const t = useTranslations("forgotPwd");
+  const { onConfirmOTP, isSuccess, isError, error } = usePostConfirmOTP();
+  const router = useRouter();
+  const params = useParams();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    getValues,
+  } = useForm({
+    reValidateMode: "onSubmit",
+  });
+  useEffect(() => {
+    if (isSuccess) {
+      router.push(`/${params?.locale}/forgot-password?s=fp`);
+    }
+  }, [isSuccess]);
+  useEffect(() => {
+    if (isError) {
+      router.push(`/${params?.locale}/forgot-password?s=fp`);
+      toast.error(error as string);
+    }
+  }, [isError]);
+  const onSubmit = () => {
+    onConfirmOTP({
+      username: "demo",
+      otp: getValues("otp"),
+    });
+  };
+  const handleChangeVal = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const txt = e.target.value.trim();
+    if (txt.length <= 6) {
+      setValue("otp", e.target.value);
+    }
+  };
+  const handleKeyDownEnter = (e: KeyboardEvent<HTMLDivElement>, _: string) => {
+    if (e.keyCode === 13) {
+      handleSubmit(onSubmit)();
+    }
+  };
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <S.StepWrapper>
-        <S.FieldBlock>
-          <FieldLabel>
-            Quý khách hàng vui lòng nhập mã xác thực OTP đã được gửi về số di
-            động đăng ký nhận thông báo.
-          </FieldLabel>
-          <TextField value={otp} />
-        </S.FieldBlock>
+        <TextInput
+          autofocus
+          onChangeValue={handleChangeVal}
+          handleEnter={handleKeyDownEnter}
+          isError={!!errors.otp}
+          control={control}
+          errMsg={errors.otp?.message as string}
+          name="otp"
+          type="number"
+          label={t("fn_forgotpwd_txt_otp_input")}
+          required
+          min={6}
+        />
         <Button
-          onClick={() => setStep(2)}
+          onClick={handleSubmit(onSubmit)}
           variant="contained"
           color="primary"
           fullWidth
         >
-          Xác nhận
+          {t("fn_forgotpwd_cta_otp_submit")}
         </Button>
       </S.StepWrapper>
     </Slide>

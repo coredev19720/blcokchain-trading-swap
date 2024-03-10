@@ -29,11 +29,9 @@ const LoginForm = () => {
     reValidateMode: "onSubmit",
   });
   const recaptchaRef = createRef<ReCAPTCHA>();
-  const usernameRef = useRef(null);
   const pwdRef: React.RefObject<HTMLInputElement> = createRef();
   const expireTimeRef: React.RefObject<HTMLInputElement> = createRef();
   const [showPwd, setShowPwd] = useState(false);
-
   useEffect(() => {
     if (isError) {
       toast.error(tNoti("txt_login_fail"));
@@ -49,6 +47,7 @@ const LoginForm = () => {
     if (e.keyCode === 13) {
       switch (field) {
         case "username":
+          console.log(pwdRef.current);
           if (pwdRef.current) {
             pwdRef.current.focus();
           }
@@ -119,7 +118,6 @@ const LoginForm = () => {
           handleKeyDownEnter(e, "username");
         }}
         error={!!errors.username}
-        inputRef={usernameRef}
         fullWidth
         InputProps={{
           startAdornment: (

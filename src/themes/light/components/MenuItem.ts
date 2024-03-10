@@ -1,5 +1,5 @@
 import colors from "../../colors";
-const MenuItem =  {
+const MenuItem = {
   styleOverrides: {
     root: {
       "&:hover": {
@@ -7,5 +7,5 @@ const MenuItem =  {
       },
     },
   },
-}
+};
 export default MenuItem;

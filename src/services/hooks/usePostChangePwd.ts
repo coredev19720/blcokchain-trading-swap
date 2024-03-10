@@ -3,7 +3,7 @@ import apiUrls from "@/src/services/apiUrls";
 import { ChangePasswordRequest } from "@/src/constraints/interface/services/request";
 import { BaseResponse } from "@/src/constraints/interface/services/response";
 import axiosInst from "../Interceptors";
-interface UseLogin {
+interface UsePostChangePwd {
   onChangePwd: (data: ChangePasswordRequest) => void;
   isError: boolean;
   isSuccess: boolean;
@@ -22,7 +22,7 @@ const handleChangePwd = async (
   }
 };
 
-export const usePostForgotPwd = (): UseLogin => {
+export const usePostChangePwd = (): UsePostChangePwd => {
   const {
     mutate: onChangePwd,
     isError,

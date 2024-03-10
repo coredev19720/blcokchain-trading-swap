@@ -3,10 +3,15 @@ import { Button, Slide, Typography } from "@mui/material";
 import * as S from "../styles";
 import { useRouter } from "next/navigation";
 import { multiKey } from "@src/images";
+import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
+import { locale } from "dayjs";
 const Success = () => {
+  const t = useTranslations("forgotPwd");
   const router = useRouter();
+  const params = useParams();
   const handleNext = () => {
-    router.push("/login");
+    router.push(`${params?.locale}/login`);
   };
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
@@ -19,8 +24,7 @@ const Success = () => {
             alt="change-pwd-success"
           />
           <Typography variant="body2">
-            Mật khẩu của Quý khách dã được thay đổi thành công. Vui lòng đăng
-            nhập lại để tiếp tục
+            {t("fn_forgotpwd_txt_success")}
           </Typography>
         </S.SuccessContent>
         <Button
@@ -29,7 +33,7 @@ const Success = () => {
           color="primary"
           fullWidth
         >
-          Đăng nhập lại
+          {t("fn_forgotpwd_cta_success")}
         </Button>
       </S.StepWrapper>
     </Slide>
