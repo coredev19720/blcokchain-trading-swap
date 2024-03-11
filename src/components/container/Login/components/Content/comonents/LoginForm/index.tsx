@@ -102,25 +102,25 @@ const LoginForm = () => {
   };
 
   const handleLogin = async (data: FieldValues) => {
-    const recaptchaVal = recaptchaRef.current?.getValue();
-    if (recaptchaRef.current) {
-      if (!recaptchaVal) {
-        toast.error(tNoti("txt_recaptcha_fail"));
-        return;
-      }
-      onLogin({
-        u: data.username,
-        p: encrypt(data.pwd),
-        t: data.expireTime * 60,
-        captchaToken: recaptchaVal,
-      });
-    }
-    // onLogin({
-    //   u: data.username,
-    //   p: encrypt(data.pwd),
-    //   t: data.expireTime * 60,
-    //   captchaToken: "",
-    // });
+    // const recaptchaVal = recaptchaRef.current?.getValue();
+    // if (recaptchaRef.current) {
+    //   if (!recaptchaVal) {
+    //     toast.error(tNoti("txt_recaptcha_fail"));
+    //     return;
+    //   }
+    //   onLogin({
+    //     u: data.username,
+    //     p: encrypt(data.pwd),
+    //     t: data.expireTime * 60,
+    //     captchaToken: recaptchaVal,
+    //   });
+    // }
+    onLogin({
+      u: data.username,
+      p: encrypt(data.pwd),
+      t: data.expireTime * 60,
+      captchaToken: "",
+    });
   };
   return (
     <form>

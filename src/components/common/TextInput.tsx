@@ -45,7 +45,6 @@ const TextInput = ({
   max,
   type,
 }: Props) => {
-  console.log("ref", inputRef);
   const tMess = useTranslations("mess");
   const renderInput = ({ field }: any) => {
     const { value } = field;

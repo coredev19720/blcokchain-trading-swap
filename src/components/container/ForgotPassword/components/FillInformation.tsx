@@ -22,7 +22,6 @@ const FillInformation = () => {
   const tNoti = useTranslations("notification");
   const { onForgotPwd, isSuccess, isError, error } = usePostForgotPwd();
   const recaptchaRef = createRef<ReCAPTCHA>();
-  console.log("nameRef", nameRef);
   const {
     control,
     handleSubmit,
@@ -50,7 +49,6 @@ const FillInformation = () => {
     if (e.keyCode === 13) {
       switch (field) {
         case "username":
-          console.log(nameRef);
           if (nameRef.current) {
             nameRef.current.focus();
           }
