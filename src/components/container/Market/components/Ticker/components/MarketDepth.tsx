@@ -111,9 +111,9 @@ const MarketDepth = ({ ticker }: Props) => {
       render: (row: IHistoryDeal) => (
         <Typography
           variant="subtitle1"
-          color={row.side === TSide.BUY ? "text.success" : "text.error"}
+          color={row.side === TSide.buy ? "text.success" : "text.error"}
         >
-          {row.side === TSide.BUY ? "B" : "S"}
+          {row.side === TSide.buy ? "B" : "S"}
         </Typography>
       ),
 

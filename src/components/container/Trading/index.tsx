@@ -34,7 +34,7 @@ const Trading = () => {
             ...ticket,
             symbol: availTicker.symbol,
             price: availTicker.reference,
-            side: TSide.BUY,
+            side: TSide.buy,
           })
         );
       }
@@ -65,11 +65,11 @@ const Trading = () => {
             disabled={!ticker || !ticket.price || !ticket.vol}
             fullWidth
             variant="contained"
-            color={ticket.side === TSide.BUY ? "success" : "error"}
+            color={ticket.side === TSide.buy ? "success" : "error"}
             onClick={handleClickTrade}
           >
             {t(
-              ticket.side === TSide.BUY
+              ticket.side === TSide.buy
                 ? "fn_trade_cta_buy"
                 : "fn_trade_cta_sell"
             )}

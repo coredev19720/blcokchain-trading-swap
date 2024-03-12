@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import apiUrls from "./apiUrls";
 import { TAuthType } from "../constraints/enum/common";
 const axiosInst = axios.create({
-  baseURL: "https://api.example.com",
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 const reqFullfiled = (config: InternalAxiosRequestConfig) => {
@@ -13,6 +13,7 @@ const reqFullfiled = (config: InternalAxiosRequestConfig) => {
   );
   if (token) {
     config.headers["Authorization"] = `Bearer ${token}`;
+    // config.headers["Access-Control-Allow-Origin"] = "*";
   }
   return config;
 };

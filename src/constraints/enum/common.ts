@@ -3,11 +3,11 @@ export enum TMarket {
   HNX = "HNX",
   UPCOM = "UPCOM",
 }
-export type TOrderStatus = "open" | "done" | "cancel";
-
-export enum TSide {
-  SELL = "SELL",
-  BUY = "BUY",
+export enum TOrderStatus {
+  cancel = "cancel",
+  open = "open",
+  done = "done",
+  "Matcheh all" = "Matcheh all",
 }
 
 export enum TAccountType {
@@ -62,4 +62,14 @@ export enum TPinAuthType {
   OTP = 1,
   SMSOTP = 5,
   DIGI_SIGN = 4,
+}
+
+export enum TSide {
+  buy = "buy",
+  sell = "sell",
+}
+
+export enum TViSide {
+  mua = "mua",
+  ban = "bán",
 }

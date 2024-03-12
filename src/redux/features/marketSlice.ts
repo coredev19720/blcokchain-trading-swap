@@ -1,7 +1,5 @@
-import { dumpPorts } from "@src/constants/dumpData";
-import { dumpOrders } from "@src/constants/dumpData/dashboard";
 import { TMarket, TOrderKind, TOrderType, TSide } from "@enum/common";
-import { ITickerData, ITicket, IOrder } from "@interface/common";
+import { ITicket, IOrder, OrderInfo } from "@interface/common";
 import { IPortItem } from "@interface/table";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Stock } from "@/src/constraints/interface/services/response";
@@ -10,8 +8,8 @@ type MarketState = {
   ticker: Stock | null;
   ticket: ITicket;
   stocks: Stock[];
-  orders: IOrder[];
-  order: IOrder | null;
+  orders: OrderInfo[];
+  order: OrderInfo | null;
   ports: IPortItem[];
   port: IPortItem | null;
 };
@@ -19,7 +17,7 @@ type MarketState = {
 const initialState = {
   ticker: null,
   ticket: {
-    side: TSide.BUY,
+    side: TSide.buy,
     price: 0,
     vol: 0,
     symbol: "",
@@ -45,20 +43,23 @@ export const market = createSlice({
     setTicket: (state, action: PayloadAction<ITicket>) => {
       state.ticket = action.payload;
     },
-    appendOrder: (state, action: PayloadAction<IOrder>) => {
+    appendOrder: (state, action: PayloadAction<OrderInfo>) => {
       state.orders = [action.payload, ...state.orders];
     },
-    updateOrders: (state, action: PayloadAction<IOrder>) => {
+    updateOrders: (state, action: PayloadAction<OrderInfo>) => {
       const orders = state.orders.map((o) => {
-        if (o.code === action.payload.code) {
+        if (o.orderid === action.payload.orderid) {
           return action.payload;
         }
         return o;
       });
       state.orders = orders;
     },
-    setOrder: (state, action: PayloadAction<IOrder | null>) => {
+    setOrder: (state, action: PayloadAction<OrderInfo | null>) => {
       state.order = action.payload;
+    },
+    setOrders: (state, action: PayloadAction<OrderInfo[]>) => {
+      state.orders = action.payload;
     },
     setPort: (state, action: PayloadAction<IPortItem | null>) => {
       state.port = action.payload;
@@ -74,6 +75,7 @@ export const market = createSlice({
 
 export const {
   setTicker,
+  setOrders,
   reset,
   setTicket,
   appendOrder,

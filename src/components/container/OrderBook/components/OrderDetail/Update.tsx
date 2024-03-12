@@ -1,7 +1,7 @@
 import { FieldBlock } from "@src/styles/common";
 import * as S from "./styles";
 import { TextField } from "@mui/material";
-import { IOrder } from "@interface/common";
+import { OrderInfo } from "@interface/common";
 import { formatNumber, genValidPrice } from "@src/utils/helpers";
 import { useTranslations } from "next-intl";
 import RowContent from "@components/common/RowContent";
@@ -12,9 +12,8 @@ import HelpText from "@components/common/HelpText";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
-import { updateOrders } from "@src/redux/features/marketSlice";
 interface IProps {
-  data: IOrder | null;
+  data: OrderInfo | null;
   handleClose: () => void;
 }
 const Update = ({ data, handleClose }: IProps) => {
@@ -49,19 +48,19 @@ const Update = ({ data, handleClose }: IProps) => {
     console.log("handleRequestOTP");
   };
   const handleSubmit = () => {
-    if (order) {
-      try {
-        const ord: IOrder = {
-          ...order,
-          price: updatePrice,
-        };
-        dispatch(updateOrders(ord));
-      } catch (e) {
-        console.log(e);
-      } finally {
-        handleClose();
-      }
-    }
+    // if (order) {
+    //   try {
+    //     const ord: IOrder = {
+    //       ...order,
+    //       price: updatePrice,
+    //     };
+    //     dispatch(updateOrders(ord));
+    //   } catch (e) {
+    //     console.log(e);
+    //   } finally {
+    //     handleClose();
+    //   }
+    // }
   };
   const handleChangeOTP = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length <= 6) {
@@ -71,10 +70,13 @@ const Update = ({ data, handleClose }: IProps) => {
   return (
     <>
       <S.Content>
-        <RowContent leftTxt={t("en_ord_order_type")} rightTxt={data?.type} />
+        <RowContent
+          leftTxt={t("en_ord_order_type")}
+          rightTxt={data?.pricetype}
+        />
         <RowContent
           leftTxt={t("fn_ob_txt_qtyProgress")}
-          rightTxt={`${data?.execQty} / ${data?.vol}`}
+          rightTxt={`${data?.execqtty} / ${data?.qtty}`}
         />
         <RowContent
           leftTxt={t("en_ord_order_price")}
@@ -83,18 +85,20 @@ const Update = ({ data, handleClose }: IProps) => {
       </S.Content>
       <RowContent
         leftTxt={t("en_ord_order_custodyCd")}
-        rightTxt={data?.code}
+        rightTxt={data?.custodycd}
         isChild
       />
       <RowContent
         leftTxt={t("en_ord_order_accNo")}
-        rightTxt={data?.accountNo}
+        rightTxt={data?.afacctno}
         isChild
       />
       <RowContent
         leftTxt={t("en_ord_order_timestamp")}
         rightTxt={
-          data?.time ? dayjs(data.time).format("YYYY-MM-DD HH:mm:ss") : "-"
+          data?.odtimestamp
+            ? dayjs(data.odtimestamp).format("YYYY-MM-DD HH:mm:ss")
+            : "-"
         }
         isChild
       />

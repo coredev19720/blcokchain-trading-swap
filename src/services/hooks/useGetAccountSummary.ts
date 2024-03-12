@@ -1,6 +1,6 @@
 import { AccountSummary } from "@src/constraints/interface/services/response";
 import { useMutation } from "@tanstack/react-query";
-import apiUrls, { getAccountSummaryUrl } from "@/src/services/apiUrls";
+import apiUrls, { genAccountServiceUrl } from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
 import { useAppDispatch } from "@src/redux/hooks";
 import { setAccountSummary } from "@src/redux/features/userSlice";
@@ -11,7 +11,9 @@ interface UseGetAccountSummary {
 }
 const handleGetData = async (accountId: string): Promise<AccountSummary> => {
   try {
-    const res = await axiosInst.get(getAccountSummaryUrl(accountId));
+    const res = await axiosInst.get(
+      genAccountServiceUrl(accountId, "summaryAccount")
+    );
     const { d } = res.data;
     return d;
   } catch (e) {

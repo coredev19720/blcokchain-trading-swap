@@ -19,15 +19,15 @@ const Search = () => {
       <S.GroupButton>
         <S.SideBtn
           variant="contained"
-          onClick={() => handleChangeSide(TSide.BUY)}
-          color={ticket.side === TSide.BUY ? "success" : "secondary"}
+          onClick={() => handleChangeSide(TSide.buy)}
+          color={ticket.side === TSide.buy ? "success" : "secondary"}
         >
           {t("fn_trade_cta_buyToggle")}
         </S.SideBtn>
         <S.SideBtn
           variant="contained"
-          onClick={() => handleChangeSide(TSide.SELL)}
-          color={ticket.side === TSide.SELL ? "error" : "secondary"}
+          onClick={() => handleChangeSide(TSide.buy)}
+          color={ticket.side === TSide.buy ? "error" : "secondary"}
         >
           {t("fn_trade_cta_sellToggle")}
         </S.SideBtn>

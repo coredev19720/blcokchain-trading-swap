@@ -1,3 +1,5 @@
+import { OrderInfo, OrderWaitMatchedInfo } from "../common";
+
 export interface BaseResponse {
   s: string;
   errcode: string | number;
@@ -196,4 +198,28 @@ export interface AccountAvailTrade {
   cash_pending_send: number; // Tiền chờ thanh toán
   mortgage: number; // Thế chấp
   marginrate: number; // Tỷ lệ thực tế
+}
+
+export interface CreateOrderResponse extends BaseResponse {
+  d: {
+    orderid: string;
+  };
+}
+
+export interface PrecheckOrderResponse extends BaseResponse {
+  d: {
+    txdate: string; // Ngày đặt lệnh
+    warningcode: string; // Mã cảnh báo
+    warningdesc: string; // Diễn giải cảnh báo
+    tokenid: string; // Tokeninfo cho xác thực OTP/TOKEN/MATRIX của tài khoản
+    transactionId: string; // Mã giao dịch
+  };
+}
+
+export interface GetOrdersResponse extends BaseResponse {
+  d: OrderInfo[];
+}
+
+export interface GetWaitMatchedOrdersResponse extends BaseResponse {
+  d: OrderWaitMatchedInfo[];
 }

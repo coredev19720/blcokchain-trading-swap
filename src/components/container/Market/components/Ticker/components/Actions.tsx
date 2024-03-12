@@ -34,14 +34,14 @@ const Actions = () => {
       <ActionBtn
         variant="contained"
         color="error"
-        onClick={() => handleClick(TSide.SELL)}
+        onClick={() => handleClick(TSide.sell)}
       >
         {t("fn_symbol_cta_sell")}
       </ActionBtn>
       <ActionBtn
         variant="contained"
         color="success"
-        onClick={() => handleClick(TSide.BUY)}
+        onClick={() => handleClick(TSide.buy)}
       >
         {t("fn_symbol_cta_buy")}
       </ActionBtn>

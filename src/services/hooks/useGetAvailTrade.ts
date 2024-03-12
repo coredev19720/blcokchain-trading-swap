@@ -1,6 +1,6 @@
 import { AccountAvailTrade } from "@src/constraints/interface/services/response";
 import { useMutation } from "@tanstack/react-query";
-import { getAccountSummaryUrl, getAvailTradeUrl } from "@/src/services/apiUrls";
+import { genAccountServiceUrl } from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
 import { useAppDispatch } from "@src/redux/hooks";
 import { setAccountAvailTrade } from "@src/redux/features/userSlice";
@@ -12,7 +12,9 @@ interface UseGetAvailTrade {
 }
 const handleGetData = async (accountId: string): Promise<AccountAvailTrade> => {
   try {
-    const res = await axiosInst.get(getAvailTradeUrl(accountId));
+    const res = await axiosInst.get(
+      genAccountServiceUrl(accountId, "availableTrade")
+    );
     const { d } = res.data;
     return d;
   } catch (e) {

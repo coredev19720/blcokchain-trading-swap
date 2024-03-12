@@ -1,5 +1,5 @@
 import * as S from "./styles";
-import { IOrder } from "@interface/common";
+import { IOrder, OrderInfo } from "@interface/common";
 import { useTranslations } from "next-intl";
 import { formatNumber } from "@src/utils/helpers";
 import { TTransactionStatus } from "@enum/common";
@@ -10,7 +10,7 @@ import RowContent from "@components/common/RowContent";
 import OTPConfirm from "@components/common/OTPConfirm";
 import dayjs from "dayjs";
 interface IProps {
-  data: IOrder | null;
+  data: OrderInfo | null;
   handleClose: () => void;
 }
 const Cancel = ({ data, handleClose }: IProps) => {
@@ -24,7 +24,7 @@ const Cancel = ({ data, handleClose }: IProps) => {
   const handleSubmit = () => {
     if (order) {
       try {
-        const ord: IOrder = {
+        const ord: OrderInfo = {
           ...order,
           status: TTransactionStatus.canceled,
         };
@@ -44,10 +44,13 @@ const Cancel = ({ data, handleClose }: IProps) => {
   return (
     <>
       <S.Content>
-        <RowContent leftTxt={t("en_ord_order_type")} rightTxt={data?.type} />
+        <RowContent
+          leftTxt={t("en_ord_order_type")}
+          rightTxt={data?.pricetype}
+        />
         <RowContent
           leftTxt={t("fn_ob_txt_qtyProgress")}
-          rightTxt={`${data?.execQty} / ${data?.vol}`}
+          rightTxt={`${data?.execqtty} / ${data?.qtty}`}
         />
         <RowContent
           leftTxt={t("en_ord_order_price")}
@@ -56,18 +59,20 @@ const Cancel = ({ data, handleClose }: IProps) => {
       </S.Content>
       <RowContent
         leftTxt={t("en_ord_order_custodyCd")}
-        rightTxt={data?.code}
+        rightTxt={data?.custodycd}
         isChild
       />
       <RowContent
         leftTxt={t("en_ord_order_accNo")}
-        rightTxt={data?.accountNo}
+        rightTxt={data?.afacctno}
         isChild
       />
       <RowContent
         leftTxt={t("en_ord_order_timestamp")}
         rightTxt={
-          data?.time ? dayjs(data.time).format("YYYY-MM-DD HH:mm:ss") : "-"
+          data?.odtimestamp
+            ? dayjs(data.odtimestamp).format("YYYY-MM-DD HH:mm:ss")
+            : "-"
         }
         isChild
       />

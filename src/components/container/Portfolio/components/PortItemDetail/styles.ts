@@ -39,13 +39,11 @@ export const Actions = styled("div")(({ theme }) => ({
 export const Action = styled(Button)(() => ({
   flex: 1,
 }));
-export const TicketSide = styled("div")<{ side?: TSide }>(
-  ({ theme, side }) => ({
-    padding: theme.spacing(1),
-    borderRadius: theme.spacing(1),
-    backgroundColor: side === TSide.BUY ? colors.sg10 : colors.sr10,
-  })
-);
+export const TicketSide = styled("div")<{ side?: TSide }>(({ theme, side }) => ({
+  padding: theme.spacing(1),
+  borderRadius: theme.spacing(1),
+  backgroundColor: side === TSide.buy ? colors.sg10 : colors.sr10,
+}));
 
 export const StatusBar = styled("div")<{ fillPct: number }>(
   ({ theme, fillPct }) => ({

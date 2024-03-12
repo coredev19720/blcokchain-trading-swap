@@ -24,11 +24,11 @@ const Cancel = ({ data, handleClose }: IProps) => {
   const handleSubmit = () => {
     if (order) {
       try {
-        const ord: IOrder = {
-          ...order,
-          status: TTransactionStatus.canceled,
-        };
-        dispatch(updateOrders(ord));
+        // const ord: IOrder = {
+        //   ...order,
+        //   status: TTransactionStatus.canceled,
+        // };
+        // dispatch(updateOrders(ord));
       } catch (e) {
         console.log(e);
       } finally {

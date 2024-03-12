@@ -2,7 +2,7 @@ import * as S from "./styles";
 import { FlexContent, SlideLine } from "@src/styles/common";
 import { Backdrop, Slide, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { IOrder } from "@interface/common";
+import { IOrder, OrderInfo } from "@interface/common";
 import { TOrderActionType, TSide } from "@enum/common";
 import colors from "@src/themes/colors";
 import Detail from "./Detail";
@@ -11,7 +11,7 @@ import Update from "./Update";
 import { useEffect, useState } from "react";
 
 interface IProps {
-  data: IOrder | null;
+  data: OrderInfo | null;
   type: TOrderActionType;
   handleClose: () => void;
 }
@@ -83,18 +83,18 @@ const OrderDetail = ({ data, type, handleClose }: IProps) => {
               <Typography variant="h5" fontWeight={600} color="text.primary">
                 {data?.symbol}
               </Typography>
-              <S.TicketSide side={data?.side}>
+              <S.TicketSide side={data?.en_side}>
                 <Typography
                   variant="body2"
                   color={
-                    data?.side === TSide.BUY
+                    data?.en_side === TSide.buy
                       ? colors.lightUpText
                       : colors.lightDownText
                   }
                   style={{ textTransform: "capitalize" }}
                 >
                   {tTrade(
-                    data?.side === TSide.BUY
+                    data?.en_side === TSide.buy
                       ? "txt_trade_confirm_buy"
                       : "txt_trade_confirm_sell"
                   )}

@@ -10,7 +10,7 @@ import { formatNumber } from "@src/utils/helpers";
 import OTPConfirm from "@components/common/OTPConfirm";
 import { appendOrder } from "@src/redux/features/marketSlice";
 import { genCode } from "@src/utils/helpers";
-import { IOrder } from "@interface/common";
+import { IOrder, OrderInfo } from "@interface/common";
 import { useRouter } from "next/navigation";
 interface IProps {
   open: boolean;
@@ -35,16 +35,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
   };
   const handleSubmit = () => {
     try {
-      const order: IOrder = {
-        ...ticket,
-        time: new Date().toISOString(),
-        code: genCode(),
-        status: TTransactionStatus.open,
-        execQty: 0,
-        pendingQty: ticket.vol,
-        accountNo: activeAccount?.custodycd || "",
-      };
-      dispatch(appendOrder(order));
+      //unimplemented
       router.push(`/order-book`);
     } catch (e) {
       console.log(e);
@@ -66,7 +57,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
         <S.Wrapper>
           <S.TicketInfo>
             <Typography variant="h5" fontWeight={600} color="text.primary">
-              {`Duyệt lệnh ${ticket.side === TSide.BUY ? "mua" : "bán"}`}
+              {`Duyệt lệnh ${ticket.side === TSide.buy ? "mua" : "bán"}`}
             </Typography>
             <S.Block>
               <FlexContent>
@@ -77,14 +68,14 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                   <Typography
                     variant="body2"
                     color={
-                      ticket.side === TSide.BUY
+                      ticket.side === TSide.buy
                         ? colors.lightUpText
                         : colors.lightDownText
                     }
                     style={{ textTransform: "capitalize" }}
                   >
                     {t(
-                      ticket.side === TSide.BUY
+                      ticket.side === TSide.buy
                         ? "txt_trade_confirm_buy"
                         : "txt_trade_confirm_sell"
                     )}

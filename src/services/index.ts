@@ -4,7 +4,7 @@ export const getAPILink = (path: string) => {
   if (!path) {
     throw new Error("Path is required");
   }
-  return `${process.env.NEXT_PUBLIC_AP_URL}/${path}`;
+  return `${process.env.NEXT_PUBLIC_API_URL}/${path}`;
 };
 
 export const handleRestApi = async (options: any) => {

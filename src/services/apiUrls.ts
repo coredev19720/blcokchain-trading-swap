@@ -1,4 +1,4 @@
-const baseUrl = process.env.NEXT_PUBLIC_AP_URL;
+const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 const apiUrls = {
   refresh: `${baseUrl}/sso/oauth/token`,
   login: `${process.env.NEXT_PUBLIC_ROOT_URL}/api/login`,
@@ -10,11 +10,7 @@ const apiUrls = {
   getInstruments: `${baseUrl}/datafeed/instruments`,
   getAcounts: `${baseUrl}/accounts`,
 };
-
-export const getAccountSummaryUrl = (accountId: string) =>
-  `${baseUrl}/inq/accounts/${accountId}/summaryAccount`;
-
-export const getAvailTradeUrl = (accountId: string) =>
-  `${baseUrl}/inq/accounts/${accountId}/availableTrade`;
+export const genAccountServiceUrl = (accountId: string, path: string) =>
+  `${baseUrl}/inq/accounts/${accountId}/${path}`;
 
 export default apiUrls;

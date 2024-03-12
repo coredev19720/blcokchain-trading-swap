@@ -102,24 +102,20 @@ const LoginForm = () => {
   };
 
   const handleLogin = async (data: FieldValues) => {
-    // const recaptchaVal = recaptchaRef.current?.getValue();
-    // if (recaptchaRef.current) {
-    //   if (!recaptchaVal) {
-    //     toast.error(tNoti("txt_recaptcha_fail"));
-    //     return;
-    //   }
-    //   onLogin({
-    //     u: data.username,
-    //     p: encrypt(data.pwd),
-    //     t: data.expireTime * 60,
-    //     captchaToken: recaptchaVal,
-    //   });
-    // }
+    const recaptchaVal = recaptchaRef.current?.getValue();
+    if (
+      process.env.NEXT_PUBLIC_NODE_ENV !== "development" &&
+      recaptchaRef.current &&
+      !recaptchaVal
+    ) {
+      toast.error(tNoti("txt_recaptcha_fail"));
+      return;
+    }
     onLogin({
       u: data.username,
       p: encrypt(data.pwd),
       t: data.expireTime * 60,
-      captchaToken: "",
+      captchaToken: recaptchaVal || "",
     });
   };
   return (

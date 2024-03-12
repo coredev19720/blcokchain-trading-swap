@@ -1,11 +1,4 @@
-import {
-  TAccountType,
-  TSide,
-  TOrderType,
-  TTransactionStatus,
-  TMarket,
-} from "@enum/common";
-import { IAccount, IMarketInfo, IOrder, ITickerData } from "@interface/common";
+import { IMarketInfo } from "@interface/common";
 
 export const marketIndex: IMarketInfo[] = [
   {
@@ -31,80 +24,5 @@ export const marketIndex: IMarketInfo[] = [
     pctChg: 1.01,
     vol: 100000000,
     value: 100000000000,
-  },
-];
-
-export const accounts: IAccount[] = [
-  {
-    type: TAccountType.CASH,
-    accountNo: "22222222",
-    totalAsset: 100000000,
-    cashPayables: 0,
-    buyingPower: 140000000,
-    cashBalance: 100000000,
-    coh: 100000000,
-    receivingCash: 0,
-    accessEquity: 0,
-    portValue: 40000000,
-  },
-  {
-    type: TAccountType.MARGIN,
-    accountNo: "11111111",
-    totalAsset: 200000000,
-    cashPayables: 500000,
-    buyingPower: 130000000,
-    cashBalance: 50000000,
-    coh: 220000000,
-    receivingCash: 0,
-    accessEquity: 0,
-    portValue: 36000000,
-  },
-];
-
-export const dumpOrders: IOrder[] = [
-  {
-    symbol: "HCM",
-    side: TSide.BUY,
-    price: 33.05,
-    vol: 1000,
-    kind: "normal",
-    type: TOrderType.LO,
-    time: "14:46:30 - 28/01/2024",
-    execQty: 100,
-    pendingQty: 900,
-    code: "CODE_001",
-    accountNo: "22222222",
-    status: TTransactionStatus.partial_filled,
-    market: TMarket.HNX,
-  },
-  {
-    symbol: "HCM",
-    side: TSide.SELL,
-    price: 33.05,
-    vol: 1000,
-    kind: "normal",
-    type: TOrderType.LO,
-    time: "14:46:30 - 28/01/2024",
-    execQty: 100,
-    pendingQty: 900,
-    code: "CODE_002",
-    accountNo: "22222222",
-    status: TTransactionStatus.partial_filled,
-    market: TMarket.HNX,
-  },
-  {
-    symbol: "HPG",
-    side: TSide.SELL,
-    price: 27.85,
-    vol: 1000,
-    kind: "normal",
-    type: TOrderType.LO,
-    time: "14:46:30 - 28/01/2024",
-    execQty: 100,
-    pendingQty: 900,
-    code: "CODE_003",
-    accountNo: "22222222",
-    status: TTransactionStatus.partial_filled,
-    market: TMarket.UPCOM,
   },
 ];

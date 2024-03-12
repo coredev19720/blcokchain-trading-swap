@@ -15,7 +15,7 @@ const Portfolio = () => {
   const dispatch = useAppDispatch();
   const [type, setType] = useState<TOrderActionType>(TOrderActionType.detail);
   const handleClickOrder = (order: IOrder, type: TOrderActionType) => {
-    dispatch(setOrder(order));
+    // dispatch(setOrder(order));
     setType(type);
   };
   return (

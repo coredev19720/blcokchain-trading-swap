@@ -148,14 +148,14 @@ const PortItemDetail = ({ data, handleClose }: IProps) => {
             <S.Action
               variant="contained"
               color="error"
-              onClick={() => handleClickAction(TSide.SELL)}
+              onClick={() => handleClickAction(TSide.sell)}
             >
               {t("fn_port_detail_cta_sell")}
             </S.Action>
             <S.Action
               variant="contained"
               color="success"
-              onClick={() => handleClickAction(TSide.BUY)}
+              onClick={() => handleClickAction(TSide.buy)}
             >
               {t("fn_port_detail_cta_buy")}
             </S.Action>
