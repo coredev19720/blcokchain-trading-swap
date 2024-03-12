@@ -1,4 +1,4 @@
-import { Stock } from "@src/constraints/interface/services/response";
+import { Stock } from "@src/constraints/interface/market";
 import { useMutation } from "@tanstack/react-query";
 import apiUrls from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";

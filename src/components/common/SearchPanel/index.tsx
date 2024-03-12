@@ -6,7 +6,7 @@ import SearchInput from "./components/SearchInput";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { setTicker, setTicket } from "@src/redux/features/marketSlice";
 import { setLastSymbolToLocalStorage } from "@src/utils/helpers";
-import { Stock } from "@/src/constraints/interface/services/response";
+import { Stock } from "@/src/constraints/interface/market";
 
 interface IProps {
   open: boolean;

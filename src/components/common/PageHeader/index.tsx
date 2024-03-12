@@ -4,7 +4,8 @@ import { useTranslations } from "next-intl";
 import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
 import { setActiveAccount } from "@src/redux/features/userSlice";
 import { Sync } from "@mui/icons-material";
-import { AccountInfo } from "@/src/constraints/interface/services/response";
+import { AccInfo } from "@/src/constraints/interface/account";
+import { useGetAccountSummary } from "@src/services/hooks/useGetAccountSummary";
 interface Props {
   title: string;
   refresh?: boolean;
@@ -13,16 +14,17 @@ const PageHeader = ({ title, refresh }: Props) => {
   const t = useTranslations("portfolio");
   const dispatch = useAppDispatch();
   const { activeAccount, accounts } = useAppSelector((state) => state.user);
+  const { refetch } = useGetAccountSummary(activeAccount?.id || "");
+  console.log(activeAccount?.id);
+  console.log(accounts);
   const handleChangeAccount = (e: SelectChangeEvent<unknown>) => {
-    if (typeof e.target.value === "string" && accounts?.length) {
+    if (typeof e.target.value === "string") {
       const availAcc = accounts.find((acc) => acc.id === e.target.value);
-      if (availAcc) {
-        dispatch(setActiveAccount(availAcc));
-      }
+      availAcc && dispatch(setActiveAccount(availAcc));
     }
   };
   const handleRefresh = () => {
-    console.log("refresh");
+    refetch();
   };
   return (
     <S.Wrapper>
@@ -37,12 +39,11 @@ const PageHeader = ({ title, refresh }: Props) => {
         onChange={handleChangeAccount}
         variant="standard"
       >
-        {accounts &&
-          accounts.map((acc: AccountInfo) => (
-            <MenuItem value={acc.id} key={`account_${acc.id}`}>
-              {`${acc.accounttype} - ${acc.id}`}
-            </MenuItem>
-          ))}
+        {accounts.map((acc: AccInfo) => (
+          <MenuItem value={acc.id} key={`account_${acc.id}`}>
+            {`${acc.accounttype} - ${acc.id}`}
+          </MenuItem>
+        ))}
       </S.AccountSelect>
     </S.Wrapper>
   );

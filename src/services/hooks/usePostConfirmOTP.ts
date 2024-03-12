@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import apiUrls from "@/src/services/apiUrls";
 import { ConfirmOTPRequest } from "@/src/constraints/interface/services/request";
-import { BaseResponse } from "@/src/constraints/interface/services/response";
+import { BaseRes } from "@/src/constraints/interface/services/response";
 import axiosInst from "../Interceptors";
 interface UsePostConfirmOTP {
   onConfirmOTP: (data: ConfirmOTPRequest) => void;
@@ -11,9 +11,7 @@ interface UsePostConfirmOTP {
 }
 
 //unimplemented
-const handleConfirmOTP = async (
-  data: ConfirmOTPRequest
-): Promise<BaseResponse> => {
+const handleConfirmOTP = async (data: ConfirmOTPRequest): Promise<BaseRes> => {
   try {
     const res = await axiosInst.post(apiUrls.forgotPwd, data);
     const { s, ec } = res.data;

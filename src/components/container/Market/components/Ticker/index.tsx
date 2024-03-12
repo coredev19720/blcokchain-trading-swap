@@ -7,7 +7,7 @@ import Line from "@components/common/Line";
 import { ITickerData } from "@interface/common";
 import MarketIndex from "./components/MarketIndex";
 import Actions from "./components/Actions";
-import { Stock } from "@/src/constraints/interface/services/response";
+import { Stock } from "@/src/constraints/interface/market";
 
 const Wrapper = styled("div")(() => ({
   display: "flex",

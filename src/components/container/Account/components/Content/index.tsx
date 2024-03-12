@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
 import * as S from "./styles";
 import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import colors from "@src/themes/colors";
 import { useAppSelector } from "@src/redux/hooks";
-import { AccountInfo } from "@interface/services/response";
+import { useGetAccountSummary } from "@/src/services/hooks/useGetAccountSummary";
 const Content = () => {
   const t = useTranslations("account");
-  const { accountSummary } = useAppSelector((state) => state.user);
+  const { accountSummary, activeAccount } = useAppSelector(
+    (state) => state.user
+  );
+  const { refetch } = useGetAccountSummary(activeAccount?.id || "");
   return accountSummary ? (
     <S.Wrapper>
       <S.RowWrapper isHeader bgColor={colors.sy80}>

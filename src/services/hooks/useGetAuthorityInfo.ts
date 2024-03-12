@@ -1,20 +1,20 @@
-import { CustomerInfo } from "@src/constraints/interface/services/response";
+import { GetAuthorInfoRes } from "@src/constraints/interface/services/response";
 import { useMutation } from "@tanstack/react-query";
 import apiUrls from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
 import { useAppDispatch } from "@src/redux/hooks";
-import { setCustomerInfo } from "@src/redux/features/userSlice";
+import { setAuthorInfo } from "@src/redux/features/userSlice";
 interface UseGetAuthorityInfo {
   onGetAuthorityInfo: () => void;
   isError: boolean;
   isSuccess: boolean;
 }
-const handleGetAuthorityInfo = async (): Promise<CustomerInfo> => {
+const handleGetAuthorityInfo = async (): Promise<GetAuthorInfoRes> => {
   try {
     const res = await axiosInst.get(apiUrls.getAuthorityInfo);
     const { d, s, ec } = res.data;
     if (s === "ok") {
-      return d;
+      return res.data;
     }
     throw new Error(ec);
   } catch (e) {
@@ -22,8 +22,8 @@ const handleGetAuthorityInfo = async (): Promise<CustomerInfo> => {
   }
 };
 
-const handleSuccess = (data: CustomerInfo, dispatch: any) => {
-  dispatch(setCustomerInfo(data));
+const handleSuccess = (data: GetAuthorInfoRes, dispatch: any) => {
+  dispatch(setAuthorInfo(data.d));
 };
 
 const handleError = (error: unknown) => {
@@ -37,7 +37,7 @@ export const useGetAuthorityInfo = (): UseGetAuthorityInfo => {
     isSuccess,
   } = useMutation({
     mutationFn: handleGetAuthorityInfo,
-    onSuccess: (data: CustomerInfo) => handleSuccess(data, dispatch),
+    onSuccess: (data: GetAuthorInfoRes) => handleSuccess(data, dispatch),
     onError: handleError,
   });
 

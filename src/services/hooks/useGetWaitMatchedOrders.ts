@@ -1,4 +1,4 @@
-import { GetWaitMatchedOrdersResponse } from "@src/constraints/interface/services/response";
+import { GetWaitMatchedOrdersRes } from "@src/constraints/interface/services/response";
 import { useMutation } from "@tanstack/react-query";
 import { genAccountServiceUrl } from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
@@ -10,7 +10,7 @@ interface UseGetWaitMatchedOrders {
 }
 const handleGetData = async (
   accountId: string
-): Promise<GetWaitMatchedOrdersResponse> => {
+): Promise<GetWaitMatchedOrdersRes> => {
   try {
     const res = await axiosInst.get(
       genAccountServiceUrl(accountId, "waitMatchedOrder")
@@ -22,7 +22,7 @@ const handleGetData = async (
   }
 };
 
-const handleSuccess = (data: GetWaitMatchedOrdersResponse, dispatch: any) => {
+const handleSuccess = (data: GetWaitMatchedOrdersRes, dispatch: any) => {
   console.log(data);
   // dispatch(setOrders(data.d));
 };
@@ -38,8 +38,7 @@ export const useGetWaitMatchedOrders = (): UseGetWaitMatchedOrders => {
     isSuccess,
   } = useMutation({
     mutationFn: handleGetData,
-    onSuccess: (data: GetWaitMatchedOrdersResponse) =>
-      handleSuccess(data, dispatch),
+    onSuccess: (data: GetWaitMatchedOrdersRes) => handleSuccess(data, dispatch),
     onError: handleError,
   });
 

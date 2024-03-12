@@ -1,10 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { genAccountServiceUrl } from "@/src/services/apiUrls";
 import { CreateOrderReq } from "@/src/constraints/interface/services/request";
-import {
-  BaseResponse,
-  CreateOrderResponse,
-} from "@/src/constraints/interface/services/response";
+import { CreateOrderRes } from "@/src/constraints/interface/services/response";
 import axiosInst from "../Interceptors";
 interface UseCreateOrder {
   onCreateOrder: (data: CreateOrderReq) => void;
@@ -15,7 +12,7 @@ interface UseCreateOrder {
 
 const handleCreateOrder = async (
   data: CreateOrderReq
-): Promise<CreateOrderResponse> => {
+): Promise<CreateOrderRes> => {
   try {
     const res = await axiosInst.post(
       genAccountServiceUrl(data.accountId, "orders"),

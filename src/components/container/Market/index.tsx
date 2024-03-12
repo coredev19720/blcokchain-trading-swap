@@ -18,16 +18,17 @@ const Market = () => {
   const { ticker, ticket, stocks } = useAppSelector((state) => state.market);
   const dispatch = useAppDispatch();
   const [openPanel, setOpenPanel] = useState<boolean>(false);
-
   useEffect(() => {
-    initTicker();
-  }, []);
+    !!stocks.length && initTicker();
+  }, [stocks]);
 
   const initTicker = () => {
     const s = searchParams?.get("s");
-    const availTicker = s && stocks.find((t) => t.symbol === s.toUpperCase());
-    if (availTicker) {
-      setLastSymbolToLocalStorage(availTicker.symbol);
+    const lastSymbol = localStorage.getItem(lastSymLocalKey);
+    const defaultSymbol = process.env.NEXT_PUBLIC_DEFAULT_SYMBOL;
+    const symbol = s || lastSymbol || defaultSymbol || "HCM";
+    const availTicker = stocks.find((s) => s.symbol === symbol.toUpperCase());
+    if (!ticker && availTicker) {
       dispatch(setTicker(availTicker));
       dispatch(
         setTicket({
@@ -36,23 +37,7 @@ const Market = () => {
           price: availTicker.reference,
         })
       );
-      return;
-    }
-    if (!ticker) {
-      const lastSymbol = localStorage.getItem(lastSymLocalKey);
-      const availTicker = lastSymbol
-        ? stocks.find((t) => t.symbol === lastSymbol.toUpperCase())
-        : null;
-      if (availTicker) {
-        dispatch(setTicker(availTicker));
-        dispatch(
-          setTicket({
-            ...ticket,
-            symbol: availTicker.symbol,
-            price: availTicker.reference,
-          })
-        );
-      }
+      setLastSymbolToLocalStorage(symbol);
     }
   };
   return (

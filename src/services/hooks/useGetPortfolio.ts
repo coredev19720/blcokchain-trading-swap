@@ -1,4 +1,4 @@
-import { GetPortfolioResponse } from "@src/constraints/interface/services/response";
+import { GetPortfolioRes } from "@src/constraints/interface/services/response";
 import { useMutation } from "@tanstack/react-query";
 import { genAccountServiceUrl } from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
@@ -9,9 +9,7 @@ interface UseGetPortfolio {
   isError: boolean;
   isSuccess: boolean;
 }
-const handleGetData = async (
-  accountId: string
-): Promise<GetPortfolioResponse> => {
+const handleGetData = async (accountId: string): Promise<GetPortfolioRes> => {
   try {
     const res = await axiosInst.get(
       genAccountServiceUrl(accountId, "securitiesPortfolio")
@@ -22,7 +20,7 @@ const handleGetData = async (
   }
 };
 
-const handleSuccess = (data: GetPortfolioResponse, dispatch: any) => {
+const handleSuccess = (data: GetPortfolioRes, dispatch: any) => {
   dispatch(setPorts(data.d));
 };
 
@@ -37,7 +35,7 @@ export const useGetPortfolio = (): UseGetPortfolio => {
     isSuccess,
   } = useMutation({
     mutationFn: handleGetData,
-    onSuccess: (data: GetPortfolioResponse) => handleSuccess(data, dispatch),
+    onSuccess: (data: GetPortfolioRes) => handleSuccess(data, dispatch),
     onError: handleError,
   });
 

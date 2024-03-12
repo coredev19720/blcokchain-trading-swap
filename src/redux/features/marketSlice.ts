@@ -2,7 +2,7 @@ import { TMarket, TOrderKind, TOrderType, TSide } from "@enum/common";
 import { ITicket, OrderInfo } from "@interface/common";
 import { PortItem } from "@interface/common";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Stock } from "@/src/constraints/interface/services/response";
+import { Stock } from "@/src/constraints/interface/market";
 
 type MarketState = {
   ticker: Stock | null;

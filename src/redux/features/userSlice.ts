@@ -1,19 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
-  AccountAvailTrade,
-  AccountInfo,
-  AccountsPermissions,
-  AccountSummary,
-  CustomerInfo,
-} from "@interface/services/response";
+  AccAvailTrade,
+  AccInfo,
+  AccsPermissions,
+  AccSummary,
+  AuthorInfo,
+} from "@interface/account";
 
 type UserState = {
-  permissions: AccountsPermissions[] | [];
-  accounts: AccountInfo[] | [];
-  activeAccount: AccountInfo | null;
-  customerInfo: CustomerInfo | null;
-  accountSummary: AccountSummary | null;
-  accountAvailTrade: AccountAvailTrade | null;
+  permissions: AccsPermissions | [];
+  accounts: AccInfo[] | [];
+  activeAccount: AccInfo | null;
+  customerInfo: AuthorInfo | null;
+  accountSummary: AccSummary | null;
+  accountAvailTrade: AccAvailTrade | null;
 };
 
 const initialState = {
@@ -28,32 +28,32 @@ export const user = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setPermission: (state, action: PayloadAction<AccountsPermissions[]>) => {
+    setPermissions: (state, action: PayloadAction<AccsPermissions>) => {
       state.permissions = action.payload;
     },
-    setAccounts: (state, action: PayloadAction<AccountInfo[]>) => {
+    setAccounts: (state, action: PayloadAction<AccInfo[]>) => {
       state.accounts = action.payload;
     },
-    setActiveAccount: (state, action: PayloadAction<AccountInfo>) => {
+    setActiveAccount: (state, action: PayloadAction<AccInfo>) => {
       state.activeAccount = action.payload;
     },
-    setCustomerInfo: (state, action: PayloadAction<CustomerInfo>) => {
+    setAuthorInfo: (state, action: PayloadAction<AuthorInfo>) => {
       state.customerInfo = action.payload;
     },
-    setAccountSummary: (state, action: PayloadAction<AccountSummary>) => {
+    setAccountSummary: (state, action: PayloadAction<AccSummary>) => {
       state.accountSummary = action.payload;
     },
-    setAccountAvailTrade: (state, action: PayloadAction<AccountAvailTrade>) => {
+    setAccountAvailTrade: (state, action: PayloadAction<AccAvailTrade>) => {
       state.accountAvailTrade = action.payload;
     },
   },
 });
 
 export const {
-  setPermission,
+  setPermissions,
   setAccounts,
   setActiveAccount,
-  setCustomerInfo,
+  setAuthorInfo,
   setAccountSummary,
   setAccountAvailTrade,
 } = user.actions;

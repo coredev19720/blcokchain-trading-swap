@@ -1,5 +1,4 @@
-import { Stock } from "@/src/constraints/interface/services/response";
-import { ITickerData } from "@interface/common";
+import { Stock } from "@/src/constraints/interface/market";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { RowContent } from "@src/styles/common";

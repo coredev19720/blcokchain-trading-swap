@@ -1,15 +1,15 @@
-import { AccountsPermissions } from "@src/constraints/interface/services/response";
+import { GetAccPermissionRes } from "@src/constraints/interface/services/response";
 import { useMutation } from "@tanstack/react-query";
 import apiUrls from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
 import { useAppDispatch } from "@src/redux/hooks";
-import { setPermission } from "@src/redux/features/userSlice";
+import { setPermissions } from "@src/redux/features/userSlice";
 interface UseGetPermissionInfo {
   onGetPermission: () => void;
   isError: boolean;
   isSuccess: boolean;
 }
-const handleGetPermission = async (): Promise<AccountsPermissions[]> => {
+const handleGetPermission = async (): Promise<GetAccPermissionRes> => {
   try {
     const res = await axiosInst.get(apiUrls.getPermissionInfo);
     const { accounts } = res.data;
@@ -19,8 +19,8 @@ const handleGetPermission = async (): Promise<AccountsPermissions[]> => {
   }
 };
 
-const handleSuccess = (data: AccountsPermissions[], dispatch: any) => {
-  dispatch(setPermission(data));
+const handleSuccess = (data: GetAccPermissionRes, dispatch: any) => {
+  dispatch(setPermissions(data.d.accounts));
 };
 
 const handleError = (error: unknown) => {
@@ -34,7 +34,7 @@ export const useGetPermissionInfo = (): UseGetPermissionInfo => {
     isSuccess,
   } = useMutation({
     mutationFn: handleGetPermission,
-    onSuccess: (data: AccountsPermissions[]) => handleSuccess(data, dispatch),
+    onSuccess: (data: GetAccPermissionRes) => handleSuccess(data, dispatch),
     onError: handleError,
   });
 

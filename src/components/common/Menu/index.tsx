@@ -6,24 +6,24 @@ import colors from "@src/themes/colors";
 import { useRouter, usePathname, useParams } from "next/navigation";
 import { useIdleTimer } from "react-idle-timer";
 import { useLogout } from "@/src/services/hooks/useLogout";
-import { useGetAccounts } from "@/src/services/hooks/useGetAccounts";
-import { useGetPermissionInfo } from "@/src/services/hooks/useGetPermissionInfo";
-import { useGetAuthorityInfo } from "@/src/services/hooks/useGetAuthorityInfo";
 import { useGetAccountSummary } from "@/src/services/hooks/useGetAccountSummary";
-import { useGetInstruments } from "@/src/services/hooks/useGetInstruments";
+import { useFetchInitData } from "@/src/services/hooks/useFetchInitData";
 import { useAppSelector } from "@/src/redux/hooks";
 import Cookies from "js-cookie";
 const Menu = () => {
   const { accounts, permissions, customerInfo, activeAccount } = useAppSelector(
     (state) => state.user
   );
+  const {
+    refetch: fetchData,
+    isLoading: fetchDataLoading,
+    isError: fetchDataError,
+    isSuccess: fetchDataSuccess,
+    data,
+  } = useFetchInitData();
   const { stocks } = useAppSelector((state) => state.market);
   const { onLogout, isError, isSuccess } = useLogout();
-  const { onGetAccounts } = useGetAccounts();
-  const { onGetPermission } = useGetPermissionInfo();
-  const { onGetAuthorityInfo } = useGetAuthorityInfo();
-  const { onGetAccountSummary } = useGetAccountSummary();
-  const { onGetInstruments } = useGetInstruments();
+  const { refetch } = useGetAccountSummary(activeAccount?.id || "");
   const pathname = usePathname();
   const router = useRouter();
   const params = useParams();
@@ -41,10 +41,7 @@ const Menu = () => {
       process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME as string
     );
     if (accessToken) {
-      !accounts.length && onGetAccounts();
-      !permissions?.length && onGetPermission();
-      !customerInfo && onGetAuthorityInfo();
-      !stocks.length && onGetInstruments();
+      !activeAccount && fetchData();
     }
   }, []);
   useEffect(() => {
@@ -56,13 +53,6 @@ const Menu = () => {
       router.push("/");
     }
   }, [isSuccess, isError]);
-
-  useEffect(() => {
-    if (activeAccount) {
-      const { id } = activeAccount;
-      onGetAccountSummary(id);
-    }
-  }, [activeAccount]);
 
   const onIdle = () => {
     onLogout();

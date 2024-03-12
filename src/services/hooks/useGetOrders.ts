@@ -1,4 +1,4 @@
-import { GetOrdersResponse } from "@src/constraints/interface/services/response";
+import { GetOrdersRes } from "@src/constraints/interface/services/response";
 import { useMutation } from "@tanstack/react-query";
 import { genAccountServiceUrl } from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
@@ -9,7 +9,7 @@ interface UseGetOrders {
   isError: boolean;
   isSuccess: boolean;
 }
-const handleGetData = async (accountId: string): Promise<GetOrdersResponse> => {
+const handleGetData = async (accountId: string): Promise<GetOrdersRes> => {
   try {
     const res = await axiosInst.get(genAccountServiceUrl(accountId, "order"));
     return res.data;
@@ -18,7 +18,7 @@ const handleGetData = async (accountId: string): Promise<GetOrdersResponse> => {
   }
 };
 
-const handleSuccess = (data: GetOrdersResponse, dispatch: any) => {
+const handleSuccess = (data: GetOrdersRes, dispatch: any) => {
   dispatch(setOrders(data.d));
 };
 
@@ -34,7 +34,7 @@ export const useGetOrders = (): UseGetOrders => {
     isSuccess,
   } = useMutation({
     mutationFn: handleGetData,
-    onSuccess: (data: GetOrdersResponse) => handleSuccess(data, dispatch),
+    onSuccess: (data: GetOrdersRes) => handleSuccess(data, dispatch),
     onError: handleError,
   });
 

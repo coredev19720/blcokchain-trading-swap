@@ -8,7 +8,7 @@ import LanguageToggle from "./components/LanguageToggle";
 import { useLogout } from "@/src/services/hooks/useLogout";
 const Account = () => {
   const t = useTranslations("account");
-  const { onLogout, isSuccess, isError } = useLogout();
+  const { onLogout } = useLogout();
 
   return (
     <Wrapper>

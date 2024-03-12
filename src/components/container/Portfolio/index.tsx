@@ -1,7 +1,7 @@
 "use client";
 import { IOrder } from "@interface/common";
 import * as S from "./styles";
-import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
+import { useAppSelector } from "@src/redux/hooks";
 import { useEffect, useState } from "react";
 import { TOrderActionType } from "@enum/common";
 import DataTable from "./components/DataTable";

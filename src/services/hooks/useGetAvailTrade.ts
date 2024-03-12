@@ -1,4 +1,4 @@
-import { AccountAvailTrade } from "@src/constraints/interface/services/response";
+import { AccAvailTradeRes } from "@src/constraints/interface/services/response";
 import { useMutation } from "@tanstack/react-query";
 import { genAccountServiceUrl } from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
@@ -10,20 +10,19 @@ interface UseGetAvailTrade {
   isError: boolean;
   isSuccess: boolean;
 }
-const handleGetData = async (accountId: string): Promise<AccountAvailTrade> => {
+const handleGetData = async (accountId: string): Promise<AccAvailTradeRes> => {
   try {
     const res = await axiosInst.get(
       genAccountServiceUrl(accountId, "availableTrade")
     );
-    const { d } = res.data;
-    return d;
+    return res.data;
   } catch (e) {
     throw e;
   }
 };
 
-const handleSuccess = (data: AccountAvailTrade, dispatch: any) => {
-  dispatch(setAccountAvailTrade(data));
+const handleSuccess = (data: AccAvailTradeRes, dispatch: any) => {
+  dispatch(setAccountAvailTrade(data.d));
 };
 
 const handleError = (error: unknown) => {
@@ -37,7 +36,7 @@ export const useGetAvailTrade = (): UseGetAvailTrade => {
     isSuccess,
   } = useMutation({
     mutationFn: handleGetData,
-    onSuccess: (data: AccountAvailTrade) => handleSuccess(data, dispatch),
+    onSuccess: (data: AccAvailTradeRes) => handleSuccess(data, dispatch),
     onError: handleError,
   });
 

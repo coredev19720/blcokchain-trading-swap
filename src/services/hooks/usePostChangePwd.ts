@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import apiUrls from "@/src/services/apiUrls";
 import { ChangePasswordRequest } from "@/src/constraints/interface/services/request";
-import { BaseResponse } from "@/src/constraints/interface/services/response";
+import { BaseRes } from "@/src/constraints/interface/services/response";
 import axiosInst from "../Interceptors";
 interface UsePostChangePwd {
   onChangePwd: (data: ChangePasswordRequest) => void;
@@ -10,7 +10,7 @@ interface UsePostChangePwd {
 }
 const handleChangePwd = async (
   data: ChangePasswordRequest
-): Promise<BaseResponse> => {
+): Promise<BaseRes> => {
   try {
     const res = await axiosInst.post(apiUrls.changePwd, data);
     if (res.data.access_token) {

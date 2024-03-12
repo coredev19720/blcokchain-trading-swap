@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import apiUrls from "@/src/services/apiUrls";
 import { CreatePwdRequest } from "@/src/constraints/interface/services/request";
-import { BaseResponse } from "@/src/constraints/interface/services/response";
+import { BaseRes } from "@/src/constraints/interface/services/response";
 import axiosInst from "../Interceptors";
 
 //unimplemented
@@ -12,9 +12,7 @@ interface UsePostCreatePwd {
   error: unknown;
 }
 
-const handleCreatePwd = async (
-  data: CreatePwdRequest
-): Promise<BaseResponse> => {
+const handleCreatePwd = async (data: CreatePwdRequest): Promise<BaseRes> => {
   try {
     const res = await axiosInst.post(apiUrls.forgotPwd, data);
     const { s, ec } = res.data;

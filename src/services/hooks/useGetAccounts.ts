@@ -1,43 +1,29 @@
-import { AccountInfo } from "@src/constraints/interface/services/response";
-import { useMutation } from "@tanstack/react-query";
+import { GetAccountsRes } from "@src/constraints/interface/services/response";
+import { useQuery } from "@tanstack/react-query";
 import apiUrls from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
-import { useAppDispatch } from "@src/redux/hooks";
-import { setAccounts, setActiveAccount } from "@src/redux/features/userSlice";
 interface UseGetAccounts {
-  onGetAccounts: () => void;
   isError: boolean;
   isSuccess: boolean;
+  refetch: () => void;
+  isLoading: boolean;
+  data: GetAccountsRes | undefined;
 }
-const handleGetData = async (): Promise<AccountInfo[]> => {
+const handleGetData = async (): Promise<GetAccountsRes> => {
   try {
     const res = await axiosInst.get(apiUrls.getAcounts);
-    const { d } = res.data;
-    return d;
+    return res.data;
   } catch (e) {
     throw e;
   }
 };
 
-const handleSuccess = (data: AccountInfo[], dispatch: any) => {
-  dispatch(setAccounts(data));
-  dispatch(setActiveAccount(data[0]));
-};
-
-const handleError = (error: unknown) => {
-  console.log("error", error);
-};
 export const useGetAccounts = (): UseGetAccounts => {
-  const dispatch = useAppDispatch();
-  const {
-    mutate: onGetAccounts,
-    isError,
-    isSuccess,
-  } = useMutation({
-    mutationFn: handleGetData,
-    onSuccess: (data: AccountInfo[]) => handleSuccess(data, dispatch),
-    onError: handleError,
+  const { refetch, isError, isSuccess, isLoading, data } = useQuery({
+    queryKey: ["get-accounts"],
+    queryFn: handleGetData,
+    enabled: false,
   });
 
-  return { onGetAccounts, isError, isSuccess };
+  return { isError, isSuccess, refetch, isLoading, data };
 };

@@ -12,7 +12,7 @@ import { formatBigNumber, genPriceColor } from "@src/utils/helpers";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTranslations } from "next-intl";
-import { Stock } from "@/src/constraints/interface/services/response";
+import { Stock } from "@/src/constraints/interface/market";
 
 const Wrapper = styled("div")(() => ({
   display: "flex",

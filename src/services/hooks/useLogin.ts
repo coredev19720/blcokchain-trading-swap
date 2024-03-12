@@ -1,4 +1,4 @@
-import { LoginResponse } from "@src/constraints/interface/services/response";
+import { LoginRes } from "@src/constraints/interface/services/response";
 import { useMutation } from "@tanstack/react-query";
 import apiUrls from "@/src/services/apiUrls";
 import Cookies from "js-cookie";
@@ -18,7 +18,7 @@ const handleLogin = async (data: {
   p: string;
   t: number;
   captchaToken: string;
-}): Promise<LoginResponse> => {
+}): Promise<LoginRes> => {
   try {
     //fix me
     // const validateCaptcha = await axios.post(
@@ -46,7 +46,7 @@ const handleLogin = async (data: {
   }
 };
 
-const handleLoginSuccess = (data: LoginResponse) => {
+const handleLoginSuccess = (data: LoginRes) => {
   if (data.access_token) {
     Cookies.set(
       process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME as string,

@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import apiUrls from "@/src/services/apiUrls";
 import { ForgotPasswordRequest } from "@/src/constraints/interface/services/request";
-import { BaseResponse } from "@/src/constraints/interface/services/response";
+import { BaseRes } from "@/src/constraints/interface/services/response";
 import axiosInst from "../Interceptors";
 interface UsePortForgotPwd {
   onForgotPwd: (data: ForgotPasswordRequest) => void;
@@ -11,9 +11,8 @@ interface UsePortForgotPwd {
 }
 
 const handleForgotPwd = async (
-  
   data: ForgotPasswordRequest
-): Promise<BaseResponse> => {
+): Promise<BaseRes> => {
   try {
     const res = await axiosInst.post(apiUrls.forgotPwd, data);
     const { s, ec } = res.data;

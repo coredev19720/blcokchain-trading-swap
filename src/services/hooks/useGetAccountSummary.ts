@@ -1,44 +1,40 @@
-import { AccountSummary } from "@src/constraints/interface/services/response";
-import { useMutation } from "@tanstack/react-query";
-import apiUrls, { genAccountServiceUrl } from "@/src/services/apiUrls";
+import { GetAccSummaryRes } from "@src/constraints/interface/services/response";
+import { useQuery } from "@tanstack/react-query";
+import { genAccountServiceUrl } from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
 import { useAppDispatch } from "@src/redux/hooks";
 import { setAccountSummary } from "@src/redux/features/userSlice";
 interface UseGetAccountSummary {
-  onGetAccountSummary: (accountId: string) => void;
+  refetch: () => void;
   isError: boolean;
   isSuccess: boolean;
+  isLoading: boolean;
+  data: GetAccSummaryRes | undefined;
 }
-const handleGetData = async (accountId: string): Promise<AccountSummary> => {
+const handleGetData = async (
+  accountId: string,
+  dispatch: any
+): Promise<GetAccSummaryRes> => {
   try {
     const res = await axiosInst.get(
       genAccountServiceUrl(accountId, "summaryAccount")
     );
-    const { d } = res.data;
-    return d;
+    dispatch(setAccountSummary(res.data.d));
+    return res.data;
   } catch (e) {
     throw e;
   }
 };
 
-const handleSuccess = (data: AccountSummary, dispatch: any) => {
-  dispatch(setAccountSummary(data));
-};
-
-const handleError = (error: unknown) => {
-  console.log("error", error);
-};
-export const useGetAccountSummary = (): UseGetAccountSummary => {
+export const useGetAccountSummary = (
+  accountId: string
+): UseGetAccountSummary => {
   const dispatch = useAppDispatch();
-  const {
-    mutate: onGetAccountSummary,
-    isError,
-    isSuccess,
-  } = useMutation({
-    mutationFn: handleGetData,
-    onSuccess: (data: AccountSummary) => handleSuccess(data, dispatch),
-    onError: handleError,
+  const { refetch, isError, isSuccess, isLoading, data } = useQuery({
+    queryKey: [`account-summary-${accountId}`],
+    queryFn: () => handleGetData(accountId, dispatch),
+    enabled: !!accountId,
   });
 
-  return { onGetAccountSummary, isError, isSuccess };
+  return { refetch, isError, isSuccess, isLoading, data };
 };
