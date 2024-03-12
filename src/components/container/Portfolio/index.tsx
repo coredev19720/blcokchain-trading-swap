@@ -2,22 +2,34 @@
 import { IOrder } from "@interface/common";
 import * as S from "./styles";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TOrderActionType } from "@enum/common";
-import { setOrder } from "@src/redux/features/marketSlice";
 import DataTable from "./components/DataTable";
 import PortInfo from "./components/PortInfo";
 import PageHeader from "../../common/PageHeader";
 import { useTranslations } from "next-intl";
+import { useGetPortfolio } from "@/src/services/hooks/useGetPortfolio";
+type Port = {
+  id: string;
+  name: string;
+  price: number;
+  amount: number;
+  total: number;
+};
 const Portfolio = () => {
+  const { onGetPortfolio } = useGetPortfolio();
   const t = useTranslations("portfolio");
-  const order = useAppSelector((state) => state.market.order);
-  const dispatch = useAppDispatch();
+  const { activeAccount } = useAppSelector((state) => state.user);
+  const { ports } = useAppSelector((state) => state.market);
+  const [port, setPort] = useState<Port | null>(null);
   const [type, setType] = useState<TOrderActionType>(TOrderActionType.detail);
   const handleClickOrder = (order: IOrder, type: TOrderActionType) => {
     // dispatch(setOrder(order));
     setType(type);
   };
+  useEffect(() => {
+    activeAccount && onGetPortfolio(activeAccount?.id);
+  }, [activeAccount]);
   return (
     <S.Wrapper>
       <PageHeader title={t("fn_port_txt_title")} />

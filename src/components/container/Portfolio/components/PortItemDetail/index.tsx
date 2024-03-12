@@ -3,7 +3,7 @@ import { SlideLine } from "@src/styles/common";
 import { Backdrop, Slide, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { IPortItem } from "@interface/table";
+import { PortItem } from "@interface/common";
 import Line from "@components/common/Line";
 import RowContent from "@components/common/RowContent";
 import { formatNumber, setLastSymbolToLocalStorage } from "@src/utils/helpers";
@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { TSide } from "@enum/common";
 import { useRouter } from "next/navigation";
 interface IProps {
-  data: IPortItem | null;
+  data: PortItem | null;
   handleClose: () => void;
 }
 const PortItemDetail = ({ data, handleClose }: IProps) => {
@@ -102,46 +102,45 @@ const PortItemDetail = ({ data, handleClose }: IProps) => {
             {/* Khoi luong */}
             <RowContent
               leftTxt={t("en_cu_stock_detail_totalQty")}
-              rightTxt={data?.qty}
+              rightTxt={data?.total}
             />
             {/* Kha dung */}
             <RowContent
               leftTxt={t("en_cu_stock_detail_sellableQty")}
-              rightTxt={data?.tradableQty}
+              rightTxt={data?.trade}
             />
             {/* Gia von */}
             <RowContent
               leftTxt={t("en_cu_stock_detail_boPrice")}
-              rightTxt={data?.price}
+              rightTxt={data?.costPrice}
             />
             {/* Gia tri von */}
             <RowContent
               leftTxt={t("en_cu_stock_detail_boValue")}
-              rightTxt={formatNumber(data ? data?.price * data?.qty * 1000 : 0)}
+              rightTxt={formatNumber(data ? data.costPriceAmt : 0)}
             />
             <Line />
             {/* Gia thi truong */}
+            {/* mapping */}
             <RowContent
               leftTxt={t("en_cu_stock_detail_mktprice")}
-              rightTxt={data?.marketPrice}
+              rightTxt={data?.basicPriceAmt}
             />
             {/* Gia tri thi truong */}
             <RowContent
               leftTxt={t("en_cu_stock_detail_mktValue")}
-              rightTxt={formatNumber(
-                data ? data.marketPrice * data.qty * 1000 : 0
-              )}
+              rightTxt={formatNumber(data ? data.basicPriceAmt : 0)}
             />
             <Line />
             {/* lai lo du tinh */}
             <RowContent
               leftTxt={t("en_cu_stock_detail_absolutePL")}
-              rightTxt={data?.tradableQty}
+              rightTxt={data?.pnlamt}
             />
             {/* % lai lo du tinh */}
             <RowContent
               leftTxt={t("en_cu_stock_detail_percentPL")}
-              rightTxt={data?.tradableQty}
+              rightTxt={data?.pnlrate}
             />
           </S.Content>
           <S.Actions>

@@ -9,17 +9,6 @@ import {
   TViSide,
 } from "../enum/common";
 
-export interface IUserInfo {
-  name: string;
-  email: string;
-}
-
-export interface ILoginForm {
-  username: string;
-  pwd: string;
-  expireTime: number;
-}
-
 export interface ITickerData {
   symbol: string;
   companyName: string;
@@ -65,27 +54,14 @@ export interface IHistoryDeal {
   vol: number;
 }
 
-export interface IMenuItem {
+export interface MenuItem {
   label: string;
   icon: any;
   url: string;
   activeIcon: any;
 }
 
-export interface IAccount {
-  type: TAccountType;
-  accountNo: string;
-  totalAsset: number;
-  cashPayables: number;
-  receivingCash: number;
-  buyingPower: number;
-  cashBalance: number;
-  coh: number;
-  accessEquity: number;
-  portValue: number;
-}
-
-export interface ILang {
+export interface Language {
   label: string;
   value: string;
   icon: any;
@@ -188,4 +164,35 @@ export interface OrderWaitMatchedInfo {
   timetype: string; // Kiểu lệnh (Trong ngày, Điều kiện)
   timetypevalue: string; // Mã kiểu lệnh(T: Trong ngày, G: Điều kiện)
   remainamt: number; // Giá trị chờ khớp
+}
+
+export interface PortItem {
+  accountID: string;
+  symbol: string;
+  total: number;
+  trade: number;
+  blocked: number;
+  vsdMortgage: number;
+  restrict: number;
+  receivingRight: number;
+  receivingT0: number;
+  receivingT1: number;
+  receivingT2: number;
+  costPrice: number;
+  withDraw: number;
+  mortgage: number;
+  basicPrice: number;
+  isSell: "Y" | "N";
+  sectype: string;
+  pnlamt: number;
+  pnlrate: string;
+  closeprice: string;
+  sending: number;
+  alldeposit: number;
+  mrratiorate: number;
+  costPriceAmt: number;
+  basicPriceAmt: number;
+  totalpnl: number;
+  otherqtty: number;
+  mortCty: number;
 }

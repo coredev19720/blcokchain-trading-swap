@@ -1,4 +1,4 @@
-import { ILang, IMenuItem, IStringOpts } from "@interface/common";
+import { Language, MenuItem, IStringOpts } from "@interface/common";
 import {
   menuIconAccount,
   menuIconTrading,
@@ -14,7 +14,7 @@ import {
 } from "../images";
 import { TOrderType } from "@enum/common";
 
-export const menus: IMenuItem[] = [
+export const menus: MenuItem[] = [
   {
     label: "mn_market",
     icon: menuIconMarket,
@@ -47,7 +47,7 @@ export const menus: IMenuItem[] = [
   },
 ];
 
-export const languages: ILang[] = [
+export const languages: Language[] = [
   { label: "English", value: "en", icon: engFlag },
   { label: "Tiếng Việt", value: "vi", icon: vieFlag },
 ];

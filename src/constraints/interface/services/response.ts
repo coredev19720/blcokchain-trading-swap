@@ -1,4 +1,4 @@
-import { OrderInfo, OrderWaitMatchedInfo } from "../common";
+import { OrderInfo, OrderWaitMatchedInfo, PortItem } from "../common";
 
 export interface BaseResponse {
   s: string;
@@ -222,4 +222,8 @@ export interface GetOrdersResponse extends BaseResponse {
 
 export interface GetWaitMatchedOrdersResponse extends BaseResponse {
   d: OrderWaitMatchedInfo[];
+}
+
+export interface GetPortfolioResponse extends BaseResponse {
+  d: PortItem[];
 }

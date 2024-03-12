@@ -47,19 +47,19 @@ const Update = ({ data, handleClose }: IProps) => {
     console.log("handleRequestOTP");
   };
   const handleSubmit = () => {
-    if (order) {
-      try {
-        const ord: IOrder = {
-          ...order,
-          price: updatePrice,
-        };
-        dispatch(updateOrders(ord));
-      } catch (e) {
-        console.log(e);
-      } finally {
-        handleClose();
-      }
-    }
+    // if (order) {
+    //   try {
+    //     const ord: IOrder = {
+    //       ...order,
+    //       price: updatePrice,
+    //     };
+    //     dispatch(updateOrders(ord));
+    //   } catch (e) {
+    //     console.log(e);
+    //   } finally {
+    //     handleClose();
+    //   }
+    // }
   };
   const handleChangeOTP = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length <= 6) {

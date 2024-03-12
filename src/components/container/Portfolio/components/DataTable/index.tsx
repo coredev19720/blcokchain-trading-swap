@@ -1,5 +1,6 @@
 import StyledTable from "@components/common/StyledTable";
-import { IColumn, IPortItem } from "@interface/table";
+import { IColumn } from "@interface/table";
+import { PortItem } from "@/src/constraints/interface/common";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { formatNumber, genChgTextClass } from "@src/utils/helpers";
 import { Typography } from "@mui/material";
@@ -19,7 +20,7 @@ const MarketDepth = () => {
     return (((currentPrice - prevPrice) / prevPrice) * 100).toFixed(2);
   };
 
-  const handleClickItem = (item: IPortItem, idx: number) => {
+  const handleClickItem = (item: PortItem, idx: number) => {
     dispatch(setPort(item));
   };
 
@@ -32,7 +33,7 @@ const MarketDepth = () => {
   const columns: IColumn[] = [
     {
       title: t("sb_info_symbol"),
-      render: (row: IPortItem) => (
+      render: (row: PortItem) => (
         <Typography
           fontWeight={600}
           color="text.primary"
@@ -47,29 +48,31 @@ const MarketDepth = () => {
     },
     {
       title: t("en_cu_stock_list_totalQty"),
-      render: (row: IPortItem) => (
+      render: (row: PortItem) => (
         <Typography variant="body2" color="text.primary">
-          {formatNumber(row.qty)}
+          {formatNumber(row.total)}
         </Typography>
       ),
       align: "right",
     },
     {
       title: t("en_cu_stock_list_valueKVND"),
-      render: (row: IPortItem) => (
+      render: (row: PortItem) => (
         <Typography variant="body2" fontWeight={600} color="text.primary">
-          {formatNumber(row.price * row.qty * 1000)}
+          {formatNumber(row.costPriceAmt)}
         </Typography>
       ),
       align: "right",
     },
     {
       title: t("en_cu_stock_list_autoPL"),
-      render: (row: IPortItem) => {
-        const chgPct = genChgPct(row.marketPrice, row.price);
+      render: (row: PortItem) => {
         return (
-          <Typography variant="body2" color={genChgTextClass(Number(chgPct))}>
-            {chgPct}%
+          <Typography
+            variant="body2"
+            color={genChgTextClass(Number(row.pnlrate))}
+          >
+            {row.pnlrate}%
           </Typography>
         );
       },

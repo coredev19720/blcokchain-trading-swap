@@ -1,6 +1,6 @@
 import { TMarket, TOrderKind, TOrderType, TSide } from "@enum/common";
-import { ITicket, IOrder, OrderInfo } from "@interface/common";
-import { IPortItem } from "@interface/table";
+import { ITicket, OrderInfo } from "@interface/common";
+import { PortItem } from "@interface/common";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Stock } from "@/src/constraints/interface/services/response";
 
@@ -10,8 +10,8 @@ type MarketState = {
   stocks: Stock[];
   orders: OrderInfo[];
   order: OrderInfo | null;
-  ports: IPortItem[];
-  port: IPortItem | null;
+  ports: PortItem[];
+  port: PortItem | null;
 };
 
 const initialState = {
@@ -61,10 +61,10 @@ export const market = createSlice({
     setOrders: (state, action: PayloadAction<OrderInfo[]>) => {
       state.orders = action.payload;
     },
-    setPort: (state, action: PayloadAction<IPortItem | null>) => {
+    setPort: (state, action: PayloadAction<PortItem | null>) => {
       state.port = action.payload;
     },
-    setPorts: (state, action: PayloadAction<IPortItem[]>) => {
+    setPorts: (state, action: PayloadAction<PortItem[]>) => {
       state.ports = action.payload;
     },
     setStocks: (state, action: PayloadAction<Stock[]>) => {

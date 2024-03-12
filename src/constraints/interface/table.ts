@@ -14,10 +14,4 @@ export interface IColumn {
   isCheck?: boolean;
 }
 
-export interface IPortItem {
-  symbol: string;
-  qty: number;
-  marketPrice: number;
-  price: number;
-  tradableQty: number;
-}
+
