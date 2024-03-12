@@ -1,45 +1,39 @@
 import { Stock } from "@src/constraints/interface/market";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import apiUrls from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
 import { useAppDispatch } from "@src/redux/hooks";
 import { setStocks } from "@/src/redux/features/marketSlice";
+import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
+import { GetInstrumentsRes } from "@/src/constraints/interface/services/response";
 interface UseGetInstruments {
-  onGetInstruments: () => void;
   isError: boolean;
   isSuccess: boolean;
+  isLoading: boolean;
+  refetch: () => void;
 }
-const handleGetData = async (): Promise<Stock[]> => {
+const handleGetData = async (
+  dispatch: Dispatch<UnknownAction>
+): Promise<GetInstrumentsRes> => {
   try {
     const res = await axiosInst.get(apiUrls.getInstruments);
     const { d, s, ec } = res.data;
     if (s === "ok") {
-      return d;
+      dispatch(setStocks(d));
+      return res.data;
     }
     throw new Error(ec);
   } catch (e) {
     throw e;
   }
 };
-
-const handleSuccess = (data: Stock[], dispatch: any) => {
-  dispatch(setStocks(data));
-};
-
-const handleError = (error: unknown) => {
-  console.log("error", error);
-};
 export const useGetInstruments = (): UseGetInstruments => {
   const dispatch = useAppDispatch();
-  const {
-    mutate: onGetInstruments,
-    isError,
-    isSuccess,
-  } = useMutation({
-    mutationFn: handleGetData,
-    onSuccess: (data: Stock[]) => handleSuccess(data, dispatch),
-    onError: handleError,
+  const { isError, isSuccess, isLoading, refetch } = useQuery({
+    queryKey: ["instruments"],
+    queryFn: () => handleGetData(dispatch),
+    enabled: false,
   });
 
-  return { onGetInstruments, isError, isSuccess };
+  return { refetch, isLoading, isError, isSuccess };
 };

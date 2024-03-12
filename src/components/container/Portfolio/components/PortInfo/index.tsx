@@ -3,7 +3,9 @@ import * as S from "./styles";
 import { useTranslations } from "next-intl";
 import { formatNumber } from "@src/utils/helpers";
 import { FlexContent } from "@src/styles/common";
+import { useAppSelector } from "@/src/redux/hooks";
 const PortInfo = () => {
+  const { accountSummary } = useAppSelector((state) => state.user);
   const t = useTranslations("portfolio");
 
   return (
@@ -13,7 +15,7 @@ const PortInfo = () => {
           {t("en_cu_stock_sum_onhandVal")}
         </Typography>
         <Typography variant="body2" fontWeight={600} color="text.primary">
-          {formatNumber(12345678)}
+          {formatNumber(accountSummary?.totalseamt || 0)}
         </Typography>
       </FlexContent>
       <FlexContent>
@@ -21,7 +23,7 @@ const PortInfo = () => {
           {t("en_cu_stock_sum_receivingVal")}
         </Typography>
         <Typography variant="body2" fontWeight={600} color="text.primary">
-          0
+          {formatNumber(accountSummary?.totalbuyamt || 0)}
         </Typography>
       </FlexContent>
     </S.Wrapper>

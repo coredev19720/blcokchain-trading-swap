@@ -17,19 +17,15 @@ type Port = {
   total: number;
 };
 const Portfolio = () => {
-  const { onGetPortfolio } = useGetPortfolio();
-  const t = useTranslations("portfolio");
   const { activeAccount } = useAppSelector((state) => state.user);
-  const { ports } = useAppSelector((state) => state.market);
+  const { isLoading } = useGetPortfolio(activeAccount?.id || "");
+  const t = useTranslations("portfolio");
   const [port, setPort] = useState<Port | null>(null);
   const [type, setType] = useState<TOrderActionType>(TOrderActionType.detail);
   const handleClickOrder = (order: IOrder, type: TOrderActionType) => {
     // dispatch(setOrder(order));
     setType(type);
   };
-  useEffect(() => {
-    activeAccount && onGetPortfolio(activeAccount?.id);
-  }, [activeAccount]);
   return (
     <S.Wrapper>
       <PageHeader title={t("fn_port_txt_title")} />

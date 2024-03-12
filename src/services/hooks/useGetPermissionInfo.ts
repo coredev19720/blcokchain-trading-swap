@@ -1,42 +1,38 @@
 import { GetAccPermissionRes } from "@src/constraints/interface/services/response";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import apiUrls from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
 import { useAppDispatch } from "@src/redux/hooks";
 import { setPermissions } from "@src/redux/features/userSlice";
+import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
+
 interface UseGetPermissionInfo {
-  onGetPermission: () => void;
   isError: boolean;
   isSuccess: boolean;
+  isLoading: boolean;
+  refetch: () => void;
 }
-const handleGetPermission = async (): Promise<GetAccPermissionRes> => {
+const handleGetData = async (
+  dispatch: Dispatch<UnknownAction>
+): Promise<GetAccPermissionRes> => {
   try {
     const res = await axiosInst.get(apiUrls.getPermissionInfo);
-    const { accounts } = res.data;
-    return accounts;
+    const { s, ec, d } = res.data;
+    if (s === "ok") {
+      dispatch(setPermissions(d));
+    }
+    throw new Error(ec);
   } catch (e) {
     throw e;
   }
 };
 
-const handleSuccess = (data: GetAccPermissionRes, dispatch: any) => {
-  dispatch(setPermissions(data.d.accounts));
-};
-
-const handleError = (error: unknown) => {
-  console.log("error", error);
-};
 export const useGetPermissionInfo = (): UseGetPermissionInfo => {
   const dispatch = useAppDispatch();
-  const {
-    mutate: onGetPermission,
-    isError,
-    isSuccess,
-  } = useMutation({
-    mutationFn: handleGetPermission,
-    onSuccess: (data: GetAccPermissionRes) => handleSuccess(data, dispatch),
-    onError: handleError,
+  const { isError, isSuccess, isLoading, refetch } = useQuery({
+    queryKey: ["get-permissions"],
+    queryFn: () => handleGetData(dispatch),
   });
 
-  return { onGetPermission, isError, isSuccess };
+  return { isError, isSuccess, isLoading, refetch };
 };

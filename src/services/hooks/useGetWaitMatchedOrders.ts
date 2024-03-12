@@ -1,46 +1,43 @@
 import { GetWaitMatchedOrdersRes } from "@src/constraints/interface/services/response";
-import { useMutation } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { genAccountServiceUrl } from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
 import { useAppDispatch } from "@src/redux/hooks";
+import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
 interface UseGetWaitMatchedOrders {
-  onGetWaitMatchedOrders: (accountId: string) => void;
   isError: boolean;
   isSuccess: boolean;
+  isLoading: boolean;
+  refetch: () => void;
 }
 const handleGetData = async (
-  accountId: string
+  accountId: string,
+  dispatch: Dispatch<UnknownAction>
 ): Promise<GetWaitMatchedOrdersRes> => {
   try {
     const res = await axiosInst.get(
       genAccountServiceUrl(accountId, "waitMatchedOrder")
     );
-    const { d } = res.data;
-    return d;
+    const { s, ec, d } = res.data;
+    if (s === "ok") {
+      //unimplemented
+      return res.data;
+    }
+    throw new Error(ec);
   } catch (e) {
     throw e;
   }
 };
 
-const handleSuccess = (data: GetWaitMatchedOrdersRes, dispatch: any) => {
-  console.log(data);
-  // dispatch(setOrders(data.d));
-};
-
-const handleError = (error: unknown) => {
-  console.log("error", error);
-};
-export const useGetWaitMatchedOrders = (): UseGetWaitMatchedOrders => {
+export const useGetWaitMatchedOrders = (
+  accountId: string
+): UseGetWaitMatchedOrders => {
   const dispatch = useAppDispatch();
-  const {
-    mutate: onGetWaitMatchedOrders,
-    isError,
-    isSuccess,
-  } = useMutation({
-    mutationFn: handleGetData,
-    onSuccess: (data: GetWaitMatchedOrdersRes) => handleSuccess(data, dispatch),
-    onError: handleError,
+  const { isError, isSuccess, isLoading, refetch } = useQuery({
+    queryKey: ["get-matched-orders", accountId],
+    queryFn: () => handleGetData(accountId, dispatch),
+    enabled: !!accountId,
   });
 
-  return { onGetWaitMatchedOrders, isError, isSuccess };
+  return { isError, isSuccess, isLoading, refetch };
 };
