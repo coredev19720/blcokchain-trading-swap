@@ -11,9 +11,10 @@ import { useLogin } from "@/src/services/hooks/useLogin";
 import { encrypt } from "@src/libs/hash";
 import { useRouter, useParams } from "next/navigation";
 import TextInput from "@/src/components/common/TextInput";
+import LoadingButton from "@/src/components/common/LoadingButton";
 
 const LoginForm = () => {
-  const { onLogin, isError, isSuccess } = useLogin();
+  const { onLogin, isError, isSuccess, isPending } = useLogin();
   const tNoti = useTranslations("notification");
   const t = useTranslations("login");
   const router = useRouter();
@@ -189,13 +190,13 @@ const LoginForm = () => {
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
           // onChange={onRecaptchaChange}
         />
-        <Button
+        <LoadingButton
           variant="contained"
           onClick={handleSubmit(handleLogin)}
           size="large"
-        >
-          {t("fn_login_cta_login")}
-        </Button>
+          loading={isPending || isSuccess}
+          text={t("fn_login_cta_login")}
+        />
       </Wrapper>
     </form>
   );

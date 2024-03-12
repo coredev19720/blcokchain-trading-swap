@@ -12,6 +12,7 @@ interface UseLogin {
   }) => void;
   isError: boolean;
   isSuccess: boolean;
+  isPending: boolean;
 }
 const handleLogin = async (data: {
   u: string;
@@ -78,11 +79,12 @@ export const useLogin = (): UseLogin => {
     mutate: onLogin,
     isError,
     isSuccess,
+    isPending,
   } = useMutation({
     mutationFn: handleLogin,
     onSuccess: handleLoginSuccess,
     onError: handleLoginError,
   });
 
-  return { onLogin, isError, isSuccess };
+  return { onLogin, isError, isSuccess, isPending };
 };
