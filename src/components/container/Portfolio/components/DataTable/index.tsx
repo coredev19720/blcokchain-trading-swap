@@ -13,13 +13,8 @@ import { useRouter } from "next/navigation";
 const MarketDepth = () => {
   const t = useTranslations("portfolio");
   const router = useRouter();
-  const ports = useAppSelector((state) => state.market.ports);
-  const port = useAppSelector((state) => state.market.port);
+  const { ports, port } = useAppSelector((state) => state.market);
   const dispatch = useAppDispatch();
-  const genChgPct = (currentPrice: number, prevPrice: number) => {
-    return (((currentPrice - prevPrice) / prevPrice) * 100).toFixed(2);
-  };
-
   const handleClickItem = (item: PortItem, idx: number) => {
     dispatch(setPort(item));
   };

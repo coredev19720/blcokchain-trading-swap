@@ -19,6 +19,7 @@
     "@reduxjs/toolkit": "^2.0.1",
     "@t3-oss/env-nextjs": "^0.7.1",
     "@tanstack/react-query": "^5.26.3",
+    "@tanstack/react-query-devtools": "^5.27.8",
     "axios": "^1.6.2",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.10",

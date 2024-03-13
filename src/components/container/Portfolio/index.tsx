@@ -18,8 +18,9 @@ type Port = {
 };
 const Portfolio = () => {
   const { activeAccount } = useAppSelector((state) => state.user);
-  const { isLoading } = useGetPortfolio(activeAccount?.id || "");
+  const { isLoading, data } = useGetPortfolio(activeAccount?.id || "");
   const t = useTranslations("portfolio");
+  console.log("data", data);
   const [port, setPort] = useState<Port | null>(null);
   const [type, setType] = useState<TOrderActionType>(TOrderActionType.detail);
   const handleClickOrder = (order: IOrder, type: TOrderActionType) => {

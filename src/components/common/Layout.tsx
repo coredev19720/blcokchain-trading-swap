@@ -1,15 +1,12 @@
 "use client";
 import { styled } from "@mui/system";
 import colors from "@src/themes/colors";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { PageWrapper, MainContent } from "@src/styles/common";
 import { ToastContainer } from "react-toastify";
 import Menu from "./Menu";
 import { publicUrls } from "@src/constants/routes";
 import { usePathname, useParams } from "next/navigation";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useGetPermissionInfo } from "@/src/services/hooks/useGetPermissionInfo";
-
 // import io from "socket.io-client/dist/socket.io";
 const Wrapper = styled("main")(({ theme }) => ({
   height: "100%",
@@ -25,7 +22,6 @@ export default function Layout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const params = useParams();
   let isPublic = publicUrls.some((x) => `/${params?.locale}/${x}` === pathname);
-  const queryClient = new QueryClient();
 
   // useEffect(() => {
   //   let socket: io.Socket;
@@ -53,23 +49,21 @@ export default function Layout({ children }: { children: ReactNode }) {
   //   console.log("Connected to the server");
   // };
   return (
-    <QueryClientProvider client={queryClient}>
-      <Wrapper>
-        <PageWrapper>
-          <MainContent>{children}</MainContent>
-          {!isPublic && <Menu />}
-        </PageWrapper>
-        <ToastContainer
-          position="bottom-center"
-          autoClose={2000}
-          hideProgressBar={true}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnHover
-          theme="light"
-        />
-      </Wrapper>
-    </QueryClientProvider>
+    <Wrapper>
+      <PageWrapper>
+        <MainContent>{children}</MainContent>
+        {!isPublic && <Menu />}
+      </PageWrapper>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnHover
+        theme="light"
+      />
+    </Wrapper>
   );
 }

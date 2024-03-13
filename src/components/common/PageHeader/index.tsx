@@ -6,6 +6,7 @@ import { setActiveAccount } from "@src/redux/features/userSlice";
 import { Sync } from "@mui/icons-material";
 import { AccInfo } from "@/src/constraints/interface/account";
 import { useGetAccountSummary } from "@src/services/hooks/useGetAccountSummary";
+import { useEffect } from "react";
 interface Props {
   title: string;
   refresh?: boolean;
@@ -15,8 +16,6 @@ const PageHeader = ({ title, refresh }: Props) => {
   const dispatch = useAppDispatch();
   const { activeAccount, accounts } = useAppSelector((state) => state.user);
   const { refetch } = useGetAccountSummary(activeAccount?.id || "");
-  console.log(activeAccount?.id);
-  console.log(accounts);
   const handleChangeAccount = (e: SelectChangeEvent<unknown>) => {
     if (typeof e.target.value === "string") {
       const availAcc = accounts.find((acc) => acc.id === e.target.value);
@@ -24,8 +23,11 @@ const PageHeader = ({ title, refresh }: Props) => {
     }
   };
   const handleRefresh = () => {
-    refetch();
+    // refetch();
   };
+  useEffect(() => {
+    console.log("mount");
+  }, []);
   return (
     <S.Wrapper>
       <S.Title>

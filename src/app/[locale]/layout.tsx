@@ -6,6 +6,8 @@ import { AppConfig } from "@src/utils/AppConfig";
 import ThemeRegistry from "../ThemeRegistry";
 import { Providers } from "@src/redux/provider";
 import Layout from "@components/common/Layout";
+import TanstackProviders from "@/src/providers/TanstackProviders";
+
 export const metadata: Metadata = {
   icons: [
     {
@@ -45,11 +47,13 @@ export default function RootLayout({
     <html lang={locale}>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <ThemeRegistry options={{ key: "mui" }}>
-            <Providers>
-              <Layout>{children}</Layout>
-            </Providers>
-          </ThemeRegistry>
+          <TanstackProviders>
+            <ThemeRegistry options={{ key: "mui" }}>
+              <Providers>
+                <Layout>{children}</Layout>
+              </Providers>
+            </ThemeRegistry>
+          </TanstackProviders>
         </NextIntlClientProvider>
       </body>
     </html>

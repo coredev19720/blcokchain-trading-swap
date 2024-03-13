@@ -73,3 +73,21 @@ export enum TViSide {
   mua = "mua",
   ban = "bán",
 }
+
+export enum TOrderStatus {
+  Open = "Open",
+  Send = "Send",
+  Canceled = "Canceled",
+  Rejected = "Rejected",
+  Admending = "Admending",
+  Matched = "Matched",
+  Expired = "Expired",
+  Canceling = "Canceling",
+  Successful = "Successful",
+  Pending = "Pending",
+  Admended = "Admended",
+  Sending = "Sending",
+  MatchedAll = "Matched all",
+  WaitForConfirmation = "Wait for confirmation",
+  WaitBankDeposits = "Wait bank deposits",
+}
