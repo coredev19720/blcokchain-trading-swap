@@ -7,10 +7,19 @@ type Props = {
   size?: "small" | "medium" | "large";
   variant?: "text" | "outlined" | "contained";
   loading?: boolean;
+  fullWidth?: boolean;
 };
-const LoadingButton = ({ text, onClick, size, variant, loading }: Props) => {
+const LoadingButton = ({
+  text,
+  onClick,
+  size,
+  variant,
+  loading,
+  fullWidth,
+}: Props) => {
   return (
     <Button
+      fullWidth={fullWidth}
       variant={variant || "contained"}
       onClick={onClick}
       size={size || "medium"}

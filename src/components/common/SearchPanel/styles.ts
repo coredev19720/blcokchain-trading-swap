@@ -16,7 +16,6 @@ export const TickerWrapper = styled("div")(({ theme }) => ({
   cursor: "pointer",
   display: "flex",
   flexDirection: "column",
-  gap: 8,
 }));
 
 export const Tickers = styled("div")(({ theme }) => ({

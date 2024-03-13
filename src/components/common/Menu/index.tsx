@@ -11,18 +11,9 @@ import { useFetchInitData } from "@/src/services/hooks/useFetchInitData";
 import { useAppSelector } from "@/src/redux/hooks";
 import Cookies from "js-cookie";
 const Menu = () => {
-  const { accounts, permissions, customerInfo, activeAccount } = useAppSelector(
-    (state) => state.user
-  );
-  const {
-    refetch: fetchData,
-    isLoading: fetchDataLoading,
-    isError: fetchDataError,
-    isSuccess: fetchDataSuccess,
-    data,
-  } = useFetchInitData();
-  const { stocks } = useAppSelector((state) => state.market);
-  const { onLogout, isError, isSuccess } = useLogout();
+  const { activeAccount } = useAppSelector((state) => state.user);
+  const { refetch: fetchData } = useFetchInitData();
+  const { onLogout } = useLogout();
   const { refetch } = useGetAccountSummary(activeAccount?.id || "");
   const pathname = usePathname();
   const router = useRouter();
@@ -44,16 +35,6 @@ const Menu = () => {
       !activeAccount && fetchData();
     }
   }, []);
-  useEffect(() => {
-    if (isSuccess || isError) {
-      const locale = params?.locale;
-      if (locale) {
-        router.push(`/${locale}/login`);
-      }
-      router.push("/");
-    }
-  }, [isSuccess, isError]);
-
   const onIdle = () => {
     onLogout();
   };

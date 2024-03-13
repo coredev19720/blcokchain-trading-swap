@@ -4,8 +4,7 @@ import Cookies from "js-cookie";
 import axiosInst from "../Interceptors";
 interface UseLogout {
   onLogout: () => void;
-  isError: boolean;
-  isSuccess: boolean;
+  isPending: boolean;
 }
 const handleLogout = async () => {
   //unimplement
@@ -21,18 +20,13 @@ const handleLogout = async () => {
     Cookies.remove(process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME as string);
     Cookies.remove(process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME as string);
     const locale = Cookies.get("NEXT_LOCALE");
-    console.log(locale);
     window.location.href = `/${locale}/login`;
   }
 };
 export const useLogout = (): UseLogout => {
-  const {
-    mutate: onLogout,
-    isError,
-    isSuccess,
-  } = useMutation({
+  const { mutate: onLogout, isPending } = useMutation({
     mutationFn: handleLogout,
   });
 
-  return { onLogout, isError, isSuccess };
+  return { onLogout, isPending };
 };

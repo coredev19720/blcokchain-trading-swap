@@ -62,7 +62,6 @@ const resRejected = async (error: any) => {
       return axiosInst(originalRequest);
     } catch (error) {
       const locale = Cookies.get("NEXT_LOCALE");
-      console.log("Error refreshing token:", error);
       // Clear tokens and log out the user
       Cookies.remove(process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME as string);
       Cookies.remove(

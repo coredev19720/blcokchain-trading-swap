@@ -10,6 +10,7 @@ export const Wrapper = styled("div")(({ theme }) => ({
 }));
 export const SideBtn = styled(Button)(() => ({
   borderRadius: 24,
+  width: 84,
 }));
 
 export const GroupButton = styled("div")(() => ({

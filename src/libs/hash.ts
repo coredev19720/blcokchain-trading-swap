@@ -9,7 +9,6 @@ export const encrypt = (text: string) => {
     const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
     return encrypted.toString("hex");
   } catch (error) {
-    console.log("encrypt error", error);
     throw new Error(`MSG_001`); // encrypt error
   }
 };

@@ -33,7 +33,6 @@ const handleLogin = async (data: {
     const res = await axiosInst.post(apiUrls.login, {
       data: { u: data.u, p: data.p },
     });
-    console.log("res", res);
     if (res.data.access_token) {
       window.localStorage.setItem(
         process.env.NEXT_PUBLIC_IDLE_STO_NAME || "idle_time",

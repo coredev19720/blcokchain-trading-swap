@@ -13,6 +13,8 @@ export const Wrapper = styled("div")(() => ({
 export const AccountSelect = styled(Select)(() => ({
   padding: 0,
   background: "none",
+  fontSize: 12,
+  height: "auto",
   "&:before, &:after": {
     borderBottom: "none",
   },
@@ -20,6 +22,7 @@ export const AccountSelect = styled(Select)(() => ({
     background: "none",
   },
   "& .MuiSelect-select": {
+    padding: 0,
     "&:hover, &:focus": {
       background: "none",
     },

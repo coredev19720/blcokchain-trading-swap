@@ -46,7 +46,6 @@ const LoginForm = () => {
     field: string
   ) => {
     if (e.keyCode === 13) {
-      console.log(field);
       switch (field) {
         case "username":
           pwdRef.current?.focus();

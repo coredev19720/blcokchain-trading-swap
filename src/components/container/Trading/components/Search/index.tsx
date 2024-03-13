@@ -9,7 +9,7 @@ import SearchPanel from "@components/common/SearchPanel";
 const Search = () => {
   const t = useTranslations("trade");
   const dispatch = useAppDispatch();
-  const ticket = useAppSelector((state) => state.market.ticket);
+  const { ticket } = useAppSelector((state) => state.market);
   const [openPanel, setOpenPanel] = useState<boolean>(false);
   const handleChangeSide = (side: TSide) => {
     dispatch(setTicket({ ...ticket, side }));
@@ -18,6 +18,7 @@ const Search = () => {
     <S.Wrapper>
       <S.GroupButton>
         <S.SideBtn
+          size="small"
           variant="contained"
           onClick={() => handleChangeSide(TSide.buy)}
           color={ticket.side === TSide.buy ? "success" : "secondary"}
@@ -25,9 +26,10 @@ const Search = () => {
           {t("fn_trade_cta_buyToggle")}
         </S.SideBtn>
         <S.SideBtn
+          size="small"
           variant="contained"
-          onClick={() => handleChangeSide(TSide.buy)}
-          color={ticket.side === TSide.buy ? "error" : "secondary"}
+          onClick={() => handleChangeSide(TSide.sell)}
+          color={ticket.side === TSide.sell ? "error" : "secondary"}
         >
           {t("fn_trade_cta_sellToggle")}
         </S.SideBtn>

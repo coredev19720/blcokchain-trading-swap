@@ -132,6 +132,7 @@ const Button = {
       padding: "6px 14px",
     },
     sizeSmall: {
+      height: 32,
       fontSize: "1.2rem",
       lineHeight: "1.6rem",
       padding: "8px 16px",

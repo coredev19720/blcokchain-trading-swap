@@ -42,7 +42,7 @@ const components = {
   MuiCheckbox: Checkbox,
   MuiRadio: Radio,
   MuiPaper: Paper,
-  MuMenuItem: MenuItem,
+  MuiMenuItem: MenuItem,
   MuiMenu: Menu,
   MuiListItemText: ListItemText,
   MuiTooltip: Tooltip,

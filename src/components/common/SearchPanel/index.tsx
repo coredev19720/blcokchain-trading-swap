@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { setTicker, setTicket } from "@src/redux/features/marketSlice";
 import { setLastSymbolToLocalStorage } from "@src/utils/helpers";
 import { Stock } from "@/src/constraints/interface/market";
+import { List, AutoSizer } from "react-virtualized";
 
 interface IProps {
   open: boolean;
@@ -40,7 +41,40 @@ const SearchPanel = ({ open, setOpenPanel }: IProps) => {
             openPanel={open}
             setSearchText={setSearchText}
           />
-          <Tickers>
+          <AutoSizer>
+            {({ height, width }) => {
+              return (
+                <List
+                  width={width}
+                  height={height - 42}
+                  rowCount={
+                    stocks.filter((x) => x.symbol.includes(searchText)).length
+                  }
+                  rowHeight={46}
+                  rowRenderer={({ key, index, style }) => {
+                    const stock = stocks.filter((x) =>
+                      x.symbol.includes(searchText)
+                    )[index];
+                    return (
+                      <TickerWrapper
+                        key={key}
+                        style={style}
+                        onClick={() => handleClickTicker(stock)}
+                      >
+                        <Typography fontWeight={600} color="text.primary">
+                          {stock.symbol}
+                        </Typography>
+                        <Typography variant="subtitle2" fontWeight={400}>
+                          {stock.FullName}
+                        </Typography>
+                      </TickerWrapper>
+                    );
+                  }}
+                />
+              );
+            }}
+          </AutoSizer>
+          {/* <Tickers>
             {stocks
               .filter((x) => x.symbol.includes(searchText))
               .map((x) => (
@@ -56,7 +90,7 @@ const SearchPanel = ({ open, setOpenPanel }: IProps) => {
                   </Typography>
                 </TickerWrapper>
               ))}
-          </Tickers>
+          </Tickers> */}
         </Wrapper>
       </Slide>
     </Backdrop>
