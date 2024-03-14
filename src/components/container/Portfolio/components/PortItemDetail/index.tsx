@@ -11,6 +11,7 @@ import { setTicker, setTicket } from "@src/redux/features/marketSlice";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { TSide } from "@enum/common";
 import { useRouter } from "next/navigation";
+import { handleSlideDown } from "@src/utils/behaviors";
 interface IProps {
   data: PortItem | null;
   handleClose: () => void;
@@ -20,44 +21,19 @@ const PortItemDetail = ({ data, handleClose }: IProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { ticket, stocks } = useAppSelector((state) => state.market);
-  const [startY, setStartY] = useState(null);
-  const [currentY, setCurrentY] = useState(null);
+  const [startY, setStartY] = useState<number | null>(null);
+  const [currentY, setCurrentY] = useState<number | null>(null);
   const [isSliding, setIsSliding] = useState(false);
   useEffect(() => {
-    const handleTouchStart = (e: any) => {
-      setStartY(e.touches[0].clientY);
-      setCurrentY(e.touches[0].clientY);
-      setIsSliding(true);
-    };
-
-    const handleTouchMove = (e: any) => {
-      if (!isSliding) return;
-      setCurrentY(e.touches[0].clientY);
-    };
-
-    const handleTouchEnd = () => {
-      if (!isSliding) return;
-
-      setIsSliding(false);
-
-      // Check if the slide-down gesture is significant
-      if (currentY && startY) {
-        const deltaY = currentY - startY;
-        if (deltaY > 50) {
-          handleClose();
-        }
-      }
-    };
-
-    window.addEventListener("touchstart", handleTouchStart);
-    window.addEventListener("touchmove", handleTouchMove);
-    window.addEventListener("touchend", handleTouchEnd);
-
-    return () => {
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("touchend", handleTouchEnd);
-    };
+    handleSlideDown({
+      setStartY,
+      setCurrentY,
+      setIsSliding,
+      handleClose,
+      isSliding,
+      currentY,
+      startY,
+    });
   }, [isSliding, currentY, startY]);
 
   const handleClickAction = (side: TSide) => {

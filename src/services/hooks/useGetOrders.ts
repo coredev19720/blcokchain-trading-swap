@@ -1,26 +1,20 @@
-import { GetOrdersRes } from "@src/constraints/interface/services/response";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { genAccountServiceUrl } from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
-import { useAppDispatch } from "@src/redux/hooks";
-import { setOrders } from "@/src/redux/features/marketSlice";
-import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
+import { OrderInfo } from "@/src/constraints/interface/common";
 interface UseGetOrders {
   isError: boolean;
   isSuccess: boolean;
-  isLoading: boolean;
+  isPending: boolean;
   refetch: () => void;
+  data: OrderInfo[] | undefined;
 }
-const handleGetData = async (
-  accountId: string,
-  dispatch: Dispatch<UnknownAction>
-): Promise<GetOrdersRes> => {
+const handleGetData = async (accountId: string): Promise<OrderInfo[]> => {
   try {
     const res = await axiosInst.get(genAccountServiceUrl(accountId, "order"));
     const { s, ec, d } = res.data;
     if (s === "ok") {
-      dispatch(setOrders(d));
-      return res.data;
+      return d;
     }
     throw new Error(ec);
   } catch (e) {
@@ -29,12 +23,11 @@ const handleGetData = async (
 };
 
 export const useGetOrders = (accountId: string): UseGetOrders => {
-  const dispatch = useAppDispatch();
-  const { isError, isSuccess, isLoading, refetch } = useQuery({
+  const { isError, isSuccess, isPending, refetch, data } = useQuery({
     queryKey: ["orders", accountId],
-    queryFn: () => handleGetData(accountId, dispatch),
+    queryFn: () => handleGetData(accountId),
     enabled: !!accountId,
   });
 
-  return { isError, isSuccess, isLoading, refetch };
+  return { isError, isSuccess, isPending, refetch, data };
 };

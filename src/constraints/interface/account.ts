@@ -1,4 +1,5 @@
 export interface AccSummary {
+  id: string; // Số tài khoản
   ismargin: string; // Là tiểu khoản Margin (N: không, Y: Có)
   balance: number; // Tiền mặt thực có
   cibalance: number; // Tiền không kỳ hạn
@@ -58,6 +59,10 @@ export interface AccSummary {
   dclamtlimit: number; // HM đảm bảo
   clamtlimit: number; // HM phải trả
   afstatus_en: string; // Trạng thái tiểu khoản tiếng anh
+}
+
+export interface AccsSummary {
+  [key: string]: AccSummary;
 }
 
 export interface AccAvailTrade {

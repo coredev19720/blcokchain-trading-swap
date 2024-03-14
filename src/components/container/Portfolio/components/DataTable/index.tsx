@@ -1,26 +1,28 @@
 import StyledTable from "@components/common/StyledTable";
 import { IColumn } from "@interface/table";
 import { PortItem } from "@/src/constraints/interface/common";
-import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { formatNumber, genChgTextClass } from "@src/utils/helpers";
 import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { ArrowForwardIos } from "@mui/icons-material";
 import { MuiIcon } from "@src/styles/common";
 import PortItemDetail from "../PortItemDetail";
-import { setPort } from "@src/redux/features/marketSlice";
 import { useRouter } from "next/navigation";
-const MarketDepth = () => {
+
+interface Props {
+  ports: PortItem[];
+  port: PortItem | null;
+  setPort: (port: PortItem | null) => void;
+}
+const MarketDepth = ({ ports, port, setPort }: Props) => {
   const t = useTranslations("portfolio");
   const router = useRouter();
-  const { ports, port } = useAppSelector((state) => state.market);
-  const dispatch = useAppDispatch();
   const handleClickItem = (item: PortItem, idx: number) => {
-    dispatch(setPort(item));
+    setPort(item);
   };
 
   const handleClose = () => {
-    dispatch(setPort(null));
+    setPort(null);
   };
   const goToSymbol = (symbol: string) => {
     router.push(`/market?s=${symbol.toUpperCase()}`);

@@ -1,10 +1,6 @@
-import { GetPortfolioRes } from "@src/constraints/interface/services/response";
 import { useQuery } from "@tanstack/react-query";
 import { genAccountServiceUrl } from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
-import { useAppDispatch } from "@src/redux/hooks";
-import { setPorts } from "@/src/redux/features/marketSlice";
-import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
 import { PortItem } from "@/src/constraints/interface/common";
 
 interface UseGetPortfolio {
@@ -29,7 +25,6 @@ const handleGetData = async (accountId: string): Promise<PortItem[]> => {
   }
 };
 export const useGetPortfolio = (accountId: string): UseGetPortfolio => {
-  const dispatch = useAppDispatch();
   const { data, isError, isSuccess, isLoading, refetch } = useQuery({
     queryKey: [`get-portfolio-${accountId}`],
     queryFn: () => handleGetData(accountId),

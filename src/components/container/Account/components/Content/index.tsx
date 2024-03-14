@@ -5,56 +5,58 @@ import colors from "@src/themes/colors";
 import { useAppSelector } from "@src/redux/hooks";
 const Content = () => {
   const t = useTranslations("account");
-  const { accountSummary } = useAppSelector((state) => state.user);
-  return accountSummary ? (
+  const { accountSummary, activeAccount } = useAppSelector(
+    (state) => state.user
+  );
+  return accountSummary && activeAccount ? (
     <S.Wrapper>
       <S.RowWrapper isHeader bgColor={colors.sy80}>
         <Typography color={colors.sb60}>{t("en_cu_asset_total")}</Typography>
         <Typography fontWeight={600} color={colors.sb60}>
-          {accountSummary.totalseamt}
+          {accountSummary[activeAccount.id]?.totalseamt}
         </Typography>
       </S.RowWrapper>
       <S.RowWrapper isHeader bgColor={colors.sb60}>
         <Typography color={colors.p300}>{t("en_cu_cash_total")}</Typography>
         <Typography fontWeight={600} color={colors.p300}>
-          {accountSummary.intbalance}
+          {accountSummary[activeAccount.id]?.intbalance}
         </Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("en_cu_cash_onHand")}</Typography>
-        <Typography>{accountSummary.balance}</Typography>
+        <Typography>{accountSummary[activeAccount.id]?.balance}</Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("en_cu_cash_payables")}</Typography>
-        <Typography>{accountSummary.tdbalance}</Typography>
+        <Typography>{accountSummary[activeAccount.id]?.tdbalance}</Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("en_cu_cash_receivables")}</Typography>
-        <Typography>{accountSummary.cibalance}</Typography>
+        <Typography>{accountSummary[activeAccount.id]?.cibalance}</Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("en_cu_cash_advance")}</Typography>
-        <Typography>{accountSummary.avladvance}</Typography>
+        <Typography>{accountSummary[activeAccount.id]?.avladvance}</Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("fn_acc_cu_stock_buyPower")}</Typography>
-        <Typography>{accountSummary.pp}</Typography>
+        <Typography>{accountSummary[activeAccount.id]?.pp}</Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("en_cu_stock_sum_total")}</Typography>
-        <Typography>{accountSummary.totalseamt}</Typography>
+        <Typography>{accountSummary[activeAccount.id]?.totalseamt}</Typography>
       </S.RowWrapper>
       <S.RowWrapper isHeader bgColor={colors.sb60}>
         <Typography color={colors.p300}>
           {t("en_cu_stock_sum_onhandVal")}
         </Typography>
         <Typography fontWeight={600} color={colors.p300}>
-          {accountSummary.totalbuyamt}
+          {accountSummary[activeAccount.id]?.totalbuyamt}
         </Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("en_cu_stock_sum_receivingVal")}</Typography>
-        <Typography>{accountSummary.netassval}</Typography>
+        <Typography>{accountSummary[activeAccount.id]?.netassval}</Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("fn_acc_cta_port")}</Typography>

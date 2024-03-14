@@ -1,5 +1,5 @@
 "use client";
-import { IOrder } from "@interface/common";
+import { IOrder, PortItem } from "@interface/common";
 import * as S from "./styles";
 import { useAppSelector } from "@src/redux/hooks";
 import { use, useEffect, useState } from "react";
@@ -9,9 +9,8 @@ import PortInfo from "./components/PortInfo";
 import PageHeader from "../../common/PageHeader";
 import { useTranslations } from "next-intl";
 import { useGetPortfolio } from "@/src/services/hooks/useGetPortfolio";
-import { setPorts } from "@/src/redux/features/marketSlice";
-import { useAppDispatch } from "@src/redux/hooks";
 import Loading from "../../common/Loading";
+
 type Port = {
   id: string;
   name: string;
@@ -21,26 +20,23 @@ type Port = {
 };
 const Portfolio = () => {
   const { activeAccount } = useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch();
   const { isLoading, data, isSuccess, isError } = useGetPortfolio(
     activeAccount?.id || ""
   );
   const t = useTranslations("portfolio");
-  const [port, setPort] = useState<Port | null>(null);
+  const [port, setPort] = useState<PortItem | null>(null);
+  const [ports, setPorts] = useState<PortItem[] | []>([]);
   const [type, setType] = useState<TOrderActionType>(TOrderActionType.detail);
   useEffect(() => {
-    data && dispatch(setPorts(data));
+    data && setPorts(data);
   }, [data]);
-  const handleClickOrder = (order: IOrder, type: TOrderActionType) => {
-    // dispatch(setOrder(order));
-    setType(type);
-  };
+
   return (
     <S.Wrapper>
       <PageHeader title={t("fn_port_txt_title")} />
       <S.Content>
         <PortInfo />
-        <DataTable />
+        <DataTable ports={ports} port={port} setPort={setPort} />
       </S.Content>
       {isLoading && <Loading />}
     </S.Wrapper>

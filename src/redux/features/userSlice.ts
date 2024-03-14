@@ -3,6 +3,7 @@ import {
   AccAvailTrade,
   AccInfo,
   AccsPermissions,
+  AccsSummary,
   AccSummary,
   AuthorInfo,
 } from "@interface/account";
@@ -12,7 +13,7 @@ type UserState = {
   accounts: AccInfo[] | [];
   activeAccount: AccInfo | null;
   customerInfo: AuthorInfo | null;
-  accountSummary: AccSummary | null;
+  accountSummary: AccsSummary | null;
   accountAvailTrade: AccAvailTrade | null;
 };
 
@@ -41,7 +42,10 @@ export const user = createSlice({
       state.customerInfo = action.payload;
     },
     setAccountSummary: (state, action: PayloadAction<AccSummary>) => {
-      state.accountSummary = action.payload;
+      state.accountSummary = {
+        ...state.accountSummary,
+        [action.payload.id]: action.payload,
+      };
     },
     setAccountAvailTrade: (state, action: PayloadAction<AccAvailTrade>) => {
       state.accountAvailTrade = action.payload;

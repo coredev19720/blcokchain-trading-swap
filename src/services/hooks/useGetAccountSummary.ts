@@ -4,22 +4,37 @@ import { genAccountServiceUrl } from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
 import { useAppDispatch } from "@src/redux/hooks";
 import { setAccountSummary } from "@src/redux/features/userSlice";
+import { AccSummary } from "@/src/constraints/interface/account";
 interface UseGetAccountSummary {
   refetch: () => void;
   isError: boolean;
   isSuccess: boolean;
   isLoading: boolean;
-  data: GetAccSummaryRes | undefined;
+  data: AccSummary | undefined;
 }
 const handleGetData = async (
   accountId: string,
   dispatch: any
-): Promise<GetAccSummaryRes> => {
+): Promise<AccSummary> => {
   try {
     const res = await axiosInst.get(
       genAccountServiceUrl(accountId, "summaryAccount")
     );
-    dispatch(setAccountSummary(res.data.d));
+    const { d, s, ec } = res.data;
+    if (s === "ok") {
+      dispatch(
+        setAccountSummary({
+          id: accountId,
+          ...res.data.d,
+        })
+      );
+      return {
+        id: accountId,
+        ...res.data.d,
+      };
+    }
+    throw new Error(ec);
+
     return res.data;
   } catch (e) {
     throw e;
