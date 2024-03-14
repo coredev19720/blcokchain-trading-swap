@@ -1,12 +1,11 @@
 "use client";
-import { use, useEffect, useState } from "react";
 import Header from "../Login/Header";
 import * as S from "./styles";
 import FillInformation from "./components/FillInformation";
 import FillPassword from "./components/FillPassword";
 import Success from "./components/Success";
 import FillOTP from "./components/FillOTP";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 const enum step {
   fi = "fi",
   fo = "fo",
@@ -16,9 +15,8 @@ const enum step {
 const ForgotPassword = () => {
   const sParams = useSearchParams();
   const router = useRouter();
-  const params = useParams();
   if (!sParams?.get("s")) {
-    router.push(`${params?.locale}/login`);
+    router.push("login");
   }
   return (
     <S.Wrapper>

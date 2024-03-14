@@ -12,11 +12,13 @@ import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { TSide } from "@enum/common";
 import { useRouter } from "next/navigation";
 import { handleSlideDown } from "@src/utils/behaviors";
+import { useParams } from "next/navigation";
 interface IProps {
   data: PortItem | null;
   handleClose: () => void;
 }
 const PortItemDetail = ({ data, handleClose }: IProps) => {
+  const params = useParams();
   const t = useTranslations("portfolio");
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -50,7 +52,7 @@ const PortItemDetail = ({ data, handleClose }: IProps) => {
         })
       );
       handleClose();
-      router.push("/trading");
+      router.push("trading");
     }
   };
   return (

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { TickerWrapper, Wrapper, Tickers } from "./styles";
+import { TickerWrapper, Wrapper } from "./styles";
 import { Backdrop, Slide, Typography } from "@mui/material";
 import SearchInput from "./components/SearchInput";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";

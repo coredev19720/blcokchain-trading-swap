@@ -4,14 +4,11 @@ import * as S from "../styles";
 import { useRouter } from "next/navigation";
 import { multiKey } from "@src/images";
 import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
-import { locale } from "dayjs";
 const Success = () => {
   const t = useTranslations("forgotPwd");
   const router = useRouter();
-  const params = useParams();
   const handleNext = () => {
-    router.push(`${params?.locale}/login`);
+    router.push("login");
   };
   return (
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>

@@ -36,7 +36,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
   const handleSubmit = () => {
     try {
       //unimplemented
-      router.push(`/order-book`);
+      router.push("order-book");
     } catch (e) {
       console.log(e);
     } finally {

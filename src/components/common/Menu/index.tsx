@@ -3,7 +3,7 @@ import { Wrapper, MenuItem, MenuImage, MenuText } from "./styles";
 import { menus } from "@constants/common";
 import { useTranslations } from "next-intl";
 import colors from "@src/themes/colors";
-import { useRouter, usePathname, useParams } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useIdleTimer } from "react-idle-timer";
 import { useLogout } from "@/src/services/hooks/useLogout";
 import { useGetAccountSummary } from "@/src/services/hooks/useGetAccountSummary";
@@ -14,10 +14,9 @@ const Menu = () => {
   const { activeAccount } = useAppSelector((state) => state.user);
   const { refetch: fetchData } = useFetchInitData();
   const { onLogout } = useLogout();
-  const { refetch } = useGetAccountSummary(activeAccount?.id || "");
+  useGetAccountSummary(activeAccount?.id || "");
   const pathname = usePathname();
   const router = useRouter();
-  const params = useParams();
   const t = useTranslations("menu");
   const [idleTime, setIdleTime] = useState<number>(1800);
 
@@ -66,7 +65,10 @@ const Menu = () => {
     syncTimers: 0,
   });
   const goToDestination = (url: string) => () => {
-    router.push(`/${params?.locale}${url}`);
+    if (!url) {
+      return;
+    }
+    router.push(url);
   };
   const Menu = menus.map((menu, index) => {
     return (

@@ -25,7 +25,7 @@ const MarketDepth = ({ ports, port, setPort }: Props) => {
     setPort(null);
   };
   const goToSymbol = (symbol: string) => {
-    router.push(`/market?s=${symbol.toUpperCase()}`);
+    router.push(`market?s=${symbol.toUpperCase()}`);
   };
   const columns: IColumn[] = [
     {

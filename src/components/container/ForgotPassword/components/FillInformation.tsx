@@ -9,7 +9,7 @@ import * as S from "../styles";
 import TextInput from "../../../common/TextInput";
 import DateInput from "../../../common/DateInput";
 import { toast } from "react-toastify";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const FillInformation = () => {
@@ -17,7 +17,6 @@ const FillInformation = () => {
   const phoneRef: React.RefObject<HTMLInputElement> = useRef(null);
   const idCodeRef: React.RefObject<HTMLInputElement> = useRef(null);
   const router = useRouter();
-  const params = useParams();
   const t = useTranslations("forgotPwd");
   const tNoti = useTranslations("notification");
   const { onForgotPwd, isSuccess, isError, error } = usePostForgotPwd();
@@ -27,19 +26,18 @@ const FillInformation = () => {
     handleSubmit,
     formState: { errors },
     setValue,
-    getValues,
   } = useForm({
     reValidateMode: "onSubmit",
   });
   useEffect(() => {
     if (isError) {
-      router.push(`/${params?.locale}/forgot-password?s=fo`);
+      router.push(`forgot-password?s=fo`);
       // toast.error(error as string);\
     }
   }, [isError]);
   useEffect(() => {
     if (isSuccess) {
-      router.push(`/${params?.locale}/forgot-password?s=fo`);
+      router.push(`forgot-password?s=fo`);
     }
   }, [isSuccess]);
   const handleKeyDownEnter = (

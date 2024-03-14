@@ -19,31 +19,31 @@ export const menus: MenuItem[] = [
     label: "mn_market",
     icon: menuIconMarket,
     activeIcon: activeMenuIconMarket,
-    url: "/market",
+    url: "market",
   },
   {
     label: "mn_watchlist",
     icon: menuIconPort,
     activeIcon: activeMenuIconPort,
-    url: "/portfolio",
+    url: "portfolio",
   },
   {
     label: "mn_trade",
     icon: menuIconTrading,
     activeIcon: activeMenuIconTrading,
-    url: "/trading",
+    url: "trading",
   },
   {
     label: "mn_ordBook",
     icon: menuIconOrderBook,
     activeIcon: activeMenuIconOrderBook,
-    url: "/order-book",
+    url: "order-book",
   },
   {
     label: "mn_account",
     icon: menuIconAccount,
     activeIcon: menuIconAccount,
-    url: "/account",
+    url: "account",
   },
 ];
 

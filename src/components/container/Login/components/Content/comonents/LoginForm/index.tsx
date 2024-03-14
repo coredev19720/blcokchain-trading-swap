@@ -37,7 +37,7 @@ const LoginForm = () => {
       toast.error(tNoti("txt_login_fail"));
     }
     if (isSuccess) {
-      router.push(`/${params?.locale}/market`);
+      router.push("market");
     }
   }, [isError, isSuccess]);
 

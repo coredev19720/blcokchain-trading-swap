@@ -7,12 +7,11 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import TextInput from "../../../common/TextInput";
 import { usePostConfirmOTP } from "@/src/services/hooks/usePostConfirmOTP";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 const FillOTP = () => {
   const t = useTranslations("forgotPwd");
   const { onConfirmOTP, isSuccess, isError, error } = usePostConfirmOTP();
   const router = useRouter();
-  const params = useParams();
   const {
     control,
     handleSubmit,
@@ -24,12 +23,12 @@ const FillOTP = () => {
   });
   useEffect(() => {
     if (isSuccess) {
-      router.push(`/${params?.locale}/forgot-password?s=fp`);
+      router.push(`forgot-password?s=fp`);
     }
   }, [isSuccess]);
   useEffect(() => {
     if (isError) {
-      router.push(`/${params?.locale}/forgot-password?s=fp`);
+      router.push(`forgot-password?s=fp`);
       toast.error(error as string);
     }
   }, [isError]);

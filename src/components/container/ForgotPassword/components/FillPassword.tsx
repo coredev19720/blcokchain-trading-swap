@@ -30,7 +30,7 @@ const FillPassword = () => {
   const [showConfPwd, setShowConfPwd] = useState<boolean>(false);
   useEffect(() => {
     if (isSuccess) {
-      router.push(`/${params?.locale}/forgot-password?s=f`);
+      router.push(`forgot-password?s=f`);
     }
   }, [isSuccess]);
   useEffect(() => {
@@ -41,7 +41,7 @@ const FillPassword = () => {
   const onSubmit = () => {
     if (getValues("pwd") === getValues("confPwd")) {
       //fix me
-      router.push(`/${params?.locale}/forgot-password?s=f`);
+      router.push(`forgot-password?s=f`);
       onCreatePwd({
         pwd: getValues("pwd"),
         confirmPwd: getValues("confPwd"),
