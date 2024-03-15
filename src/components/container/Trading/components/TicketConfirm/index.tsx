@@ -9,7 +9,6 @@ import colors from "@src/themes/colors";
 import { formatNumber } from "@src/utils/helpers";
 import OTPConfirm from "@components/common/OTPConfirm";
 import { appendOrder } from "@src/redux/features/marketSlice";
-import { genCode } from "@src/utils/helpers";
 import { IOrder, OrderInfo } from "@interface/common";
 import { useRouter } from "next/navigation";
 interface IProps {

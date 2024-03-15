@@ -38,7 +38,7 @@ export const formatBigNumber = (val: number) => {
 export const formatNumber = (number: number, decimal = 0) => {
   if (number === 0) return "-";
   return number
-    ? parseFloat(number.toString()).toLocaleString("en-US", {
+    ? number.toLocaleString("en-US", {
         minimumFractionDigits: decimal,
         maximumFractionDigits: decimal,
       })
@@ -52,18 +52,6 @@ export const unFormatNumber = (number: number | string) => {
   return number;
 };
 
-export const genCode = () => {
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let randomString = "";
-
-  for (let i = 0; i < 8; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    randomString += characters.charAt(randomIndex);
-  }
-
-  return randomString;
-};
 export const findDiffIndex = (str1: string, str2: string) => {
   const minLength = Math.min(str1.length, str2.length);
 

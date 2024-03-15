@@ -7,7 +7,6 @@ import { ToastContainer } from "react-toastify";
 import Menu from "./Menu";
 import { publicUrls } from "@src/constants/routes";
 import { usePathname, useParams } from "next/navigation";
-// import io from "socket.io-client/dist/socket.io";
 const Wrapper = styled("main")(({ theme }) => ({
   height: "100%",
   width: "100%",
@@ -23,31 +22,6 @@ export default function Layout({ children }: { children: ReactNode }) {
   const params = useParams();
   let isPublic = publicUrls.some((x) => `/${params?.locale}/${x}` === pathname);
 
-  // useEffect(() => {
-  //   let socket: io.Socket;
-
-  //   socket = io("https://apiuat.bmsc.com", {
-  //     transports: ["websocket"],
-  //     path: "/realtime/socket.io",
-  //     query: {
-  //       __sails_io_sdk_version: "1.2.1",
-  //       __sails_io_sdk_platform: "browser",
-  //       __sails_io_sdk_language: "javascript",
-  //       EIO: "3",
-  //     },
-  //   });
-
-  //   socket.on("connect", connect);
-
-  //   return () => {
-  //     if (socket) {
-  //       socket.disconnect();
-  //     }
-  //   };
-  // }, []);
-  // const connect = () => {
-  //   console.log("Connected to the server");
-  // };
   return (
     <Wrapper>
       <PageWrapper>

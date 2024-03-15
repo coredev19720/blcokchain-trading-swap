@@ -12,12 +12,47 @@ import {
   setLastSymbolToLocalStorage,
   lastSymLocalKey,
 } from "@src/utils/helpers";
+import io from "socket.io-client";
 
 const Market = () => {
   const searchParams = useSearchParams();
   const { ticker, ticket, stocks } = useAppSelector((state) => state.market);
   const dispatch = useAppDispatch();
   const [openPanel, setOpenPanel] = useState<boolean>(false);
+  useEffect(() => {
+    let socket: io.Socket;
+    const socketUrl = process.env.NEXT_PUBLIC_API_URL || "";
+    socket = io(socketUrl, {
+      transports: ["websocket"],
+      path: "/realtime/socket.io",
+      query: {
+        __sails_io_sdk_version: "1.2.1",
+        __sails_io_sdk_platform: "browser",
+        __sails_io_sdk_language: "javascript",
+      },
+    });
+
+    socket.on("connect", connect);
+    socket.on("disconnect", () => console.log("Disconnected from the server"));
+    socket.on("connection", (socket: io.Socket) => {
+      socket.emit("get", {
+        data: { args: ["t:HCM"], op: "subscribe" },
+        method: "get",
+        url: "/client/subscribe",
+      });
+    });
+    socket.on("t", (data: any) => {
+      console.log(data);
+    });
+    return () => {
+      if (socket) {
+        socket.disconnect();
+      }
+    };
+  }, []);
+  const connect = () => {
+    console.log("Connected to the server");
+  };
   useEffect(() => {
     !!stocks.length && initTicker();
   }, [stocks]);
