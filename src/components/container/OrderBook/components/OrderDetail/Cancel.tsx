@@ -1,5 +1,5 @@
 import * as S from "./styles";
-import { IOrder, OrderInfo } from "@interface/common";
+import { OrderInfo } from "@interface/market";
 import { useTranslations } from "next-intl";
 import { formatNumber } from "@src/utils/helpers";
 import { TTransactionStatus } from "@enum/common";

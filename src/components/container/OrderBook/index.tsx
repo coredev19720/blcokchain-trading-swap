@@ -1,5 +1,5 @@
 "use client";
-import { OrderInfo } from "@interface/common";
+import { OrderInfo } from "@interface/market";
 import Header from "./components/Header";
 import Order from "./components/Order";
 import * as S from "./styles";
@@ -7,8 +7,7 @@ import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { useEffect, useState } from "react";
 import OrderDetail from "./components/OrderDetail";
 import { TOrderActionType } from "@enum/common";
-import { setOrder } from "@src/redux/features/marketSlice";
-import { useGetOrders } from "@/src/services/hooks/useGetOrders";
+import { useGetOrders } from "@/src/services/hooks/order/useGetOrders";
 import Loading from "../../common/Loading";
 const OrderBook = () => {
   const { activeAccount } = useAppSelector((state) => state.user);

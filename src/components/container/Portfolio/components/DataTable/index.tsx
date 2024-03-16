@@ -1,6 +1,6 @@
 import StyledTable from "@components/common/StyledTable";
 import { IColumn } from "@interface/table";
-import { PortItem } from "@/src/constraints/interface/common";
+import { PortItem } from "@interface/market";
 import { formatNumber, genChgTextClass } from "@src/utils/helpers";
 import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";

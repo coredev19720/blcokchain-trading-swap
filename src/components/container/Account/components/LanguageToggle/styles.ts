@@ -5,6 +5,8 @@ export const Wrapper = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+  flex: 1,
+  justifyContent: "center",
 }));
 
 export const Language = styled("div")<{ active?: boolean }>((props) => ({

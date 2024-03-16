@@ -7,9 +7,11 @@ import { useTranslations } from "next-intl";
 import LanguageToggle from "./components/LanguageToggle";
 import { useLogout } from "@/src/services/hooks/useLogout";
 import LoadingButton from "../../common/LoadingButton";
+import { useRouter } from "next/navigation";
 const Account = () => {
   const t = useTranslations("account");
   const { onLogout, isPending } = useLogout();
+  const router = useRouter();
 
   return (
     <Wrapper>

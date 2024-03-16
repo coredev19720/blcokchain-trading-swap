@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { genAccountServiceUrl } from "@/src/services/apiUrls";
-import axiosInst from "../Interceptors";
-import { OrderInfo } from "@/src/constraints/interface/common";
+import axiosInst from "../../Interceptors";
+import { OrderInfo } from "@interface/market";
 interface UseGetOrders {
   isError: boolean;
   isSuccess: boolean;

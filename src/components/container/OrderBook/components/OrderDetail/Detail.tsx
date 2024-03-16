@@ -1,5 +1,5 @@
 import * as S from "./styles";
-import { IOrder, OrderInfo } from "@interface/common";
+import { OrderInfo } from "@interface/market";
 import { formatNumber } from "@src/utils/helpers";
 import { useTranslations } from "next-intl";
 import dayjs from "dayjs";

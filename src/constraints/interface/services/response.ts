@@ -5,8 +5,8 @@ import {
   AccsPermissions,
   AuthorInfo,
 } from "../account";
-import { OrderInfo, OrderWaitMatchedInfo, PortItem } from "../common";
-import { Stock } from "../market";
+import { PortItem } from "../market";
+import { PreCheckData, Stock, OrderInfo, WaitMatchedOrder } from "../market";
 
 export interface BaseRes {
   s: string;
@@ -46,13 +46,7 @@ export interface CreateOrderRes extends BaseRes {
 }
 
 export interface PrecheckOrderRes extends BaseRes {
-  d: {
-    txdate: string; // Ngày đặt lệnh
-    warningcode: string; // Mã cảnh báo
-    warningdesc: string; // Diễn giải cảnh báo
-    tokenid: string; // Tokeninfo cho xác thực OTP/TOKEN/MATRIX của tài khoản
-    transactionId: string; // Mã giao dịch
-  };
+  d: PreCheckData;
 }
 
 export interface GetOrdersRes extends BaseRes {
@@ -60,7 +54,7 @@ export interface GetOrdersRes extends BaseRes {
 }
 
 export interface GetWaitMatchedOrdersRes extends BaseRes {
-  d: OrderWaitMatchedInfo[];
+  d: WaitMatchedOrder[];
 }
 
 export interface GetPortfolioRes extends BaseRes {

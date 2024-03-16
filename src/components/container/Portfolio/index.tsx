@@ -1,5 +1,5 @@
 "use client";
-import { IOrder, PortItem } from "@interface/common";
+import { PortItem } from "@interface/market";
 import * as S from "./styles";
 import { useAppSelector } from "@src/redux/hooks";
 import { use, useEffect, useState } from "react";

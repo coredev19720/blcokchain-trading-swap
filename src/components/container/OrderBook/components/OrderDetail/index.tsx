@@ -2,7 +2,7 @@ import * as S from "./styles";
 import { FlexContent, SlideLine } from "@src/styles/common";
 import { Backdrop, Slide, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { IOrder, OrderInfo } from "@interface/common";
+import {  OrderInfo } from "@interface/market";
 import { TOrderActionType, TSide } from "@enum/common";
 import colors from "@src/themes/colors";
 import Detail from "./Detail";

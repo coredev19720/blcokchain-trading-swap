@@ -1,6 +1,5 @@
 import { TMarket, TOrderKind, TOrderType, TSide } from "@enum/common";
-import { ITicket, OrderInfo } from "@interface/common";
-import { PortItem } from "@interface/common";
+import { ITicket, OrderInfo, PortItem } from "@interface/market";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Stock } from "@/src/constraints/interface/market";
 

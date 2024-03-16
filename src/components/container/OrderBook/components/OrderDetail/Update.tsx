@@ -1,7 +1,7 @@
 import { FieldBlock } from "@src/styles/common";
 import * as S from "./styles";
 import { TextField } from "@mui/material";
-import { OrderInfo } from "@interface/common";
+import { OrderInfo } from "@interface/market";
 import { formatNumber, genValidPrice } from "@src/utils/helpers";
 import { useTranslations } from "next-intl";
 import RowContent from "@components/common/RowContent";

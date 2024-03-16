@@ -6,13 +6,13 @@ interface Props {
   children: React.ReactNode;
   required?: boolean;
   variant?: Variant;
-  noEllipsis?: boolean;
+  noellipsis?: boolean;
 }
-const Label = styled(Typography)<Props>(({ noEllipsis }) => ({
+const Label = styled(Typography)<Props>(({ noellipsis }) => ({
   color: colors.mn70,
-  whiteSpace: !noEllipsis ? "normal" : "nowrap",
-  overflow: !noEllipsis ? "normal" : "hidden",
-  textOverflow: !noEllipsis ? "normal" : "ellipsis",
+  whiteSpace: !noellipsis ? "normal" : "nowrap",
+  overflow: !noellipsis ? "normal" : "hidden",
+  textOverflow: !noellipsis ? "normal" : "ellipsis",
   fontWeight: 400,
 }));
 const Wrapper = styled("div")({ display: "flex" });
@@ -21,10 +21,10 @@ const Dot = styled(Typography)({
   color: colors.sr50,
 });
 
-const FieldLabel = ({ children, required, variant, noEllipsis }: Props) => {
+const FieldLabel = ({ children, required, variant, noellipsis }: Props) => {
   return (
     <Wrapper>
-      <Label variant={variant || "subtitle2"} noEllipsis={noEllipsis}>
+      <Label variant={variant || "subtitle2"} noellipsis={noellipsis}>
         {children}
       </Label>
       {required && <Dot>*</Dot>}

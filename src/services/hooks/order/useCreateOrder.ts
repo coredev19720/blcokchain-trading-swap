@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { genAccountServiceUrl } from "@/src/services/apiUrls";
 import { CreateOrderReq } from "@/src/constraints/interface/services/request";
 import { CreateOrderRes } from "@/src/constraints/interface/services/response";
-import axiosInst from "../Interceptors";
+import axiosInst from "../../Interceptors";
 interface UseCreateOrder {
   onCreateOrder: (data: CreateOrderReq) => void;
   isError: boolean;

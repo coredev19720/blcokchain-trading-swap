@@ -1,3 +1,5 @@
+import colors from "@/src/themes/colors";
+import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const Wrapper = styled("div")(() => ({
@@ -25,3 +27,9 @@ export const RowWrapper = styled("div")<{
       }),
   ...(bgColor ? { backgroundColor: bgColor } : {}),
 }));
+
+export const DetailText = styled(Typography)({
+  fontWeight: 600,
+  width: "100%",
+  textAlign: "right",
+});

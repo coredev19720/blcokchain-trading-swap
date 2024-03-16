@@ -1,9 +1,8 @@
 import { GetWaitMatchedOrdersRes } from "@src/constraints/interface/services/response";
 import { useQuery } from "@tanstack/react-query";
 import { genAccountServiceUrl } from "@/src/services/apiUrls";
-import axiosInst from "../Interceptors";
+import axiosInst from "../../Interceptors";
 import { useAppDispatch } from "@src/redux/hooks";
-import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
 interface UseGetWaitMatchedOrders {
   isError: boolean;
   isSuccess: boolean;
@@ -11,17 +10,16 @@ interface UseGetWaitMatchedOrders {
   refetch: () => void;
 }
 const handleGetData = async (
-  accountId: string,
-  dispatch: Dispatch<UnknownAction>
+  accountId: string
 ): Promise<GetWaitMatchedOrdersRes> => {
   try {
     const res = await axiosInst.get(
-      genAccountServiceUrl(accountId, "waitMatchedOrder")
+      genAccountServiceUrl(accountId, "matchedOrder")
     );
     const { s, ec, d } = res.data;
     if (s === "ok") {
       //unimplemented
-      return res.data;
+      return d;
     }
     throw new Error(ec);
   } catch (e) {
@@ -35,7 +33,7 @@ export const useGetWaitMatchedOrders = (
   const dispatch = useAppDispatch();
   const { isError, isSuccess, isLoading, refetch } = useQuery({
     queryKey: ["get-matched-orders", accountId],
-    queryFn: () => handleGetData(accountId, dispatch),
+    queryFn: () => handleGetData(accountId),
     enabled: !!accountId,
   });
 

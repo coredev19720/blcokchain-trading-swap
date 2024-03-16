@@ -3,7 +3,7 @@ import { SlideLine } from "@src/styles/common";
 import { Backdrop, Slide, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { PortItem } from "@interface/common";
+import { PortItem } from "@interface/market";
 import Line from "@components/common/Line";
 import RowContent from "@components/common/RowContent";
 import { formatNumber, setLastSymbolToLocalStorage } from "@src/utils/helpers";
@@ -12,13 +12,11 @@ import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { TSide } from "@enum/common";
 import { useRouter } from "next/navigation";
 import { handleSlideDown } from "@src/utils/behaviors";
-import { useParams } from "next/navigation";
 interface IProps {
   data: PortItem | null;
   handleClose: () => void;
 }
 const PortItemDetail = ({ data, handleClose }: IProps) => {
-  const params = useParams();
   const t = useTranslations("portfolio");
   const router = useRouter();
   const dispatch = useAppDispatch();
