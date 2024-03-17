@@ -54,7 +54,9 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
         <S.Wrapper>
           <S.TicketInfo>
             <Typography variant="h5" fontWeight={600} color="text.primary">
-              {`Duyệt lệnh ${ticket.side === TSide.buy ? "mua" : "bán"}`}
+              {ticket.side === TSide.buy
+                ? t("fn_trade_txt_confirm_buy_title")
+                : t("fn_trade_txt_confirm_sell_title")}
             </Typography>
             <S.Block>
               <FlexContent>
@@ -82,9 +84,8 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
             </S.Block>
             <S.Block>
               <FlexContent>
-                {/* not trans */}
                 <Typography variant="body2" color="text.secondary">
-                  Loại lệnh
+                  {t("fn_trade_txt_ord_type")}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -95,9 +96,8 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                 </Typography>
               </FlexContent>
               <FlexContent>
-                {/* not trans */}
                 <Typography variant="body2" color="text.secondary">
-                  Khối lượng đặt
+                  {t("fn_trade_txt_qty")}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -108,9 +108,8 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                 </Typography>
               </FlexContent>
               <FlexContent>
-                {/* not trans */}
                 <Typography variant="body2" color="text.secondary">
-                  Giá đặt
+                  {t("fn_trade_txt_price")}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -121,9 +120,8 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                 </Typography>
               </FlexContent>
               <FlexContent>
-                {/* not trans */}
                 <Typography variant="body2" color="text.secondary">
-                  Giá trị dự kiến
+                  {t("fn_trade_txt_value")}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -135,7 +133,6 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
               </FlexContent>
             </S.Block>
             <FlexContent>
-              {/* not trans */}
               <Typography variant="body2" color="text.secondary">
                 {t("en_trade_custodyCd")}
               </Typography>
@@ -144,7 +141,6 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
               </Typography>
             </FlexContent>
             <FlexContent>
-              {/* not trans */}
               <Typography variant="body2" color="text.secondary">
                 {t("en_trade_accNo")}
               </Typography>
@@ -165,6 +161,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
               fullWidth
               disabled={otp.length !== 6}
               onClick={handleSubmit}
+              size="large"
             >
               {t("fn_trade_cta_confirm")}
             </Button>

@@ -116,11 +116,12 @@ const PortItemDetail = ({ data, handleClose }: IProps) => {
             {/* % lai lo du tinh */}
             <RowContent
               leftTxt={t("en_cu_stock_detail_percentPL")}
-              rightTxt={data?.pnlrate}
+              rightTxt={`${data?.pnlrate}%`}
             />
           </S.Content>
           <S.Actions>
             <S.Action
+              disabled={data?.trade === 0}
               variant="contained"
               color="error"
               onClick={() => handleClickAction(TSide.sell)}

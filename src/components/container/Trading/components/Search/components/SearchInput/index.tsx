@@ -16,7 +16,7 @@ const Input = styled(OutlinedInput)(() => ({
   backgroundColor: colors.nb5,
   borderRadius: 12,
   "& input": {
-    padding: 8,
+    padding: "7px 8px",
   },
 }));
 

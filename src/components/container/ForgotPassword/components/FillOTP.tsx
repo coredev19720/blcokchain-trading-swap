@@ -9,7 +9,7 @@ import TextInput from "../../../common/TextInput";
 import { usePostConfirmOTP } from "@/src/services/hooks/usePostConfirmOTP";
 import { useRouter } from "next/navigation";
 const FillOTP = () => {
-  const t = useTranslations("forgotPwd");
+  const t = useTranslations("resetpwd");
   const { onConfirmOTP, isSuccess, isError, error } = usePostConfirmOTP();
   const router = useRouter();
   const {
@@ -61,7 +61,7 @@ const FillOTP = () => {
           errMsg={errors.otp?.message as string}
           name="otp"
           type="number"
-          label={t("fn_forgotpwd_txt_otp_input")}
+          label={t("fn_resetpwd_txt_otp_input")}
           required
           min={6}
         />
@@ -71,7 +71,7 @@ const FillOTP = () => {
           color="primary"
           fullWidth
         >
-          {t("fn_forgotpwd_cta_otp_submit")}
+          {t("fn_resetpwd_cta_otp_submit")}
         </Button>
       </S.StepWrapper>
     </Slide>

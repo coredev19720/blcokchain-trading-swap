@@ -7,8 +7,12 @@ import FieldLabel from "@components/common/FieldLabel";
 import StyledTable from "@components/common/StyledTable";
 import { IColumn } from "@interface/table";
 import { IDealPrice } from "@interface/common";
-import { formatBigNumber, genPriceColor } from "@src/utils/helpers";
-const TickerInfo = () => {
+import {
+  formatBigNumber,
+  formatNumber,
+  genPriceColor,
+} from "@src/utils/helpers";
+const SymbolInfo = () => {
   const ticker = useAppSelector((state) => state.market.ticker);
   const ticket = useAppSelector((state) => state.market.ticket);
   const t = useTranslations("trade");
@@ -88,19 +92,19 @@ const TickerInfo = () => {
         <S.PriceBlock>
           <FieldLabel>{t("en_sb_price_floor")}</FieldLabel>
           <Typography color="text.floor" variant="body2" fontWeight={600}>
-            {ticker?.floor}
+            {formatNumber(ticker?.floor || 0)}
           </Typography>
         </S.PriceBlock>
         <S.PriceBlock>
           <FieldLabel>{t("en_sb_price_avg")}</FieldLabel>
           <Typography color="text.primary" variant="body2" fontWeight={600}>
-            {ticker?.reference}
+            {formatNumber(ticker?.ceiling || 0)}
           </Typography>
         </S.PriceBlock>
         <S.PriceBlock>
           <FieldLabel>{t("en_sb_price_celling")}</FieldLabel>
           <Typography color="text.ceil" variant="body2" fontWeight={600}>
-            {ticker?.ceiling}
+            {formatNumber(ticker?.ceiling || 0)}
           </Typography>
         </S.PriceBlock>
       </S.PriceInfo>
@@ -112,4 +116,4 @@ const TickerInfo = () => {
     </S.Wrapper>
   );
 };
-export default TickerInfo;
+export default SymbolInfo;

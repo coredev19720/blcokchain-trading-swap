@@ -17,7 +17,7 @@ const FillInformation = () => {
   const phoneRef: React.RefObject<HTMLInputElement> = useRef(null);
   const idCodeRef: React.RefObject<HTMLInputElement> = useRef(null);
   const router = useRouter();
-  const t = useTranslations("forgotPwd");
+  const t = useTranslations("resetpwd");
   const tNoti = useTranslations("notification");
   const { onForgotPwd, isSuccess, isError, error } = usePostForgotPwd();
   const recaptchaRef = createRef<ReCAPTCHA>();
@@ -114,7 +114,7 @@ const FillInformation = () => {
         <TextInput
           autofocus
           name="username"
-          label={t("fn_forgotpwd_inp_username")}
+          label={t("fn_resetpwd_inp_username")}
           control={control}
           onChangeValue={handleChangeUsername}
           handleEnter={handleKeyDownEnter}
@@ -125,7 +125,7 @@ const FillInformation = () => {
         <TextInput
           defaultValue="Tran Van An"
           name="fullname"
-          label={t("fn_forgotpwd_inp_fullname")}
+          label={t("fn_resetpwd_inp_fullname")}
           control={control}
           onChangeValue={handleChangeFullname}
           inputRef={nameRef}
@@ -135,7 +135,7 @@ const FillInformation = () => {
         <DateInput
           defaultValue={dayjs("05/16/1957").toDate()}
           name="dateofbirth"
-          label={t("fn_forgotpwd_inp_birthdate")}
+          label={t("fn_resetpwd_inp_birthdate")}
           control={control}
           onChangeValue={handleChangeDate}
           isError={!!errors.dateofbirth}
@@ -144,7 +144,7 @@ const FillInformation = () => {
         <TextInput
           defaultValue="022356753"
           name="idcode"
-          label={t("fn_forgotpwd_inp_idcode")}
+          label={t("fn_resetpwd_inp_idcode")}
           control={control}
           onChangeValue={handleChangeIdCode}
           inputRef={idCodeRef}
@@ -155,7 +155,7 @@ const FillInformation = () => {
           <DateInput
             defaultValue={dayjs("05/16/2012").toDate()}
             name="iddate"
-            label={t("fn_forgotpwd_inp_issue_date")}
+            label={t("fn_resetpwd_inp_issue_date")}
             control={control}
             onChangeValue={handleChangeDate}
             isError={!!errors.iddate}
@@ -165,7 +165,7 @@ const FillInformation = () => {
         <TextInput
           defaultValue="0977989613"
           name="phone"
-          label={t("fn_forgotpwd_inp_phone")}
+          label={t("fn_resetpwd_inp_phone")}
           control={control}
           onChangeValue={handleChangePhone}
           inputRef={phoneRef}
@@ -183,7 +183,7 @@ const FillInformation = () => {
           color="primary"
           fullWidth
         >
-          {t("fn_forgotpwd_cta_submit")}
+          {t("fn_resetpwd_cta_submit")}
         </Button>
       </S.StepWrapper>
     </Slide>

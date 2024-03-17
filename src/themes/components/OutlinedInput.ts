@@ -25,6 +25,8 @@ const OutlinedInput = {
       },
     },
     input: {
+      fontSize: 17,
+      lineHeight: "22px",
       height: "unset",
       borderRadius: 4,
       padding: "12px 16px",

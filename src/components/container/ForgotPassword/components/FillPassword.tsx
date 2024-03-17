@@ -14,7 +14,7 @@ const FillPassword = () => {
   const params = useParams();
   const router = useRouter();
   const confPwdRef: React.Ref<any> = createRef();
-  const t = useTranslations("forgotPwd");
+  const t = useTranslations("resetpwd");
   const tMess = useTranslations("mess");
   const { onCreatePwd, isSuccess, isError, error } = usePostCreatePwd();
   const {
@@ -77,10 +77,10 @@ const FillPassword = () => {
     <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <S.StepWrapper>
         <Typography variant="body2">
-          {t("fn_forgotpwd_txt_pwd_input")}
+          {t("fn_resetpwd_txt_pwd_input")}
         </Typography>
         <TextInput
-          label={t("fn_forgotpwd_inp_pwd")}
+          label={t("fn_resetpwd_inp_pwd")}
           control={control}
           name="pwd"
           required
@@ -103,7 +103,7 @@ const FillPassword = () => {
           }}
         />
         <TextInput
-          label={t("fn_forgotpwd_inp_pwd_confirm")}
+          label={t("fn_resetpwd_inp_pwd_confirm")}
           control={control}
           name="confPwd"
           required
@@ -132,7 +132,7 @@ const FillPassword = () => {
           color="primary"
           fullWidth
         >
-          {t("fn_forgotpwd_cta_new_pwd_submit")}
+          {t("fn_resetpwd_cta_new_pwd_submit")}
         </Button>
       </S.StepWrapper>
     </Slide>

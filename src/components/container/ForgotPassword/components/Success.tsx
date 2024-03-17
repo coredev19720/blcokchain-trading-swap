@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { multiKey } from "@src/images";
 import { useTranslations } from "next-intl";
 const Success = () => {
-  const t = useTranslations("forgotPwd");
+  const t = useTranslations("resetpwd");
   const router = useRouter();
   const handleNext = () => {
     router.push("login");
@@ -21,7 +21,7 @@ const Success = () => {
             alt="change-pwd-success"
           />
           <Typography variant="body2">
-            {t("fn_forgotpwd_txt_success")}
+            {t("fn_resetpwd_txt_success")}
           </Typography>
         </S.SuccessContent>
         <Button
@@ -30,7 +30,7 @@ const Success = () => {
           color="primary"
           fullWidth
         >
-          {t("fn_forgotpwd_cta_success")}
+          {t("fn_resetpwd_cta_success")}
         </Button>
       </S.StepWrapper>
     </Slide>

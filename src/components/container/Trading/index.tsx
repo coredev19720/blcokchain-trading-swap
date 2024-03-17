@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import * as S from "./styles";
 import { TSide } from "@enum/common";
 import Search from "./components/Search";
-import TickerInfo from "./components/TickerInfo";
+import SymbolInfo from "./components/SymbolInfo";
 import TicketInfo from "./components/TicketInfo";
 import TicketConfirm from "./components/TicketConfirm";
 import { lastSymLocalKey } from "@src/utils/helpers";
@@ -15,11 +15,14 @@ import PageHeader from "../../common/PageHeader";
 const Trading = () => {
   const t = useTranslations("trade");
   const { ticket, ticker, stocks } = useAppSelector((state) => state.market);
+  const { accountSummary, activeAccount } = useAppSelector(
+    (state) => state.user
+  );
   const dispatch = useAppDispatch();
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
   useEffect(() => {
     initTicker();
-  }, []);
+  }, [stocks]);
 
   const initTicker = () => {
     if (!ticker) {
@@ -49,14 +52,16 @@ const Trading = () => {
       <S.Content>
         <S.MainContent>
           <Search />
-          <TickerInfo />
+          <SymbolInfo />
           <TicketInfo />
           <S.AccStatus>
             <Typography variant="body2">
               {t("fn_trade_txt_accStatus")}
             </Typography>
             <Typography color="text.success" variant="body2">
-              mapping
+              {accountSummary && activeAccount
+                ? accountSummary[activeAccount.id].afstatus_en
+                : ""}
             </Typography>
           </S.AccStatus>
         </S.MainContent>
@@ -67,6 +72,7 @@ const Trading = () => {
             variant="contained"
             color={ticket.side === TSide.buy ? "success" : "error"}
             onClick={handleClickTrade}
+            size="large"
           >
             {t(
               ticket.side === TSide.buy

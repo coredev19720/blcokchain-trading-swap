@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "@mui/system";
 import { Typography } from "@mui/material";
+import { formatNumber } from "@/src/utils/helpers";
 interface IProps {
   leftTxt?: string;
   rightTxt?: string | number;
@@ -21,7 +22,7 @@ const RowContent = ({ leftTxt, rightTxt, isChild }: IProps) => {
         {leftTxt}
       </Typography>
       <Typography variant="body2" fontWeight={600} color="text.primary">
-        {rightTxt}
+        {typeof rightTxt === "number" ? formatNumber(rightTxt) : rightTxt}
       </Typography>
     </Wrapper>
   );

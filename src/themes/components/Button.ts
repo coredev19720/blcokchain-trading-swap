@@ -4,9 +4,8 @@ import breakpoints from "@src/themes/breakpoints";
 const Button = {
   styleOverrides: {
     root: {
-      fontSize: "1.5rem",
-      lineHeight: "2rem",
-      height: 40,
+      fontSize: "1.3rem",
+      lineHeight: "1.8rem",
       borderRadius: 8,
       boxShadow: "none",
       "&:hover": {
@@ -132,9 +131,8 @@ const Button = {
       padding: "6px 14px",
     },
     sizeSmall: {
-      height: 32,
-      fontSize: "1.2rem",
-      lineHeight: "1.6rem",
+      fontSize: "1.5rem",
+      lineHeight: "2rem",
       padding: "8px 16px",
     },
     outlinedSizeSmall: {
