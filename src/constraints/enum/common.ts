@@ -75,19 +75,19 @@ export enum TViSide {
 }
 
 export enum TOrderStatus {
-  Open = "Open",
-  Send = "Send",
-  Canceled = "Canceled",
-  Rejected = "Rejected",
-  Admending = "Admending",
-  Matched = "Matched",
-  Expired = "Expired",
-  Canceling = "Canceling",
-  Successful = "Successful",
-  Pending = "Pending",
-  Admended = "Admended",
-  Sending = "Sending",
-  MatchedAll = "Matched all",
-  WaitForConfirmation = "Wait for confirmation",
-  WaitBankDeposits = "Wait bank deposits",
+  Open = "Open", // Mở
+  Send = "Send", // Đã gửi
+  Canceled = "Canceled", // Đã hủy
+  Rejected = "Rejected", // Từ chối
+  Admending = "Admending", // Đang sửa
+  Matched = "Matched", // Đã khớp
+  Expired = "Expired", // Hết hiệu lực
+  Canceling = "Canceling", // Đang hủy
+  Successful = "Successful", // Hoàn thành
+  Pending = "Pending", // Chờ gửi, Chờ duyệt, Chờ xử lý
+  Admended = "Admended", // Đã sửa
+  Sending = "Sending", // Đang gửi
+  MatchedAll = "Matched All", // Khớp hết
+  WaitForConfirmation = "Wait For Confirmation", // Chờ xác nhận
+  WaitBankDeposits = "Wait Bank Deposits", // Chờ ký quỹ ngân hàng
 }

@@ -5,7 +5,7 @@ import { OrderInfo } from "@interface/market";
 interface UseGetOrders {
   isError: boolean;
   isSuccess: boolean;
-  isPending: boolean;
+  isLoading: boolean;
   refetch: () => void;
   data: OrderInfo[] | undefined;
 }
@@ -23,11 +23,11 @@ const handleGetData = async (accountId: string): Promise<OrderInfo[]> => {
 };
 
 export const useGetOrders = (accountId: string): UseGetOrders => {
-  const { isError, isSuccess, isPending, refetch, data } = useQuery({
+  const { isError, isSuccess, isLoading, refetch, data } = useQuery({
     queryKey: ["orders", accountId],
     queryFn: () => handleGetData(accountId),
     enabled: !!accountId,
   });
 
-  return { isError, isSuccess, isPending, refetch, data };
+  return { isError, isSuccess, isLoading, refetch, data };
 };

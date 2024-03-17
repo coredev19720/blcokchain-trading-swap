@@ -74,6 +74,7 @@ const Order = ({ data, handleClick }: IProps) => {
       </S.Content>
       <S.Actions>
         <S.Action
+          disabled={data.allowcancel !== "Y"}
           color="error"
           variant="contained"
           fullWidth
@@ -82,6 +83,7 @@ const Order = ({ data, handleClick }: IProps) => {
           {t("fn_ob_cta_cancel")}
         </S.Action>
         <S.Action
+          disabled={data.allowamend !== "Y"}
           color="primary"
           variant="contained"
           fullWidth

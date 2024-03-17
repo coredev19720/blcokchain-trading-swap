@@ -1,19 +1,15 @@
-import { GetWaitMatchedOrdersRes } from "@src/constraints/interface/services/response";
+import { WaitMatchedOrd } from "@interface/market";
 import { useQuery } from "@tanstack/react-query";
 import { genAccountServiceUrl } from "@/src/services/apiUrls";
 import axiosInst from "../../Interceptors";
-import { useAppDispatch } from "@src/redux/hooks";
-import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
-interface UseGetWaitMatchedOrders {
+interface UseGetWaitMatchedOrds {
   isError: boolean;
   isSuccess: boolean;
   isLoading: boolean;
   refetch: () => void;
+  data?: WaitMatchedOrd[];
 }
-const handleGetData = async (
-  accountId: string,
-  dispatch: Dispatch<UnknownAction>
-): Promise<GetWaitMatchedOrdersRes> => {
+const handleGetData = async (accountId: string): Promise<WaitMatchedOrd[]> => {
   try {
     const res = await axiosInst.get(
       genAccountServiceUrl(accountId, "waitMatchedOrder")
@@ -21,7 +17,7 @@ const handleGetData = async (
     const { s, ec, d } = res.data;
     if (s === "ok") {
       //unimplemented
-      return res.data;
+      return d;
     }
     throw new Error(ec);
   } catch (e) {
@@ -29,15 +25,14 @@ const handleGetData = async (
   }
 };
 
-export const useGetWaitMatchedOrders = (
+export const useGetWaitMatchedOrds = (
   accountId: string
-): UseGetWaitMatchedOrders => {
-  const dispatch = useAppDispatch();
-  const { isError, isSuccess, isLoading, refetch } = useQuery({
-    queryKey: ["get-matched-orders", accountId],
-    queryFn: () => handleGetData(accountId, dispatch),
+): UseGetWaitMatchedOrds => {
+  const { isError, isSuccess, isLoading, refetch, data } = useQuery({
+    queryKey: ["wait-matched-orders", accountId],
+    queryFn: () => handleGetData(accountId),
     enabled: !!accountId,
   });
 
-  return { isError, isSuccess, isLoading, refetch };
+  return { isError, isSuccess, isLoading, refetch, data };
 };

@@ -24,7 +24,7 @@ export interface Stock {
   pctChg: number;
 }
 
-export interface MatchedOrder {
+export interface MatchedOrd {
   txdate: string; // Ngày đặt lệnh
   afacctno: string; // Số tiểu khoản
   afacctname: string; // Tên tiểu khoản
@@ -74,25 +74,28 @@ export interface PreCheckData {
   transactionId: string; // Mã giao dịch
 }
 
-export interface BaseOrderInterface {
-  txdate: string; // Ngày đặt lệnh
-  afacctno: string; // Số tiểu khoản
-  orderid: string; // Số hiệu lệnh
-  symbol: string; // Mã chứng khoán
-  pricetype: string; // Loại giá. Tra cứu select * from allcode where cdname ='PRICETYPE' and cdtype = 'OD'
-  execqtty: number; // Khối lượng khớp
-  remainqtty: number; // Khối lượng chờ khớp
-  status: string; // Trạng thái tiếng việt
-  en_status: string; // Trạng thái tiếng anh
-  tradeplace: string; // Sàn giao dịch
-}
-export interface OrderInfo {
-  custodycd: string; // Số lưu ký
+export interface BaseOrd {
   txdate: string; // Ngày đặt lệnh
   afacctno: string; // Số tiểu khoản
   orderid: string; // Số hiệu lệnh
   txtime: string; // Thời gian đặt (HH24:MI:SS)
   symbol: string; // Mã chứng khoán
+  execqtty: number; // Khối lượng khớp
+  execamt: number; // Giá trị khớp
+  execprice: number; // Giá khớp
+  remainqtty: number; // Khối lượng chờ khớp
+  remainamt: number; // Giá trị chờ khớp
+  status: string; // Trạng thái tiếng việt
+  en_status: string; // Trạng thái tiếng anh
+  hosesession: string; // Phiên đặt lệnh
+  cancelqtty: number; // Khối lượng hủy
+  adjustqtty: number; // Khối lượng sửa
+  odtimestamp: string; // Giờ cập nhật
+  tradeplace: string; // Sàn giao dịch
+}
+
+export interface OrderInfo extends BaseOrd {
+  custodycd: string; // Số lưu ký
   allowcancel: string; // Có được Hủy lệnh không (Y: có, N: không)
   allowamend: string; // Có được Sửa lệnh không (Y: có, N: không)
   side: TViSide; // Mua/Bán tiếng việt
@@ -101,78 +104,45 @@ export interface OrderInfo {
   pricetype: string; // Loại giá. Tra cứu select * from allcode where cdname ='PRICETYPE' and cdtype = 'OD'
   via: string; // Kênh giao dịch
   qtty: number; // Khối lượng đặt
-  execqtty: number; // Khối lượng khớp
-  execamt: number; // Giá trị khớp
-  execprice: number; // Giá khớp
-  remainqtty: number; // Khối lượng chờ khớp
-  remainamt: number; // Giá trị chờ khớp
-  status: string; // Trạng thái tiếng việt
   en_status: TOrderStatus; // Trạng thái tiếng anh
   tlname: string; // User đặt lệnh
-  hosesession: string; // Phiên đặt lệnh
-  cancelqtty: number; // Khối lượng hủy
-  adjustqtty: number; // Khối lượng sửa
   isdisposal: string; // Có phải là lệnh bán xử lý (Y: có, N: không)
   rootorderid: string; // Số hiệu lệnh gốc
   timetype: string; // Kiểu lệnh (Trong ngày, Điều kiện)
   timetypevalue: string; // Mã kiểu lệnh(T: Trong ngày, G: Điều kiện)
   feedbackmsg: string; // Thông tin trả về
   quoteqtty: string; // Khối lượng đặt
-  odtimestamp: string; // Giờ cập nhật
   matchtype: string; // Loại khớp tiếng việt
   en_matchtype: string; // Loại khớp tiếng anh
   avgprice: number; // Giá khớp trung bình
-  tradeplace: string; // Sàn giao dịch
 }
 
-export interface WaitMatchedOrder {
+export interface WaitMatchedOrd extends BaseOrd {
   exectype: string; // Mã loại lệnh Mua/Bán. Tra cứu select * from allcode where cdname ='EXECTYPE' and cdtype = 'OD';
   matchtype: string; // Loại khớp
   pricetype: string; // Loại giá. Tra cứu select * from allcode where cdname ='PRICETYPE' and cdtype = 'OD'
-  afacctno: number; // Số tiểu khoản
-  symbol: number; // Mã chứng khoán
   orderqtty: number; // KL đặt
   quoteprice: number; // Giá đặt
-  status: string; // Trạng thái
-  en_status: string; // Trạng thái tiếng anh
-  orderid: string; // Số hiệu lệnh
-  hosesession: string; // Phiên đặt lệnh
-  remainqtty: number; // Khối lượng chờ khớp
-  cancelqtty: number; // Khối lượng hủy
-  adjustqtty: number; // Khối lượng sửa
-  tradeplace: string; // Sàn (HNX, UPCOM, HOSE)
   desc_exectype: string; // Loại lệnh
   iscancel: string; // Được hủy không?
   isdisposal: string; // Có phải là lệnh bán xử lý (N: không, Y: Có)
   isadmend: string; // Được sửa không? (N: không, Y: Có)
   foacctno: string; // Số hiệu lệnh fomast (dự trữ)
-  odtimestamp: string; // Giờ cập nhật
   orstatusvalue: string; // Mã trạng thái. Tra cứu select * from allcode where cdname ='ORSTATUS' and cdtype = 'OD';
   confirmed: string; // Trạng thái xác nhận lệnh
-  execqtty: number; // Khối lượng khớp
-  execamt: number; // Giá trị khớp
   orstatus: string; // Trạng thái lệnh
-  execprice: number; // Giá khớp
-  txtime: string; // Thời gian đặt (HH24:MI:SS)
-  txdate: string; // Ngày giao dịch
   via: string; // Kênh đặt lệnh
   feedbackmsg: string; // Thông tin trả về
   timetype: string; // Kiểu lệnh (Trong ngày, Điều kiện)
   timetypevalue: string; // Mã kiểu lệnh(T: Trong ngày, G: Điều kiện)
-  remainamt: number; // Giá trị chờ khớp
 }
 
-export interface MatchedOrder {
-  txdate: string; // Ngày đặt lệnh
-  afacctno: string; // Số tiểu khoản
+export interface MatchedOrd extends BaseOrd {
   afacctname: string; // Tên tiểu khoản
   exectype: string; // Loại giao dịch
   en_exectype: string; // Loại giao dịch tiếng anh
   exectypecd: string; // Mã loại giao dịch
-  symbol: string; // Mã chứng khoán
-  execqtty: number; // Số lượng đặt
   avgexecprice: number; // Giá đặt
-  execamt: number; // Số tiền mua
   feeacr: number; // Phí
   totalamt: number; // Tổng
   bexecqtty: number; // Số lượng mua
@@ -187,20 +157,13 @@ export interface MatchedOrder {
   staxright: number; // Thuế
   stotalamt: number; // Tổng bán
   feerate: number; // % thuế
-  orderid: string; // Số hiệu lệnh
   rootorderid: string; // Số hiệu lệnh gốc
-  tradeplace: string; // Sàn giao dịch
   tradeplacecd: string; // Mã sàn
   last_change: string; // Lần cuối chỉnh sửa
-  txtime: string; // Thời gian giao dịch
   taxrate: number; // Thuế suất
   quoteprice: number; // Giá đặt
   orderqtty: number; // Số lượng đặt
   pricetype: string; // Loại lệnh
-  remainqtty: number; // Số lượng còn lại
-  remainamt: number; // Tổng còn
-  status: string; // Trạng thái
-  en_status: string; // Trạng thái tiếng anh
   status_code: string; // Mã trạng thái
 }
 

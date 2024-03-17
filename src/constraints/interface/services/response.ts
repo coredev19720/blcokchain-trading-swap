@@ -5,8 +5,8 @@ import {
   AccsPermissions,
   AuthorInfo,
 } from "../account";
-import { PortItem } from "../market";
-import { PreCheckData, Stock, OrderInfo, WaitMatchedOrder } from "../market";
+import { MatchedOrd, PortItem } from "../market";
+import { PreCheckData, Stock, OrderInfo, WaitMatchedOrd } from "../market";
 
 export interface BaseRes {
   s: string;
@@ -53,8 +53,12 @@ export interface GetOrdersRes extends BaseRes {
   d: OrderInfo[];
 }
 
-export interface GetWaitMatchedOrdersRes extends BaseRes {
-  d: WaitMatchedOrder[];
+export interface GetWaitMatchedOrdsRes extends BaseRes {
+  d: WaitMatchedOrd[];
+}
+
+export interface GetMatchedOrdsRes extends BaseRes {
+  d: MatchedOrd[];
 }
 
 export interface GetPortfolioRes extends BaseRes {
