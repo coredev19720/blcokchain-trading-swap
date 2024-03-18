@@ -47,7 +47,7 @@ const SearchInput = ({
     if (txt.length > 20) {
       txt = txt.substring(0, 20);
     }
-    setSearchText(txt);
+    setSearchText(txt.toUpperCase());
   };
   return (
     <Wrapper>
