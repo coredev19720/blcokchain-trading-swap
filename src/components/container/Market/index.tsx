@@ -12,50 +12,74 @@ import {
   setLastSymbolToLocalStorage,
   lastSymLocalKey,
 } from "@src/utils/helpers";
-// import io from "socket.io-client";
-
+//@ts-ignore
+import io from "socket.io-client";
+import { socketCfg } from "@src/constants/config";
 const Market = () => {
   const searchParams = useSearchParams();
   const { ticker, ticket, stocks } = useAppSelector((state) => state.market);
   const dispatch = useAppDispatch();
   const [openPanel, setOpenPanel] = useState<boolean>(false);
-  // useEffect(() => {
-  //   let socket: io.Socket;
-  //   const socketUrl = process.env.NEXT_PUBLIC_API_URL || "";
-  //   socket = io(socketUrl, {
-  //     transports: ["websocket"],
-  //     path: "/realtime/socket.io",
-  //     query: {
-  //       __sails_io_sdk_version: "1.2.1",
-  //       __sails_io_sdk_platform: "browser",
-  //       __sails_io_sdk_language: "javascript",
-  //     },
-  //   });
+  const [socket, setSocket] = useState<io.Socket | null>(null);
+  useEffect(() => {
+    console.log("socketCfg", socketCfg);
+    const url = process.env.NEXT_PUBLIC_API_URL || "";
+    const skt: io.Socket = io(url, {
+      transports: socketCfg.transport,
+      path: socketCfg.path,
+      query: {
+        __sails_io_sdk_version: socketCfg.version,
+        __sails_io_sdk_platform: socketCfg.platform,
+        __sails_io_sdk_language: socketCfg.lang,
+      },
+    });
+    setSocket(skt);
+    skt.on("connect", connect);
+    skt.on("disconnect", () => console.log("Disconnected from the server"));
+    // skt.on("connection", symbolSub(skt, "HCM"));
+    skt.on("t", (data: any) => {
+      symbolEvent(data);
+    });
+    return () => {
+      if (skt) {
+        skt.disconnect();
+      }
+    };
+  }, []);
+  useEffect(() => {
+    if (ticker) {
+      symbolSub(socket, ticker.symbol);
+    }
+  }, [ticker?.symbol]);
 
-  //   socket.on("connect", connect);
-  //   socket.on("disconnect", () => console.log("Disconnected from the server"));
-  //   socket.on("connection", (socket: io.Socket) => {
-  //     socket.emit("get", {
-  //       data: { args: ["t:HCM"], op: "subscribe" },
-  //       method: "get",
-  //       url: "/client/subscribe",
-  //     });
-  //   });
-  //   socket.on("t", (data: any) => {
-  //     console.log(data);
-  //   });
-  //   return () => {
-  //     if (socket) {
-  //       socket.disconnect();
-  //     }
-  //   };
-  // }, []);
-  // const connect = () => {
-  //   console.log("Connected to the server");
-  // };
   useEffect(() => {
     !!stocks.length && initTicker();
   }, [stocks]);
+
+  const connect = () => {
+    console.log("Connected to the server");
+  };
+
+  const symbolSub = (socket: io.Socket, symbol: string) => {
+    console.log("Subscribing to symbol", symbol);
+    socket.emit("get", {
+      data: { args: [`t:${symbol}`], op: "subscribe" },
+      method: "get",
+      url: socketCfg.subscribePath,
+    });
+  };
+
+  const symbolUnsub = (socket: io.Socket, symbol: string) => {
+    socket.emit("get", {
+      data: { args: [`t:${symbol}`], op: "unsubscribe" },
+      method: "get",
+      url: socketCfg.subscribePath,
+    });
+  };
+
+  const symbolEvent = (data: any) => {
+    console.log(data);
+  };
 
   const initTicker = () => {
     const s = searchParams?.get("s");

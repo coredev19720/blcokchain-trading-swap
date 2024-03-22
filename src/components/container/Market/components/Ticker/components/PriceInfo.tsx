@@ -3,7 +3,7 @@ import Line from "@components/common/Line";
 import { ITickerData } from "@interface/common";
 import { RowContent } from "@src/styles/common";
 import colors from "@src/themes/colors";
-import { genPriceColor } from "@src/utils/helpers";
+import { formatNumber, genPriceColor } from "@src/utils/helpers";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTranslations } from "next-intl";
@@ -81,7 +81,7 @@ const PriceInfo = ({ ticker }: Props) => {
             color={colors.lightRefText}
             variant="body2"
           >
-            {ticker.reference}
+            {formatNumber(ticker.reference / 1000, 2)}
           </Typography>
         </RowContent>
         <RowContent>
@@ -92,7 +92,7 @@ const PriceInfo = ({ ticker }: Props) => {
             color={colors.lightCeilText}
             variant="body2"
           >
-            {ticker.ceiling}
+            {formatNumber(ticker.ceiling / 1000, 2)}
           </Typography>
         </RowContent>
         <RowContent>
@@ -102,7 +102,7 @@ const PriceInfo = ({ ticker }: Props) => {
             color={colors.lightFloorText}
             variant="body2"
           >
-            {ticker.floor}
+            {formatNumber(ticker.floor / 1000, 2)}
           </Typography>
         </RowContent>
       </ContentBlock>

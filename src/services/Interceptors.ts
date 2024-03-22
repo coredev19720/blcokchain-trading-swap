@@ -61,14 +61,12 @@ const resRejected = async (error: any) => {
       );
       return axiosInst(originalRequest);
     } catch (error) {
-      const locale = Cookies.get("NEXT_LOCALE");
       // Clear tokens and log out the user
       Cookies.remove(process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME as string);
       Cookies.remove(
         process.env.NEXT_PUBLIC_REFRESH_TOKEN_COOKIE_NAME as string
       );
-      // Redirect to login page or any other logic
-      window.location.href = `/${locale}/login`;
+      window.location.href = "login";
     }
   }
   // Return error if it's not related to token refresh
