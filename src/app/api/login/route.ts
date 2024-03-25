@@ -5,29 +5,32 @@ import axiosInst from "@/src/services/Interceptors";
 
 export async function POST(req: Request) {
   const { data } = await req.json();
-  const { u, p, captchaToken } = data;
+  const { u, p, c } = data;
   try {
-    // const data = {
-    //   secret: process.env.RECAPTCHA_SITE_KEY,
-    //   response: captchaToken,
-    // };
-    // console.log(data);
-    // const recaptchaValid = await axiosInst.post(
-    //   process.env.RECAPTCHA_VERIFY_URL || "",
-    //   data
-    // );
-    const res = await axiosInst.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/sso/oauth/token`,
-      {
-        username: `${process.env.NEXT_PUBLIC_PREFIX_ACCOUNT}${u}`,
-        password: decrypt(p),
-        grant_type: TAuthType.password,
-        client_id: process.env.NEXT_PUBLIC_CLIENT_ID,
-        client_secret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
-      }
+    const data = {
+      secret: process.env.RECAPTCHA_SECRET_KEY as string,
+      response: c,
+    };
+    const recaptchaUrl = process.env.RECAPTCHA_VERIFY_URL as string;
+    const recaptchaResult = await axiosInst.post(
+      `${recaptchaUrl}?${new URLSearchParams(data)}`
     );
-    return NextResponse.json(res.data);
+    if (recaptchaResult.data.success) {
+      const res = await axiosInst.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/sso/oauth/token`,
+        {
+          username: `${process.env.NEXT_PUBLIC_PREFIX_ACCOUNT}${u}`,
+          password: decrypt(p),
+          grant_type: TAuthType.password,
+          client_id: process.env.NEXT_PUBLIC_CLIENT_ID,
+          client_secret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
+        }
+      );
+      return NextResponse.json(res.data);
+    }
+    return NextResponse.json("error");
   } catch (e) {
     console.log(e);
+    return NextResponse.json("error");
   }
 }

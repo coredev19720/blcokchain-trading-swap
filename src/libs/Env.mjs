@@ -5,11 +5,7 @@ import { z } from "zod";
 export const Env = createEnv({
   server: {
     RECAPTCHA_VERIFY_URL: z.string().min(1),
-    RECAPTCHA_SITE_KEY: z.string().min(1),
-    // TOKEN_AL: z.string().min(1),
-    // TOKEN_FORMAT: z.string().min(1),
-    // TOKEN_SK: z.string().min(1),
-    // TOKEN_IV: z.string().min(1),
+    RECAPTCHA_SECRET_KEY: z.string().min(1),
   },
   client: {
     NEXT_PUBLIC_DEFAULT_SYMBOL: z.string().min(3).max(3),
@@ -51,5 +47,6 @@ export const Env = createEnv({
     RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     NEXT_PUBLIC_NODE_ENV: process.env.NEXT_PUBLIC_NODE_ENV,
+    RECAPTCHA_SECRET_KEY: process.env.RECAPTCHA_SECRET_KEY,
   },
 });

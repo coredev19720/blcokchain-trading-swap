@@ -23,7 +23,7 @@ export const Content = styled("div")(({ theme }) => ({
   flexDirection: "column",
   gap: theme.spacing(2),
   padding: theme.spacing(3, 4),
-  background: colors.p300,
+  background: theme.palette.common.background,
   borderRadius: theme.spacing(1),
 }));
 
@@ -33,17 +33,19 @@ export const Actions = styled("div")(({ theme }) => ({
   padding: theme.spacing(2, 4),
   marginLeft: theme.spacing(-4),
   width: "calc(100% + 32px)",
-  background: theme.palette.mode === "dark" ? colors.p100 : colors.p300,
+  background: theme.palette.common.background,
 }));
 
 export const Action = styled(Button)(() => ({
   flex: 1,
 }));
-export const TicketSide = styled("div")<{ side?: TSide }>(({ theme, side }) => ({
-  padding: theme.spacing(1),
-  borderRadius: theme.spacing(1),
-  backgroundColor: side === TSide.buy ? colors.sg10 : colors.sr10,
-}));
+export const TicketSide = styled("div")<{ side?: TSide }>(
+  ({ theme, side }) => ({
+    padding: theme.spacing(1),
+    borderRadius: theme.spacing(1),
+    backgroundColor: side === TSide.buy ? colors.sg10 : colors.sr10,
+  })
+);
 
 export const StatusBar = styled("div")<{ fillPct: number }>(
   ({ theme, fillPct }) => ({

@@ -53,7 +53,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
       >
         <S.Wrapper>
           <S.TicketInfo>
-            <Typography variant="h5" fontWeight={600} color="text.primary">
+            <Typography variant="h5" fontWeight={600}>
               {ticket.side === TSide.buy
                 ? t("fn_trade_txt_confirm_buy_title")
                 : t("fn_trade_txt_confirm_sell_title")}
@@ -87,11 +87,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                 <Typography variant="body2" color="text.secondary">
                   {t("fn_trade_txt_ord_type")}
                 </Typography>
-                <Typography
-                  variant="body2"
-                  fontWeight={600}
-                  color="text.primary"
-                >
+                <Typography variant="body2" fontWeight={600}>
                   {ticket.type}
                 </Typography>
               </FlexContent>
@@ -99,11 +95,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                 <Typography variant="body2" color="text.secondary">
                   {t("fn_trade_txt_qty")}
                 </Typography>
-                <Typography
-                  variant="body2"
-                  fontWeight={600}
-                  color="text.primary"
-                >
+                <Typography variant="body2" fontWeight={600}>
                   {ticket.vol}
                 </Typography>
               </FlexContent>
@@ -111,11 +103,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                 <Typography variant="body2" color="text.secondary">
                   {t("fn_trade_txt_price")}
                 </Typography>
-                <Typography
-                  variant="body2"
-                  fontWeight={600}
-                  color="text.primary"
-                >
+                <Typography variant="body2" fontWeight={600}>
                   {ticket.price}
                 </Typography>
               </FlexContent>
@@ -123,11 +111,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                 <Typography variant="body2" color="text.secondary">
                   {t("fn_trade_txt_value")}
                 </Typography>
-                <Typography
-                  variant="body2"
-                  fontWeight={600}
-                  color="text.primary"
-                >
+                <Typography variant="body2" fontWeight={600}>
                   {formatNumber(ticket.price * ticket.vol)}
                 </Typography>
               </FlexContent>
@@ -136,7 +120,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
               <Typography variant="body2" color="text.secondary">
                 {t("en_trade_custodyCd")}
               </Typography>
-              <Typography variant="body2" fontWeight={600} color="text.primary">
+              <Typography variant="body2" fontWeight={600}>
                 {/* {ticket.code} */}
               </Typography>
             </FlexContent>
@@ -144,7 +128,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
               <Typography variant="body2" color="text.secondary">
                 {t("en_trade_accNo")}
               </Typography>
-              <Typography variant="body2" fontWeight={600} color="text.primary">
+              <Typography variant="body2" fontWeight={600}>
                 {activeAccount?.custodycd || ""}
               </Typography>
             </FlexContent>

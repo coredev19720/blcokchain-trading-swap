@@ -33,7 +33,6 @@ const MarketDepth = ({ ports, port, setPort }: Props) => {
       render: (row: PortItem) => (
         <Typography
           fontWeight={600}
-          color="text.primary"
           onClick={() => {
             goToSymbol(row.symbol);
           }}
@@ -46,16 +45,14 @@ const MarketDepth = ({ ports, port, setPort }: Props) => {
     {
       title: t("en_cu_stock_list_totalQty"),
       render: (row: PortItem) => (
-        <Typography variant="body2" color="text.primary">
-          {formatNumber(row.total)}
-        </Typography>
+        <Typography variant="body2">{formatNumber(row.total)}</Typography>
       ),
       align: "right",
     },
     {
       title: t("en_cu_stock_list_valueKVND"),
       render: (row: PortItem) => (
-        <Typography variant="body2" fontWeight={600} color="text.primary">
+        <Typography variant="body2" fontWeight={600}>
           {formatNumber(row.costPriceAmt)}
         </Typography>
       ),

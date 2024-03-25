@@ -19,19 +19,7 @@ const Button = {
       lineHeight: "2.2rem",
       borderRadius: 12,
     },
-    containedPrimary: {
-      backgroundColor: colors.sb60,
-      "&:hover": {
-        backgroundColor: colors.sb70,
-      },
-      "&:active": {
-        backgroundColor: colors.sb80,
-      },
-      "&:disabled": {
-        backgroundColor: "rgba(14, 17, 20, 0.12)",
-        color: "rgba(14, 17, 20, 0.32)",
-      },
-    },
+    containedPrimary: {},
     containedSecondary: {
       backgroundColor: colors.ln50,
       color: colors.dn30,

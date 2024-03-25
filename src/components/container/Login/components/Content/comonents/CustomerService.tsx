@@ -32,10 +32,10 @@ const CustomerService = () => {
         <Image src={csIcon} alt="cs icon" height={40} width={40} />
       </IconWrapper>
       <TextWrapper>
-        <Typography fontWeight={600} color="text.primary" variant="subtitle1">
+        <Typography fontWeight={600} variant="subtitle1">
           {t("txt_cs")}
         </Typography>
-        <Typography fontWeight={600} color="text.primary" variant="body2">
+        <Typography fontWeight={600} variant="body2">
           {t("txt_cs_phone")}
         </Typography>
       </TextWrapper>

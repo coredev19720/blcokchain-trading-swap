@@ -30,37 +30,37 @@ const Content = () => {
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("en_cu_cash_onHand")}</Typography>
-        <Typography fontWeight={600} color="text.primary">
+        <Typography fontWeight={600}>
           {formatNumber(accountSummary[activeAccount.id]?.balance)}
         </Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("en_cu_cash_payables")}</Typography>
-        <Typography fontWeight={600} color="text.primary">
+        <Typography fontWeight={600}>
           {formatNumber(accountSummary[activeAccount.id]?.tdbalance)}
         </Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("en_cu_cash_receivables")}</Typography>
-        <Typography fontWeight={600} color="text.primary">
+        <Typography fontWeight={600}>
           {formatNumber(accountSummary[activeAccount.id]?.cibalance)}
         </Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("en_cu_cash_advance")}</Typography>
-        <Typography fontWeight={600} color="text.primary">
+        <Typography fontWeight={600}>
           {formatNumber(accountSummary[activeAccount.id]?.avladvance)}
         </Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("fn_acc_cu_stock_buyPower")}</Typography>
-        <Typography fontWeight={600} color="text.primary">
+        <Typography fontWeight={600}>
           {formatNumber(accountSummary[activeAccount.id]?.pp)}
         </Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("en_cu_stock_sum_total")}</Typography>
-        <Typography fontWeight={600} color="text.primary">
+        <Typography fontWeight={600}>
           {formatNumber(accountSummary[activeAccount.id]?.totalseamt)}
         </Typography>
       </S.RowWrapper>
@@ -74,7 +74,7 @@ const Content = () => {
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("en_cu_stock_sum_receivingVal")}</Typography>
-        <Typography fontWeight={600} color="text.primary">
+        <Typography fontWeight={600}>
           {formatNumber(accountSummary[activeAccount.id]?.netassval)}
         </Typography>
       </S.RowWrapper>

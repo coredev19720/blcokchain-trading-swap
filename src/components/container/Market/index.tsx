@@ -47,7 +47,7 @@ const Market = () => {
     };
   }, []);
   useEffect(() => {
-    if (ticker) {
+    if (ticker && socket) {
       symbolSub(socket, ticker.symbol);
     }
   }, [ticker?.symbol]);

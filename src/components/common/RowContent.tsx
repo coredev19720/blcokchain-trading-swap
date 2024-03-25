@@ -21,7 +21,7 @@ const RowContent = ({ leftTxt, rightTxt, isChild }: IProps) => {
       <Typography variant="body2" color="text.secondary">
         {leftTxt}
       </Typography>
-      <Typography variant="body2" fontWeight={600} color="text.primary">
+      <Typography variant="body2" fontWeight={600}>
         {typeof rightTxt === "number" ? formatNumber(rightTxt) : rightTxt}
       </Typography>
     </Wrapper>

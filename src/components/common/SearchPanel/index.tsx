@@ -61,9 +61,7 @@ const SearchPanel = ({ open, setOpenPanel }: IProps) => {
                         style={style}
                         onClick={() => handleClickTicker(stock)}
                       >
-                        <Typography fontWeight={600} color="text.primary">
-                          {stock.symbol}
-                        </Typography>
+                        <Typography fontWeight={600}>{stock.symbol}</Typography>
                         <Typography variant="subtitle2" fontWeight={400}>
                           {stock.FullName}
                         </Typography>
@@ -82,7 +80,7 @@ const SearchPanel = ({ open, setOpenPanel }: IProps) => {
                   key={x.symbol}
                   onClick={() => handleClickTicker(x)}
                 >
-                  <Typography fontWeight={600} color="text.primary">
+                  <Typography fontWeight={600}  >
                     {x.symbol}
                   </Typography>
                   <Typography variant="subtitle2" fontWeight={400}>

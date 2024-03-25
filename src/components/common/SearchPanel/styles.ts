@@ -6,7 +6,7 @@ export const Wrapper = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   height: "100%",
-  background: colors.p300,
+  background: theme.palette.common.background,
   overflow: "auto",
   padding: 16,
   width: "100%",

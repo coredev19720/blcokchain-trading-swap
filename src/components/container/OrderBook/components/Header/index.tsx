@@ -7,9 +7,7 @@ const Header = () => {
   const t = useTranslations("order_book");
   return (
     <S.Wrapper>
-      <Typography fontWeight={700} color="text.primary">
-        {t("fn_ob_txt_title")}
-      </Typography>
+      <Typography fontWeight={700}>{t("fn_ob_txt_title")}</Typography>
       <Typography variant="subtitle1">{`${t("fn_ob_txt_date")} ${dayjs().format(
         "DD/MM/YYYY"
       )}`}</Typography>

@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import apiUrls from "@/src/services/apiUrls";
 import Cookies from "js-cookie";
 import axiosInst from "../Interceptors";
+import axios from "axios";
 interface UseLogin {
   onLogin: (data: {
     u: string;
@@ -21,17 +22,8 @@ const handleLogin = async (data: {
   captchaToken: string;
 }): Promise<LoginRes> => {
   try {
-    //fix me
-    // const validateCaptcha = await axios.post(
-    //   process.env.NEXT_PUBLIC_RECAPTCHA_VERIFY_URL as string,
-    //   {
-    //     secret: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
-    //     response: data.captchaToken,
-    //   }
-    // );
-    // console.log("validateCaptcha", validateCaptcha.data);
     const res = await axiosInst.post(apiUrls.login, {
-      data: { u: data.u, p: data.p },
+      data: { u: data.u, p: data.p, c: data.captchaToken },
     });
     if (res.data.access_token) {
       window.localStorage.setItem(

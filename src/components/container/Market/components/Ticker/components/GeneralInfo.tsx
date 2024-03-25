@@ -12,7 +12,7 @@ const GeneralInfo = ({ ticker }: Props) => {
   return (
     <Wrapper>
       <RowContent>
-        <Typography variant="h4" color="text.primary" fontWeight={600}>
+        <Typography variant="h4" fontWeight={600}>
           {ticker.symbol}
         </Typography>
         <Typography

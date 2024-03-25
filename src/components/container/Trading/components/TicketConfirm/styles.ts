@@ -28,7 +28,7 @@ export const Block = styled("div")(({ theme }) => ({
   gap: 8,
   padding: theme.spacing(4),
   borderRadius: theme.spacing(2),
-  background: theme.palette.mode === "dark" ? colors.p100 : colors.p300,
+  background: theme.palette.common.background,
 }));
 
 export const TicketSide = styled("div")<{ side: TSide }>(({ theme, side }) => ({
@@ -38,7 +38,7 @@ export const TicketSide = styled("div")<{ side: TSide }>(({ theme, side }) => ({
 }));
 
 export const Actions = styled("div")(({ theme }) => ({
-  background: theme.palette.mode === "dark" ? colors.dn10 : colors.p300,
+  background: theme.palette.common.background,
   padding: theme.spacing(4),
   display: "flex",
   flexDirection: "column",

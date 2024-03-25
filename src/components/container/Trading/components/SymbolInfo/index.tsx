@@ -97,7 +97,7 @@ const SymbolInfo = () => {
         </S.PriceBlock>
         <S.PriceBlock>
           <FieldLabel>{t("en_sb_price_avg")}</FieldLabel>
-          <Typography color="text.primary" variant="body2" fontWeight={600}>
+          <Typography variant="body2" fontWeight={600}>
             {formatNumber(ticker?.ceiling || 0)}
           </Typography>
         </S.PriceBlock>

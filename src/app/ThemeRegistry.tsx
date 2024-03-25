@@ -6,6 +6,7 @@ import createCache from "@emotion/cache";
 import { useServerInsertedHTML } from "next/navigation";
 import { CacheProvider } from "@emotion/react";
 import { Experimental_CssVarsProvider as CssVarsProvider } from "@mui/material";
+
 import theme from "@src/themes";
 export default function ThemeRegistry(props: any) {
   const { options, children } = props;

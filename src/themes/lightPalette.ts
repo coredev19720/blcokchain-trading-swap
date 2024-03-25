@@ -3,9 +3,10 @@ import { PaletteMode } from "@mui/material";
 
 const lightPalette = {
   primary: {
-    main: colors.sb80,
+    main: colors.sb60,
     light: colors.sb70,
     dark: colors.sb90,
+    constrastText: colors.p300,
   },
   secondary: {
     main: colors.mn10,
@@ -49,6 +50,7 @@ const lightPalette = {
   },
   background: {
     paper: colors.p300,
+    default: colors.p300,
     backdrop: "rgba(0,0,0,0.5)",
   },
   mode: "light" as PaletteMode,

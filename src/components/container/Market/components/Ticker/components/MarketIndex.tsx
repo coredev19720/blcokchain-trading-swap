@@ -24,7 +24,7 @@ const MarketIndex = () => {
     {
       title: t("en_idx_code"),
       render: (row: IMarketInfo) => (
-        <Typography variant="subtitle1" fontWeight={700} color="text.primary">
+        <Typography variant="subtitle1" fontWeight={700}>
           {row.name}
         </Typography>
       ),

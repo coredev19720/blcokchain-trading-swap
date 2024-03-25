@@ -8,8 +8,8 @@ interface Props {
   variant?: Variant;
   noellipsis?: boolean;
 }
-const Label = styled(Typography)<Props>(({ noellipsis }) => ({
-  color: colors.mn70,
+const Label = styled(Typography)<Props>(({ theme, noellipsis }) => ({
+  color: theme.palette.text.secondary,
   whiteSpace: !noellipsis ? "normal" : "nowrap",
   overflow: !noellipsis ? "normal" : "hidden",
   textOverflow: !noellipsis ? "normal" : "ellipsis",

@@ -1,27 +1,16 @@
 import * as S from "./styles";
-import { useEffect } from "react";
 import { languages } from "@src/constants/common";
 import Cookies from "js-cookie";
-import { usePathname, useRouter, useParams } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import Image from "next/image";
-import { setTheme } from "@src/redux/features/layoutSlice";
-import { useAppDispatch } from "@src/redux/hooks";
 
 const LanguageToggle = () => {
-  const dispatch = useAppDispatch();
-  const pathname = usePathname();
   const router = useRouter();
   const params = useParams();
-  useEffect(() => {
-    const theme = Cookies.get("theme");
-    if (theme === "dark") {
-      dispatch(setTheme(theme));
-    }
-  }, []);
 
   const handleChangeLanguage = (val: string) => {
     Cookies.set("NEXT_LOCALE", val);
-    pathname && router.push(`/${val}/account`);
+    router.push(`/${val}/account`);
   };
   return (
     <S.Wrapper>

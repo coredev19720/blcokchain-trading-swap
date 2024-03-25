@@ -4,20 +4,21 @@ import darkPalette from "./darkPalette";
 import typography from "./typography";
 import breakpoints from "./breakpoints";
 import components from "./components";
+
 const theme = extendTheme({
   colorSchemes: {
     light: {
-      // palette for light mode
       palette: lightPalette,
     },
     dark: {
-      // palette for dark mode
       palette: darkPalette,
     },
   },
   typography: { ...typography },
   breakpoints: { values: { ...breakpoints } },
   spacing: 4,
-  components: { ...components },
+  components: {
+    ...components,
+  },
 });
 export default theme;

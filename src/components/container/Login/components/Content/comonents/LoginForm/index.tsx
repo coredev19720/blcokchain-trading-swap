@@ -1,15 +1,14 @@
-import { IconButton, TextField, Typography, Button } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import { createRef, useState, KeyboardEvent, useEffect } from "react";
 import { useForm, FieldValues } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { uIdGen } from "@src/utils/helpers";
 import { Wrapper, AdormentWrapper } from "./styles";
 import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "react-toastify";
 import { useLogin } from "@/src/services/hooks/useLogin";
 import { encrypt } from "@src/libs/hash";
-import { useRouter, useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import TextInput from "@/src/components/common/TextInput";
 import LoadingButton from "@/src/components/common/LoadingButton";
 
@@ -18,7 +17,6 @@ const LoginForm = () => {
   const tNoti = useTranslations("notification");
   const t = useTranslations("login");
   const router = useRouter();
-  const params = useParams();
   const {
     control,
     handleSubmit,
@@ -103,11 +101,7 @@ const LoginForm = () => {
 
   const handleLogin = async (data: FieldValues) => {
     const recaptchaVal = recaptchaRef.current?.getValue();
-    if (
-      process.env.NEXT_PUBLIC_NODE_ENV !== "development" &&
-      recaptchaRef.current &&
-      !recaptchaVal
-    ) {
+    if (recaptchaRef.current && !recaptchaVal) {
       toast.error(tNoti("txt_recaptcha_fail"));
       return;
     }
@@ -121,7 +115,7 @@ const LoginForm = () => {
   return (
     <form>
       <Wrapper>
-        <Typography variant="h5" fontWeight={600} color="text.primary">
+        <Typography variant="h5" fontWeight={600}>
           {t("fn_login_txt_title")}
         </Typography>
         <TextInput
@@ -138,6 +132,7 @@ const LoginForm = () => {
             startAdornment: (
               <Typography
                 style={{ paddingLeft: 4 }}
+                color="text.secondary"
               >{`${process.env.NEXT_PUBLIC_PREFIX_ACCOUNT}-`}</Typography>
             ),
           }}
@@ -179,7 +174,9 @@ const LoginForm = () => {
           inputProps={{
             endAdornment: (
               <AdormentWrapper>
-                <Typography>{t("txt_minute")}</Typography>
+                <Typography color="text.secondary">
+                  {t("txt_minute")}
+                </Typography>
               </AdormentWrapper>
             ),
           }}

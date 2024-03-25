@@ -17,7 +17,7 @@ const Order = ({ data, handleClick }: IProps) => {
     <S.Wrapper>
       <S.Content>
         <FlexContent>
-          <Typography variant="h5" fontWeight={600} color="text.primary">
+          <Typography variant="h5" fontWeight={600}>
             {data.symbol}
           </Typography>
           <S.TicketSide side={data.en_side}>
@@ -43,7 +43,7 @@ const Order = ({ data, handleClick }: IProps) => {
           <Typography variant="body2" color="text.secondary">
             {t("fn_ob_txt_qtyProgress")}
           </Typography>
-          <Typography variant="body2" fontWeight={600} color="text.primary">
+          <Typography variant="body2" fontWeight={600}>
             {`${data.qtty} / ${data.remainqtty}`}
           </Typography>
         </FlexContent>
@@ -51,7 +51,7 @@ const Order = ({ data, handleClick }: IProps) => {
           <Typography variant="body2" color="text.secondary">
             {t("en_ord_order_status")}
           </Typography>
-          <Typography variant="body2" fontWeight={600} color="text.primary">
+          <Typography variant="body2" fontWeight={600}>
             {data.en_status}
           </Typography>
         </FlexContent>
@@ -59,7 +59,7 @@ const Order = ({ data, handleClick }: IProps) => {
           <Typography variant="body2" color="text.secondary">
             {t("en_ord_order_price")}
           </Typography>
-          <Typography variant="body2" fontWeight={600} color="text.primary">
+          <Typography variant="body2" fontWeight={600}>
             {data.price}
           </Typography>
         </FlexContent>
@@ -67,7 +67,7 @@ const Order = ({ data, handleClick }: IProps) => {
           <Typography variant="body2" color="text.secondary">
             {t("en_ord_order_value")}
           </Typography>
-          <Typography variant="body2" fontWeight={600} color="text.primary">
+          <Typography variant="body2" fontWeight={600}>
             {formatNumber(data ? data.qtty * data.price : 0)}
           </Typography>
         </FlexContent>

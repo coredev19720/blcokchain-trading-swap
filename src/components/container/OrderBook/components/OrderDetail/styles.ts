@@ -24,7 +24,7 @@ export const Content = styled("div")(({ theme }) => ({
   flexDirection: "column",
   gap: theme.spacing(2),
   padding: theme.spacing(3, 4),
-  background: colors.p300,
+  background: theme.palette.common.background,
   borderRadius: theme.spacing(1),
 }));
 

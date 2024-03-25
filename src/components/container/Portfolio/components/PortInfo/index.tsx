@@ -16,7 +16,7 @@ const PortInfo = () => {
         <Typography variant="body2">
           {t("en_cu_stock_sum_onhandVal")}
         </Typography>
-        <Typography variant="body2" fontWeight={600} color="text.primary">
+        <Typography variant="body2" fontWeight={600}>
           {accountSummary &&
             activeAccount &&
             formatNumber(accountSummary[activeAccount.id]?.totalseamt || 0)}
@@ -26,7 +26,7 @@ const PortInfo = () => {
         <Typography variant="body2">
           {t("en_cu_stock_sum_receivingVal")}
         </Typography>
-        <Typography variant="body2" fontWeight={600} color="text.primary">
+        <Typography variant="body2" fontWeight={600}>
           {accountSummary &&
             activeAccount &&
             formatNumber(accountSummary[activeAccount.id]?.totalbuyamt || 0)}

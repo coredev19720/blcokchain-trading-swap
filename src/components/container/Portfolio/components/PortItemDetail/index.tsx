@@ -66,11 +66,11 @@ const PortItemDetail = ({ data, handleClose }: IProps) => {
       >
         <S.Wrapper>
           <SlideLine />
-          <Typography fontWeight={600} color="text.primary">
+          <Typography fontWeight={600}>
             {t("fn_port_detail_txt_title")}
           </Typography>
           <S.Content>
-            <Typography variant="h5" fontWeight={600} color="text.primary">
+            <Typography variant="h5" fontWeight={600}>
               {data?.symbol}
             </Typography>
           </S.Content>

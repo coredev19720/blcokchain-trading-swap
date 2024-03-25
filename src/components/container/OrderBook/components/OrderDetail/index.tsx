@@ -2,7 +2,7 @@ import * as S from "./styles";
 import { FlexContent, SlideLine } from "@src/styles/common";
 import { Backdrop, Slide, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import {  OrderInfo } from "@interface/market";
+import { OrderInfo } from "@interface/market";
 import { TOrderActionType, TSide } from "@enum/common";
 import colors from "@src/themes/colors";
 import Detail from "./Detail";
@@ -50,12 +50,12 @@ const OrderDetail = ({ data, type, handleClose }: IProps) => {
       >
         <S.Wrapper>
           <SlideLine />
-          <Typography fontWeight={600} variant="h5" color="text.primary">
+          <Typography fontWeight={600} variant="h5">
             {title[type]}
           </Typography>
           <S.Content>
             <FlexContent>
-              <Typography variant="h5" fontWeight={600} color="text.primary">
+              <Typography variant="h5" fontWeight={600}>
                 {data?.symbol}
               </Typography>
               <S.TicketSide side={data?.en_side}>

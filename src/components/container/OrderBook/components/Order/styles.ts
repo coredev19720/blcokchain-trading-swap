@@ -1,6 +1,6 @@
 import { TSide } from "@enum/common";
 import colors from "@src/themes/colors";
-import { Button, Select } from "@mui/material";
+import { Button } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const Wrapper = styled("div")(() => ({
@@ -17,7 +17,7 @@ export const Content = styled("div")(({ theme }) => ({
   flexDirection: "column",
   gap: theme.spacing(2),
   padding: theme.spacing(3, 4),
-  background: colors.p300,
+  background: theme.palette.common.background,
   borderRadius: theme.spacing(1),
 }));
 
