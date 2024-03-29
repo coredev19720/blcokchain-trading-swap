@@ -22,7 +22,6 @@ const Market = () => {
   const [openPanel, setOpenPanel] = useState<boolean>(false);
   const [socket, setSocket] = useState<io.Socket | null>(null);
   useEffect(() => {
-    console.log("socketCfg", socketCfg);
     const url = process.env.NEXT_PUBLIC_API_URL || "";
     const skt: io.Socket = io(url, {
       transports: socketCfg.transport,

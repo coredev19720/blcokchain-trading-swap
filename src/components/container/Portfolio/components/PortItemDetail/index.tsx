@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { TSide } from "@enum/common";
 import { useRouter } from "next/navigation";
 import { handleSlideDown } from "@src/utils/behaviors";
+import colors from "@/src/themes/colors";
 interface IProps {
   data: PortItem | null;
   handleClose: () => void;
@@ -52,6 +53,14 @@ const PortItemDetail = ({ data, handleClose }: IProps) => {
       handleClose();
       router.push("trading");
     }
+  };
+  const genTextColor = (value: number | undefined) => {
+    if (value === undefined) return "text.primary";
+    return value > 0
+      ? colors.lightUpText
+      : value < 0
+      ? colors.lightDownText
+      : "text.primary";
   };
   return (
     <Backdrop open={!!data} onClick={handleClose}>
@@ -112,11 +121,13 @@ const PortItemDetail = ({ data, handleClose }: IProps) => {
             <RowContent
               leftTxt={t("en_cu_stock_detail_absolutePL")}
               rightTxt={data?.pnlamt}
+              rightColor={genTextColor(data?.pnlamt)}
             />
             {/* % lai lo du tinh */}
             <RowContent
               leftTxt={t("en_cu_stock_detail_percentPL")}
               rightTxt={`${data?.pnlrate}%`}
+              rightColor={genTextColor(data?.pnlamt)}
             />
           </S.Content>
           <S.Actions>
