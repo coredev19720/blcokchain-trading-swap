@@ -1,4 +1,4 @@
-import { Stock } from "@/src/constraints/interface/market";
+import { InsRTData, Stock } from "@/src/constraints/interface/market";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { RowContent } from "@src/styles/common";
@@ -6,45 +6,45 @@ import { genPriceColor, genTextWithPrefix } from "@src/utils/helpers";
 
 const Wrapper = styled("div")(() => ({}));
 type Props = {
-  ticker: Stock;
+  instrument: InsRTData;
 };
-const GeneralInfo = ({ ticker }: Props) => {
+const GeneralInfo = ({ instrument }: Props) => {
   return (
     <Wrapper>
       <RowContent>
         <Typography variant="h4" fontWeight={600}>
-          {ticker.symbol}
+          {instrument.SB}
         </Typography>
         <Typography
           variant="h4"
           fontWeight={600}
           color={genPriceColor(
-            ticker.reference,
-            ticker.price,
-            ticker.ceiling,
-            ticker.floor
+            instrument.RE,
+            instrument.CP,
+            instrument.CL,
+            instrument.FL
           )}
         >
-          {ticker.price}
+          {instrument.CP}
         </Typography>
       </RowContent>
 
       <RowContent>
         <Typography variant="subtitle1" noWrap>
-          {ticker.FullName}
+          {instrument.FN}
         </Typography>
         <Typography
           style={{ whiteSpace: "nowrap" }}
           variant="subtitle1"
           color={genPriceColor(
-            ticker.reference,
-            ticker.price,
-            ticker.ceiling,
-            ticker.floor
+            instrument.RE,
+            instrument.CP,
+            instrument.CL,
+            instrument.FL
           )}
         >
-          {`${genTextWithPrefix(ticker.chg)} / ${genTextWithPrefix(
-            ticker.pctChg
+          {`${genTextWithPrefix(instrument.CH)} / ${genTextWithPrefix(
+            instrument.CHP
           )}%`}
         </Typography>
       </RowContent>

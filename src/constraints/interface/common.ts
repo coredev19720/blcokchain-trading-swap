@@ -16,14 +16,9 @@ export interface ITickerData {
   marketValue: number;
   klnnBuy: number;
   klnnSell: number;
-  marketDepth: IMarketDepth;
   market: TMarket;
 }
-export interface IMarketDepth {
-  deals: IDealPrice[];
-  historyDeals: IHistoryDeal[];
-}
-export interface IDealPrice {
+export interface IBestDeal {
   price: number;
   buyVol: number;
   sellVol: number;

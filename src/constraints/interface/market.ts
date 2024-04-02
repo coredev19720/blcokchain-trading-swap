@@ -7,7 +7,7 @@ import {
   TViSide,
 } from "../enum/common";
 
-export interface Stock {
+export interface  Stock {
   symbol: string;
   FullName: string;
   ceiling: number;
@@ -206,4 +206,108 @@ export interface ITicket {
   kind: TOrderKind;
   type: TOrderType;
   market: TMarket;
+}
+export interface InsRTData {
+  Id: string; // identify
+  SB: string; // Symbol: Mã chứng khoán
+  SI: string; // StockId
+  FN: string; // FullName: Tên mã
+  TD: string; // Tradingdate: ngày giao dịch
+  ST: string; // StockType
+  CL: number; // Ceiling: giá trần
+  FL: number; // Floor: giá sàn
+  RE: number; // Reference: giá tham chiếu
+  B3: number; // bidPrice3: top 3 giá mua tốt nhất
+  V3: number; // volPrice3: top 3 khối lượng mua tốt nhất
+  B2: number; // bidPrice2: top 3 giá mua tốt nhất
+  V2: number; // volPrice2: top 3 khối lượng mua tốt nhất
+  B1: number; // bidPrice1: top 3 giá mua tốt nhất
+  V1: number; // volPrice1: top 3 khối lượng mua tốt nhất
+  CP: number; // closePrice: giá khớp cuối
+  CV: number; // closeVol: khối lượng khớp cuối
+  CH: number; // Change: thay đổi so với giá tham chiếu
+  CHP: number; // changePercent: phần trăm thay đổi so với giá tham chiếu
+  S1: number; // offerPrice1: top 3 giá bán tốt nhất
+  U1: number; // offerVol1 top 3 khối lượng bán tốt nhất
+  S2: number; // offerPrice2: top 3 giá bán tốt nhất
+  U2: number; // offerVol2 top 3 khối lượng bán tốt nhất
+  S3: number; // offerPrice3: top 3 giá bán tốt nhất
+  U3: number; // offerVol3 top 3 khối lượng bán tốt nhất
+  TT: number; // totalTrading: tổng khổi lượng giao dịch
+  TV: number; // totalTradingValue: tổng giá trị giao dịch
+  AP: number; // averagePrice: giá trung binh
+  OP: number; // Open: giá mở cửa
+  HI: number; // High: giá cao nhất
+  LO: number; // Low: giá thấp nhất
+  FB: number; // foreignBuy: nước ngoài mua
+  FS: number; // foreignSell: nước ngoài bán
+  FR: number; // foreignRemain
+  FO: number; // foreignRoom: room nước ngoài
+  TO: number; // TOTAL_OFFER_QTTY
+  TB: number; // TOTAL_BID_QTTY
+  PP: number; // PRIOR_PRICE
+  SS: string; // Status
+  P1: string; // priceOne
+  PMQ: number; // PT_MATCH_QTTY: khối lượng khớp lệnh thỏa thuận
+  PMP: number; // PT_MATCH_PRICE: giá khớp lệnh thỏa thuận
+  PTQ: number; // PT_TOTAL_TRADED_QTTY: khối lượng giao dịch thỏa thuận
+  PTV: number; // PT_TOTAL_TRADED_VALUE: giá trị giao dịch thỏa thuận
+  FC: string; // FloorCode
+  P2: string; // priceTwo
+  OI: string; // openInterest
+  OIC: string; // openInterestChange
+  FTD: string; // firstTradingDate
+  LTD: string; // lastTradingDate
+  ULS: string; // underlyingSymbol
+  TSI: string; // tradingSessionID
+  LS: string; // ListedShare
+  CWT: string; // CoveredWarrantType
+  EX: string; // Exchange: sàn giao dịch
+  EP: string; // ExercisePrice
+  ER: string; // ExerciseRatio
+  IN: string; // IssuerName
+  MD: string; // MaturityDate
+}
+export interface TradeRTData {
+  IID: string; // Indentity
+  SM: string; // Sequence MSG
+  TD: string; // Ngày giao dịch
+  SB: string; // Mã CK
+  FT: string; // Thời gian
+  FMP: number; // Giá khớp
+  FCV: number; // Giá trị thay đổi
+  FV: number; // KL khớp
+  AVO: number; // KL tích lũy
+  AVA: number; // Giá trị tích lũy
+}
+export interface AccountRTData {
+  custodycd: string; // số lưu ký
+  accountno: string; // số tài khoản giao dịch
+  orderid: string; // Số hiệu lệnh
+  code: string; // Mã CK
+  lastchange: string; // Thời gian
+  subside: string; // Loại lệnh
+  side_desc: string; // Diễn giải loại lệnh
+  subtypecd: string; // Loại giá
+  ordertype_desc: string; // diễn giải loại giá
+  validity: string; // validity
+  dataval: string; // dataval
+  status: string; // Trạng thái lệnh
+  orderqtty: number; // Số lượng đặt
+  orderprice: number; // Giá đặt
+  matchprice: number; // giá khớp
+  matchqtty: number; // số lượng khớp
+  odsent: string; // Thời gian đặt
+  execamt: number; // Giá trị khớp
+  remain_qtty: number; // SL chờ khớp
+  cancel_qtty: number; // SL hủy
+  admend_qtty: number; // SL sửa
+  confirmid: string; // SHL sở confirm
+  originorderid: string; // SHL gốc
+  txdate: string; // Ngày yêu cầu
+  feeamt: number; // Phí
+  tax: number; // Thuế
+  tradingfee: number; // Phần tram phí
+  via: string; // Kênh đặt lệnh
+  norp: string; // Lệnh thỏa thuận hay ko?
 }

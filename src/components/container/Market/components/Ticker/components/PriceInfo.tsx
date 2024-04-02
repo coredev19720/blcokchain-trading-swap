@@ -1,13 +1,12 @@
 import FieldLabel from "@components/common/FieldLabel";
 import Line from "@components/common/Line";
-import { ITickerData } from "@interface/common";
 import { RowContent } from "@src/styles/common";
 import colors from "@src/themes/colors";
 import { formatNumber, genPriceColor } from "@src/utils/helpers";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTranslations } from "next-intl";
-import { Stock } from "@/src/constraints/interface/market";
+import { InsRTData } from "@/src/constraints/interface/market";
 const Wrapper = styled("div")(() => ({
   display: "flex",
   gap: 8,
@@ -19,9 +18,9 @@ const ContentBlock = styled("div")(() => ({
   flexDirection: "column",
 }));
 type Props = {
-  ticker: Stock;
+  instrument: InsRTData;
 };
-const PriceInfo = ({ ticker }: Props) => {
+const PriceInfo = ({ instrument }: Props) => {
   const t = useTranslations("market");
   return (
     <Wrapper>
@@ -32,13 +31,13 @@ const PriceInfo = ({ ticker }: Props) => {
             fontWeight={500}
             variant="body2"
             color={genPriceColor(
-              ticker.reference,
-              ticker.open,
-              ticker.ceiling,
-              ticker.floor
+              instrument.RE,
+              instrument.OP,
+              instrument.CL,
+              instrument.FL
             )}
           >
-            {ticker.open}
+            {instrument.OP}
           </Typography>
         </RowContent>
         <RowContent>
@@ -47,13 +46,13 @@ const PriceInfo = ({ ticker }: Props) => {
             fontWeight={500}
             variant="body2"
             color={genPriceColor(
-              ticker.reference,
-              ticker.high,
-              ticker.ceiling,
-              ticker.floor
+              instrument.RE,
+              instrument.HI,
+              instrument.CL,
+              instrument.FL
             )}
           >
-            {ticker.high}
+            {instrument.HI}
           </Typography>
         </RowContent>
         <RowContent>
@@ -62,13 +61,13 @@ const PriceInfo = ({ ticker }: Props) => {
             fontWeight={500}
             variant="body2"
             color={genPriceColor(
-              ticker.reference,
-              ticker.low,
-              ticker.ceiling,
-              ticker.floor
+              instrument.RE,
+              instrument.LO,
+              instrument.CL,
+              instrument.FL
             )}
           >
-            {ticker.low}
+            {instrument.LO}
           </Typography>
         </RowContent>
       </ContentBlock>
@@ -81,7 +80,7 @@ const PriceInfo = ({ ticker }: Props) => {
             color={colors.lightRefText}
             variant="body2"
           >
-            {formatNumber(ticker.reference / 1000, 2)}
+            {formatNumber(instrument.RE)}
           </Typography>
         </RowContent>
         <RowContent>
@@ -92,7 +91,7 @@ const PriceInfo = ({ ticker }: Props) => {
             color={colors.lightCeilText}
             variant="body2"
           >
-            {formatNumber(ticker.ceiling / 1000, 2)}
+            {formatNumber(instrument.CL)}
           </Typography>
         </RowContent>
         <RowContent>
@@ -102,7 +101,7 @@ const PriceInfo = ({ ticker }: Props) => {
             color={colors.lightFloorText}
             variant="body2"
           >
-            {formatNumber(ticker.floor / 1000, 2)}
+            {formatNumber(instrument.FL)}
           </Typography>
         </RowContent>
       </ContentBlock>
