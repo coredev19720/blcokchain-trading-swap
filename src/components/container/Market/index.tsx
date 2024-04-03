@@ -17,6 +17,7 @@ import io from "socket.io-client";
 import { socketCfg } from "@src/constants/config";
 import { InsRTData, TradeRTData } from "@/src/constraints/interface/market";
 import { initInstrument } from "@/src/constants/market";
+import { usePreviousValue } from "@/src/hooks/usePrevious";
 const Market = () => {
   const searchParams = useSearchParams();
   const { ticker, ticket, stocks } = useAppSelector((state) => state.market);
@@ -25,6 +26,8 @@ const Market = () => {
   const [instrument, setInstrument] = useState<InsRTData>(initInstrument);
   const [trades, setTrades] = useState<TradeRTData[]>([]);
   const [socket, setSocket] = useState<io.Socket | null>(null);
+  const prevSymbol = usePreviousValue(ticker?.symbol);
+
   useEffect(() => {
     const url = process.env.NEXT_PUBLIC_API_URL || "";
     const skt: io.Socket = io(url, {
@@ -41,14 +44,14 @@ const Market = () => {
     skt.on("disconnect", () => console.log("Disconnected from the server"));
     // skt.on("connection", symbolSub(skt, "HCM"));
     skt.on("i", (data: any) => {
-      if (data[0] === "i" && data[1].d[0]) {
-        setInstrument({ ...instrument, ...data[1].d[0] });
+      if (data.d[0]) {
+        handleIEvent(data.d[0]);
       }
     });
     skt.on("t", (data: any) => {
-      if (data[0] === "t" && data[1].d[0]) {
-        const rtData: TradeRTData = data[1].d[0];
-        setTrades([...trades, rtData]);
+      if (data.d[0]) {
+        const rtData: TradeRTData = data.d[0];
+        handleTEvent(rtData);
       }
     });
     return () => {
@@ -62,7 +65,12 @@ const Market = () => {
     if (ticker && socket) {
       symbolSub(socket, ticker.symbol);
     }
-  }, [ticker?.symbol]);
+    if (prevSymbol && prevSymbol !== ticker?.symbol && socket) {
+      symbolUnsub(socket, prevSymbol);
+      setInstrument(initInstrument);
+      setTrades([]);
+    }
+  }, [ticker]);
 
   useEffect(() => {
     !!stocks.length && initTicker();
@@ -85,14 +93,21 @@ const Market = () => {
 
   const symbolUnsub = (socket: io.Socket, symbol: string) => {
     socket.emit("get", {
-      data: { args: [`instrument:${symbol}`], op: "unsubscribe" },
+      data: {
+        args: [`t:${symbol}`, `i:${symbol}`],
+        op: "unsubscribe",
+      },
       method: "get",
       url: socketCfg.subscribePath,
     });
   };
 
-  const symbolEvent = (data: any) => {
-    console.log(data);
+  const handleIEvent = (data: any) => {
+    setInstrument((prev) => ({ ...prev, ...data }));
+  };
+
+  const handleTEvent = (data: TradeRTData) => {
+    setTrades((prev) => [data, ...prev]);
   };
 
   const initTicker = () => {
@@ -118,11 +133,7 @@ const Market = () => {
     <Wrapper>
       <SearchInput setOpenPanel={setOpenPanel} />
       <SearchPanel open={openPanel} setOpenPanel={setOpenPanel} />
-      {ticker ? (
-        <Ticker instrument={instrument} trades={trades} ticker={ticker} />
-      ) : (
-        <EmptyState />
-      )}
+      <Ticker instrument={instrument} trades={trades} ticker={ticker} />
     </Wrapper>
   );
 };

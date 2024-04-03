@@ -2,7 +2,7 @@ import GeneralInfo from "./components/GeneralInfo";
 import MarketValue from "./components/MarketValue";
 import PriceInfo from "./components/PriceInfo";
 import Line from "@components/common/Line";
-import { IBestDeal, IHistoryDeal, ITickerData } from "@interface/common";
+import { IBestDeal } from "@interface/common";
 import MarketIndex from "./components/MarketIndex";
 import Actions from "./components/Actions";
 import {
@@ -12,7 +12,7 @@ import {
 } from "@/src/constraints/interface/market";
 import FieldLabel from "@/src/components/common/FieldLabel";
 import StyledTable from "@/src/components/common/StyledTable";
-import { TSide } from "@/src/constraints/enum/common";
+import { TShortSide } from "@/src/constraints/enum/common";
 import { IColumn } from "@/src/constraints/interface/table";
 import { formatBigNumber, genPriceColor } from "@/src/utils/helpers";
 import { Typography } from "@mui/material";
@@ -20,48 +20,68 @@ import { useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
 import * as S from "./styles";
 type Props = {
-  ticker: Stock;
   instrument: InsRTData;
   trades: TradeRTData[];
+  ticker: Stock | null;
 };
-const Ticker = ({ ticker, instrument, trades }: Props) => {
+const Ticker = ({ instrument, trades, ticker }: Props) => {
   const [bestDeals, setBestDeals] = useState<IBestDeal[]>([]);
   const t = useTranslations("market");
   useEffect(() => {
     setBestDeals([
       {
-        buyVol: instrument.V1,
-        price: instrument.B1,
+        buyVol: 0,
+        price: instrument.S3,
+        sellVol: instrument.U3,
+      },
+      {
+        buyVol: 0,
+        price: instrument.S2,
+        sellVol: instrument.U2,
+      },
+
+      {
+        buyVol: 0,
+        price: instrument.S1,
         sellVol: instrument.U1,
+      },
+
+      {
+        buyVol: instrument.V3,
+        price: instrument.B3,
+        sellVol: 0,
       },
       {
         buyVol: instrument.V2,
         price: instrument.B2,
-        sellVol: instrument.U2,
+        sellVol: 0,
       },
       {
-        buyVol: instrument.V3,
-        price: instrument.B3,
-        sellVol: instrument.U3,
+        buyVol: instrument.V1,
+        price: instrument.B1,
+        sellVol: 0,
       },
     ]);
   }, [
     instrument.B3,
     instrument.V3,
     instrument.U3,
+    instrument.S3,
     instrument.B2,
     instrument.V2,
     instrument.U2,
+    instrument.S2,
     instrument.B1,
     instrument.V1,
     instrument.U1,
+    instrument.S1,
   ]);
   const bestDealCols: IColumn[] = [
     {
       title: t("en_sb_best_buyQty"),
       render: (row: IBestDeal) => (
         <Typography variant="subtitle1">
-          {formatBigNumber(row.buyVol)}
+          {row.buyVol ? formatBigNumber(row.buyVol) : null}
         </Typography>
       ),
       align: "right",
@@ -72,13 +92,13 @@ const Ticker = ({ ticker, instrument, trades }: Props) => {
         <Typography
           variant="subtitle1"
           color={genPriceColor(
-            instrument.RE,
+            ticker?.reference,
             row.price,
-            instrument.CL,
-            instrument.FL
+            ticker?.ceiling,
+            ticker?.floor
           )}
         >
-          {row.price}
+          {(row.price / 1000).toFixed(2)}
         </Typography>
       ),
       align: "right",
@@ -87,7 +107,7 @@ const Ticker = ({ ticker, instrument, trades }: Props) => {
       title: t("en_sb_best_sellQty"),
       render: (row: IBestDeal) => (
         <Typography variant="subtitle1">
-          {formatBigNumber(row.sellVol)}
+          {row.sellVol ? formatBigNumber(row.sellVol) : null}
         </Typography>
       ),
       align: "right",
@@ -98,54 +118,58 @@ const Ticker = ({ ticker, instrument, trades }: Props) => {
     {
       title: t("en_sb_match_time"),
       align: "center",
-      render: (row: IHistoryDeal) => (
-        <Typography variant="subtitle1">{row.time}</Typography>
+      render: (row: TradeRTData) => (
+        <Typography variant="subtitle1">{genTime(row.FT)}</Typography>
       ),
     },
     {
       title: t("en_sb_match_price"),
       align: "right",
-      render: (row: IHistoryDeal) => (
+      render: (row: TradeRTData) => (
         <Typography
           variant="subtitle1"
           color={genPriceColor(
-            instrument.RE,
-            row.price,
-            instrument.CL,
-            instrument.FL
+            ticker?.reference,
+            row.FMP,
+            ticker?.ceiling,
+            ticker?.floor
           )}
         >
-          {row.price}
+          {(row.FMP / 1000).toFixed(2)}
         </Typography>
       ),
     },
     {
       title: t("en_sb_match_qty"),
-      render: (row: IHistoryDeal) => (
-        <Typography variant="subtitle1">{formatBigNumber(row.vol)}</Typography>
+      render: (row: TradeRTData) => (
+        <Typography variant="subtitle1">{formatBigNumber(row.FV)}</Typography>
       ),
       align: "right",
     },
     {
       title: "",
-      render: (row: IHistoryDeal) => (
+      render: (row: TradeRTData) => (
         <Typography
           variant="subtitle1"
-          color={row.side === TSide.buy ? "text.success" : "text.error"}
+          color={row.LC === TShortSide.b ? "text.success" : "text.error"}
         >
-          {row.side === TSide.buy ? "B" : "S"}
+          {row.LC === TShortSide.b ? "B" : "S"}
         </Typography>
       ),
 
       align: "center",
     },
   ];
+  const genTime = (time: string) => {
+    const timeArr = time.split(":");
+    return `${timeArr[0]}:${timeArr[1]}`;
+  };
   return (
     <S.Wrapper>
       <S.InforSection>
-        <GeneralInfo instrument={instrument} />
+        <GeneralInfo instrument={instrument} ticker={ticker} />
         <Line />
-        <PriceInfo instrument={instrument} />
+        <PriceInfo instrument={instrument} ticker={ticker} />
         <Line />
         <MarketValue instrument={instrument} />
         <Line />
@@ -154,14 +178,14 @@ const Ticker = ({ ticker, instrument, trades }: Props) => {
             <FieldLabel>{t("fn_symbol_txt_bestQuote")}</FieldLabel>
             <StyledTable columns={bestDealCols} dataSource={bestDeals} />
           </S.BestDeal>
-          {/* <HistoryDeals>
-        <FieldLabel>{t("fn_symbol_txt_ordHist")}</FieldLabel>
-        <StyledTable
-          columns={historyDealsCols}
-          dataSource={ticker.marketDepth.historyDeals}
-          stickyHeader
-        />
-      </HistoryDeals> */}
+          <S.HistoryDeals>
+            <FieldLabel>{t("fn_symbol_txt_ordHist")}</FieldLabel>
+            <StyledTable
+              columns={historyDealsCols}
+              dataSource={trades}
+              stickyHeader
+            />
+          </S.HistoryDeals>
         </S.DealWrapper>
         <MarketIndex />
       </S.InforSection>

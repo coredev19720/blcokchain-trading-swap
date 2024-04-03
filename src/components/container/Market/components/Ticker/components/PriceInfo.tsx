@@ -6,7 +6,7 @@ import { formatNumber, genPriceColor } from "@src/utils/helpers";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTranslations } from "next-intl";
-import { InsRTData } from "@/src/constraints/interface/market";
+import { InsRTData, Stock } from "@/src/constraints/interface/market";
 const Wrapper = styled("div")(() => ({
   display: "flex",
   gap: 8,
@@ -19,8 +19,9 @@ const ContentBlock = styled("div")(() => ({
 }));
 type Props = {
   instrument: InsRTData;
+  ticker: Stock | null;
 };
-const PriceInfo = ({ instrument }: Props) => {
+const PriceInfo = ({ instrument, ticker }: Props) => {
   const t = useTranslations("market");
   return (
     <Wrapper>
@@ -31,10 +32,10 @@ const PriceInfo = ({ instrument }: Props) => {
             fontWeight={500}
             variant="body2"
             color={genPriceColor(
-              instrument.RE,
+              ticker?.reference,
               instrument.OP,
-              instrument.CL,
-              instrument.FL
+              ticker?.ceiling,
+              ticker?.floor
             )}
           >
             {instrument.OP}
@@ -46,10 +47,10 @@ const PriceInfo = ({ instrument }: Props) => {
             fontWeight={500}
             variant="body2"
             color={genPriceColor(
-              instrument.RE,
+              ticker?.reference,
               instrument.HI,
-              instrument.CL,
-              instrument.FL
+              ticker?.ceiling,
+              ticker?.floor
             )}
           >
             {instrument.HI}
@@ -61,10 +62,10 @@ const PriceInfo = ({ instrument }: Props) => {
             fontWeight={500}
             variant="body2"
             color={genPriceColor(
-              instrument.RE,
+              ticker?.reference,
               instrument.LO,
-              instrument.CL,
-              instrument.FL
+              ticker?.ceiling,
+              ticker?.floor
             )}
           >
             {instrument.LO}
@@ -80,7 +81,7 @@ const PriceInfo = ({ instrument }: Props) => {
             color={colors.lightRefText}
             variant="body2"
           >
-            {formatNumber(instrument.RE)}
+            {ticker ? (ticker.reference / 1000).toFixed(2) : "-"}
           </Typography>
         </RowContent>
         <RowContent>
@@ -91,7 +92,7 @@ const PriceInfo = ({ instrument }: Props) => {
             color={colors.lightCeilText}
             variant="body2"
           >
-            {formatNumber(instrument.CL)}
+            {ticker ? (ticker.ceiling / 1000).toFixed(2) : "-"}
           </Typography>
         </RowContent>
         <RowContent>
@@ -101,7 +102,7 @@ const PriceInfo = ({ instrument }: Props) => {
             color={colors.lightFloorText}
             variant="body2"
           >
-            {formatNumber(instrument.FL)}
+            {ticker ? (ticker.floor / 1000).toFixed(2) : "-"}
           </Typography>
         </RowContent>
       </ContentBlock>

@@ -7,7 +7,7 @@ import {
   TViSide,
 } from "../enum/common";
 
-export interface  Stock {
+export interface Stock {
   symbol: string;
   FullName: string;
   ceiling: number;
@@ -279,6 +279,8 @@ export interface TradeRTData {
   FV: number; // KL khớp
   AVO: number; // KL tích lũy
   AVA: number; // Giá trị tích lũy
+  FMV: number; // Giá trị khớp
+  LC: string; // Loại lệnh
 }
 export interface AccountRTData {
   custodycd: string; // số lưu ký

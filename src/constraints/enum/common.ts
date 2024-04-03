@@ -64,6 +64,10 @@ export enum TPinAuthType {
   DIGI_SIGN = 4,
 }
 
+export enum TShortSide {
+  s = "s",
+  b = "b",
+}
 export enum TSide {
   buy = "buy",
   sell = "sell",

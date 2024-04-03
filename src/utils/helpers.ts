@@ -4,11 +4,12 @@ export const uIdGen = () => {
 };
 
 export const genPriceColor = (
-  ref: number,
-  price: number,
-  ceil: number,
-  floor: number
+  ref?: number,
+  price?: number,
+  ceil?: number,
+  floor?: number
 ) => {
+  if (!ref || !price || !ceil || !floor) return colors.lightRefText;
   if (price === ceil) return colors.lightCeilText;
   if (price === floor) return colors.lightFloorText;
   if (price === ref) return colors.lightRefText;
