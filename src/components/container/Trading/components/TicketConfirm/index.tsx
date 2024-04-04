@@ -16,12 +16,14 @@ interface IProps {
 const TicketConfirm = ({ open, setOpen }: IProps) => {
   const t = useTranslations("trade");
   const { ticket } = useAppSelector((state) => state.market);
-  const { activeAccount } = useAppSelector((state) => state.user);
-
+  const { activeAccount, permissions } = useAppSelector((state) => state.user);
+  console.log(activeAccount);
+  console.log("permissions", permissions);
+  const activePermission =
+    activeAccount && permissions ? permissions[activeAccount.custodycd] : null;
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [otp, setOTP] = useState<string>("");
-
   const handleChangeOTP = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length <= 6) {
       setOTP(e.target.value);
@@ -96,7 +98,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                   {t("fn_trade_txt_qty")}
                 </Typography>
                 <Typography variant="body2" fontWeight={600}>
-                  {ticket.vol}
+                  {formatNumber(ticket.vol)}
                 </Typography>
               </FlexContent>
               <FlexContent>
@@ -104,7 +106,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                   {t("fn_trade_txt_price")}
                 </Typography>
                 <Typography variant="body2" fontWeight={600}>
-                  {ticket.price}
+                  {formatNumber(Number(ticket.price) * 1000)}
                 </Typography>
               </FlexContent>
               <FlexContent>
@@ -112,7 +114,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                   {t("fn_trade_txt_value")}
                 </Typography>
                 <Typography variant="body2" fontWeight={600}>
-                  {formatNumber(ticket.price * ticket.vol)}
+                  {formatNumber(Number(ticket.price) * 1000 * ticket.vol)}
                 </Typography>
               </FlexContent>
             </S.Block>
@@ -121,7 +123,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                 {t("en_trade_custodyCd")}
               </Typography>
               <Typography variant="body2" fontWeight={600}>
-                {/* {ticket.code} */}
+                {activeAccount?.custodycd}
               </Typography>
             </FlexContent>
             <FlexContent>
@@ -129,7 +131,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
                 {t("en_trade_accNo")}
               </Typography>
               <Typography variant="body2" fontWeight={600}>
-                {activeAccount?.custodycd || ""}
+                {`${activeAccount?.custodycd} - ${activeAccount?.accounttype}`}
               </Typography>
             </FlexContent>
           </S.TicketInfo>

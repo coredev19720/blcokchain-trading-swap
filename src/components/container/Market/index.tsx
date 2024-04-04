@@ -123,7 +123,7 @@ const Market = () => {
         setTicket({
           ...ticket,
           symbol: availTicker.symbol,
-          price: availTicker.reference,
+          price: (availTicker.reference / 1000).toFixed(2),
         })
       );
       setLastSymbolToLocalStorage(symbol);

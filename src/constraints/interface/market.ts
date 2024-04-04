@@ -201,7 +201,7 @@ export interface PortItem {
 export interface ITicket {
   symbol: string;
   side: TSide;
-  price: number;
+  price: string;
   vol: number;
   kind: TOrderKind;
   type: TOrderType;

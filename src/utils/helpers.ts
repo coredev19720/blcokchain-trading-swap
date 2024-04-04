@@ -64,10 +64,11 @@ export const findDiffIndex = (str1: string, str2: string) => {
   return null;
 };
 export const genValidPrice = (
-  valStr: string,
-  currentVal: string,
+  val: number,
+  currentVal: number,
   floorPrice: number
 ) => {
+  const valStr = val.toString();
   const currentValStr = currentVal.toString();
   const floorPriceStr = floorPrice.toString();
   if (valStr.length >= currentValStr.length || valStr.length === 1) {
@@ -77,12 +78,11 @@ export const genValidPrice = (
       const floorPriceStrArr = floorPriceStr.split("");
       if (valStrArr[diffIndex] < floorPriceStrArr[diffIndex]) {
         valStrArr[diffIndex] = floorPriceStrArr[diffIndex];
-        return floorPrice;
+        return (floorPrice / 1000).toFixed(2);
       }
     }
   }
-
-  return valStr;
+  return (val / 1000).toFixed(2);
 };
 
 export const lastSymLocalKey: string = process.env.NEXT_PUBLIC_LAST_SYM_KEY

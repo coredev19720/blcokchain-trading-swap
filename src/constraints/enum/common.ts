@@ -95,3 +95,16 @@ export enum TOrderStatus {
   WaitForConfirmation = "Wait For Confirmation", // Chờ xác nhận
   WaitBankDeposits = "Wait Bank Deposits", // Chờ ký quỹ ngân hàng
 }
+
+export enum TradeType {
+  CASHTRANS = "CASHTRANS",
+  STOCKTRANS = "STOCKTRANS",
+  GROUP_ORDER = "GROUP_ORDER",
+  ADWINPUT = "ADWINPUT",
+  RESETPASS = "RESETPASS",
+  ISSUEINPUT = "ISSUEINPUT",
+  COND_ORDER = "COND_ORDER",
+  ORDINPUT = "ORDINPUT",
+  DEPOSIT = "DEPOSIT",
+  CASHTRANSENDDATE = "CASHTRANSENDDATE",
+}

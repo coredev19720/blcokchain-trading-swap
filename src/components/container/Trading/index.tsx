@@ -13,20 +13,23 @@ import { setTicker, setTicket } from "@src/redux/features/marketSlice";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import PageHeader from "../../common/PageHeader";
 import { initInstrument } from "@/src/constants/market";
-import { InsRTData } from "@/src/constraints/interface/market";
+import { InsRTData, TradeRTData } from "@/src/constraints/interface/market";
 import { socketCfg } from "@/src/constants/config";
 //@ts-ignore
 import io from "socket.io-client";
+import { usePreviousValue } from "@/src/hooks/usePrevious";
 const Trading = () => {
   const t = useTranslations("trade");
   const { ticket, ticker, stocks } = useAppSelector((state) => state.market);
-  const [instrument, setInstrument] = useState<InsRTData>(initInstrument);
   const { accountSummary, activeAccount } = useAppSelector(
     (state) => state.user
   );
   const dispatch = useAppDispatch();
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
   const [socket, setSocket] = useState<io.Socket | null>(null);
+  const [instrument, setInstrument] = useState<InsRTData>(initInstrument);
+  const [trades, setTrades] = useState<TradeRTData[]>([]);
+  const prevSymbol = usePreviousValue(ticker?.symbol);
   useEffect(() => {
     initTicker();
   }, [stocks]);
@@ -46,8 +49,14 @@ const Trading = () => {
     skt.on("disconnect", () => console.log("Disconnected from the server"));
     // skt.on("connection", symbolSub(skt, "HCM"));
     skt.on("i", (data: any) => {
-      if (data[0] === "i" && data[1].d[0]) {
-        setInstrument({ ...instrument, ...data[1].d[0] });
+      if (data.d[0]) {
+        handleIEvent(data.d[0]);
+      }
+    });
+    skt.on("t", (data: any) => {
+      if (data.d[0]) {
+        const rtData: TradeRTData = data.d[0];
+        handleTEvent(rtData);
       }
     });
     return () => {
@@ -60,7 +69,12 @@ const Trading = () => {
     if (ticker && socket) {
       symbolSub(socket, ticker.symbol);
     }
-  }, [ticker?.symbol]);
+    if (prevSymbol && prevSymbol !== ticker?.symbol && socket) {
+      symbolUnsub(socket, prevSymbol);
+      setInstrument(initInstrument);
+      setTrades([]);
+    }
+  }, [ticker]);
   const connect = () => {
     console.log("Connected to the server");
   };
@@ -78,14 +92,21 @@ const Trading = () => {
 
   const symbolUnsub = (socket: io.Socket, symbol: string) => {
     socket.emit("get", {
-      data: { args: [`instrument:${symbol}`], op: "unsubscribe" },
+      data: {
+        args: [`t:${symbol}`, `i:${symbol}`],
+        op: "unsubscribe",
+      },
       method: "get",
       url: socketCfg.subscribePath,
     });
   };
 
-  const symbolEvent = (data: any) => {
-    console.log(data);
+  const handleIEvent = (data: any) => {
+    setInstrument((prev) => ({ ...prev, ...data }));
+  };
+
+  const handleTEvent = (data: TradeRTData) => {
+    setTrades((prev) => [data, ...prev]);
   };
 
   const initTicker = () => {
@@ -100,7 +121,7 @@ const Trading = () => {
         setTicket({
           ...ticket,
           symbol: availTicker.symbol,
-          price: availTicker.reference,
+          price: (availTicker.reference / 1000).toFixed(2),
           side: TSide.buy,
         })
       );
@@ -115,7 +136,7 @@ const Trading = () => {
       <S.Content>
         <S.MainContent>
           <Search />
-          <SymbolInfo instrument={instrument} />
+          <SymbolInfo instrument={instrument} ticker={ticker} />
           <TicketInfo />
           <S.AccStatus>
             <Typography variant="body2">

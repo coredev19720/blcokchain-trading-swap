@@ -9,7 +9,7 @@ import {
 } from "@interface/account";
 
 type UserState = {
-  permissions: AccsPermissions | [];
+  permissions: AccsPermissions | null;
   accounts: AccInfo[] | [];
   activeAccount: AccInfo | null;
   customerInfo: AuthorInfo | null;
@@ -18,7 +18,7 @@ type UserState = {
 };
 
 const initialState = {
-  permissions: [],
+  permissions: null,
   accounts: [],
   activeAccount: null,
   accountSummary: null,
