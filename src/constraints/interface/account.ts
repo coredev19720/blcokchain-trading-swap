@@ -1,3 +1,5 @@
+import { TPinAuthType } from "../enum/common";
+
 export interface AccSummary {
   id: string; // Số tài khoản
   ismargin: string; // Là tiểu khoản Margin (N: không, Y: Có)
@@ -137,17 +139,17 @@ export interface AuthorInfo {
 }
 
 export interface AccPermissions {
-  CASHTRANS: string[];
-  STOCKTRANS: string[];
-  GROUP_ORDER: string[];
-  ADWINPUT: string[];
-  RESETPASS: string[];
-  ISSUEINPUT: string[];
-  COND_ORDER: string[];
-  ORDINPUT: string[];
-  DEPOSIT: string[];
-  CASHTRANSENDDATE: string[];
-  COMMON?: string[];
+  CASHTRANS: TPinAuthType[];
+  STOCKTRANS: TPinAuthType[];
+  GROUP_ORDER: TPinAuthType[];
+  ADWINPUT: TPinAuthType[];
+  RESETPASS: TPinAuthType[];
+  ISSUEINPUT: TPinAuthType[];
+  COND_ORDER: TPinAuthType[];
+  ORDINPUT: TPinAuthType[];
+  DEPOSIT: TPinAuthType[];
+  CASHTRANSENDDATE: TPinAuthType[];
+  COMMON?: TPinAuthType[];
 }
 
 export interface AccsPermissions {

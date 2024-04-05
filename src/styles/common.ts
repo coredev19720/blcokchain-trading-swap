@@ -1,5 +1,7 @@
 import { styled } from "@mui/system";
 import colors from "../themes/colors";
+import { styled as muiStyled } from "@mui/material/styles";
+import { keyframes } from "@emotion/react";
 
 export const PageWrapper = styled("div")(({ theme }) => ({
   maxWidth: 600,
@@ -65,4 +67,16 @@ export const MuiIcon = styled("div")(({ theme }) => ({
   height: 24,
   color: theme.palette.mode === "dark" ? colors.neutral1 : colors.black,
   fontSize: 24,
+}));
+const splashAnimation = keyframes`  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }`;
+export const SplashText = styled("div")(() => ({
+  animation: `${splashAnimation} 0.7s ease-in-out`,
 }));

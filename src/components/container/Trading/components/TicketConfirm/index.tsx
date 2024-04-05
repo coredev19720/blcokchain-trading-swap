@@ -16,11 +16,7 @@ interface IProps {
 const TicketConfirm = ({ open, setOpen }: IProps) => {
   const t = useTranslations("trade");
   const { ticket } = useAppSelector((state) => state.market);
-  const { activeAccount, permissions } = useAppSelector((state) => state.user);
-  console.log(activeAccount);
-  console.log("permissions", permissions);
-  const activePermission =
-    activeAccount && permissions ? permissions[activeAccount.custodycd] : null;
+  const { activeAccount } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [otp, setOTP] = useState<string>("");

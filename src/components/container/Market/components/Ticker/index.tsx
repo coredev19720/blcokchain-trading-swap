@@ -19,6 +19,7 @@ import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
 import * as S from "./styles";
+import { SplashText } from "@/src/styles/common";
 type Props = {
   instrument: InsRTData;
   trades: TradeRTData[];
@@ -79,36 +80,44 @@ const Ticker = ({ instrument, trades, ticker }: Props) => {
   const bestDealCols: IColumn[] = [
     {
       title: t("en_sb_best_buyQty"),
-      render: (row: IBestDeal) => (
-        <Typography variant="subtitle1">
-          {row.buyVol ? formatBigNumber(row.buyVol) : null}
-        </Typography>
-      ),
+      render: (row: IBestDeal) => {
+        return (
+          <SplashText key={row.buyVol}>
+            <Typography variant="subtitle1">
+              {row.buyVol ? formatBigNumber(row.buyVol) : null}
+            </Typography>
+          </SplashText>
+        );
+      },
       align: "right",
     },
     {
       title: t("en_sb_best_price"),
       render: (row: IBestDeal) => (
-        <Typography
-          variant="subtitle1"
-          color={genPriceColor(
-            ticker?.reference,
-            row.price,
-            ticker?.ceiling,
-            ticker?.floor
-          )}
-        >
-          {(row.price / 1000).toFixed(2)}
-        </Typography>
+        <SplashText key={row.price}>
+          <Typography
+            variant="subtitle1"
+            color={genPriceColor(
+              ticker?.reference,
+              row.price,
+              ticker?.ceiling,
+              ticker?.floor
+            )}
+          >
+            {(row.price / 1000).toFixed(2)}
+          </Typography>
+        </SplashText>
       ),
       align: "right",
     },
     {
       title: t("en_sb_best_sellQty"),
       render: (row: IBestDeal) => (
-        <Typography variant="subtitle1">
-          {row.sellVol ? formatBigNumber(row.sellVol) : null}
-        </Typography>
+        <SplashText key={row.sellVol}>
+          <Typography variant="subtitle1">
+            {row.sellVol ? formatBigNumber(row.sellVol) : null}
+          </Typography>
+        </SplashText>
       ),
       align: "right",
     },

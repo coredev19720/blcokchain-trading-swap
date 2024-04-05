@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { genAccountServiceUrl } from "@/src/services/apiUrls";
 import { PrecheckOrderReq } from "@/src/constraints/interface/services/request";
 import { PrecheckOrderRes } from "@/src/constraints/interface/services/response";
-import axiosInst from "../Interceptors";
+import axiosInst from "../../Interceptors";
 interface UsePrecheckOrder {
   onPrecheckOrder: (data: PrecheckOrderReq) => void;
   isError: boolean;

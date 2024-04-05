@@ -13,6 +13,8 @@ const reqFullfiled = (config: InternalAxiosRequestConfig) => {
   );
   if (token) {
     config.headers["Authorization"] = `Bearer ${token}`;
+    config.headers["x-via"] = "K";
+    config.headers["x-lang"] = "vi";
     // config.headers["Access-Control-Allow-Origin"] = "*";
   }
   return config;

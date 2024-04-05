@@ -97,14 +97,14 @@ export enum TOrderStatus {
 }
 
 export enum TradeType {
-  CASHTRANS = "CASHTRANS",
-  STOCKTRANS = "STOCKTRANS",
-  GROUP_ORDER = "GROUP_ORDER",
-  ADWINPUT = "ADWINPUT",
-  RESETPASS = "RESETPASS",
-  ISSUEINPUT = "ISSUEINPUT",
-  COND_ORDER = "COND_ORDER",
-  ORDINPUT = "ORDINPUT",
-  DEPOSIT = "DEPOSIT",
-  CASHTRANSENDDATE = "CASHTRANSENDDATE",
+  CASHTRANS = "CASHTRANS", //Chuyển tiền
+  STOCKTRANS = "STOCKTRANS", //Chuyển chứng khoán
+  GROUP_ORDER = "GROUP_ORDER", //Đặt lệnh nhóm
+  ADWINPUT = "ADWINPUT", //Ứng trước tiền bán.
+  RESETPASS = "RESETPASS", //Quên mật khẩu
+  ISSUEINPUT = "ISSUEINPUT", //Đăng ký quyền mua
+  COND_ORDER = "COND_ORDER", //Đặt lệnh điều kiện
+  ORDINPUT = "ORDINPUT", //Đặt lệnh thông thường
+  DEPOSIT = "DEPOSIT", //Tra cứu giao dịch
+  CASHTRANSENDDATE = "CASHTRANSENDDATE", //Chuyển khoản tiền cuối ngày.
 }
