@@ -1,9 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Button, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import * as S from "./styles";
-import { TPinAuthType, TSide } from "@enum/common";
+import { TOrderType, TPinAuthType, TSide, TradeType } from "@enum/common";
 import Search from "./components/Search";
 import SymbolInfo from "./components/SymbolInfo";
 import TicketInfo from "./components/TicketInfo";
@@ -19,6 +19,8 @@ import { usePrecheckOrder } from "@/src/services/hooks/order/usePrecheckOrder";
 //@ts-ignore
 import io from "socket.io-client";
 import { usePreviousValue } from "@/src/hooks/usePrevious";
+import { toast } from "react-toastify";
+import { errHandling } from "@/src/utils/error";
 const Trading = () => {
   const t = useTranslations("trade");
   const { ticket, ticker, stocks } = useAppSelector((state) => state.market);
@@ -36,7 +38,8 @@ const Trading = () => {
   }, [stocks]);
   const activePermission =
     activeAccount && permissions ? permissions[activeAccount.id] : null;
-  const { onPrecheckOrder, isError, isSuccess, error } = usePrecheckOrder();
+  const { onPrecheckOrder, isError, isSuccess, error, data } =
+    usePrecheckOrder();
   useEffect(() => {
     const url = process.env.NEXT_PUBLIC_API_URL || "";
     const skt: io.Socket = io(url, {
@@ -69,6 +72,19 @@ const Trading = () => {
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (isError && error) {
+      const errMsg = errHandling(error);
+      toast.error(errMsg);
+    }
+  }, [isError, error]);
+  useEffect(() => {
+    if (isSuccess) {
+      setIsConfirm(true);
+    }
+  }, [isSuccess]);
+
   useEffect(() => {
     if (ticker && socket) {
       symbolSub(socket, ticker.symbol);
@@ -144,12 +160,11 @@ const Trading = () => {
       accountId: activeAccount.id || "",
       instrument: ticket.symbol,
       qty: ticket.vol,
-      side: ticket.side, // Mua/Bán - 'buy' or 'sell'
-      type: ticket.type, // 'limit': Lệnh LO, 'market':Lệnh thị trường ATO, ATC,...
-      limitPrice: ticket.price, // Giá
-      authtype: activePermission.ORDINPUT[0], // Loại xác thực, tra cứu bảng 3.5.3;
+      side: ticket.side,
+      type: ticket.type === TOrderType.LO ? "limit" : "market",
+      limitPrice: Number(ticket.price) * 1000,
+      authtype: activePermission.ORDINPUT[0],
     });
-    setIsConfirm(true);
   };
   return (
     <S.Wrapper>
@@ -193,7 +208,11 @@ const Trading = () => {
           </Button>
         </S.ButtonWrapper>
       </S.Content>
-      <TicketConfirm open={isConfirm} setOpen={setIsConfirm} />
+      <TicketConfirm
+        open={isConfirm}
+        setOpen={setIsConfirm}
+        precheckData={data ? data.d : null}
+      />
     </S.Wrapper>
   );
 };

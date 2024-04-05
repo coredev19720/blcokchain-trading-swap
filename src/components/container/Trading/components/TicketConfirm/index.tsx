@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./styles";
 import { FlexContent } from "@src/styles/common";
 import { Backdrop, Button, Slide, Typography } from "@mui/material";
@@ -9,17 +9,39 @@ import colors from "@src/themes/colors";
 import { formatNumber } from "@src/utils/helpers";
 import OTPConfirm from "@components/common/OTPConfirm";
 import { useRouter } from "next/navigation";
+import { useCreateOrder } from "@/src/services/hooks/order/useCreateOrder";
+import { CreateOrderReq } from "@/src/constraints/interface/services/request";
+import { PreCheckData } from "@/src/constraints/interface/market";
+import { errHandling } from "@/src/utils/error";
+import { toast } from "react-toastify";
 interface IProps {
   open: boolean;
   setOpen: (val: boolean) => void;
+  precheckData: PreCheckData | null;
 }
-const TicketConfirm = ({ open, setOpen }: IProps) => {
+const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
   const t = useTranslations("trade");
   const { ticket } = useAppSelector((state) => state.market);
-  const { activeAccount } = useAppSelector((state) => state.user);
+  const { activeAccount, permissions } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const activePermission =
+    activeAccount && permissions ? permissions[activeAccount.id] : null;
+
   const [otp, setOTP] = useState<string>("");
+  const { onCreateOrder, isError, isSuccess, error } = useCreateOrder();
+  useEffect(() => {
+    if (isSuccess) {
+      router.push("order-book");
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (isError && error) {
+      const errMsg = errHandling(error);
+      toast.error(errMsg);
+    }
+  }, [isError, error]);
   const handleChangeOTP = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length <= 6) {
       setOTP(e.target.value);
@@ -29,9 +51,21 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
     console.log("handleRequestOTP");
   };
   const handleSubmit = () => {
+    if (!activeAccount || !precheckData) return;
     try {
-      //unimplemented
-      router.push("order-book");
+      const data: CreateOrderReq = {
+        accountId: activeAccount.id,
+        requestId: "12345", //unimplemented
+        instrument: ticket.symbol,
+        qty: ticket.vol,
+        side: ticket.side,
+        type: ticket.type === "LO" ? "limit" : "market",
+        limitPrice: ticket.price,
+        tokenid: precheckData.tokenid,
+        transactionId: precheckData.transactionId,
+        code: otp,
+      };
+      onCreateOrder(data);
     } catch (e) {
       console.log(e);
     } finally {
@@ -136,6 +170,7 @@ const TicketConfirm = ({ open, setOpen }: IProps) => {
               handleRequest={handleRequestOTP}
               handleChangeOTP={handleChangeOTP}
               otp={otp}
+              activePermission={activePermission}
             />
             <Button
               color="primary"

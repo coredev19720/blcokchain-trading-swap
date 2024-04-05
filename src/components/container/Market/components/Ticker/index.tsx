@@ -19,7 +19,7 @@ import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
 import * as S from "./styles";
-import { SplashText } from "@/src/styles/common";
+import SplashText from "@/src/components/common/SplashText";
 type Props = {
   instrument: InsRTData;
   trades: TradeRTData[];
@@ -82,7 +82,7 @@ const Ticker = ({ instrument, trades, ticker }: Props) => {
       title: t("en_sb_best_buyQty"),
       render: (row: IBestDeal) => {
         return (
-          <SplashText key={row.buyVol}>
+          <SplashText val={row.buyVol}>
             <Typography variant="subtitle1">
               {row.buyVol ? formatBigNumber(row.buyVol) : null}
             </Typography>
@@ -94,7 +94,7 @@ const Ticker = ({ instrument, trades, ticker }: Props) => {
     {
       title: t("en_sb_best_price"),
       render: (row: IBestDeal) => (
-        <SplashText key={row.price}>
+        <SplashText val={row.price}>
           <Typography
             variant="subtitle1"
             color={genPriceColor(
@@ -113,7 +113,7 @@ const Ticker = ({ instrument, trades, ticker }: Props) => {
     {
       title: t("en_sb_best_sellQty"),
       render: (row: IBestDeal) => (
-        <SplashText key={row.sellVol}>
+        <SplashText val={row.sellVol}>
           <Typography variant="subtitle1">
             {row.sellVol ? formatBigNumber(row.sellVol) : null}
           </Typography>

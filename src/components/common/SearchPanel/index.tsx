@@ -25,7 +25,7 @@ const SearchPanel = ({ open, setOpenPanel }: IProps) => {
       setTicket({
         ...ticket,
         symbol: val.symbol,
-        price: val.reference,
+        price: (val.reference / 1000).toFixed(2),
       })
     );
     setOpenPanel(false);

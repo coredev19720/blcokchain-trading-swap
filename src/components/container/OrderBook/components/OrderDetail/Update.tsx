@@ -22,27 +22,24 @@ const Update = ({ data, handleClose }: IProps) => {
   const availTicker = stocks.find((x) => x.symbol === data?.symbol);
   const dispatch = useAppDispatch();
   const [otp, setOtp] = useState<string>("");
-  const [updatePrice, setUpdatePrice] = useState<number>(data?.price || 0);
+  const [updatePrice, setUpdatePrice] = useState<string>(
+    data?.price ? (data.price / 1000).toFixed(2) : "0"
+  );
 
   const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (availTicker) {
-      if (Number(e.target.value) > availTicker.ceiling) {
-        setUpdatePrice(availTicker.ceiling);
-        return;
-      }
-      const validPrice = genValidPrice(
-        e.target.value,
-        updatePrice.toString(),
-        availTicker.floor
-      );
-      setUpdatePrice(Number(validPrice));
-    }
-  };
-  const handleValidPrice = () => {
-    if (availTicker && updatePrice < availTicker.floor) {
-      setUpdatePrice(availTicker.floor);
+    const price = Number(e.target.value) * 1000;
+    if (!availTicker) {
       return;
     }
+    if (Number(e.target.value) > availTicker.ceiling) {
+      setUpdatePrice((availTicker.ceiling / 1000).toFixed(2));
+      return;
+    }
+    if (Number(e.target.value) < availTicker.floor) {
+      setUpdatePrice((availTicker.floor / 1000).toFixed(2));
+      return;
+    }
+    setUpdatePrice(e.target.value);
   };
   const handleRequestOTP = () => {
     console.log("handleRequestOTP");
@@ -110,8 +107,7 @@ const Update = ({ data, handleClose }: IProps) => {
             fullWidth
             value={updatePrice || null}
             onChange={handleChangePrice}
-            onBlur={handleValidPrice}
-            type="number"
+            type="decimal"
           />
         </FieldBlock>
         <OTPConfirm

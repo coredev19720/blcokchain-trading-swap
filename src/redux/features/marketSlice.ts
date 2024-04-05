@@ -17,7 +17,7 @@ const initialState = {
   ticker: null,
   ticket: {
     side: TSide.buy,
-    price: 0,
+    price: "0",
     vol: 0,
     symbol: "",
     type: TOrderType.LO,

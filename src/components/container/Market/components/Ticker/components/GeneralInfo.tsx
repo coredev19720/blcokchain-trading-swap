@@ -1,7 +1,8 @@
+import SplashText from "@/src/components/common/SplashText";
 import { InsRTData, Stock } from "@/src/constraints/interface/market";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
-import { RowContent, SplashText } from "@src/styles/common";
+import { RowContent } from "@src/styles/common";
 import { genPriceColor } from "@src/utils/helpers";
 
 const Wrapper = styled("div")(() => ({}));
@@ -16,7 +17,7 @@ const GeneralInfo = ({ instrument, ticker }: Props) => {
         <Typography variant="h4" fontWeight={600}>
           {ticker?.symbol}
         </Typography>
-        <SplashText key={instrument.CP}>
+        <SplashText val={instrument.CP}>
           <Typography
             variant="h4"
             fontWeight={600}
@@ -36,7 +37,7 @@ const GeneralInfo = ({ instrument, ticker }: Props) => {
         <Typography variant="subtitle1" noWrap>
           {instrument.FN}
         </Typography>
-        <SplashText key={instrument.CH}>
+        <SplashText val={instrument.CH}>
           <Typography
             style={{ whiteSpace: "nowrap" }}
             variant="subtitle1"

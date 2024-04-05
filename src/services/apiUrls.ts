@@ -10,6 +10,8 @@ const apiUrls = {
   getInstruments: `${baseUrl}/datafeed/instruments`,
   getAcounts: `${baseUrl}/accounts`,
 };
+export const genOrderUrl = (accountId: string, path: string) =>
+  `${baseUrl}/accounts/${accountId}/${path}`;
 export const genAccountServiceUrl = (accountId: string, path: string) =>
   `${baseUrl}/inq/accounts/${accountId}/${path}`;
 

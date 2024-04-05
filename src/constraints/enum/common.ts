@@ -24,10 +24,10 @@ export enum TReduxAction {
 }
 export type TOrderKind = "normal" | "";
 export enum TOrderType {
-  LO = "LO",
-  MP = "MP",
-  MAK = "MAK",
-  MOK = "MOK",
+  LO = "LO", //Lệnh giới hạn
+  MP = "MP", //Lệnh thị trường
+  MAK = "MAK", //Lệnh khớp liên tục
+  MOK = "MOK", //Lệnh khớp ngay
   MTL = "MTL",
   RP = "RP",
   PLO = "PLO",
@@ -59,7 +59,7 @@ export enum TPwdType {
 }
 
 export enum TPinAuthType {
-  OTP = 1,
+  PIN = 1,
   SMSOTP = 5,
   DIGI_SIGN = 4,
 }

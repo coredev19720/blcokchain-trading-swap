@@ -14,6 +14,7 @@ import { TOrderKind, TOrderType } from "@enum/common";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { setTicket } from "@src/redux/features/marketSlice";
 import { genValidPrice } from "@src/utils/helpers";
+
 const TicketInfo = () => {
   const t = useTranslations("trade");
   const dispatch = useAppDispatch();
@@ -24,22 +25,22 @@ const TicketInfo = () => {
   };
 
   const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (ticker) {
-      console.log("e.target.value", Number(e.target.value));
-      console.log("ticker.ceiling", ticker.ceiling);
-      if (Number(e.target.value) * 1000 > ticker.ceiling) {
-        dispatch(
-          setTicket({ ...ticket, price: (ticker.ceiling / 1000).toFixed(2) })
-        );
-        return;
-      }
-      const validPrice = genValidPrice(
-        Number(e.target.value) * 1000,
-        Number(ticket.price) * 1000,
-        ticker?.floor
+    if (!ticker) return;
+    if (Number(e.target.value) * 1000 > ticker.ceiling) {
+      dispatch(
+        setTicket({ ...ticket, price: (ticker.ceiling / 1000).toFixed(2) })
       );
-      console.log(validPrice);
-      dispatch(setTicket({ ...ticket, price: validPrice }));
+      return;
+    }
+    dispatch(setTicket({ ...ticket, price: e.target.value }));
+  };
+  const handleBlurPriceInput = () => {
+    if (!ticker) return;
+    if (Number(ticket.price) * 1000 < ticker.floor) {
+      dispatch(
+        setTicket({ ...ticket, price: (ticker.floor / 1000).toFixed(2) })
+      );
+      return;
     }
   };
   const handleChangeOrderKind = (e: SelectChangeEvent<unknown>) => {
@@ -49,11 +50,6 @@ const TicketInfo = () => {
     dispatch(setTicket({ ...ticket, vol: Number(e.target.value) }));
   };
 
-  const handleValidPrice = () => {
-    if (ticker && ticker.floor < Number(ticket.price) * 1000) {
-      dispatch(setTicket({ ...ticket, price: ticker.floor.toString() }));
-    }
-  };
   return (
     <S.Wrapper>
       <Grid container spacing={2}>
@@ -77,10 +73,10 @@ const TicketInfo = () => {
           <FieldLabel>{t("fn_trade_inp_ordPrice")}</FieldLabel>
           <TextField
             fullWidth
-            value={ticket.price || ticker?.reference}
+            value={ticket.price}
             onChange={handleChangePrice}
-            type="number"
-            onBlur={handleValidPrice}
+            onBlur={handleBlurPriceInput}
+            type="decimal"
           />
         </S.FieldBlock>
         {/* Lệnh */}

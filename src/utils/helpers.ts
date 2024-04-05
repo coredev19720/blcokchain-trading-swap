@@ -68,20 +68,7 @@ export const genValidPrice = (
   currentVal: number,
   floorPrice: number
 ) => {
-  const valStr = val.toString();
-  const currentValStr = currentVal.toString();
-  const floorPriceStr = floorPrice.toString();
-  if (valStr.length >= currentValStr.length || valStr.length === 1) {
-    const diffIndex = findDiffIndex(valStr, floorPriceStr);
-    if (diffIndex !== null) {
-      const valStrArr = valStr.split("");
-      const floorPriceStrArr = floorPriceStr.split("");
-      if (valStrArr[diffIndex] < floorPriceStrArr[diffIndex]) {
-        valStrArr[diffIndex] = floorPriceStrArr[diffIndex];
-        return (floorPrice / 1000).toFixed(2);
-      }
-    }
-  }
+  if (val < floorPrice) return (floorPrice / 1000).toFixed(2);
   return (val / 1000).toFixed(2);
 };
 

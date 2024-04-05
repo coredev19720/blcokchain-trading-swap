@@ -8,12 +8,20 @@ import {
   RadioButtonUncheckedRounded,
   RadioButtonCheckedRounded,
 } from "@mui/icons-material";
+import { AccPermissions } from "@/src/constraints/interface/account";
+import { TAuthType, TPinAuthType } from "@/src/constraints/enum/common";
 interface IProps {
   handleRequest: () => void;
   otp: string;
   handleChangeOTP: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  activePermission?: AccPermissions | null;
 }
-const OTPConfirm = ({ handleRequest, handleChangeOTP, otp }: IProps) => {
+const OTPConfirm = ({
+  handleRequest,
+  handleChangeOTP,
+  otp,
+  activePermission,
+}: IProps) => {
   const t = useTranslations("order_book");
   const [countdown, setCountdown] = useState(0);
 
@@ -50,16 +58,18 @@ const OTPConfirm = ({ handleRequest, handleChangeOTP, otp }: IProps) => {
             fullWidth
             autoFocus
           />
-          <S.OTPButton
-            onClick={() => {
-              handleRequest();
-              setCountdown(30);
-            }}
-            variant="outlined"
-            disabled={!!countdown}
-          >
-            {!!countdown ? `(${countdown})` : t("fn_ob_cta_token")}
-          </S.OTPButton>
+          {activePermission?.ORDINPUT[0] === TPinAuthType.SMSOTP && (
+            <S.OTPButton
+              onClick={() => {
+                handleRequest();
+                setCountdown(30);
+              }}
+              variant="outlined"
+              disabled={!!countdown}
+            >
+              {!!countdown ? `(${countdown})` : t("fn_ob_cta_token")}
+            </S.OTPButton>
+          )}
         </S.OTPInput>
       </S.OTP>
       <FormControlLabel

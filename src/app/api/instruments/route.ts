@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import { decrypt } from "@src/libs/hash";
-import { TAuthType } from "@enum/common";
 import axiosInst from "@/src/services/Interceptors";
 import apiUrls from "@/src/services/apiUrls";
 
@@ -17,7 +15,7 @@ export async function POST(req: Request) {
       `${recaptchaUrl}?${new URLSearchParams(data)}`
     );
     if (recaptchaResult.data.success) {
-      const res = await fetch(apiUrls.getInstruments);
+      const res = await axiosInst.get(apiUrls.getInstruments);
       return NextResponse.json(res.data);
     }
     return NextResponse.json("error");
