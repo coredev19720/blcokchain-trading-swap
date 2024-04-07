@@ -6,16 +6,17 @@ import {
   Select,
   SelectChangeEvent,
   TextField,
-  Typography,
 } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { orderKindOpts, orderTypeOpts } from "@src/constants/common";
 import { TOrderKind, TOrderType } from "@enum/common";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { setTicket } from "@src/redux/features/marketSlice";
-import { genValidPrice } from "@src/utils/helpers";
 
-const TicketInfo = () => {
+interface Props {
+  maxVol: number;
+}
+const TicketInfo = ({ maxVol }: Props) => {
   const t = useTranslations("trade");
   const dispatch = useAppDispatch();
   const ticket = useAppSelector((state) => state.market.ticket);
@@ -47,7 +48,12 @@ const TicketInfo = () => {
     dispatch(setTicket({ ...ticket, kind: e.target.value as TOrderKind }));
   };
   const handleChangeVol = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setTicket({ ...ticket, vol: Number(e.target.value) }));
+    dispatch(
+      setTicket({
+        ...ticket,
+        vol: Number(e.target.value) > maxVol ? maxVol : Number(e.target.value),
+      })
+    );
   };
 
   return (

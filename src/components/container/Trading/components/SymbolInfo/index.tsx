@@ -12,11 +12,13 @@ import {
   formatNumber,
   genPriceColor,
 } from "@src/utils/helpers";
-import { InsRTData, Stock } from "@/src/constraints/interface/market";
+import { InsRTData, PortItem, Stock } from "@/src/constraints/interface/market";
 import { useEffect, useState } from "react";
+import { AccAvailTrade, AccInfo } from "@/src/constraints/interface/account";
 interface IProps {
   instrument: InsRTData;
   ticker: Stock | null;
+  maxVol: number;
 }
 interface BestDeal {
   buyVol: number;
@@ -24,8 +26,9 @@ interface BestDeal {
   buyPrice: number;
   sellPrice: number;
 }
-const SymbolInfo = ({ instrument, ticker }: IProps) => {
-  const ticket = useAppSelector((state) => state.market.ticket);
+const SymbolInfo = ({ instrument, ticker, maxVol }: IProps) => {
+  const { ticket } = useAppSelector((state) => state.market);
+
   const [bestDeals, setBestDeals] = useState<BestDeal[]>([]);
   const t = useTranslations("trade");
   useEffect(() => {
@@ -64,6 +67,7 @@ const SymbolInfo = ({ instrument, ticker }: IProps) => {
     instrument.U1,
     instrument.S1,
   ]);
+
   const columns: IColumn[] = [
     {
       title: t("fn_trade_sb_best_buyQty"),
@@ -116,17 +120,22 @@ const SymbolInfo = ({ instrument, ticker }: IProps) => {
       align: "center",
     },
   ];
+
   return (
     <S.Wrapper>
       {/* buying */}
-      {ticket.side === TSide.sell && (
-        <S.PowerBuying>
-          <Typography variant="body2">{t("fn_trade_txt_can_sell")}</Typography>
-          <Typography fontWeight={700} variant="body2">
-            0
-          </Typography>
-        </S.PowerBuying>
-      )}
+      <S.PowerBuying>
+        <Typography variant="body2">
+          {t(
+            ticket.side === TSide.sell
+              ? "fn_trade_txt_can_sell"
+              : "fn_trade_txt_can_buy"
+          )}
+        </Typography>
+        <Typography fontWeight={700} variant="body2">
+          {formatNumber(maxVol || 0)}
+        </Typography>
+      </S.PowerBuying>
       {/* Price info */}
       <S.PriceInfo>
         <S.PriceBlock>
@@ -148,7 +157,6 @@ const SymbolInfo = ({ instrument, ticker }: IProps) => {
           </Typography>
         </S.PriceBlock>
       </S.PriceInfo>
-
       {/* Deals */}
       <StyledTable columns={columns} dataSource={bestDeals} />
     </S.Wrapper>

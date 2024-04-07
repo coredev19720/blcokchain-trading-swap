@@ -85,11 +85,13 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
       >
         <S.Wrapper>
           <S.TicketInfo>
+            {/* Title */}
             <Typography variant="h5" fontWeight={600}>
               {ticket.side === TSide.buy
                 ? t("fn_trade_txt_confirm_buy_title")
                 : t("fn_trade_txt_confirm_sell_title")}
             </Typography>
+            {/* Symbol */}
             <S.Block>
               <FlexContent>
                 <Typography variant="h4" fontWeight={600}>
@@ -114,6 +116,7 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
                 </S.TicketSide>
               </FlexContent>
             </S.Block>
+            {/* Thông tin lệnh */}
             <S.Block>
               <FlexContent>
                 <Typography variant="body2" color="text.secondary">
@@ -148,6 +151,7 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
                 </Typography>
               </FlexContent>
             </S.Block>
+            {/* Thông tin tài khoản */}
             <FlexContent>
               <Typography variant="body2" color="text.secondary">
                 {t("en_trade_custodyCd")}
@@ -165,6 +169,7 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
               </Typography>
             </FlexContent>
           </S.TicketInfo>
+          {/* Actions */}
           <S.Actions>
             <OTPConfirm
               handleRequest={handleRequestOTP}

@@ -10,7 +10,8 @@ import PageHeader from "../../common/PageHeader";
 import { useTranslations } from "next-intl";
 import { useGetPortfolio } from "@/src/services/hooks/useGetPortfolio";
 import Loading from "../../common/Loading";
-
+import { useAppDispatch } from "@src/redux/hooks";
+import { setPorts } from "@src/redux/features/marketSlice";
 type Port = {
   id: string;
   name: string;
@@ -19,16 +20,16 @@ type Port = {
   total: number;
 };
 const Portfolio = () => {
+  const dispatch = useAppDispatch();
   const { activeAccount } = useAppSelector((state) => state.user);
+  const { ports } = useAppSelector((state) => state.market);
   const { isLoading, data, isSuccess, isError } = useGetPortfolio(
     activeAccount?.id || ""
   );
   const t = useTranslations("portfolio");
   const [port, setPort] = useState<PortItem | null>(null);
-  const [ports, setPorts] = useState<PortItem[] | []>([]);
-  const [type, setType] = useState<TOrderActionType>(TOrderActionType.detail);
   useEffect(() => {
-    data && setPorts(data);
+    data && dispatch(setPorts(data));
   }, [data]);
 
   return (

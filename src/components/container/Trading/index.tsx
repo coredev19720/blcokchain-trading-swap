@@ -1,9 +1,9 @@
 "use client";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import * as S from "./styles";
-import { TOrderType, TPinAuthType, TSide, TradeType } from "@enum/common";
+import { TOrderType, TSide } from "@enum/common";
 import Search from "./components/Search";
 import SymbolInfo from "./components/SymbolInfo";
 import TicketInfo from "./components/TicketInfo";
@@ -13,7 +13,7 @@ import { setTicker, setTicket } from "@src/redux/features/marketSlice";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import PageHeader from "../../common/PageHeader";
 import { initInstrument } from "@/src/constants/market";
-import { InsRTData, TradeRTData } from "@/src/constraints/interface/market";
+import { InsRTData, PortItem } from "@/src/constraints/interface/market";
 import { socketCfg } from "@/src/constants/config";
 import { usePrecheckOrder } from "@/src/services/hooks/order/usePrecheckOrder";
 //@ts-ignore
@@ -21,25 +21,61 @@ import io from "socket.io-client";
 import { usePreviousValue } from "@/src/hooks/usePrevious";
 import { toast } from "react-toastify";
 import { errHandling } from "@/src/utils/error";
+import { useGetAvailTrade } from "@/src/services/hooks/useGetAvailTrade";
+
 const Trading = () => {
   const t = useTranslations("trade");
-  const { ticket, ticker, stocks } = useAppSelector((state) => state.market);
+  const { ticket, ticker, stocks, ports } = useAppSelector(
+    (state) => state.market
+  );
   const { accountSummary, activeAccount, permissions } = useAppSelector(
     (state) => state.user
   );
   const dispatch = useAppDispatch();
+  const { onPrecheckOrder, isError, isSuccess, error, data } =
+    usePrecheckOrder();
+  const { data: availTrade, refetch: rfAvailTrade } = useGetAvailTrade(
+    activeAccount?.id || "",
+    ticker?.symbol || "",
+    TSide.buy,
+    ticket.price ? Number(ticket.price) * 1000 : 0
+  );
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
   const [socket, setSocket] = useState<io.Socket | null>(null);
   const [instrument, setInstrument] = useState<InsRTData>(initInstrument);
-  const [trades, setTrades] = useState<TradeRTData[]>([]);
+  const [symbolPort, setSymbolPort] = useState<PortItem | null>(null);
   const prevSymbol = usePreviousValue(ticker?.symbol);
+  const activePermission =
+    activeAccount && permissions ? permissions[activeAccount.id] : null;
+  const maxVol =
+    ticket?.side === TSide.sell
+      ? symbolPort?.trade || 0
+      : availTrade?.maxqtty || 0;
   useEffect(() => {
     initTicker();
   }, [stocks]);
-  const activePermission =
-    activeAccount && permissions ? permissions[activeAccount.id] : null;
-  const { onPrecheckOrder, isError, isSuccess, error, data } =
-    usePrecheckOrder();
+  useEffect(() => {
+    console.log(ticket);
+    if (ticket) {
+      console.log("ports", ports);
+      const port = ports.find((p) => p.symbol === ticket?.symbol);
+      console.log(port);
+      setSymbolPort(port || null);
+    }
+  }, [ticket]);
+  useEffect(() => {
+    ticket?.side === TSide.buy && rfAvailTrade();
+  }, [ticket.price, ticket.symbol]);
+
+  useEffect(() => {
+    if (ticker && socket) {
+      symbolSub(socket, ticker.symbol);
+    }
+    if (prevSymbol && prevSymbol !== ticker?.symbol && socket) {
+      symbolUnsub(socket, prevSymbol);
+      setInstrument(initInstrument);
+    }
+  }, [ticker]);
   useEffect(() => {
     const url = process.env.NEXT_PUBLIC_API_URL || "";
     const skt: io.Socket = io(url, {
@@ -58,12 +94,6 @@ const Trading = () => {
     skt.on("i", (data: any) => {
       if (data.d[0]) {
         handleIEvent(data.d[0]);
-      }
-    });
-    skt.on("t", (data: any) => {
-      if (data.d[0]) {
-        const rtData: TradeRTData = data.d[0];
-        handleTEvent(rtData);
       }
     });
     return () => {
@@ -85,16 +115,6 @@ const Trading = () => {
     }
   }, [isSuccess]);
 
-  useEffect(() => {
-    if (ticker && socket) {
-      symbolSub(socket, ticker.symbol);
-    }
-    if (prevSymbol && prevSymbol !== ticker?.symbol && socket) {
-      symbolUnsub(socket, prevSymbol);
-      setInstrument(initInstrument);
-      setTrades([]);
-    }
-  }, [ticker]);
   const connect = () => {
     console.log("Connected to the server");
   };
@@ -102,7 +122,7 @@ const Trading = () => {
   const symbolSub = (socket: io.Socket, symbol: string) => {
     socket.emit("get", {
       data: {
-        args: [`t:${symbol}`, `i:${symbol}`],
+        args: [`i:${symbol}`],
         op: "subscribe",
       },
       method: "get",
@@ -113,7 +133,7 @@ const Trading = () => {
   const symbolUnsub = (socket: io.Socket, symbol: string) => {
     socket.emit("get", {
       data: {
-        args: [`t:${symbol}`, `i:${symbol}`],
+        args: [`i:${symbol}`],
         op: "unsubscribe",
       },
       method: "get",
@@ -123,10 +143,6 @@ const Trading = () => {
 
   const handleIEvent = (data: any) => {
     setInstrument((prev) => ({ ...prev, ...data }));
-  };
-
-  const handleTEvent = (data: TradeRTData) => {
-    setTrades((prev) => [data, ...prev]);
   };
 
   const initTicker = () => {
@@ -172,15 +188,16 @@ const Trading = () => {
       <S.Content>
         <S.MainContent>
           <Search />
-          <SymbolInfo instrument={instrument} ticker={ticker} />
-          <TicketInfo />
+          <SymbolInfo instrument={instrument} ticker={ticker} maxVol={maxVol} />
+          <TicketInfo maxVol={maxVol} />
+          {/* Trạng thái tiểu khoản */}
           <S.AccStatus>
             <Typography variant="body2">
               {t("fn_trade_txt_accStatus")}
             </Typography>
             <Typography color="text.success" variant="body2">
               {accountSummary && activeAccount
-                ? accountSummary[activeAccount.id].afstatus_en
+                ? accountSummary[activeAccount.id]?.afstatus_en
                 : ""}
             </Typography>
           </S.AccStatus>

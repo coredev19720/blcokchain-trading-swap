@@ -47,9 +47,6 @@ export const user = createSlice({
         [action.payload.id]: action.payload,
       };
     },
-    setAccountAvailTrade: (state, action: PayloadAction<AccAvailTrade>) => {
-      state.accountAvailTrade = action.payload;
-    },
   },
 });
 
@@ -59,6 +56,5 @@ export const {
   setActiveAccount,
   setAuthorInfo,
   setAccountSummary,
-  setAccountAvailTrade,
 } = user.actions;
 export default user.reducer;

@@ -117,6 +117,9 @@
     "fn_trade_inp_ordQty": "Số lượng",
     "fn_trade_inp_ordMulti": "Nhân lệnh",
     "fn_trade_txt_accStatus": "Trạng thái tiểu khoản",
+    "fn_trade_txt_can_buy": "Sức mua",
+    "fn_trade_txt_can_sell": "Có thể bán",
+
     "en_trade_custodyCd": "Số lưu ký",
     "en_trade_accNo": "Tiểu khoản",
     "fn_trade_cta_confirm": "Xác nhận",

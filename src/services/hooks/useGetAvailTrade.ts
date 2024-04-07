@@ -1,29 +1,38 @@
 import { AccAvailTradeRes } from "@src/constraints/interface/services/response";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { genAccountServiceUrl } from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
 import { useAppDispatch } from "@src/redux/hooks";
-import { setAccountAvailTrade } from "@src/redux/features/userSlice";
-import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
+import { TSide } from "@/src/constraints/enum/common";
+import { AccAvailTrade } from "@/src/constraints/interface/account";
 
 interface UseGetAvailTrade {
   isError: boolean;
   isSuccess: boolean;
   isLoading: boolean;
   refetch: () => void;
+  data: AccAvailTrade | undefined;
 }
 const handleGetData = async (
   accountId: string,
-  dispatch: Dispatch<UnknownAction>
-): Promise<AccAvailTradeRes> => {
+  symbol: string,
+  side: TSide,
+  quotePrice: number
+): Promise<AccAvailTrade> => {
   try {
     const res = await axiosInst.get(
-      genAccountServiceUrl(accountId, "availableTrade")
+      genAccountServiceUrl(accountId, "availableTrade"),
+      {
+        params: {
+          symbol,
+          side,
+          quotePrice,
+        },
+      }
     );
     const { s, ec, d } = res.data;
     if (s === "ok") {
-      dispatch(setAccountAvailTrade(d));
-      return res.data;
+      return d;
     }
     throw new Error(ec);
   } catch (e) {
@@ -31,13 +40,18 @@ const handleGetData = async (
   }
 };
 
-export const useGetAvailTrade = (accountId: string): UseGetAvailTrade => {
+export const useGetAvailTrade = (
+  accountId: string,
+  symbol: string,
+  side: TSide,
+  quotePrice: number
+): UseGetAvailTrade => {
   const dispatch = useAppDispatch();
-  const { isError, isSuccess, refetch, isLoading } = useQuery({
+  const { isError, isSuccess, refetch, isLoading, data } = useQuery({
     queryKey: ["avail-trade", accountId],
-    queryFn: () => handleGetData(accountId, dispatch),
-    enabled: !!accountId,
+    queryFn: () => handleGetData(accountId, symbol, side, quotePrice),
+    enabled: !!accountId && !!symbol && !!side && !!quotePrice,
   });
 
-  return { refetch, isLoading, isError, isSuccess };
+  return { refetch, isLoading, isError, isSuccess, data };
 };
