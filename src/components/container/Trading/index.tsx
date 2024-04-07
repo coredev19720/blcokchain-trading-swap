@@ -59,7 +59,6 @@ const Trading = () => {
     if (ticket) {
       console.log("ports", ports);
       const port = ports.find((p) => p.symbol === ticket?.symbol);
-      console.log(port);
       setSymbolPort(port || null);
     }
   }, [ticket]);

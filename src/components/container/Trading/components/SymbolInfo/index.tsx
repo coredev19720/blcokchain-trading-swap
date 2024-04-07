@@ -6,15 +6,10 @@ import { TSide } from "@enum/common";
 import FieldLabel from "@components/common/FieldLabel";
 import StyledTable from "@components/common/StyledTable";
 import { IColumn } from "@interface/table";
-import { IBestDeal } from "@interface/common";
-import {
-  formatBigNumber,
-  formatNumber,
-  genPriceColor,
-} from "@src/utils/helpers";
-import { InsRTData, PortItem, Stock } from "@/src/constraints/interface/market";
+import { formatBigNumber, formatNumber, genTrend } from "@src/utils/helpers";
+import { InsRTData, Stock } from "@/src/constraints/interface/market";
 import { useEffect, useState } from "react";
-import { AccAvailTrade, AccInfo } from "@/src/constraints/interface/account";
+import SplashText from "@/src/components/common/SplashText";
 interface IProps {
   instrument: InsRTData;
   ticker: Stock | null;
@@ -79,36 +74,38 @@ const SymbolInfo = ({ instrument, ticker, maxVol }: IProps) => {
     {
       title: t("fn_trade_sb_best_buyPrice"),
       render: (row: BestDeal) => (
-        <Typography
-          fontWeight={600}
-          variant="body2"
-          color={genPriceColor(
+        <SplashText
+          key={row.buyPrice}
+          trend={genTrend(
             ticker?.reference,
             row.buyPrice,
             ticker?.ceiling,
             ticker?.floor
           )}
         >
-          {(row.buyPrice / 1000).toFixed(2)}
-        </Typography>
+          <Typography fontWeight={600} variant="body2" color="inherit">
+            {(row.buyPrice / 1000).toFixed(2)}
+          </Typography>
+        </SplashText>
       ),
       align: "center",
     },
     {
       title: t("fn_trade_sb_best_sellPrice"),
       render: (row: BestDeal) => (
-        <Typography
-          variant="body2"
-          fontWeight={600}
-          color={genPriceColor(
+        <SplashText
+          key={row.sellPrice}
+          trend={genTrend(
             ticker?.reference,
             row.sellPrice,
             ticker?.ceiling,
             ticker?.floor
           )}
         >
-          {(row.sellPrice / 1000).toFixed(2)}
-        </Typography>
+          <Typography fontWeight={600} variant="body2" color="inherit">
+            {(row.sellPrice / 1000).toFixed(2)}
+          </Typography>
+        </SplashText>
       ),
       align: "center",
     },

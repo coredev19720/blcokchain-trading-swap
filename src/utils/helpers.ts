@@ -2,7 +2,18 @@ import colors from "@src/themes/colors";
 export const uIdGen = () => {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
 };
+export const genTrend = (
+  ref?: number,
+  price?: number,
+  ceil?: number,
+  floor?: number
+) => {
+  if (!ref || !price || !ceil || !floor) return "ref";
+  if (price === ceil) return "ce";
+  if (price === floor) return "fl";
 
+  return price > ref ? "up" : price < ref ? "down" : "ref";
+};
 export const genPriceColor = (
   ref?: number,
   price?: number,
@@ -63,11 +74,8 @@ export const findDiffIndex = (str1: string, str2: string) => {
   }
   return null;
 };
-export const genValidPrice = (
-  val: number,
-  currentVal: number,
-  floorPrice: number
-) => {
+
+export const genValidPrice = (val: number, floorPrice: number) => {
   if (val < floorPrice) return (floorPrice / 1000).toFixed(2);
   return (val / 1000).toFixed(2);
 };

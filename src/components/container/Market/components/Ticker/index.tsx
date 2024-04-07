@@ -14,7 +14,7 @@ import FieldLabel from "@/src/components/common/FieldLabel";
 import StyledTable from "@/src/components/common/StyledTable";
 import { TShortSide } from "@/src/constraints/enum/common";
 import { IColumn } from "@/src/constraints/interface/table";
-import { formatBigNumber, genPriceColor } from "@/src/utils/helpers";
+import { formatBigNumber, genPriceColor, genTrend } from "@/src/utils/helpers";
 import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
@@ -82,7 +82,7 @@ const Ticker = ({ instrument, trades, ticker }: Props) => {
       title: t("en_sb_best_buyQty"),
       render: (row: IBestDeal) => {
         return (
-          <SplashText val={row.buyVol}>
+          <SplashText key={row.buyVol}>
             <Typography variant="subtitle1">
               {row.buyVol ? formatBigNumber(row.buyVol) : null}
             </Typography>
@@ -94,16 +94,16 @@ const Ticker = ({ instrument, trades, ticker }: Props) => {
     {
       title: t("en_sb_best_price"),
       render: (row: IBestDeal) => (
-        <SplashText val={row.price}>
-          <Typography
-            variant="subtitle1"
-            color={genPriceColor(
-              ticker?.reference,
-              row.price,
-              ticker?.ceiling,
-              ticker?.floor
-            )}
-          >
+        <SplashText
+          key={row.price}
+          trend={genTrend(
+            ticker?.reference,
+            row.price,
+            ticker?.ceiling,
+            ticker?.floor
+          )}
+        >
+          <Typography variant="subtitle1" color="inherit">
             {(row.price / 1000).toFixed(2)}
           </Typography>
         </SplashText>
@@ -113,7 +113,7 @@ const Ticker = ({ instrument, trades, ticker }: Props) => {
     {
       title: t("en_sb_best_sellQty"),
       render: (row: IBestDeal) => (
-        <SplashText val={row.sellVol}>
+        <SplashText key={row.sellVol}>
           <Typography variant="subtitle1">
             {row.sellVol ? formatBigNumber(row.sellVol) : null}
           </Typography>

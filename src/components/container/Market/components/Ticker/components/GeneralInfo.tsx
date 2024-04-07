@@ -3,7 +3,7 @@ import { InsRTData, Stock } from "@/src/constraints/interface/market";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { RowContent } from "@src/styles/common";
-import { genPriceColor } from "@src/utils/helpers";
+import { genPriceColor, genTrend } from "@src/utils/helpers";
 
 const Wrapper = styled("div")(() => ({}));
 type Props = {
@@ -17,17 +17,16 @@ const GeneralInfo = ({ instrument, ticker }: Props) => {
         <Typography variant="h4" fontWeight={600}>
           {ticker?.symbol}
         </Typography>
-        <SplashText val={instrument.CP}>
-          <Typography
-            variant="h4"
-            fontWeight={600}
-            color={genPriceColor(
-              ticker?.reference,
-              instrument.CP,
-              ticker?.ceiling,
-              ticker?.floor
-            )}
-          >
+        <SplashText
+          key={instrument.CP}
+          trend={genTrend(
+            ticker?.reference,
+            instrument.CP,
+            ticker?.ceiling,
+            ticker?.floor
+          )}
+        >
+          <Typography variant="h4" fontWeight={600} color="inherit">
             {(instrument.CP / 1000).toFixed(2)}
           </Typography>
         </SplashText>
@@ -35,22 +34,23 @@ const GeneralInfo = ({ instrument, ticker }: Props) => {
 
       <RowContent>
         <Typography variant="subtitle1" noWrap>
-          {instrument.FN}
+          {ticker?.FullName}
         </Typography>
-        <SplashText val={instrument.CH}>
+        <SplashText
+          key={instrument.CH}
+          trend={genTrend(
+            ticker?.reference,
+            instrument.CH,
+            ticker?.ceiling,
+            ticker?.floor
+          )}
+        >
           <Typography
             style={{ whiteSpace: "nowrap" }}
             variant="subtitle1"
-            color={genPriceColor(
-              ticker?.reference,
-              instrument.CP,
-              ticker?.ceiling,
-              ticker?.floor
-            )}
+            color="inherit"
           >
-            {`${(instrument.CH / 1000).toFixed(2)} /${instrument.CHP.toFixed(
-              2
-            )} %`}
+            {(instrument.CH / 1000).toFixed(2)}
           </Typography>
         </SplashText>
       </RowContent>
