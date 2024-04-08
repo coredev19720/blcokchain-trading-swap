@@ -42,7 +42,7 @@ export interface CreateOrderReq {
   qty: number; // Khối lượng
   side: TSide; // Mua/Bán - 'buy' or 'sell'
   type: "limit" | "market"; // 'limit': Lệnh LO, 'market':Lệnh thị trường ATO, ATC,...
-  limitPrice?: string; // Giá
+  limitPrice?: number; // Giá
   splitval?: string; // Khối lượng chẻ
   tokenid: string; // Tokeninfo lấy từ hàm 3.9
   transactionId: string; // Mã giao dịch lấy từ hàm 3.9
@@ -57,4 +57,14 @@ export interface PrecheckOrderReq {
   type: "limit" | "market"; // 'limit': Lệnh LO, 'market':Lệnh thị trường ATO, ATC,...
   limitPrice?: number; // Giá
   authtype?: TPinAuthType; // Loại xác thực, tra cứu bảng 3.5.3
+}
+
+export interface UpdateOrderReq {
+  accountId: string;
+  orderId: string;
+  limitPrice?: number; // Giá
+  tokenid: string; // Tokeninfo lấy từ hàm 3.9
+  transactionId: string; // Mã giao dịch lấy từ hàm 3.9
+  qty: number; // Khối lượng
+  code: string; // mã xác thực 2 lớp.
 }

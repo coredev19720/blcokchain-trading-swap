@@ -10,12 +10,14 @@ import Cancel from "./Cancel";
 import Update from "./Update";
 import { useEffect, useState } from "react";
 import { handleSlideDown } from "@src/utils/behaviors";
+import { AccInfo } from "@/src/constraints/interface/account";
 interface IProps {
-  data: OrderInfo | null;
+  data: OrderInfo;
   type: TOrderActionType;
   handleClose: () => void;
+  activeAccount: AccInfo | null;
 }
-const OrderDetail = ({ data, type, handleClose }: IProps) => {
+const OrderDetail = ({ data, type, handleClose, activeAccount }: IProps) => {
   const t = useTranslations("order_book");
   const tTrade = useTranslations("trade");
   const title = {
@@ -26,6 +28,7 @@ const OrderDetail = ({ data, type, handleClose }: IProps) => {
   const [startY, setStartY] = useState<number | null>(null);
   const [currentY, setCurrentY] = useState<number | null>(null);
   const [isSliding, setIsSliding] = useState(false);
+
   useEffect(() => {
     handleSlideDown({
       setStartY,
@@ -77,12 +80,20 @@ const OrderDetail = ({ data, type, handleClose }: IProps) => {
               </S.TicketSide>
             </FlexContent>
           </S.Content>
-          {type === "detail" && <Detail data={data} />}
-          {type === "cancel" && (
-            <Cancel data={data} handleClose={handleClose} />
+          {type === TOrderActionType.detail && <Detail data={data} />}
+          {type === TOrderActionType.cancel && (
+            <Cancel
+              data={data}
+              handleClose={handleClose}
+              activeAccount={activeAccount}
+            />
           )}
-          {type === "update" && (
-            <Update data={data} handleClose={handleClose} />
+          {type === TOrderActionType.update && (
+            <Update
+              data={data}
+              handleClose={handleClose}
+              activeAccount={activeAccount}
+            />
           )}
         </S.Wrapper>
       </Slide>

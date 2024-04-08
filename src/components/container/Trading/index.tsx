@@ -227,7 +227,7 @@ const Trading = () => {
       <TicketConfirm
         open={isConfirm}
         setOpen={setIsConfirm}
-        precheckData={data ? data.d : null}
+        precheckData={data ? data : null}
       />
     </S.Wrapper>
   );

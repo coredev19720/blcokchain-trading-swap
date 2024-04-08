@@ -90,7 +90,7 @@ const ctAni = keyframes`
     color: white;
   }
   100% {
-    color: ${colors.lightCeilText} !important;
+    color: ${colors.lightCeilText};
   }
 `;
 const ftAni = keyframes`

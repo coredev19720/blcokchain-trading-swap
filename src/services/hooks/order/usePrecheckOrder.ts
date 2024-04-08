@@ -1,27 +1,27 @@
 import { useMutation } from "@tanstack/react-query";
 import { genOrderUrl } from "@/src/services/apiUrls";
 import { PrecheckOrderReq } from "@/src/constraints/interface/services/request";
-import { PrecheckOrderRes } from "@/src/constraints/interface/services/response";
 import axiosInst from "../../Interceptors";
+import { PreCheckData } from "@/src/constraints/interface/market";
 interface UsePrecheckOrder {
   onPrecheckOrder: (data: PrecheckOrderReq) => void;
   isError: boolean;
   isSuccess: boolean;
   error: unknown;
-  data: PrecheckOrderRes | undefined;
+  data: PreCheckData | undefined;
 }
 
 const handlePrecheckOrder = async (
   data: PrecheckOrderReq
-): Promise<PrecheckOrderRes> => {
+): Promise<PreCheckData> => {
   try {
     const res = await axiosInst.post(
       genOrderUrl(data.accountId, "precheckOrder"),
       data
     );
-    const { s, ec } = res.data;
+    const { s, ec, d } = res.data;
     if (s !== "ok") throw new Error(ec);
-    return res.data;
+    return d;
   } catch (e) {
     throw e;
   }

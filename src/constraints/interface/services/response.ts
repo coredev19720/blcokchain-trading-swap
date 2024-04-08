@@ -49,6 +49,10 @@ export interface PrecheckOrderRes extends BaseRes {
   d: PreCheckData;
 }
 
+export interface UpdateOrderRes extends BaseRes {
+  d: PreCheckData;
+}
+
 export interface GetOrdersRes extends BaseRes {
   d: OrderInfo[];
 }

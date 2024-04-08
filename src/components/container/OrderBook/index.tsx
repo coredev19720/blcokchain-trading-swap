@@ -85,7 +85,14 @@ const OrderBook = () => {
           <Order data={x} key={x.orderid} handleClick={handleClickOrder} />
         ))}
       </S.OrderList>
-      <OrderDetail data={ord} type={type} handleClose={handleClose} />
+      {ord && (
+        <OrderDetail
+          data={ord}
+          type={type}
+          handleClose={handleClose}
+          activeAccount={activeAccount}
+        />
+      )}
       {/* {(ordsIsLoading || waitMatchedOrdsIsLoading || matchedOrdsLoading) && (
         <Loading />
       )} */}

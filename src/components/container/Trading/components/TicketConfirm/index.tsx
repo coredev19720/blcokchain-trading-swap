@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { TSide } from "@enum/common";
 import { useTranslations } from "next-intl";
 import colors from "@src/themes/colors";
-import { formatNumber } from "@src/utils/helpers";
+import { formatNumber, generateUniqueId } from "@src/utils/helpers";
 import OTPConfirm from "@components/common/OTPConfirm";
 import { useRouter } from "next/navigation";
 import { useCreateOrder } from "@/src/services/hooks/order/useCreateOrder";
@@ -55,12 +55,12 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
     try {
       const data: CreateOrderReq = {
         accountId: activeAccount.id,
-        requestId: "12345", //unimplemented
+        requestId: generateUniqueId(),
         instrument: ticket.symbol,
         qty: ticket.vol,
         side: ticket.side,
         type: ticket.type === "LO" ? "limit" : "market",
-        limitPrice: ticket.price,
+        limitPrice: Number(ticket.price) * 1000,
         tokenid: precheckData.tokenid,
         transactionId: precheckData.transactionId,
         code: otp,

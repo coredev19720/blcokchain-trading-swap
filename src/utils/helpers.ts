@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import colors from "@src/themes/colors";
 export const uIdGen = () => {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
@@ -91,4 +92,8 @@ export const genChgTextClass = (chg: number) => {
   if (chg > 0) return colors.lightUpText;
   if (chg < 0) return colors.lightDownText;
   return "text.primary";
+};
+
+export const generateUniqueId = () => {
+  return crypto.randomBytes(8).toString("hex");
 };

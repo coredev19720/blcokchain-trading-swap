@@ -40,7 +40,7 @@ const GeneralInfo = ({ instrument, ticker }: Props) => {
           key={instrument.CH}
           trend={genTrend(
             ticker?.reference,
-            instrument.CH,
+            instrument.CP,
             ticker?.ceiling,
             ticker?.floor
           )}

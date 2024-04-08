@@ -2,7 +2,7 @@ import { FieldBlock } from "@src/styles/common";
 import * as S from "./styles";
 import { TextField } from "@mui/material";
 import { OrderInfo } from "@interface/market";
-import { formatNumber, genValidPrice } from "@src/utils/helpers";
+import { formatNumber } from "@src/utils/helpers";
 import { useTranslations } from "next-intl";
 import RowContent from "@components/common/RowContent";
 import FieldLabel from "@components/common/FieldLabel";
@@ -12,52 +12,69 @@ import HelpText from "@components/common/HelpText";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
+import { UpdateOrderReq } from "@/src/constraints/interface/services/request";
+import { useUpdateOrder } from "@/src/services/hooks/order/useUpdateOrder";
+import { AccInfo } from "@/src/constraints/interface/account";
 interface IProps {
   data: OrderInfo | null;
   handleClose: () => void;
+  activeAccount: AccInfo | null;
 }
-const Update = ({ data, handleClose }: IProps) => {
+const Update = ({ data, handleClose, activeAccount }: IProps) => {
   const t = useTranslations("order_book");
   const { order, stocks } = useAppSelector((state) => state.market);
   const availTicker = stocks.find((x) => x.symbol === data?.symbol);
+  const {
+    onUpdateOrder,
+    isError,
+    isSuccess,
+    data: uData,
+    error,
+  } = useUpdateOrder();
   const dispatch = useAppDispatch();
   const [otp, setOtp] = useState<string>("");
   const [updatePrice, setUpdatePrice] = useState<string>(
     data?.price ? (data.price / 1000).toFixed(2) : "0"
   );
-
   const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const price = Number(e.target.value) * 1000;
     if (!availTicker) {
       return;
     }
-    if (Number(e.target.value) > availTicker.ceiling) {
+    if (Number(e.target.value) * 1000 > availTicker.ceiling) {
       setUpdatePrice((availTicker.ceiling / 1000).toFixed(2));
       return;
     }
-    if (Number(e.target.value) < availTicker.floor) {
+    setUpdatePrice(e.target.value);
+  };
+  const handleBlurPriceInput = () => {
+    if (!availTicker) return;
+    if (Number(updatePrice) * 1000 < availTicker.floor) {
       setUpdatePrice((availTicker.floor / 1000).toFixed(2));
       return;
     }
-    setUpdatePrice(e.target.value);
   };
   const handleRequestOTP = () => {
     console.log("handleRequestOTP");
   };
   const handleSubmit = () => {
-    // if (order) {
-    //   try {
-    //     const ord: IOrder = {
-    //       ...order,
-    //       price: updatePrice,
-    //     };
-    //     dispatch(updateOrders(ord));
-    //   } catch (e) {
-    //     console.log(e);
-    //   } finally {
-    //     handleClose();
-    //   }
-    // }
+    if (order) {
+      try {
+        const ord: UpdateOrderReq = {
+          accountId: activeAccount?.id || "",
+          orderId: data?.rootorderid || "",
+          limitPrice: Number(updatePrice) * 1000,
+          tokenid: "", // Tokeninfo lấy từ hàm 3.9 // unimplemented
+          transactionId: "", // Mã giao dịch lấy từ hàm 3.9// unimplemented
+          qty: 0, // Khối lượng// unimplemented
+          code: "string", // mã xác thực 2 lớp.// unimplemented
+        };
+        onUpdateOrder(ord);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        handleClose();
+      }
+    }
   };
   const handleChangeOTP = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length <= 6) {
@@ -73,7 +90,9 @@ const Update = ({ data, handleClose }: IProps) => {
         />
         <RowContent
           leftTxt={t("fn_ob_txt_qtyProgress")}
-          rightTxt={`${data?.execqtty} / ${data?.qtty}`}
+          rightTxt={`${formatNumber(data?.execqtty || 0)} / ${formatNumber(
+            data?.qtty || 0
+          )}`}
         />
         <RowContent
           leftTxt={t("en_ord_order_price")}
@@ -107,6 +126,7 @@ const Update = ({ data, handleClose }: IProps) => {
             fullWidth
             value={updatePrice || null}
             onChange={handleChangePrice}
+            onBlur={handleBlurPriceInput}
             type="decimal"
           />
         </FieldBlock>

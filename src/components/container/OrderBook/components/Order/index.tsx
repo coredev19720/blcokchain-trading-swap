@@ -44,7 +44,7 @@ const Order = ({ data, handleClick }: IProps) => {
             {t("fn_ob_txt_qtyProgress")}
           </Typography>
           <Typography variant="body2" fontWeight={600}>
-            {`${data.qtty} / ${data.remainqtty}`}
+            {`${formatNumber(data.qtty)} / ${formatNumber(data.remainqtty)}`}
           </Typography>
         </FlexContent>
         <FlexContent>
@@ -60,7 +60,7 @@ const Order = ({ data, handleClick }: IProps) => {
             {t("en_ord_order_price")}
           </Typography>
           <Typography variant="body2" fontWeight={600}>
-            {data.price}
+            {(data.price / 1000).toFixed(2)}
           </Typography>
         </FlexContent>
         <FlexContent>
