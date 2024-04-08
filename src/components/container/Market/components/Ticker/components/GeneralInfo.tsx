@@ -50,7 +50,9 @@ const GeneralInfo = ({ instrument, ticker }: Props) => {
             variant="subtitle1"
             color="inherit"
           >
-            {(instrument.CH / 1000).toFixed(2)}
+            {`${(instrument.CH / 1000).toFixed(2)} /${instrument.CHP.toFixed(
+              2
+            )} %`}
           </Typography>
         </SplashText>
       </RowContent>

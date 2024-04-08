@@ -181,6 +181,12 @@ const Trading = () => {
       authtype: activePermission.ORDINPUT[0],
     });
   };
+  const btnDisabled =
+    !ticker ||
+    !ticket.price ||
+    !ticket.vol ||
+    !activeAccount ||
+    !activePermission;
   return (
     <S.Wrapper>
       <PageHeader title={t("fn_trade_txt_title")} />
@@ -203,13 +209,7 @@ const Trading = () => {
         </S.MainContent>
         <S.ButtonWrapper>
           <Button
-            disabled={
-              !ticker ||
-              !ticket.price ||
-              !ticket.vol ||
-              !activeAccount ||
-              !activePermission
-            }
+            disabled={btnDisabled}
             fullWidth
             variant="contained"
             color={ticket.side === TSide.buy ? "success" : "error"}

@@ -28,6 +28,5 @@ export const AccStatus = styled("div")(({ theme }) => ({
 }));
 
 export const ButtonWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 4),
-  paddingBottom: 16,
+  padding: theme.spacing(4, 4),
 }));
