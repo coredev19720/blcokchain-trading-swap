@@ -1,8 +1,10 @@
 import { styled } from "@mui/system";
 import { keyframes } from "@emotion/react";
 import colors from "@/src/themes/colors";
+import React from "react";
+import { usePreviousValue } from "@/src/hooks/usePrevious";
 interface Props {
-  key: string | number | undefined;
+  val: string | number | undefined;
   trend?: "up" | "down" | "ref" | "ce" | "fl";
   children?: React.ReactNode;
 }
@@ -121,9 +123,31 @@ export const Wrapper = styled("div")<{
   animationFillMode: "forwards",
 }));
 
-const SplashText = ({ key, children, trend }: Props) => {
+const genColor = (trend: "up" | "down" | "ref" | "ce" | "fl") => {
+  switch (trend) {
+    case "down":
+      return colors.lightDownText;
+    case "up":
+      return colors.lightUpText;
+    case "ref":
+      return colors.lightRefText;
+    case "ce":
+      return colors.lightCeilText;
+    case "fl":
+      return colors.lightFloorText;
+    default:
+      return "white";
+  }
+};
+
+const SplashText = ({ val, children, trend }: Props) => {
+  const previous = usePreviousValue(val);
   return (
-    <Wrapper key={key} trend={trend}>
+    <Wrapper
+      key={val}
+      trend={previous ? trend : undefined}
+      style={{ color: trend && genColor(trend) }}
+    >
       {children}
     </Wrapper>
   );

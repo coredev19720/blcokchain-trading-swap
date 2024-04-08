@@ -75,7 +75,7 @@ const SymbolInfo = ({ instrument, ticker, maxVol }: IProps) => {
       title: t("fn_trade_sb_best_buyPrice"),
       render: (row: BestDeal) => (
         <SplashText
-          key={row.buyPrice}
+          val={row.buyPrice}
           trend={genTrend(
             ticker?.reference,
             row.buyPrice,
@@ -94,7 +94,7 @@ const SymbolInfo = ({ instrument, ticker, maxVol }: IProps) => {
       title: t("fn_trade_sb_best_sellPrice"),
       render: (row: BestDeal) => (
         <SplashText
-          key={row.sellPrice}
+          val={row.sellPrice}
           trend={genTrend(
             ticker?.reference,
             row.sellPrice,

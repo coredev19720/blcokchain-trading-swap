@@ -3,13 +3,14 @@ import { InsRTData, Stock } from "@/src/constraints/interface/market";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { RowContent } from "@src/styles/common";
-import { genPriceColor, genTrend } from "@src/utils/helpers";
+import { genTrend } from "@src/utils/helpers";
 
 const Wrapper = styled("div")(() => ({}));
 type Props = {
   instrument: InsRTData;
   ticker: Stock | null;
 };
+
 const GeneralInfo = ({ instrument, ticker }: Props) => {
   return (
     <Wrapper>
@@ -18,7 +19,7 @@ const GeneralInfo = ({ instrument, ticker }: Props) => {
           {ticker?.symbol}
         </Typography>
         <SplashText
-          key={instrument.CP}
+          val={instrument.CP}
           trend={genTrend(
             ticker?.reference,
             instrument.CP,
@@ -37,7 +38,7 @@ const GeneralInfo = ({ instrument, ticker }: Props) => {
           {ticker?.FullName}
         </Typography>
         <SplashText
-          key={instrument.CH}
+          val={instrument.CH}
           trend={genTrend(
             ticker?.reference,
             instrument.CP,

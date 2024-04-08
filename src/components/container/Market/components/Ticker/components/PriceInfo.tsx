@@ -31,7 +31,7 @@ const PriceInfo = ({ instrument, ticker }: Props) => {
         <RowContent>
           <FieldLabel>{t("en_sb_price_open")}</FieldLabel>
           <SplashText
-            key={instrument.OP}
+            val={instrument.OP}
             trend={genTrend(
               ticker?.reference,
               instrument.OP,
@@ -47,7 +47,7 @@ const PriceInfo = ({ instrument, ticker }: Props) => {
         <RowContent>
           <FieldLabel>{t("en_sb_price_highest")}</FieldLabel>
           <SplashText
-            key={instrument.HI}
+            val={instrument.HI}
             trend={genTrend(
               ticker?.reference,
               instrument.HI,
@@ -63,7 +63,7 @@ const PriceInfo = ({ instrument, ticker }: Props) => {
         <RowContent>
           <FieldLabel>{t("en_sb_price_lowest")}</FieldLabel>
           <SplashText
-            key={instrument.LO}
+            val={instrument.LO}
             trend={genTrend(
               ticker?.reference,
               instrument.LO,
@@ -81,7 +81,7 @@ const PriceInfo = ({ instrument, ticker }: Props) => {
       <ContentBlock>
         <RowContent>
           <FieldLabel>{t("en_sb_price_ref")}</FieldLabel>
-          <SplashText key={ticker?.reference || 0} trend="ref">
+          <SplashText val={ticker?.reference || 0} trend="ref">
             <Typography fontWeight={500} variant="body2" color="inherit">
               {ticker ? (ticker.reference / 1000).toFixed(2) : "-"}
             </Typography>
@@ -89,7 +89,7 @@ const PriceInfo = ({ instrument, ticker }: Props) => {
         </RowContent>
         <RowContent>
           <FieldLabel>{t("en_sb_price_celling")}</FieldLabel>
-          <SplashText key={ticker?.ceiling || 0} trend="ce">
+          <SplashText val={ticker?.ceiling || 0} trend="ce">
             <Typography fontWeight={500} variant="body2" color="inherit">
               {ticker ? (ticker.ceiling / 1000).toFixed(2) : "-"}
             </Typography>
@@ -97,7 +97,7 @@ const PriceInfo = ({ instrument, ticker }: Props) => {
         </RowContent>
         <RowContent>
           <FieldLabel>{t("en_sb_price_floor")}</FieldLabel>
-          <SplashText key={ticker?.floor || 0} trend="fl">
+          <SplashText val={ticker?.floor || 0} trend="fl">
             <Typography fontWeight={500} variant="body2" color="inherit">
               {ticker ? (ticker.floor / 1000).toFixed(2) : "-"}
             </Typography>
