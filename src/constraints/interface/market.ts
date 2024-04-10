@@ -8,20 +8,36 @@ import {
 } from "../enum/common";
 
 export interface Stock {
-  symbol: string;
-  FullName: string;
-  ceiling: number;
-  floor: number;
-  reference: number;
-  exchange: string;
-  StockType: string;
-  //fix me
-  price: number;
-  open: number;
-  high: number;
-  low: number;
-  chg: number;
-  pctChg: number;
+  symbol: string; // Mã chứng khoán
+  FullName: string; // Tên chứng khoán
+}
+export interface Instrument {
+  symbol: string; // Mã chứng khoán
+  FullName: string; // Tên chứng khoán
+  ceiling: number; // Giá trần
+  floor: number; // Giá sàn
+  reference: number; // Giá tham chiếu
+  exchange: string; // Sàn giao dịch
+  StockType: string; // Loại chứng khoán
+  bidPrice3: number; // Bên mua: Giá 3
+  bidVol3: number; // Bên mua: Khối lượng 3
+  bidPrice2: number; // Bên mua: Giá 2
+  bidVol2: number; // Bên mua: Khối lượng 2
+  bidPrice1: number; // Bên mua: Giá 1
+  bidVol1: number; // Bên mua: Khối lượng 1
+  closePrice: number; // Khớp lệnh: Giá
+  closeVol: number; // Khớp lệnh: Khối lượng
+  offerPrice1: number; // Bên bán: Giá 1
+  offerVol1: number; // Bên bán: Khối lượng 1
+  offerPrice2: number; // Bên bán: Giá 2
+  offerVol2: number; // Bên bán: Khối lượng 2
+  offerPrice3: number; // Bên bán: Giá 3
+  offerVol3: number; // Bên bán: Khối lượng 3
+  foreignRemain: number; // Đầu tư nước ngoài: Dư
+  foreignBuy: number; // Đầu tư nước ngoài: Mua
+  foreignSell: number; // Đầu tư nước ngoài: Bán
+  low: number; // Giá khớp thấp nhất
+  high: number; // Giá khớp cao nhất
 }
 
 export interface MatchedOrd {

@@ -1,10 +1,10 @@
 import { TMarket, TOrderKind, TOrderType, TSide } from "@enum/common";
-import { ITicket, OrderInfo, PortItem } from "@interface/market";
+import { ITicket, Instrument, OrderInfo, PortItem } from "@interface/market";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Stock } from "@/src/constraints/interface/market";
 
 type MarketState = {
-  ticker: Stock | null;
+  selectedStock: Stock;
   ticket: ITicket;
   stocks: Stock[];
   orders: OrderInfo[];
@@ -14,7 +14,10 @@ type MarketState = {
 };
 
 const initialState = {
-  ticker: null,
+  selectedStock: {
+    symbol: "",
+    FullName: "",
+  },
   ticket: {
     side: TSide.buy,
     price: "0",
@@ -36,8 +39,8 @@ export const market = createSlice({
   initialState,
   reducers: {
     reset: () => initialState,
-    setTicker: (state, action: PayloadAction<Stock>) => {
-      state.ticker = action.payload;
+    setSelectedStock: (state, action: PayloadAction<Stock>) => {
+      state.selectedStock = action.payload;
     },
     setTicket: (state, action: PayloadAction<ITicket>) => {
       state.ticket = action.payload;
@@ -73,7 +76,7 @@ export const market = createSlice({
 });
 
 export const {
-  setTicker,
+  setSelectedStock,
   setOrders,
   reset,
   setTicket,

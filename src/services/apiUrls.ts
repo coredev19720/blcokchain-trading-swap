@@ -15,4 +15,7 @@ export const genOrderUrl = (accountId: string, path: string) =>
 export const genAccountServiceUrl = (accountId: string, path: string) =>
   `${baseUrl}/inq/accounts/${accountId}/${path}`;
 
+export const genInstrumentUrl = (symbol: string) => {
+  return `${apiUrls.getInstruments}?symbols=${symbol}`;
+};
 export default apiUrls;

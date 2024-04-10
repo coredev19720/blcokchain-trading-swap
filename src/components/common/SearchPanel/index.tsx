@@ -1,10 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TickerWrapper, Wrapper } from "./styles";
 import { Backdrop, Slide, Typography } from "@mui/material";
 import SearchInput from "./components/SearchInput";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
-import { setTicker, setTicket } from "@src/redux/features/marketSlice";
+import { setSelectedStock, setTicket } from "@src/redux/features/marketSlice";
 import { setLastSymbolToLocalStorage } from "@src/utils/helpers";
 import { Stock } from "@/src/constraints/interface/market";
 import { List, AutoSizer } from "react-virtualized";
@@ -14,21 +14,26 @@ interface IProps {
   setOpenPanel: (val: boolean) => void;
 }
 const SearchPanel = ({ open, setOpenPanel }: IProps) => {
-  const { ticket, stocks } = useAppSelector((state) => state.market);
+  const { ticket, stocks, selectedStock } = useAppSelector(
+    (state) => state.market
+  );
   const dispatch = useAppDispatch();
   const [searchText, setSearchText] = useState<string>("");
 
-  const handleClickTicker = (val: Stock) => {
-    setLastSymbolToLocalStorage(val.symbol);
-    dispatch(setTicker(val));
+  useEffect(() => {
     dispatch(
       setTicket({
         ...ticket,
-        symbol: val.symbol,
-        price: (val.reference / 1000).toFixed(2),
+        symbol: selectedStock?.symbol || "",
+        price: "0",
       })
     );
     setOpenPanel(false);
+  }, [selectedStock]);
+
+  const handleClickTicker = (val: Stock) => {
+    dispatch(setSelectedStock(val));
+    setLastSymbolToLocalStorage(val.symbol);
   };
 
   return (
@@ -72,23 +77,6 @@ const SearchPanel = ({ open, setOpenPanel }: IProps) => {
               );
             }}
           </AutoSizer>
-          {/* <Tickers>
-            {stocks
-              .filter((x) => x.symbol.includes(searchText))
-              .map((x) => (
-                <TickerWrapper
-                  key={x.symbol}
-                  onClick={() => handleClickTicker(x)}
-                >
-                  <Typography fontWeight={600}  >
-                    {x.symbol}
-                  </Typography>
-                  <Typography variant="subtitle2" fontWeight={400}>
-                    {x.FullName}
-                  </Typography>
-                </TickerWrapper>
-              ))}
-          </Tickers> */}
         </Wrapper>
       </Slide>
     </Backdrop>

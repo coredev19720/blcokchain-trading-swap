@@ -19,10 +19,9 @@ const ContentBlock = styled("div")(() => ({
   flexDirection: "column",
 }));
 type Props = {
-  instrument: InsRTData;
-  ticker: Stock | null;
+  inst: InsRTData | null;
 };
-const PriceInfo = ({ instrument, ticker }: Props) => {
+const PriceInfo = ({ inst }: Props) => {
   const t = useTranslations("market");
 
   return (
@@ -31,48 +30,33 @@ const PriceInfo = ({ instrument, ticker }: Props) => {
         <RowContent>
           <FieldLabel>{t("en_sb_price_open")}</FieldLabel>
           <SplashText
-            val={instrument.OP}
-            trend={genTrend(
-              ticker?.reference,
-              instrument.OP,
-              ticker?.ceiling,
-              ticker?.floor
-            )}
+            val={inst?.OP}
+            trend={genTrend(inst?.RE, inst?.OP, inst?.CL, inst?.FL)}
           >
             <Typography fontWeight={500} variant="body2" color="inherit">
-              {instrument.OP}
+              {inst ? (inst.OP / 1000).toFixed(2) : "-"}
             </Typography>
           </SplashText>
         </RowContent>
         <RowContent>
           <FieldLabel>{t("en_sb_price_highest")}</FieldLabel>
           <SplashText
-            val={instrument.HI}
-            trend={genTrend(
-              ticker?.reference,
-              instrument.HI,
-              ticker?.ceiling,
-              ticker?.floor
-            )}
+            val={inst?.HI}
+            trend={genTrend(inst?.RE, inst?.HI, inst?.CL, inst?.FL)}
           >
             <Typography fontWeight={500} variant="body2" color="inherit">
-              {instrument.HI}
+              {inst ? (inst.HI / 1000).toFixed(2) : "-"}
             </Typography>
           </SplashText>
         </RowContent>
         <RowContent>
           <FieldLabel>{t("en_sb_price_lowest")}</FieldLabel>
           <SplashText
-            val={instrument.LO}
-            trend={genTrend(
-              ticker?.reference,
-              instrument.LO,
-              ticker?.ceiling,
-              ticker?.floor
-            )}
+            val={inst?.LO}
+            trend={genTrend(inst?.RE, inst?.LO, inst?.CL, inst?.FL)}
           >
             <Typography fontWeight={500} variant="body2" color="inherit">
-              {instrument.LO}
+              {inst ? (inst.LO / 1000).toFixed(2) : "-"}
             </Typography>
           </SplashText>
         </RowContent>
@@ -81,25 +65,25 @@ const PriceInfo = ({ instrument, ticker }: Props) => {
       <ContentBlock>
         <RowContent>
           <FieldLabel>{t("en_sb_price_ref")}</FieldLabel>
-          <SplashText val={ticker?.reference || 0} trend="ref">
+          <SplashText val={inst?.RE || 0} trend="ref">
             <Typography fontWeight={500} variant="body2" color="inherit">
-              {ticker ? (ticker.reference / 1000).toFixed(2) : "-"}
+              {inst ? (inst.RE / 1000).toFixed(2) : "-"}
             </Typography>
           </SplashText>
         </RowContent>
         <RowContent>
           <FieldLabel>{t("en_sb_price_celling")}</FieldLabel>
-          <SplashText val={ticker?.ceiling || 0} trend="ce">
+          <SplashText val={inst?.CL || 0} trend="ce">
             <Typography fontWeight={500} variant="body2" color="inherit">
-              {ticker ? (ticker.ceiling / 1000).toFixed(2) : "-"}
+              {inst ? (inst.CL / 1000).toFixed(2) : "-"}
             </Typography>
           </SplashText>
         </RowContent>
         <RowContent>
           <FieldLabel>{t("en_sb_price_floor")}</FieldLabel>
-          <SplashText val={ticker?.floor || 0} trend="fl">
+          <SplashText val={inst?.FL || 0} trend="fl">
             <Typography fontWeight={500} variant="body2" color="inherit">
-              {ticker ? (ticker.floor / 1000).toFixed(2) : "-"}
+              {inst ? (inst.FL / 1000).toFixed(2) : "-"}
             </Typography>
           </SplashText>
         </RowContent>

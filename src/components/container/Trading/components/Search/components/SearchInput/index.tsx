@@ -21,11 +21,11 @@ const Input = styled(OutlinedInput)(() => ({
 }));
 
 const SearchInput = ({ setOpenPanel }: IProps) => {
-  const ticker = useAppSelector((state) => state.market.ticker);
+  const { selectedStock } = useAppSelector((state) => state.market);
   return (
     <Wrapper>
       <Input
-        placeholder={ticker?.symbol || ""}
+        placeholder={selectedStock?.symbol || ""}
         onFocus={() => setOpenPanel(true)}
         fullWidth
         startAdornment={<Search fontSize="large" color="secondary" />}

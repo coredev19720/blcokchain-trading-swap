@@ -14,16 +14,18 @@ import { CreateOrderReq } from "@/src/constraints/interface/services/request";
 import { PreCheckData } from "@/src/constraints/interface/market";
 import { errHandling } from "@/src/utils/error";
 import { toast } from "react-toastify";
+import { useQueryClient } from "@tanstack/react-query";
+
 interface IProps {
   open: boolean;
   setOpen: (val: boolean) => void;
   precheckData: PreCheckData | null;
 }
 const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
+  const queryClient = useQueryClient();
   const t = useTranslations("trade");
   const { ticket } = useAppSelector((state) => state.market);
   const { activeAccount, permissions } = useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch();
   const router = useRouter();
   const activePermission =
     activeAccount && permissions ? permissions[activeAccount.id] : null;
@@ -32,6 +34,7 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
   const { onCreateOrder, isError, isSuccess, error } = useCreateOrder();
   useEffect(() => {
     if (isSuccess) {
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
       router.push("order-book");
     }
   }, [isSuccess]);

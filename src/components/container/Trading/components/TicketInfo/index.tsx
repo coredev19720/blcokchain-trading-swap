@@ -12,35 +12,32 @@ import { orderKindOpts, orderTypeOpts } from "@src/constants/common";
 import { TOrderKind, TOrderType } from "@enum/common";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { setTicket } from "@src/redux/features/marketSlice";
+import { InsRTData } from "@/src/constraints/interface/market";
 
 interface Props {
+  inst: InsRTData | null;
   maxVol: number;
 }
-const TicketInfo = ({ maxVol }: Props) => {
+const TicketInfo = ({ inst, maxVol }: Props) => {
   const t = useTranslations("trade");
   const dispatch = useAppDispatch();
-  const ticket = useAppSelector((state) => state.market.ticket);
-  const ticker = useAppSelector((state) => state.market.ticker);
+  const { ticket } = useAppSelector((state) => state.market);
   const handleChangeOrderType = (e: SelectChangeEvent<unknown>) => {
     dispatch(setTicket({ ...ticket, type: e.target.value as TOrderType }));
   };
 
   const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!ticker) return;
-    if (Number(e.target.value) * 1000 > ticker.ceiling) {
-      dispatch(
-        setTicket({ ...ticket, price: (ticker.ceiling / 1000).toFixed(2) })
-      );
+    if (!inst) return;
+    if (Number(e.target.value) * 1000 > inst.CL) {
+      dispatch(setTicket({ ...ticket, price: (inst.CL / 1000).toFixed(2) }));
       return;
     }
     dispatch(setTicket({ ...ticket, price: e.target.value }));
   };
   const handleBlurPriceInput = () => {
-    if (!ticker) return;
-    if (Number(ticket.price) * 1000 < ticker.floor) {
-      dispatch(
-        setTicket({ ...ticket, price: (ticker.floor / 1000).toFixed(2) })
-      );
+    if (!inst) return;
+    if (Number(ticket.price) * 1000 < inst.FL) {
+      dispatch(setTicket({ ...ticket, price: (inst.FL / 1000).toFixed(2) }));
       return;
     }
   };

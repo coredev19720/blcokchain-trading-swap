@@ -5,7 +5,7 @@ import {
   AccsPermissions,
   AuthorInfo,
 } from "../account";
-import { MatchedOrd, PortItem } from "../market";
+import { Instrument, MatchedOrd, PortItem } from "../market";
 import { PreCheckData, Stock, OrderInfo, WaitMatchedOrd } from "../market";
 
 export interface BaseRes {
@@ -49,9 +49,9 @@ export interface PrecheckOrderRes extends BaseRes {
   d: PreCheckData;
 }
 
-export interface UpdateOrderRes extends BaseRes {
-  d: PreCheckData;
-}
+export interface UpdateOrderRes extends BaseRes {}
+
+export interface CancelOrderRes extends BaseRes {}
 
 export interface GetOrdersRes extends BaseRes {
   d: OrderInfo[];
@@ -91,6 +91,10 @@ export interface AccAvailTradeRes extends BaseRes {
   d: AccAvailTrade;
 }
 
-export interface GetInstrumentsRes extends BaseRes {
+export interface GetStocksRes extends BaseRes {
   d: Stock[];
+}
+
+export interface GetInstrumentRes extends BaseRes {
+  d: Instrument[];
 }

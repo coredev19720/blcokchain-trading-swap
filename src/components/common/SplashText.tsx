@@ -142,6 +142,7 @@ const genColor = (trend: "up" | "down" | "ref" | "ce" | "fl") => {
 
 const SplashText = ({ val, children, trend }: Props) => {
   const previous = usePreviousValue(val);
+  console.log("previous", previous);
   return (
     <Wrapper
       key={val}
@@ -152,4 +153,4 @@ const SplashText = ({ val, children, trend }: Props) => {
     </Wrapper>
   );
 };
-export default SplashText;
+export default React.memo(SplashText, (prev, next) => prev.val === next.val);

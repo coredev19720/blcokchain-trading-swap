@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import Ticker from "./components/Ticker";
 import EmptyState from "./components/EmptyState";
 import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
-import { setTicker, setTicket } from "@src/redux/features/marketSlice";
+import { setSelectedStock } from "@src/redux/features/marketSlice";
 import SearchPanel from "../../common/SearchPanel";
 import {
   setLastSymbolToLocalStorage,
@@ -16,17 +16,20 @@ import {
 import io from "socket.io-client";
 import { socketCfg } from "@src/constants/config";
 import { InsRTData, TradeRTData } from "@/src/constraints/interface/market";
-import { initInstrument } from "@/src/constants/market";
 import { usePreviousValue } from "@/src/hooks/usePrevious";
+import { useGetInstrument } from "@/src/services/hooks/useGetInstrument";
+import { stockMappingRTData } from "@/src/utils/market";
+
 const Market = () => {
   const searchParams = useSearchParams();
-  const { ticker, ticket, stocks } = useAppSelector((state) => state.market);
+  const { selectedStock, stocks } = useAppSelector((state) => state.market);
+  const { data: stockData } = useGetInstrument(selectedStock?.symbol || "");
   const dispatch = useAppDispatch();
   const [openPanel, setOpenPanel] = useState<boolean>(false);
-  const [instrument, setInstrument] = useState<InsRTData>(initInstrument);
+  const [inst, setInst] = useState<InsRTData | null>(null);
   const [trades, setTrades] = useState<TradeRTData[]>([]);
   const [socket, setSocket] = useState<io.Socket | null>(null);
-  const prevSymbol = usePreviousValue(ticker?.symbol);
+  const prevSymbol = usePreviousValue(selectedStock?.symbol);
 
   useEffect(() => {
     const url = process.env.NEXT_PUBLIC_API_URL || "";
@@ -61,17 +64,17 @@ const Market = () => {
     };
   }, []);
 
+  useEffect(() => {}, [selectedStock]);
   useEffect(() => {
-    if (ticker && socket) {
-      symbolSub(socket, ticker.symbol);
-    }
-    if (prevSymbol && prevSymbol !== ticker?.symbol && socket) {
+    if (prevSymbol && socket) {
       symbolUnsub(socket, prevSymbol);
-      setInstrument(initInstrument);
       setTrades([]);
     }
-  }, [ticker]);
-
+    if (selectedStock.symbol === stockData?.symbol && socket) {
+      setInst(stockMappingRTData(stockData));
+      symbolSub(socket, stockData.symbol);
+    }
+  }, [stockData?.symbol, socket]);
   useEffect(() => {
     !!stocks.length && initTicker();
   }, [stocks]);
@@ -103,7 +106,7 @@ const Market = () => {
   };
 
   const handleIEvent = (data: any) => {
-    setInstrument((prev) => ({ ...prev, ...data }));
+    setInst((prev) => ({ ...prev, ...data }));
   };
 
   const handleTEvent = (data: TradeRTData) => {
@@ -111,29 +114,23 @@ const Market = () => {
   };
 
   const initTicker = () => {
-    if (ticker) return;
+    if (selectedStock.symbol) return;
     const s = searchParams?.get("s");
     const lastSymbol = localStorage.getItem(lastSymLocalKey);
     const defaultSymbol = process.env.NEXT_PUBLIC_DEFAULT_SYMBOL;
     const symbol = s || lastSymbol || defaultSymbol || "HCM";
-    const availTicker = stocks.find((s) => s.symbol === symbol.toUpperCase());
-    if (availTicker) {
-      dispatch(setTicker(availTicker));
-      dispatch(
-        setTicket({
-          ...ticket,
-          symbol: availTicker.symbol,
-          price: (availTicker.reference / 1000).toFixed(2),
-        })
-      );
+    const stock = stocks.find((s) => s.symbol === symbol.toUpperCase());
+    if (stock) {
+      dispatch(setSelectedStock(stock));
       setLastSymbolToLocalStorage(symbol);
     }
   };
+
   return (
     <Wrapper>
       <SearchInput setOpenPanel={setOpenPanel} />
       <SearchPanel open={openPanel} setOpenPanel={setOpenPanel} />
-      <Ticker instrument={instrument} trades={trades} ticker={ticker} />
+      <Ticker inst={inst} trades={trades} />
     </Wrapper>
   );
 };

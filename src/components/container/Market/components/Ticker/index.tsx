@@ -21,62 +21,50 @@ import { useState, useEffect } from "react";
 import * as S from "./styles";
 import SplashText from "@/src/components/common/SplashText";
 type Props = {
-  instrument: InsRTData;
+  inst: InsRTData | null;
   trades: TradeRTData[];
-  ticker: Stock | null;
 };
-const Ticker = ({ instrument, trades, ticker }: Props) => {
+const Ticker = ({ inst, trades }: Props) => {
   const [bestDeals, setBestDeals] = useState<IBestDeal[]>([]);
   const t = useTranslations("market");
   useEffect(() => {
-    setBestDeals([
-      {
-        buyVol: 0,
-        price: instrument.S3,
-        sellVol: instrument.U3,
-      },
-      {
-        buyVol: 0,
-        price: instrument.S2,
-        sellVol: instrument.U2,
-      },
+    if (inst) {
+      setBestDeals([
+        {
+          buyVol: 0,
+          price: inst.S3,
+          sellVol: inst.U3,
+        },
+        {
+          buyVol: 0,
+          price: inst.S2,
+          sellVol: inst.U2,
+        },
 
-      {
-        buyVol: 0,
-        price: instrument.S1,
-        sellVol: instrument.U1,
-      },
+        {
+          buyVol: 0,
+          price: inst.S1,
+          sellVol: inst.U1,
+        },
 
-      {
-        buyVol: instrument.V3,
-        price: instrument.B3,
-        sellVol: 0,
-      },
-      {
-        buyVol: instrument.V2,
-        price: instrument.B2,
-        sellVol: 0,
-      },
-      {
-        buyVol: instrument.V1,
-        price: instrument.B1,
-        sellVol: 0,
-      },
-    ]);
-  }, [
-    instrument.B3,
-    instrument.V3,
-    instrument.U3,
-    instrument.S3,
-    instrument.B2,
-    instrument.V2,
-    instrument.U2,
-    instrument.S2,
-    instrument.B1,
-    instrument.V1,
-    instrument.U1,
-    instrument.S1,
-  ]);
+        {
+          buyVol: inst.V3,
+          price: inst.B3,
+          sellVol: 0,
+        },
+        {
+          buyVol: inst.V2,
+          price: inst.B2,
+          sellVol: 0,
+        },
+        {
+          buyVol: inst.V1,
+          price: inst.B1,
+          sellVol: 0,
+        },
+      ]);
+    }
+  }, [inst]);
   const bestDealCols: IColumn[] = [
     {
       title: t("en_sb_best_buyQty"),
@@ -96,12 +84,7 @@ const Ticker = ({ instrument, trades, ticker }: Props) => {
       render: (row: IBestDeal) => (
         <SplashText
           val={row.price}
-          trend={genTrend(
-            ticker?.reference,
-            row.price,
-            ticker?.ceiling,
-            ticker?.floor
-          )}
+          trend={genTrend(inst?.RE, row.price, inst?.CL, inst?.FL)}
         >
           <Typography variant="subtitle1" color="inherit">
             {(row.price / 1000).toFixed(2)}
@@ -137,12 +120,7 @@ const Ticker = ({ instrument, trades, ticker }: Props) => {
       render: (row: TradeRTData) => (
         <Typography
           variant="subtitle1"
-          color={genPriceColor(
-            ticker?.reference,
-            row.FMP,
-            ticker?.ceiling,
-            ticker?.floor
-          )}
+          color={genPriceColor(inst?.RE, row.FMP, inst?.CL, inst?.FL)}
         >
           {(row.FMP / 1000).toFixed(2)}
         </Typography>
@@ -176,11 +154,11 @@ const Ticker = ({ instrument, trades, ticker }: Props) => {
   return (
     <S.Wrapper>
       <S.InforSection>
-        <GeneralInfo instrument={instrument} ticker={ticker} />
+        <GeneralInfo inst={inst} />
         <Line />
-        <PriceInfo instrument={instrument} ticker={ticker} />
+        <PriceInfo inst={inst} />
         <Line />
-        <MarketValue instrument={instrument} />
+        <MarketValue inst={inst} />
         <Line />
         <S.DealWrapper>
           <S.BestDeal>

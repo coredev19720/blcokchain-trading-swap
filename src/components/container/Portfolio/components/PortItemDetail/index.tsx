@@ -7,7 +7,7 @@ import { PortItem } from "@interface/market";
 import Line from "@components/common/Line";
 import RowContent from "@components/common/RowContent";
 import { formatNumber, setLastSymbolToLocalStorage } from "@src/utils/helpers";
-import { setTicker, setTicket } from "@src/redux/features/marketSlice";
+import { setSelectedStock, setTicket } from "@src/redux/features/marketSlice";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { TSide } from "@enum/common";
 import { useRouter } from "next/navigation";
@@ -38,15 +38,15 @@ const PortItemDetail = ({ data, handleClose }: IProps) => {
   }, [isSliding, currentY, startY]);
 
   const handleClickAction = (side: TSide) => {
-    const availTicker = stocks.find((t) => t.symbol === data?.symbol);
-    if (availTicker) {
-      setLastSymbolToLocalStorage(availTicker.symbol);
-      dispatch(setTicker(availTicker));
+    const stock = stocks.find((t) => t.symbol === data?.symbol);
+    if (stock) {
+      setLastSymbolToLocalStorage(stock.symbol);
+      dispatch(setSelectedStock(stock));
       dispatch(
         setTicket({
           ...ticket,
-          symbol: availTicker.symbol,
-          price: (availTicker.reference / 1000).toFixed(2),
+          symbol: stock.symbol,
+          price: "0", // unimplemented
           side: side,
         })
       );

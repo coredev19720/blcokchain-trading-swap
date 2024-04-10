@@ -1,25 +1,26 @@
 import { useMutation } from "@tanstack/react-query";
 import { genOrderUrl } from "@/src/services/apiUrls";
 import { UpdateOrderReq } from "@/src/constraints/interface/services/request";
-import { PrecheckOrderRes } from "@/src/constraints/interface/services/response";
+import { UpdateOrderRes } from "@/src/constraints/interface/services/response";
 import axiosInst from "../../Interceptors";
 interface UseUpdateOrder {
   onUpdateOrder: (data: UpdateOrderReq) => void;
   isError: boolean;
   isSuccess: boolean;
   error: unknown;
-  data: PrecheckOrderRes | undefined;
+  data: UpdateOrderRes | undefined;
 }
 
 const handleUpdateOrder = async (
   data: UpdateOrderReq
-): Promise<PrecheckOrderRes> => {
+): Promise<UpdateOrderRes> => {
   try {
-    const res = await axiosInst.post(
-      genOrderUrl(data.accountId, "precheckOrder"),
-      data
+    const { accountId, orderId, ...rest } = data;
+    const res = await axiosInst.put(
+      genOrderUrl(data.accountId, `orders/${data.orderId}`),
+      { data: rest }
     );
-    const { s, ec } = res.data;
+    const { s, ec, d } = res.data;
     if (s !== "ok") throw new Error(ec);
     return res.data;
   } catch (e) {

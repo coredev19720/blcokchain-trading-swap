@@ -5,7 +5,9 @@ import axiosInst from "../Interceptors";
 import { useAppDispatch } from "@src/redux/hooks";
 import { setStocks } from "@/src/redux/features/marketSlice";
 import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
-import { GetInstrumentsRes } from "@/src/constraints/interface/services/response";
+import { GetStocksRes } from "@/src/constraints/interface/services/response";
+
+//not use
 interface UseGetInstruments {
   isError: boolean;
   isSuccess: boolean;
@@ -14,7 +16,7 @@ interface UseGetInstruments {
 }
 const handleGetData = async (
   dispatch: Dispatch<UnknownAction>
-): Promise<GetInstrumentsRes> => {
+): Promise<GetStocksRes> => {
   try {
     const res = await axiosInst.get(apiUrls.getInstruments);
     const { d, s, ec } = res.data;

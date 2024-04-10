@@ -41,7 +41,8 @@ export const genTextWithPrefix = (val: number) => {
   return val;
 };
 
-export const formatBigNumber = (val: number) => {
+export const formatBigNumber = (val: number | undefined) => {
+  if (!val) return "-";
   if (val >= 1000000000) return `${(val / 1000000000).toFixed(1)}B`;
   if (val >= 1000000) return `${(val / 1000000).toFixed(1)}M`;
   if (val >= 1000) return `${(val / 1000).toFixed(1)}K`;

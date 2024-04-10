@@ -11,10 +11,11 @@ import HelpText from "@components/common/HelpText";
 
 import dayjs from "dayjs";
 import { useState } from "react";
-import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
+import { useAppSelector } from "@src/redux/hooks";
 import { UpdateOrderReq } from "@/src/constraints/interface/services/request";
 import { useUpdateOrder } from "@/src/services/hooks/order/useUpdateOrder";
 import { AccInfo } from "@/src/constraints/interface/account";
+import { useGetInstrument } from "@/src/services/hooks/useGetInstrument";
 interface IProps {
   data: OrderInfo | null;
   handleClose: () => void;
@@ -22,8 +23,7 @@ interface IProps {
 }
 const Update = ({ data, handleClose, activeAccount }: IProps) => {
   const t = useTranslations("order_book");
-  const { order, stocks } = useAppSelector((state) => state.market);
-  const availTicker = stocks.find((x) => x.symbol === data?.symbol);
+  const { order } = useAppSelector((state) => state.market);
   const {
     onUpdateOrder,
     isError,
@@ -31,31 +31,34 @@ const Update = ({ data, handleClose, activeAccount }: IProps) => {
     data: uData,
     error,
   } = useUpdateOrder();
-  const dispatch = useAppDispatch();
+  const { data: symbolData } = useGetInstrument(data?.symbol || "");
   const [otp, setOtp] = useState<string>("");
   const [updatePrice, setUpdatePrice] = useState<string>(
     data?.price ? (data.price / 1000).toFixed(2) : "0"
   );
   const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!availTicker) {
+    if (!symbolData) {
       return;
     }
-    if (Number(e.target.value) * 1000 > availTicker.ceiling) {
-      setUpdatePrice((availTicker.ceiling / 1000).toFixed(2));
+    if (symbolData && Number(e.target.value) * 1000 > symbolData.ceiling) {
+      setUpdatePrice((symbolData.ceiling / 1000).toFixed(2));
       return;
     }
     setUpdatePrice(e.target.value);
   };
+
   const handleBlurPriceInput = () => {
-    if (!availTicker) return;
-    if (Number(updatePrice) * 1000 < availTicker.floor) {
-      setUpdatePrice((availTicker.floor / 1000).toFixed(2));
+    if (!symbolData) return;
+    if (symbolData && Number(updatePrice) * 1000 < symbolData.floor) {
+      setUpdatePrice((symbolData.floor / 1000).toFixed(2));
       return;
     }
   };
+
   const handleRequestOTP = () => {
     console.log("handleRequestOTP");
   };
+
   const handleSubmit = () => {
     if (order) {
       try {

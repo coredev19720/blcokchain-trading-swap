@@ -1,7 +1,7 @@
 import {
   GetAccountsRes,
   GetAuthorInfoRes,
-  GetInstrumentsRes,
+  GetStocksRes,
   GetAccPermissionRes,
 } from "@src/constraints/interface/services/response";
 import { useQuery } from "@tanstack/react-query";
@@ -39,11 +39,18 @@ const handleGetData = async (
     .then((values) => {
       const accounts: GetAccountsRes = values[0].data;
       const authoInfo: GetAuthorInfoRes = values[1].data;
-      const instruments: GetInstrumentsRes = values[2].data;
+      const stocks: GetStocksRes = values[2].data;
       const permissions: GetAccPermissionRes = values[3].data;
       dispatch(setAccounts(accounts.d));
       dispatch(setAuthorInfo(authoInfo.d));
-      dispatch(setStocks(instruments.d));
+      dispatch(
+        setStocks(
+          stocks.d.map((stock) => ({
+            symbol: stock.symbol,
+            FullName: stock.FullName,
+          }))
+        )
+      );
       dispatch(setPermissions(permissions.d?.accounts));
       dispatch(setActiveAccount(accounts.d[0]));
       return values;

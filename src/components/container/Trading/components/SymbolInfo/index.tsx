@@ -7,12 +7,11 @@ import FieldLabel from "@components/common/FieldLabel";
 import StyledTable from "@components/common/StyledTable";
 import { IColumn } from "@interface/table";
 import { formatBigNumber, formatNumber, genTrend } from "@src/utils/helpers";
-import { InsRTData, Stock } from "@/src/constraints/interface/market";
+import { InsRTData } from "@/src/constraints/interface/market";
 import { useEffect, useState } from "react";
 import SplashText from "@/src/components/common/SplashText";
 interface IProps {
-  instrument: InsRTData;
-  ticker: Stock | null;
+  inst: InsRTData | null;
   maxVol: number;
 }
 interface BestDeal {
@@ -21,47 +20,36 @@ interface BestDeal {
   buyPrice: number;
   sellPrice: number;
 }
-const SymbolInfo = ({ instrument, ticker, maxVol }: IProps) => {
+const SymbolInfo = ({ inst, maxVol }: IProps) => {
   const { ticket } = useAppSelector((state) => state.market);
 
   const [bestDeals, setBestDeals] = useState<BestDeal[]>([]);
   const t = useTranslations("trade");
   useEffect(() => {
-    setBestDeals([
-      {
-        buyVol: instrument.V3,
-        buyPrice: instrument.B3,
-        sellVol: instrument.U3,
-        sellPrice: instrument.S3,
-      },
-      {
-        buyVol: instrument.V2,
-        buyPrice: instrument.B2,
-        sellVol: instrument.U2,
-        sellPrice: instrument.S2,
-      },
+    if (inst) {
+      setBestDeals([
+        {
+          buyVol: inst.V3,
+          buyPrice: inst.B3,
+          sellVol: inst.U3,
+          sellPrice: inst.S3,
+        },
+        {
+          buyVol: inst.V2,
+          buyPrice: inst.B2,
+          sellVol: inst.U2,
+          sellPrice: inst.S2,
+        },
 
-      {
-        buyVol: instrument.V1,
-        buyPrice: instrument.B1,
-        sellVol: instrument.U1,
-        sellPrice: instrument.S1,
-      },
-    ]);
-  }, [
-    instrument.B3,
-    instrument.V3,
-    instrument.U3,
-    instrument.S3,
-    instrument.B2,
-    instrument.V2,
-    instrument.U2,
-    instrument.S2,
-    instrument.B1,
-    instrument.V1,
-    instrument.U1,
-    instrument.S1,
-  ]);
+        {
+          buyVol: inst.V1,
+          buyPrice: inst.B1,
+          sellVol: inst.U1,
+          sellPrice: inst.S1,
+        },
+      ]);
+    }
+  }, [inst]);
 
   const columns: IColumn[] = [
     {
@@ -76,12 +64,7 @@ const SymbolInfo = ({ instrument, ticker, maxVol }: IProps) => {
       render: (row: BestDeal) => (
         <SplashText
           val={row.buyPrice}
-          trend={genTrend(
-            ticker?.reference,
-            row.buyPrice,
-            ticker?.ceiling,
-            ticker?.floor
-          )}
+          trend={genTrend(inst?.RE, row.buyPrice, inst?.CL, inst?.FL)}
         >
           <Typography fontWeight={600} variant="body2" color="inherit">
             {(row.buyPrice / 1000).toFixed(2)}
@@ -95,12 +78,7 @@ const SymbolInfo = ({ instrument, ticker, maxVol }: IProps) => {
       render: (row: BestDeal) => (
         <SplashText
           val={row.sellPrice}
-          trend={genTrend(
-            ticker?.reference,
-            row.sellPrice,
-            ticker?.ceiling,
-            ticker?.floor
-          )}
+          trend={genTrend(inst?.RE, row.sellPrice, inst?.CL, inst?.FL)}
         >
           <Typography fontWeight={600} variant="body2" color="inherit">
             {(row.sellPrice / 1000).toFixed(2)}
@@ -138,19 +116,19 @@ const SymbolInfo = ({ instrument, ticker, maxVol }: IProps) => {
         <S.PriceBlock>
           <FieldLabel>{t("en_sb_price_floor")}</FieldLabel>
           <Typography color="text.floor" variant="body2" fontWeight={600}>
-            {ticker ? (ticker.floor / 1000).toFixed(2) : 0}
+            {inst ? (inst.FL / 1000).toFixed(2) : 0}
           </Typography>
         </S.PriceBlock>
         <S.PriceBlock>
           <FieldLabel>{t("en_sb_price_avg")}</FieldLabel>
           <Typography variant="body2" fontWeight={600}>
-            {formatNumber(instrument?.AP || 0)}
+            {formatNumber(inst?.AP || 0)}
           </Typography>
         </S.PriceBlock>
         <S.PriceBlock>
           <FieldLabel>{t("en_sb_price_celling")}</FieldLabel>
           <Typography color="text.ceil" variant="body2" fontWeight={600}>
-            {ticker ? (ticker.ceiling / 1000).toFixed(2) : 0}
+            {inst ? (inst.CL / 1000).toFixed(2) : 0}
           </Typography>
         </S.PriceBlock>
       </S.PriceInfo>
