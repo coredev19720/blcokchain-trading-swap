@@ -1,5 +1,11 @@
 import { TMarket, TOrderKind, TOrderType, TSide } from "@enum/common";
-import { ITicket, Instrument, OrderInfo, PortItem } from "@interface/market";
+import {
+  ITicket,
+  InsRTData,
+  Instrument,
+  OrderInfo,
+  PortItem,
+} from "@interface/market";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Stock } from "@/src/constraints/interface/market";
 
@@ -11,6 +17,7 @@ type MarketState = {
   order: OrderInfo | null;
   ports: PortItem[];
   port: PortItem | null;
+  inst: InsRTData | null;
 };
 
 const initialState = {
@@ -32,6 +39,7 @@ const initialState = {
   order: null,
   ports: [],
   port: null,
+  inst: null,
 } as MarketState;
 
 export const market = createSlice({
@@ -72,6 +80,9 @@ export const market = createSlice({
     setStocks: (state, action: PayloadAction<Stock[]>) => {
       state.stocks = action.payload;
     },
+    setInstrument: (state, action: PayloadAction<InsRTData | null>) => {
+      state.inst = action.payload;
+    },
   },
 });
 
@@ -86,5 +97,6 @@ export const {
   setPort,
   setPorts,
   setStocks,
+  setInstrument,
 } = market.actions;
 export default market.reducer;

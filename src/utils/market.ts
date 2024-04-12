@@ -56,7 +56,7 @@ export const stockMappingRTData = (stock: Instrument): InsRTData => {
     TSI: "", // tradingSessionID
     LS: "", // ListedShare
     CWT: "", // CoveredWarrantType
-    EX: "", // Exchange: sàn giao dịch
+    EX: stock.exchange, // Exchange: sàn giao dịch
     EP: "", // ExercisePrice
     ER: "", // ExerciseRatio
     IN: "", // IssuerName

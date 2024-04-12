@@ -221,7 +221,7 @@ export interface ITicket {
   vol: number;
   kind: TOrderKind;
   type: TOrderType;
-  market: TMarket;
+  market: string;
 }
 export interface InsRTData {
   Id: string; // identify

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { setTicket } from "@src/redux/features/marketSlice";
 import { TSide } from "@enum/common";
+import { InsRTData } from "@/src/constraints/interface/market";
 const Wrapper = styled("div")(({ theme }) => ({
   display: "flex",
   gap: 8,
@@ -14,13 +15,17 @@ const Wrapper = styled("div")(({ theme }) => ({
 const ActionBtn = styled(Button)(({ theme }) => ({
   flex: 1,
 }));
-const Actions = () => {
+interface Props {
+  inst: InsRTData | null;
+}
+const Actions = ({ inst }: Props) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const t = useTranslations("market");
   const ticket = useAppSelector((state) => state.market.ticket);
+  console.log(ticket);
   const handleClick = (side: TSide) => {
-    dispatch(setTicket({ ...ticket, side }));
+    dispatch(setTicket({ ...ticket, side, market: inst?.EX || "" }));
     router.push("trading");
   };
   return (

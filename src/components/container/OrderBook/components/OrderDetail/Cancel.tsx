@@ -33,7 +33,6 @@ const Cancel = ({ data, handleClose, activeAccount }: IProps) => {
     onCancelOrder,
     isError,
     isSuccess: cancelSuccess,
-    data: uData,
     error,
   } = useCancelOrder();
   console.log("cancelSuccess", cancelSuccess);
@@ -51,7 +50,12 @@ const Cancel = ({ data, handleClose, activeAccount }: IProps) => {
       limitPrice: data.price,
     });
   }, []);
-
+  useEffect(() => {
+    if (cancelSuccess) {
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
+      handleClose();
+    }
+  }, [cancelSuccess]);
   useEffect(() => {
     if (precheckIsError) {
       const errMsg = errHandling(precheckError);
@@ -59,13 +63,6 @@ const Cancel = ({ data, handleClose, activeAccount }: IProps) => {
       handleClose();
     }
   }, [precheckIsError, precheckError]);
-
-  useEffect(() => {
-    console.log("uData", uData);
-    if (uData) {
-      queryClient.invalidateQueries({ queryKey: ["orders"] });
-    }
-  }, [uData]);
 
   useEffect(() => {
     if (isError) {
@@ -89,8 +86,6 @@ const Cancel = ({ data, handleClose, activeAccount }: IProps) => {
         onCancelOrder(ord);
       } catch (e) {
         console.log(e);
-      } finally {
-        handleClose();
       }
     }
   };

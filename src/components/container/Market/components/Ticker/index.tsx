@@ -176,7 +176,7 @@ const Ticker = ({ inst, trades }: Props) => {
         </S.DealWrapper>
         <MarketIndex />
       </S.InforSection>
-      <Actions />
+      <Actions inst={inst} />
     </S.Wrapper>
   );
 };

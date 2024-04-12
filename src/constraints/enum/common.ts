@@ -70,7 +70,7 @@ export enum TShortSide {
 }
 export enum TSide {
   buy = "buy",
-  sell = "buy",
+  sell = "sell",
 }
 
 export enum TViSide {

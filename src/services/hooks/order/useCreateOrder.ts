@@ -32,7 +32,6 @@ export const useCreateOrder = (): UseCreateOrder => {
     mutate: onCreateOrder,
     isError,
     isSuccess,
-    data,
     error,
   } = useMutation({
     mutationFn: handleCreateOrder,
