@@ -41,7 +41,7 @@ const GeneralInfo = ({ inst }: Props) => {
             color="inherit"
           >
             {inst
-              ? `${(inst?.CH / 1000).toFixed(2)} /${inst.CHP.toFixed(2)} %`
+              ? `${(inst?.CH / 1000).toFixed(2)} /${inst?.CHP?.toFixed(2)} %`
               : "-/-"}
           </Typography>
         </SplashText>

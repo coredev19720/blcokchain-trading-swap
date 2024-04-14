@@ -19,18 +19,18 @@ export const stockMappingRTData = (stock: Instrument): InsRTData => {
     V1: stock.bidVol1, // volPrice1: top 3 khối lượng mua tốt nhất
     CP: stock.closePrice, // closePrice: giá khớp cuối
     CV: stock.closeVol, // closeVol: khối lượng khớp cuối
-    CH: 0, // Change: thay đổi so với giá tham chiếu
-    CHP: 0, // changePercent: phần trăm thay đổi so với giá tham chiếu
+    CH: stock.change, // Change: thay đổi so với giá tham chiếu
+    CHP: stock.changePercent, // changePercent: phần trăm thay đổi so với giá tham chiếu
     S1: stock.offerPrice1, // offerPrice1: top 3 giá bán tốt nhất
     U1: stock.offerVol1, // offerVol1 top 3 khối lượng bán tốt nhất
     S2: stock.offerPrice2, // offerPrice2: top 3 giá bán tốt nhất
     U2: stock.offerVol2, // offerVol2 top 3 khối lượng bán tốt nhất
     S3: stock.offerPrice3, // offerPrice3: top 3 giá bán tốt nhất
     U3: stock.offerVol3, // offerVol3 top 3 khối lượng bán tốt nhất
-    TT: 0, // totalTrading: tổng khổi lượng giao dịch
-    TV: 0, // totalTradingValue: tổng giá trị giao dịch
-    AP: 0, // averagePrice: giá trung binh
-    OP: 0, // Open: giá mở cửa
+    TT: stock.totalTrading, // totalTrading: tổng khổi lượng giao dịch
+    TV: stock.totalTradingValue, // totalTradingValue: tổng giá trị giao dịch
+    AP: stock.averagePrice, // averagePrice: giá trung binh
+    OP: stock.open, // Open: giá mở cửa
     HI: stock.high, // High: giá cao nhất
     LO: stock.low, // Low: giá thấp nhất
     FB: stock.foreignBuy, // foreignBuy: nước ngoài mua

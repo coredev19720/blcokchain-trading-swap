@@ -38,6 +38,12 @@ export interface Instrument {
   foreignSell: number; // Đầu tư nước ngoài: Bán
   low: number; // Giá khớp thấp nhất
   high: number; // Giá khớp cao nhất
+  averagePrice: number; //giá khớp trung bình
+  open: number; //giá mở cửa
+  change: number; //thay đổi
+  changePercent: number; //thay đổi %
+  totalTrading: number; //tổng khối lượng giao dịch
+  totalTradingValue: number; //tổng giá trị giao dịch
 }
 
 export interface MatchedOrd {
