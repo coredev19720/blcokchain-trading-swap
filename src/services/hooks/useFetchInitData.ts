@@ -38,11 +38,11 @@ const handleGetData = async (
   ])
     .then((values) => {
       const accounts: GetAccountsRes = values[0].data;
-      const authoInfo: GetAuthorInfoRes = values[1].data;
+      const authInfo: GetAuthorInfoRes = values[1].data;
       const stocks: GetStocksRes = values[2].data;
       const permissions: GetAccPermissionRes = values[3].data;
       dispatch(setAccounts(accounts.d));
-      dispatch(setAuthorInfo(authoInfo.d));
+      dispatch(setAuthorInfo(authInfo.d));
       dispatch(
         setStocks(
           stocks.d.map((stock) => ({

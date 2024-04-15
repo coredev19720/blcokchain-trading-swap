@@ -16,7 +16,7 @@ type MarketState = {
   stocks: Stock[];
   orders: OrderInfo[];
   order: OrderInfo | null;
-  ports: PortItem[];
+  ports: PortItem[] | null;
   port: PortItem | null;
   inst: InsRTData | null;
   hisTrades: TradeRTData[];
@@ -39,7 +39,7 @@ const initialState = {
   stocks: [],
   orders: [],
   order: null,
-  ports: [],
+  ports: null,
   port: null,
   inst: null,
   hisTrades: [],
@@ -91,6 +91,9 @@ export const market = createSlice({
     setHisTrades: (state, action: PayloadAction<TradeRTData>) => {
       state.hisTrades = [action.payload, ...state.hisTrades];
     },
+    clearHisTrades: (state) => {
+      state.hisTrades = [];
+    },
   },
 });
 
@@ -107,5 +110,6 @@ export const {
   setStocks,
   setInstrument,
   setHisTrades,
+  clearHisTrades,
 } = market.actions;
 export default market.reducer;

@@ -9,7 +9,7 @@ import SymbolInfo from "./components/SymbolInfo";
 import TicketInfo from "./components/TicketInfo";
 import TicketConfirm from "./components/TicketConfirm";
 import { useAppSelector } from "@src/redux/hooks";
-import PageHeader from "../../common/PageHeader";
+import { PageHeader } from "@components/common";
 import { PortItem } from "@/src/constraints/interface/market";
 import { usePrecheckOrder } from "@/src/services/hooks/order/usePrecheckOrder";
 import { toast } from "react-toastify";
@@ -42,7 +42,7 @@ const Trading = () => {
       : availTrade?.maxqtty || 0;
 
   useEffect(() => {
-    if (ticket) {
+    if (ticket && ports) {
       const port = ports.find((p) => p.symbol === ticket?.symbol);
       setSymbolPort(port || null);
     }

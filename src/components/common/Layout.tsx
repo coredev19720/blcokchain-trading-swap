@@ -15,8 +15,10 @@ import io from "socket.io-client";
 import { useAppSelector } from "@/src/redux/hooks";
 import { useAppDispatch } from "@/src/redux/hooks";
 import {
+  clearHisTrades,
   setHisTrades,
   setInstrument,
+  setPorts,
   setSelectedStock,
 } from "@/src/redux/features/marketSlice";
 import { usePreviousValue } from "@/src/hooks/usePrevious";
@@ -28,6 +30,7 @@ import {
   lastSymLocalKey,
 } from "@src/utils/helpers";
 import { useSearchParams } from "next/navigation";
+import { useGetPortfolio } from "@/src/services/hooks/useGetPortfolio";
 const Wrapper = styled("main")(({ theme }) => {
   return {
     height: "100%",
@@ -41,7 +44,11 @@ const Wrapper = styled("main")(({ theme }) => {
 });
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const { selectedStock, stocks } = useAppSelector((state) => state.market);
+  const { selectedStock, stocks, ports } = useAppSelector(
+    (state) => state.market
+  );
+  const { activeAccount } = useAppSelector((state) => state.user);
+  const { data: portData } = useGetPortfolio(activeAccount?.id || "");
   const { data: stockData } = useGetInstrument(selectedStock?.symbol || "");
   const searchParams = useSearchParams();
 
@@ -52,7 +59,6 @@ export default function Layout({ children }: { children: ReactNode }) {
   const { mode } = useColorScheme();
   const [mounted, setMounted] = useState(false);
   const [socket, setSocket] = useState<io.Socket | null>(null);
-  const [trades, setTrades] = useState<TradeRTData[]>([]);
   const prevSymbol = usePreviousValue(selectedStock?.symbol);
   useEffect(() => {
     setMounted(true);
@@ -86,14 +92,16 @@ export default function Layout({ children }: { children: ReactNode }) {
       }
     };
   }, []);
-
   useEffect(() => {
-    !!stocks.length && initTicker();
-  }, [stocks]);
+    portData && dispatch(setPorts(portData));
+  }, [portData]);
+  useEffect(() => {
+    !!stocks.length && activeAccount && ports && initTicker();
+  }, [stocks, activeAccount, ports]);
   useEffect(() => {
     if (prevSymbol && socket) {
       symbolUnsub(socket, prevSymbol);
-      setTrades([]);
+      dispatch(clearHisTrades());
     }
     if (selectedStock.symbol === stockData?.symbol && socket) {
       dispatch(setInstrument(stockMappingRTData(stockData)));
@@ -137,11 +145,13 @@ export default function Layout({ children }: { children: ReactNode }) {
     dispatch(setHisTrades(data));
   };
   const initTicker = () => {
+    console.log("ports", ports);
+    console.log("selectedStock", selectedStock);
     if (selectedStock.symbol) return;
     const s = searchParams?.get("s");
     const lastSymbol = localStorage.getItem(lastSymLocalKey);
-    const defaultSymbol = process.env.NEXT_PUBLIC_DEFAULT_SYMBOL;
-    const symbol = s || lastSymbol || defaultSymbol;
+    const firstPortItem = ports && ports.length > 0 ? ports[0].symbol : "";
+    const symbol = s || lastSymbol || firstPortItem;
     const stock = stocks.find((s) => s.symbol === symbol?.toUpperCase());
     if (stock) {
       dispatch(setSelectedStock(stock));
