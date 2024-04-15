@@ -14,9 +14,13 @@ const Content = () => {
     router.push("forgot-password?s=fi");
   };
 
-  const redirectToCashTransfer = () => router.push("cash-transfer");
+  const redirectToCashTransfer = () => {
+    const url = process.env.NEXT_PUBLIC_TRANSFER_GUIDE_URL;
+    url && router.push(url);
+  };
   const redirectToOnlTrading = () => {
-    router.push("onl-trading");
+    const url = process.env.NEXT_PUBLIC_TRADE_GUIDE_URL;
+    url && router.push(url);
   };
 
   return (
