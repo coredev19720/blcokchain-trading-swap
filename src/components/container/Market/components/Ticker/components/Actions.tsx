@@ -23,7 +23,6 @@ const Actions = ({ inst }: Props) => {
   const router = useRouter();
   const t = useTranslations("market");
   const ticket = useAppSelector((state) => state.market.ticket);
-  console.log(ticket);
   const handleClick = (side: TSide) => {
     dispatch(setTicket({ ...ticket, side, market: inst?.EX || "" }));
     router.push("trading");

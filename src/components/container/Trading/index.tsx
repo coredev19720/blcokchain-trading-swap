@@ -43,7 +43,6 @@ const Trading = () => {
 
   useEffect(() => {
     if (ticket) {
-      console.log("ports", ports);
       const port = ports.find((p) => p.symbol === ticket?.symbol);
       setSymbolPort(port || null);
     }

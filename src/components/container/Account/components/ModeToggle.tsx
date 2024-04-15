@@ -11,7 +11,6 @@ const ModeToggle = () => {
     setMounted(true);
   }, []);
   const toggle = () => {
-    console.log(mode);
     setMode(mode === "light" ? "dark" : "light");
   };
   if (!mounted) return null;

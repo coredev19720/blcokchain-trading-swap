@@ -1,7 +1,7 @@
 "use client";
 
 import { styled } from "@mui/system";
-import { ReactNode, useState, useEffect, use } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import { PageWrapper, MainContent } from "@src/styles/common";
 import { ToastContainer } from "react-toastify";
 import Menu from "./Menu";
@@ -15,6 +15,7 @@ import io from "socket.io-client";
 import { useAppSelector } from "@/src/redux/hooks";
 import { useAppDispatch } from "@/src/redux/hooks";
 import {
+  setHisTrades,
   setInstrument,
   setSelectedStock,
 } from "@/src/redux/features/marketSlice";
@@ -40,9 +41,7 @@ const Wrapper = styled("main")(({ theme }) => {
 });
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const { inst, selectedStock, stocks } = useAppSelector(
-    (state) => state.market
-  );
+  const { selectedStock, stocks } = useAppSelector((state) => state.market);
   const { data: stockData } = useGetInstrument(selectedStock?.symbol || "");
   const searchParams = useSearchParams();
 
@@ -74,6 +73,11 @@ export default function Layout({ children }: { children: ReactNode }) {
     skt.on("i", (data: any) => {
       if (data.d[0]) {
         handleIEvent(data.d[0]);
+      }
+    });
+    skt.on("t", (data: any) => {
+      if (data.d[0]) {
+        handleTEvent(data.d[0]);
       }
     });
     return () => {
@@ -123,12 +127,14 @@ export default function Layout({ children }: { children: ReactNode }) {
     });
   };
 
+  //handle Instrument event from socket
   const handleIEvent = (data: any) => {
-    dispatch(setInstrument({ ...inst, ...data }));
+    dispatch(setInstrument(data));
   };
 
+  //handle Trade event from socket
   const handleTEvent = (data: TradeRTData) => {
-    setTrades((prev) => [data, ...prev]);
+    dispatch(setHisTrades(data));
   };
   const initTicker = () => {
     if (selectedStock.symbol) return;
@@ -142,7 +148,6 @@ export default function Layout({ children }: { children: ReactNode }) {
       setLastSymbolToLocalStorage(stock.symbol);
     }
   };
-  console.log("inst", inst);
   if (!mounted) return null;
   return (
     <Wrapper>

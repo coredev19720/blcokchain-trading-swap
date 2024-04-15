@@ -9,32 +9,18 @@ import OrderDetail from "./components/OrderDetail";
 import { TOrderActionType } from "@enum/common";
 import { useGetOrders } from "@/src/services/hooks/order/useGetOrders";
 import Loading from "../../common/Loading";
-// import { useGetMatchedOrds } from "@/src/services/hooks/order/useGetMatchedOrders";
-// import { useGetWaitMatchedOrds } from "@/src/services/hooks/order/useGetWaitMatchedOrders";
 const OrderBook = () => {
-  const { activeAccount } = useAppSelector((state) => state.user);
+  const { activeAccount, permissions } = useAppSelector((state) => state.user);
+  const activePermission =
+    activeAccount && permissions ? permissions[activeAccount.id] : null;
   const {
     refetch: refecthOrds,
     data: ordersData,
     isLoading: ordsIsLoading,
   } = useGetOrders(activeAccount?.id || "");
-  // const {
-  //   refetch: refetchMatchedOrds,
-  //   data: matchedOrdsData,
-  //   isLoading: matchedOrdsLoading,
-  // } = useGetMatchedOrds(activeAccount?.id || "");
-  // const {
-  //   refetch: refetchWaitMatchedOrds,
-  //   data: waitMatchedOrdsData,
-  //   isLoading: waitMatchedOrdsIsLoading,
-  // } = useGetWaitMatchedOrds(activeAccount?.id || "");
   const [type, setType] = useState<TOrderActionType>(TOrderActionType.detail);
   const [ords, setOrds] = useState<OrderInfo[] | []>([]);
   const [ord, setOrd] = useState<OrderInfo | null>(null);
-  // const [matchedOrds, setMatchedOrds] = useState<MatchedOrd[] | []>([]);
-  // const [waitMatchecdOrds, setWaitMatchedOrds] = useState<
-  //   WaitMatchedOrd[] | []
-  // >([]);
   const handleClickOrder = (order: OrderInfo, type: TOrderActionType) => {
     setOrd(order);
     setType(type);
@@ -49,17 +35,6 @@ const OrderBook = () => {
     }
   }, [ordersData]);
 
-  // useEffect(() => {
-  //   if (matchedOrds) {
-  //     setMatchedOrds(matchedOrds);
-  //   }
-  // }, [matchedOrds]);
-
-  // useEffect(() => {
-  //   if (waitMatchecdOrds) {
-  //     setWaitMatchedOrds(waitMatchecdOrds);
-  //   }
-  // }, [waitMatchecdOrds]);
   const prepareData = (data: OrderInfo[]) => {
     const editableData: OrderInfo[] = [];
     const matchedData: OrderInfo[] = [];
@@ -91,6 +66,7 @@ const OrderBook = () => {
           type={type}
           handleClose={handleClose}
           activeAccount={activeAccount}
+          activePermission={activePermission}
         />
       )}
       {/* {(ordsIsLoading || waitMatchedOrdsIsLoading || matchedOrdsLoading) && (

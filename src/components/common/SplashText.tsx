@@ -142,7 +142,6 @@ const genColor = (trend: "up" | "down" | "ref" | "ce" | "fl") => {
 
 const SplashText = ({ val, children, trend }: Props) => {
   const previous = usePreviousValue(val);
-  console.log("previous", previous);
   return (
     <Wrapper
       key={val}

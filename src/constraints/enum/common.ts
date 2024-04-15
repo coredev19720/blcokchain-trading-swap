@@ -59,9 +59,9 @@ export enum TPwdType {
 }
 
 export enum TPinAuthType {
-  PIN = 1,
-  SMSOTP = 5,
-  DIGI_SIGN = 4,
+  PIN = "1",
+  SMSOTP = "5",
+  DIGI_SIGN = "4",
 }
 
 export enum TShortSide {

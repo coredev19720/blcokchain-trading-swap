@@ -5,6 +5,7 @@ const apiUrls = {
   logout: `${baseUrl}/sso/logoutClient`,
   forgotPwd: `${baseUrl}/sso/genResetPass`,
   changePwd: `${baseUrl}/tran/changePass`,
+  genTwoFactor: `${baseUrl}/tran/genTwoFactorAuth`,
   getPermissionInfo: `${baseUrl}/sso/info/getPermissionInfo`,
   getAuthorityInfo: `${baseUrl}/inq/authorityInfo`,
   getInstruments: `${baseUrl}/datafeed/instruments`,

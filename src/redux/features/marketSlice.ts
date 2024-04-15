@@ -5,6 +5,7 @@ import {
   Instrument,
   OrderInfo,
   PortItem,
+  TradeRTData,
 } from "@interface/market";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Stock } from "@/src/constraints/interface/market";
@@ -18,6 +19,7 @@ type MarketState = {
   ports: PortItem[];
   port: PortItem | null;
   inst: InsRTData | null;
+  hisTrades: TradeRTData[];
 };
 
 const initialState = {
@@ -40,6 +42,7 @@ const initialState = {
   ports: [],
   port: null,
   inst: null,
+  hisTrades: [],
 } as MarketState;
 
 export const market = createSlice({
@@ -81,7 +84,12 @@ export const market = createSlice({
       state.stocks = action.payload;
     },
     setInstrument: (state, action: PayloadAction<InsRTData | null>) => {
-      state.inst = action.payload;
+      state.inst = state.inst
+        ? { ...state.inst, ...action.payload }
+        : action.payload;
+    },
+    setHisTrades: (state, action: PayloadAction<TradeRTData>) => {
+      state.hisTrades = [action.payload, ...state.hisTrades];
     },
   },
 });
@@ -98,5 +106,6 @@ export const {
   setPorts,
   setStocks,
   setInstrument,
+  setHisTrades,
 } = market.actions;
 export default market.reducer;

@@ -1,45 +1,42 @@
-import { FieldBlock } from "@src/styles/common";
-import * as S from "./styles";
+import { useEffect, useState } from "react";
+import dayjs from "dayjs";
+import { useTranslations } from "next-intl";
+
 import { TextField } from "@mui/material";
 import { OrderInfo } from "@interface/market";
 import { formatNumber } from "@src/utils/helpers";
-import { useTranslations } from "next-intl";
-import RowContent from "@components/common/RowContent";
-import FieldLabel from "@components/common/FieldLabel";
-import OTPConfirm from "@components/common/OTPConfirm";
-import HelpText from "@components/common/HelpText";
-
-import dayjs from "dayjs";
-import { useEffect, useState } from "react";
-import { useAppSelector } from "@src/redux/hooks";
+import {
+  RowContent,
+  FieldLabel,
+  OTPConfirm,
+  HelpText,
+} from "@components/common";
+import { FieldBlock } from "@src/styles/common";
+import * as S from "./styles";
 import { UpdateOrderReq } from "@/src/constraints/interface/services/request";
-import { useUpdateOrder } from "@/src/services/hooks/order/useUpdateOrder";
-import { AccInfo } from "@/src/constraints/interface/account";
-import { useGetInstrument } from "@/src/services/hooks/useGetInstrument";
+import { AccInfo, AccPermissions } from "@/src/constraints/interface/account";
 import { TSide } from "@/src/constraints/enum/common";
+import { useUpdateOrder } from "@/src/services/hooks/order/useUpdateOrder";
+import { useGetInstrument } from "@/src/services/hooks/useGetInstrument";
 import { usePrecheckOrder } from "@/src/services/hooks/order/usePrecheckOrder";
+import { useGenTwoFactorAuth } from "@/src/services/hooks/useGenTwoFactorAuth";
+
 interface IProps {
   data: OrderInfo | null;
   handleClose: () => void;
   activeAccount: AccInfo | null;
+  activePermission: AccPermissions | null;
 }
-const Update = ({ data, handleClose, activeAccount }: IProps) => {
+const Update = ({
+  data,
+  handleClose,
+  activeAccount,
+  activePermission,
+}: IProps) => {
   const t = useTranslations("order_book");
-  const {
-    onUpdateOrder,
-    isError,
-    isSuccess,
-    data: uData,
-    error,
-  } = useUpdateOrder();
-
-  const {
-    onPrecheckOrder,
-    isError: precheckIsError,
-    isSuccess: precheckIsSuccess,
-    data: precheckData,
-    error: precheckError,
-  } = usePrecheckOrder();
+  const { onGenTwoFactor, data: twoFactorData } = useGenTwoFactorAuth();
+  const { onUpdateOrder, data: uData } = useUpdateOrder();
+  const { onPrecheckOrder, data: precheckData } = usePrecheckOrder();
   const { data: symbolData } = useGetInstrument(data?.symbol || "");
   const [otp, setOtp] = useState<string>("");
   const [updatePrice, setUpdatePrice] = useState<string>(
@@ -70,7 +67,7 @@ const Update = ({ data, handleClose, activeAccount }: IProps) => {
   };
 
   const handleRequestOTP = () => {
-    console.log("handleRequestOTP");
+    onGenTwoFactor({ transactionId: precheckData?.transactionId || "" });
   };
 
   const handleSubmit = () => {
@@ -157,6 +154,7 @@ const Update = ({ data, handleClose, activeAccount }: IProps) => {
           otp={otp}
           handleChangeOTP={handleChangeOTP}
           handleRequest={handleRequestOTP}
+          activePermission={activePermission}
         />
         <HelpText txt={t("fn_obEdit_txt_notice")} stt="error" />
         <S.Action

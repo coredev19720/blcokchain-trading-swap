@@ -98,3 +98,10 @@ export interface GetStocksRes extends BaseRes {
 export interface GetInstrumentRes extends BaseRes {
   d: Instrument[];
 }
+
+export interface GenTwoFactorRes extends BaseRes {
+  d: {
+    tokenid: string;
+    transactionId: string;
+  };
+}

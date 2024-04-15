@@ -9,12 +9,12 @@ import {
   RadioButtonCheckedRounded,
 } from "@mui/icons-material";
 import { AccPermissions } from "@/src/constraints/interface/account";
-import { TAuthType, TPinAuthType } from "@/src/constraints/enum/common";
+import { TPinAuthType } from "@/src/constraints/enum/common";
 interface IProps {
   handleRequest: () => void;
   otp: string;
   handleChangeOTP: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  activePermission?: AccPermissions | null;
+  activePermission: AccPermissions | null;
 }
 const OTPConfirm = ({
   handleRequest,
@@ -24,7 +24,6 @@ const OTPConfirm = ({
 }: IProps) => {
   const t = useTranslations("order_book");
   const [countdown, setCountdown] = useState(0);
-
   useEffect(() => {
     const intervalId = setInterval(() => {
       // Update countdown every 1 second

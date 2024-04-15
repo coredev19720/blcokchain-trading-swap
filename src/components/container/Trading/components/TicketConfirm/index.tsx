@@ -32,7 +32,6 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
 
   const [otp, setOTP] = useState<string>("");
   const { onCreateOrder, isError, isSuccess, error } = useCreateOrder();
-  console.log("isSuccess", isSuccess);
   useEffect(() => {
     if (isSuccess) {
       queryClient.invalidateQueries({ queryKey: ["orders"] });

@@ -9,7 +9,7 @@ import OTPConfirm from "@components/common/OTPConfirm";
 import dayjs from "dayjs";
 import { usePrecheckOrder } from "@/src/services/hooks/order/usePrecheckOrder";
 import { CancelOrderReq } from "@/src/constraints/interface/services/request";
-import { AccInfo } from "@/src/constraints/interface/account";
+import { AccInfo, AccPermissions } from "@/src/constraints/interface/account";
 import { toast } from "react-toastify";
 import { errHandling } from "@/src/utils/error";
 import { useCancelOrder } from "@/src/services/hooks/order/useCancelOrder";
@@ -18,8 +18,14 @@ interface IProps {
   data: OrderInfo;
   handleClose: () => void;
   activeAccount: AccInfo | null;
+  activePermission: AccPermissions | null;
 }
-const Cancel = ({ data, handleClose, activeAccount }: IProps) => {
+const Cancel = ({
+  data,
+  handleClose,
+  activeAccount,
+  activePermission,
+}: IProps) => {
   const t = useTranslations("order_book");
   const {
     onPrecheckOrder,
@@ -132,6 +138,7 @@ const Cancel = ({ data, handleClose, activeAccount }: IProps) => {
           handleRequest={handleRequestOTP}
           handleChangeOTP={handleChangeOTP}
           otp={otp}
+          activePermission={activePermission}
         />
         <S.Action
           color="primary"

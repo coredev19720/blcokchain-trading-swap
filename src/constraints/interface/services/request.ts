@@ -76,3 +76,7 @@ export interface CancelOrderReq {
   transactionId: string; // Mã giao dịch lấy từ hàm 3.9
   code: string; // mã xác thực 2 lớp.
 }
+
+export interface GenTwoFactorReq {
+  transactionId: string;
+}

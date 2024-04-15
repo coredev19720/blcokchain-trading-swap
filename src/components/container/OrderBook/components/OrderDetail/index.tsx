@@ -10,14 +10,21 @@ import Cancel from "./Cancel";
 import Update from "./Update";
 import { useEffect, useState } from "react";
 import { handleSlideDown } from "@src/utils/behaviors";
-import { AccInfo } from "@/src/constraints/interface/account";
+import { AccInfo, AccPermissions } from "@/src/constraints/interface/account";
 interface IProps {
   data: OrderInfo;
   type: TOrderActionType;
   handleClose: () => void;
   activeAccount: AccInfo | null;
+  activePermission: AccPermissions | null;
 }
-const OrderDetail = ({ data, type, handleClose, activeAccount }: IProps) => {
+const OrderDetail = ({
+  data,
+  type,
+  handleClose,
+  activeAccount,
+  activePermission,
+}: IProps) => {
   const t = useTranslations("order_book");
   const tTrade = useTranslations("trade");
   //unimplemented
@@ -87,6 +94,7 @@ const OrderDetail = ({ data, type, handleClose, activeAccount }: IProps) => {
               data={data}
               handleClose={handleClose}
               activeAccount={activeAccount}
+              activePermission={activePermission}
             />
           )}
           {type === TOrderActionType.update && (
@@ -94,6 +102,7 @@ const OrderDetail = ({ data, type, handleClose, activeAccount }: IProps) => {
               data={data}
               handleClose={handleClose}
               activeAccount={activeAccount}
+              activePermission={activePermission}
             />
           )}
         </S.Wrapper>
