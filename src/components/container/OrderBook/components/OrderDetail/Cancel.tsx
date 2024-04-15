@@ -28,14 +28,12 @@ const Cancel = ({ data, handleClose, activeAccount }: IProps) => {
     data: precheckData,
     error: precheckError,
   } = usePrecheckOrder();
-
   const {
     onCancelOrder,
     isError,
     isSuccess: cancelSuccess,
     error,
   } = useCancelOrder();
-  console.log("cancelSuccess", cancelSuccess);
   const queryClient = useQueryClient();
   const [otp, setOtp] = useState<string>("");
   useEffect(() => {

@@ -20,6 +20,7 @@ interface IProps {
 const OrderDetail = ({ data, type, handleClose, activeAccount }: IProps) => {
   const t = useTranslations("order_book");
   const tTrade = useTranslations("trade");
+  //unimplemented
   const title = {
     cancel: "Lệnh hủy",
     detail: "Chi tiết lệnh",

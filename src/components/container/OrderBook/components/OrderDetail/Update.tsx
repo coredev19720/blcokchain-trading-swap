@@ -10,12 +10,14 @@ import OTPConfirm from "@components/common/OTPConfirm";
 import HelpText from "@components/common/HelpText";
 
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppSelector } from "@src/redux/hooks";
 import { UpdateOrderReq } from "@/src/constraints/interface/services/request";
 import { useUpdateOrder } from "@/src/services/hooks/order/useUpdateOrder";
 import { AccInfo } from "@/src/constraints/interface/account";
 import { useGetInstrument } from "@/src/services/hooks/useGetInstrument";
+import { TSide } from "@/src/constraints/enum/common";
+import { usePrecheckOrder } from "@/src/services/hooks/order/usePrecheckOrder";
 interface IProps {
   data: OrderInfo | null;
   handleClose: () => void;
@@ -23,7 +25,6 @@ interface IProps {
 }
 const Update = ({ data, handleClose, activeAccount }: IProps) => {
   const t = useTranslations("order_book");
-  const { order } = useAppSelector((state) => state.market);
   const {
     onUpdateOrder,
     isError,
@@ -31,11 +32,24 @@ const Update = ({ data, handleClose, activeAccount }: IProps) => {
     data: uData,
     error,
   } = useUpdateOrder();
+
+  const {
+    onPrecheckOrder,
+    isError: precheckIsError,
+    isSuccess: precheckIsSuccess,
+    data: precheckData,
+    error: precheckError,
+  } = usePrecheckOrder();
   const { data: symbolData } = useGetInstrument(data?.symbol || "");
   const [otp, setOtp] = useState<string>("");
   const [updatePrice, setUpdatePrice] = useState<string>(
     data?.price ? (data.price / 1000).toFixed(2) : "0"
   );
+  useEffect(() => {
+    if (precheckData) {
+      handleUpdateOrder();
+    }
+  }, [precheckData]);
   const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!symbolData) {
       return;
@@ -60,24 +74,30 @@ const Update = ({ data, handleClose, activeAccount }: IProps) => {
   };
 
   const handleSubmit = () => {
-    if (order) {
-      try {
-        const ord: UpdateOrderReq = {
-          accountId: activeAccount?.id || "",
-          orderId: data?.rootorderid || "",
-          limitPrice: Number(updatePrice) * 1000,
-          tokenid: "", // Tokeninfo lấy từ hàm 3.9 // unimplemented
-          transactionId: "", // Mã giao dịch lấy từ hàm 3.9// unimplemented
-          qty: 0, // Khối lượng// unimplemented
-          code: "string", // mã xác thực 2 lớp.// unimplemented
-        };
-        onUpdateOrder(ord);
-      } catch (e) {
-        console.log(e);
-      } finally {
-        handleClose();
-      }
+    if (data) {
+      onPrecheckOrder({
+        accountId: activeAccount?.id || "",
+        instrument: data.symbol, // Mã chứng khoán
+        qty: data.remainqtty,
+        //fix me uncomment this code
+        // side: data.en_side,
+        side: data.en_side === TSide.buy ? "buy" : "sell",
+        type: data.pricetype === "LO" ? "limit" : "market", // 'limit': Lệnh LO, 'market':Lệnh thị trường ATO, ATC,...
+        limitPrice: data.price,
+      });
     }
+  };
+  const handleUpdateOrder = () => {
+    const ord: UpdateOrderReq = {
+      accountId: activeAccount?.id || "",
+      orderId: data?.rootorderid || "",
+      limitPrice: Number(updatePrice) * 1000,
+      tokenid: precheckData?.tokenid || "",
+      transactionId: precheckData?.transactionId || "",
+      qty: data?.qtty || 0,
+      code: otp,
+    };
+    onUpdateOrder(ord);
   };
   const handleChangeOTP = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length <= 6) {
