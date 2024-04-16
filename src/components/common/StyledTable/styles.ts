@@ -1,7 +1,9 @@
 import colors from "@src/themes/colors";
 import { styled } from "@mui/system";
 import { TableContainer } from "@mui/material";
-
+interface HeaderWrapperProps {
+  isSort?: boolean;
+}
 export const TableWrapper = styled(TableContainer)({
   scrollbarWidth: "thin",
   boxShadow: "none",
@@ -20,11 +22,24 @@ export const TableWrapper = styled(TableContainer)({
   },
 });
 
-export const HeadCellWrapper = styled("div")({
-  display: "block",
-  justifyContent: "space-between",
-  alignItems: "center",
-  "&.isSort": {
-    display: "flex",
+export const HeadCellWrapper = styled("div")<HeaderWrapperProps>(
+  ({ isSort }) => ({
+    display: isSort ? "flex" : "block",
+    justifyContent: "space-between",
+    alignItems: "center",
+  })
+);
+
+export const HeaderShorter = styled("div")({
+  display: "flex",
+  flexDirection: "column",
+  "& svg": {
+    color: colors.p300,
+    "&:first-child": {
+      marginBottom: -4,
+    },
+    "&:last-child": {
+      marginTop: -4,
+    },
   },
 });

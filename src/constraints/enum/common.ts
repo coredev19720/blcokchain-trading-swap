@@ -107,3 +107,5 @@ export enum TradeType {
   DEPOSIT = "DEPOSIT", //Tra cứu giao dịch
   CASHTRANSENDDATE = "CASHTRANSENDDATE", //Chuyển khoản tiền cuối ngày.
 }
+
+export type TShortWay = "asc" | "desc" | "";

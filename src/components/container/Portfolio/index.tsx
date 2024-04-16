@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl";
 import { useGetPortfolio } from "@/src/services/hooks/useGetPortfolio";
 import { useAppDispatch } from "@src/redux/hooks";
 import { setPorts } from "@src/redux/features/marketSlice";
+import { FormControlLabel, Switch } from "@mui/material";
 
 const Portfolio = () => {
   const dispatch = useAppDispatch();
@@ -18,16 +19,32 @@ const Portfolio = () => {
   const { isLoading, data } = useGetPortfolio(activeAccount?.id || "");
   const t = useTranslations("portfolio");
   const [port, setPort] = useState<PortItem | null>(null);
+  const [isShowPrice, setIsShowPrice] = useState<boolean>(false);
   useEffect(() => {
     data && dispatch(setPorts(data));
   }, [data]);
+
+  const handleSwitch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsShowPrice(event.target.checked);
+  };
 
   return (
     <S.Wrapper>
       <PageHeader title={t("fn_port_txt_title")} portRefresh />
       <S.Content>
         <PortInfo />
-        <DataTable ports={ports || []} port={port} setPort={setPort} />
+        <DataTable
+          ports={ports || []}
+          port={port}
+          setPort={setPort}
+          isShowPrice={isShowPrice}
+        />
+        <S.TogglePrice
+          label={t("fn_port_cta_viewPrice")}
+          control={
+            <S.PriceSwitch checked={isShowPrice} onChange={handleSwitch} />
+          }
+        />
       </S.Content>
       {isLoading && <Loading />}
     </S.Wrapper>

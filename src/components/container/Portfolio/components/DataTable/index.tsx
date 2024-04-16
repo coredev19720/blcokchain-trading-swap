@@ -13,8 +13,9 @@ interface Props {
   ports: PortItem[];
   port: PortItem | null;
   setPort: (port: PortItem | null) => void;
+  isShowPrice: boolean;
 }
-const MarketDepth = ({ ports, port, setPort }: Props) => {
+const DataTable = ({ ports, port, setPort, isShowPrice }: Props) => {
   const t = useTranslations("portfolio");
   const router = useRouter();
   const handleClickItem = (item: PortItem, idx: number) => {
@@ -27,9 +28,23 @@ const MarketDepth = ({ ports, port, setPort }: Props) => {
   const goToSymbol = (symbol: string) => {
     router.push(`market?s=${symbol.toUpperCase()}`);
   };
+
+  const renderPrice = (row: PortItem) => {
+    const { closeprice, basicPrice, costPriceAmt } = row;
+    let price = costPriceAmt;
+    if (isShowPrice) {
+      price = closeprice !== "0" ? Number(closeprice) : basicPrice;
+    }
+    return (
+      <Typography variant="body2" fontWeight={600}>
+        {formatNumber(price)}
+      </Typography>
+    );
+  };
   const columns: IColumn[] = [
     {
       title: t("sb_info_symbol"),
+      dataIndex: "symbol",
       render: (row: PortItem) => (
         <Typography
           fontWeight={600}
@@ -41,25 +56,27 @@ const MarketDepth = ({ ports, port, setPort }: Props) => {
         </Typography>
       ),
       noClick: true,
+      isSort: true,
     },
     {
       title: t("en_cu_stock_list_totalQty"),
+      dataIndex: "total",
       render: (row: PortItem) => (
         <Typography variant="body2">{formatNumber(row.total)}</Typography>
       ),
       align: "right",
+      isSort: true,
     },
     {
       title: t("en_cu_stock_list_valueKVND"),
-      render: (row: PortItem) => (
-        <Typography variant="body2" fontWeight={600}>
-          {formatNumber(row.costPriceAmt)}
-        </Typography>
-      ),
+      dataIndex: "costPriceAmt",
+      render: renderPrice,
       align: "right",
+      isSort: true,
     },
     {
       title: t("en_cu_stock_list_autoPL"),
+      dataIndex: "pnlrate",
       render: (row: PortItem) => {
         return (
           <Typography
@@ -71,6 +88,7 @@ const MarketDepth = ({ ports, port, setPort }: Props) => {
         );
       },
       align: "right",
+      isSort: true,
     },
     {
       title: "",
@@ -94,4 +112,4 @@ const MarketDepth = ({ ports, port, setPort }: Props) => {
     </>
   );
 };
-export default MarketDepth;
+export default DataTable;

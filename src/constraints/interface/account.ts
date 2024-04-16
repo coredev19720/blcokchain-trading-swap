@@ -61,6 +61,7 @@ export interface AccSummary {
   dclamtlimit: number; // HM đảm bảo
   clamtlimit: number; // HM phải trả
   afstatus_en: string; // Trạng thái tiểu khoản tiếng anh
+  sesecured_avl: number; // Giá trị ck thực có
 }
 
 export interface AccsSummary {

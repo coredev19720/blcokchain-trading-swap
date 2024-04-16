@@ -1,28 +1,39 @@
 import React, { useState } from "react";
 import { TableHead, TableRow } from "@mui/material";
 import Cell from "./components/Cell";
+import { IColumn } from "@/src/constraints/interface/table";
+import { TShortWay } from "@/src/constraints/enum/common";
 
 interface IProps {
-  columns: any[];
+  columns: IColumn[];
   dataSource: any[];
   setData: (val: any) => void;
 }
 const Header = ({ columns, dataSource, setData }: IProps) => {
   const [sortKey, setSortKey] = useState<string>("");
-  const [sortWay, setSortWay] = useState<"desc" | "asc" | "">("");
+  const [sortWay, setSortWay] = useState<TShortWay>("");
 
-  const sortData = (field: string, way: "desc" | "asc" | "") => {
+  const sortData = (field: string, way: TShortWay) => {
     const tempData = [...dataSource];
     if (field && way) {
-      tempData.sort((a, b) =>
-        way === "desc" ? a[field] - b[field] : b[field] - a[field]
-      );
+      const dataType = typeof tempData[0][field];
+      console.log("dataType", dataType);
+      dataType === "number" &&
+        tempData.sort((a, b) =>
+          way === "desc" ? a[field] - b[field] : b[field] - a[field]
+        );
+      dataType === "string" &&
+        tempData.sort((a, b) =>
+          way === "desc"
+            ? a[field].localeCompare(b[field])
+            : b[field].localeCompare(a[field])
+        );
     }
     setData(tempData);
   };
 
   const handleClickToSort = (field: string) => {
-    let way: "desc" | "asc" | "" = "";
+    let way: TShortWay;
     if (field === sortKey) {
       switch (sortWay) {
         case "desc":
@@ -44,7 +55,7 @@ const Header = ({ columns, dataSource, setData }: IProps) => {
   };
   const renderRow = (
     <TableRow>
-      {columns.map((col: any, index: number) => (
+      {columns.map((col: IColumn, index: number) => (
         <Cell
           col={col}
           key={`${col.key}_${index}`}

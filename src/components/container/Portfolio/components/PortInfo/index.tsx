@@ -19,7 +19,7 @@ const PortInfo = () => {
         <Typography variant="body2" fontWeight={600}>
           {accountSummary &&
             activeAccount &&
-            formatNumber(accountSummary[activeAccount.id]?.totalseamt || 0)}
+            formatNumber(accountSummary[activeAccount.id]?.sesecured_avl || 0)}
         </Typography>
       </FlexContent>
       <FlexContent>

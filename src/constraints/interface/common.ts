@@ -66,3 +66,4 @@ export interface IStringOpts {
 //   accountNo: string;
 //   status: TTransactionStatus;
 // }
+

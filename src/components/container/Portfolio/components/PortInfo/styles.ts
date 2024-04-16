@@ -10,4 +10,5 @@ export const Wrapper = styled("div")(({ theme }) => ({
   alignItems: "center",
   backgroundColor: theme.palette.mode === "dark" ? colors.p100 : colors.sy10,
   borderRadius: theme.spacing(2),
+  width: "100%",
 }));

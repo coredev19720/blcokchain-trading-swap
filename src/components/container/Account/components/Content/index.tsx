@@ -19,11 +19,12 @@ const Content = () => {
       <S.RowWrapper isHeader bgColor={colors.sy80}>
         <Typography color={colors.sb60}>{t("en_cu_asset_total")}</Typography>
         <Typography fontWeight={600} color={colors.sb60}>
-          {formatNumber(accountSummary[activeAccount.id]?.totalseamt)}
+          {formatNumber(accountSummary[activeAccount.id]?.netassval)}
         </Typography>
       </S.RowWrapper>
       <S.RowWrapper isHeader bgColor={colors.sb60}>
         <Typography color={colors.p300}>{t("en_cu_cash_total")}</Typography>
+        {/* unimplemented */}
         <Typography fontWeight={600} color={colors.p300}>
           {formatNumber(accountSummary[activeAccount.id]?.intbalance)}
         </Typography>
@@ -31,19 +32,19 @@ const Content = () => {
       <S.RowWrapper>
         <Typography>{t("en_cu_cash_onHand")}</Typography>
         <Typography fontWeight={600}>
-          {formatNumber(accountSummary[activeAccount.id]?.balance)}
+          {formatNumber(accountSummary[activeAccount.id]?.cibalance)}
         </Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("en_cu_cash_payables")}</Typography>
         <Typography fontWeight={600}>
-          {formatNumber(accountSummary[activeAccount.id]?.tdbalance)}
+          {formatNumber(accountSummary[activeAccount.id]?.buyqtty)}
         </Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("en_cu_cash_receivables")}</Typography>
         <Typography fontWeight={600}>
-          {formatNumber(accountSummary[activeAccount.id]?.cibalance)}
+          {formatNumber(accountSummary[activeAccount.id]?.receivingamt)}
         </Typography>
       </S.RowWrapper>
       <S.RowWrapper>
@@ -58,6 +59,8 @@ const Content = () => {
           {formatNumber(accountSummary[activeAccount.id]?.pp)}
         </Typography>
       </S.RowWrapper>
+
+      {/* Chứng khoán - unimplemented */}
       <S.RowWrapper>
         <Typography>{t("en_cu_stock_sum_total")}</Typography>
         <Typography fontWeight={600}>
@@ -69,13 +72,13 @@ const Content = () => {
           {t("en_cu_stock_sum_onhandVal")}
         </Typography>
         <Typography fontWeight={600} color={colors.p300}>
-          {formatNumber(accountSummary[activeAccount.id]?.totalbuyamt)}
+          {formatNumber(accountSummary[activeAccount.id]?.sesecured_avl)}
         </Typography>
       </S.RowWrapper>
       <S.RowWrapper>
         <Typography>{t("en_cu_stock_sum_receivingVal")}</Typography>
         <Typography fontWeight={600}>
-          {formatNumber(accountSummary[activeAccount.id]?.netassval)}
+          {formatNumber(accountSummary[activeAccount.id]?.totalbuyamt)}
         </Typography>
       </S.RowWrapper>
       <S.RowWrapper>
