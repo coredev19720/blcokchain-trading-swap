@@ -46,10 +46,9 @@ const Ticker = ({ inst, trades }: Props) => {
           price: inst.S1,
           sellVol: inst.U1,
         },
-
         {
-          buyVol: inst.V3,
-          price: inst.B3,
+          buyVol: inst.V1,
+          price: inst.B1,
           sellVol: 0,
         },
         {
@@ -58,8 +57,8 @@ const Ticker = ({ inst, trades }: Props) => {
           sellVol: 0,
         },
         {
-          buyVol: inst.V1,
-          price: inst.B1,
+          buyVol: inst.V3,
+          price: inst.B3,
           sellVol: 0,
         },
       ]);

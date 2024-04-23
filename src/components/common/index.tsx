@@ -15,7 +15,7 @@ import LoadingButton from "./LoadingButton";
 import RowContent from "./RowContent";
 import SplashText from "./SplashText";
 import TextInput from "./TextInput";
-
+import NotiContent from "./NotiContent";
 export {
   Menu,
   OTPConfirm,
@@ -34,4 +34,5 @@ export {
   RowContent,
   SplashText,
   TextInput,
+  NotiContent,
 };

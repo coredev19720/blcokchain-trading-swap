@@ -1,4 +1,10 @@
-import { TMarket, TOrderKind, TOrderType, TSide } from "../enum/common";
+import {
+  HNXOrderType,
+  HOSEOrderType,
+  TMarket,
+  TSide,
+  UPCOMOrderType,
+} from "../enum/common";
 
 export interface ITickerData {
   symbol: string;
@@ -58,12 +64,17 @@ export interface IStringOpts {
   value: string;
 }
 
-// export interface IOrder extends ITicket {
-//   time: string;
-//   execQty: number;
-//   pendingQty: number;
-//   code: string;
-//   accountNo: string;
-//   status: TTransactionStatus;
-// }
+export interface IHNXOrderTypeOpts {
+  label: HNXOrderType;
+  value: HNXOrderType;
+}
 
+export interface IHOSEOrderTypeOpts {
+  label: HOSEOrderType;
+  value: HOSEOrderType;
+}
+
+export interface IUPCOMOrderTypeOpts {
+  label: UPCOMOrderType;
+  value: UPCOMOrderType;
+}

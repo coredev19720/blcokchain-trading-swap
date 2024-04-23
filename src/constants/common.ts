@@ -1,4 +1,11 @@
-import { Language, MenuItem, IStringOpts } from "@interface/common";
+import {
+  Language,
+  MenuItem,
+  IStringOpts,
+  IHNXOrderTypeOpts,
+  IHOSEOrderTypeOpts,
+  IUPCOMOrderTypeOpts,
+} from "@interface/common";
 import {
   menuIconAccount,
   menuIconTrading,
@@ -56,13 +63,13 @@ export const orderKindOpts = [
   { label: "Lệnh dự kiến", value: "conditional" },
 ];
 
-export const orderTypeOpts: {
-  label: string;
-  value: TOrderType;
-}[] = Object.values(TOrderType).map((value) => ({
-  label: value,
-  value: value,
-}));
+// export const orderTypeOpts: {
+//   label: string;
+//   value: TOrderType;
+// }[] = Object.values(TOrderType).map((value) => ({
+//   label: value,
+//   value: value,
+// }));
 
 export const accountOpts: IStringOpts[] = [
   {
@@ -70,3 +77,66 @@ export const accountOpts: IStringOpts[] = [
     value: "",
   },
 ];
+
+export const hnxOrderTypeOpts: IHNXOrderTypeOpts[] = [
+  {
+    label: "ATO",
+    value: "ATO",
+  },
+  {
+    label: "ATC",
+    value: "ATC",
+  },
+  {
+    label: "LO",
+    value: "LO",
+  },
+  {
+    label: "MP",
+    value: "MP",
+  },
+  {
+    label: "MOK",
+    value: "MOK",
+  },
+  {
+    label: "MTL",
+    value: "MTL",
+  },
+  {
+    label: "RP",
+    value: "RP",
+  },
+];
+export const hoseOrderTypeOpts: IHOSEOrderTypeOpts[] = [
+  {
+    label: "ATO",
+    value: "ATO",
+  },
+  {
+    label: "ATC",
+    value: "ATC",
+  },
+  {
+    label: "LO",
+    value: "LO",
+  },
+  {
+    label: "MP",
+    value: "MP",
+  },
+  {
+    label: "RP",
+    value: "RP",
+  },
+];
+export const upcomOrderTypeOpts: IUPCOMOrderTypeOpts[] = [
+  { label: "LO", value: "LO" },
+  { label: "RP", value: "RP" },
+];
+
+export const orderTypeOpts = {
+  HOSE: hoseOrderTypeOpts,
+  HNX: hnxOrderTypeOpts,
+  UPCOM: upcomOrderTypeOpts,
+};

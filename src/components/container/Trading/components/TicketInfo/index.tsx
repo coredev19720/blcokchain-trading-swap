@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { orderKindOpts, orderTypeOpts } from "@src/constants/common";
-import { TOrderKind, TOrderType } from "@enum/common";
+import { TMarket, TOrderKind, TOrderType } from "@enum/common";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { setTicket } from "@src/redux/features/marketSlice";
 import { InsRTData } from "@/src/constraints/interface/market";
@@ -19,6 +19,7 @@ interface Props {
   maxVol: number;
 }
 const TicketInfo = ({ inst, maxVol }: Props) => {
+  const orderTypes = orderTypeOpts[(inst?.EX as TMarket) || "HOSE"];
   const t = useTranslations("trade");
   const dispatch = useAppDispatch();
   const { ticket } = useAppSelector((state) => state.market);
@@ -52,7 +53,6 @@ const TicketInfo = ({ inst, maxVol }: Props) => {
       })
     );
   };
-
   return (
     <S.Wrapper>
       <Grid container spacing={2}>
@@ -90,7 +90,7 @@ const TicketInfo = ({ inst, maxVol }: Props) => {
             fullWidth
             value={ticket.type}
           >
-            {orderTypeOpts.map((x) => (
+            {orderTypes.map((x) => (
               <MenuItem value={x.value} key={x.value}>
                 {x.label}
               </MenuItem>

@@ -9,7 +9,7 @@ import SymbolInfo from "./components/SymbolInfo";
 import TicketInfo from "./components/TicketInfo";
 import TicketConfirm from "./components/TicketConfirm";
 import { useAppSelector } from "@src/redux/hooks";
-import { PageHeader } from "@components/common";
+import { PageHeader, NotiContent } from "@components/common";
 import { PortItem } from "@/src/constraints/interface/market";
 import { usePrecheckOrder } from "@/src/services/hooks/order/usePrecheckOrder";
 import { toast } from "react-toastify";
@@ -108,6 +108,8 @@ const Trading = () => {
                 : ""}
             </Typography>
           </S.AccStatus>
+          {/* 2FA type noti */}
+          <NotiContent type="warning" message="Thông báo" />
         </S.MainContent>
         <S.ButtonWrapper>
           <Button

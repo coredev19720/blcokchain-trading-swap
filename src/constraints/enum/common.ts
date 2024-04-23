@@ -109,3 +109,16 @@ export enum TradeType {
 }
 
 export type TShortWay = "asc" | "desc" | "";
+
+export type HNXOrderType =
+  | "LO"
+  | "ATO"
+  | "ATC"
+  | "MP"
+  | "MAK"
+  | "MOK"
+  | "MTL"
+  | "RP"
+  | "PLO";
+export type HOSEOrderType = "LO" | "ATO" | "ATC" | "MP" | "RP";
+export type UPCOMOrderType = "LO" | "RP";
