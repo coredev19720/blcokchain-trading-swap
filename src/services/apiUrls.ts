@@ -10,6 +10,7 @@ const apiUrls = {
   getAuthorityInfo: `${baseUrl}/inq/authorityInfo`,
   getInstruments: `${baseUrl}/datafeed/instruments`,
   getAcounts: `${baseUrl}/accounts`,
+  setCurrentAcc: `${baseUrl}/sso/info/setCurrentAccount`,
 };
 export const genOrderUrl = (accountId: string, path: string) =>
   `${baseUrl}/accounts/${accountId}/${path}`;

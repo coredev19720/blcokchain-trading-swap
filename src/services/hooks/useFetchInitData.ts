@@ -37,11 +37,12 @@ const handleGetData = async (
     permissionPromise,
   ])
     .then((values) => {
-      const accounts: GetAccountsRes = values[0].data;
+      const accRes: GetAccountsRes = values[0].data;
       const authInfo: GetAuthorInfoRes = values[1].data;
       const stocks: GetStocksRes = values[2].data;
       const permissions: GetAccPermissionRes = values[3].data;
-      dispatch(setAccounts(accounts.d));
+      const { d: accounts } = accRes;
+      dispatch(setAccounts(accounts));
       dispatch(setAuthorInfo(authInfo.d));
       dispatch(
         setStocks(
@@ -52,7 +53,7 @@ const handleGetData = async (
         )
       );
       dispatch(setPermissions(permissions.d?.accounts));
-      dispatch(setActiveAccount(accounts.d[0]));
+      // dispatch(setActiveAccount(accounts[0]));
       return values;
     })
     .catch((e) => {

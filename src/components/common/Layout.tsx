@@ -46,8 +46,8 @@ export default function Layout({ children }: { children: ReactNode }) {
     (state) => state.market
   );
   const { activeAccount } = useAppSelector((state) => state.user);
-  const { data: portData } = useGetPortfolio(activeAccount?.id || "");
-  const { data: stockData } = useGetInstrument(selectedStock?.symbol || "");
+  const { data: portData } = useGetPortfolio(activeAccount?.id ?? "");
+  const { data: stockData } = useGetInstrument(selectedStock?.symbol ?? "");
   const searchParams = useSearchParams();
 
   const dispatch = useAppDispatch();
@@ -60,7 +60,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const prevSymbol = usePreviousValue(selectedStock?.symbol);
   useEffect(() => {
     setMounted(true);
-    const url = process.env.NEXT_PUBLIC_API_URL || "";
+    const url = process.env.NEXT_PUBLIC_API_URL ?? "";
     const skt: io.Socket = io(url, {
       transports: socketCfg.transport,
       path: socketCfg.path,

@@ -11,10 +11,8 @@ export enum TOrderStatus {
 }
 
 export enum TAccountType {
-  CASH = "CASH",
+  THUONG = "THUONG",
   MARGIN = "MARGIN",
-  MARGIN_CASH = "MARGIN_CASH",
-  MARGIN_STOCK = "MARGIN_STOCK",
 }
 
 export type Language = "en" | "vi";

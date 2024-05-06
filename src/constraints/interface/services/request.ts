@@ -80,3 +80,7 @@ export interface CancelOrderReq {
 export interface GenTwoFactorReq {
   transactionId: string;
 }
+
+export interface SetCurrentAccReq {
+  afacctno: string;
+}

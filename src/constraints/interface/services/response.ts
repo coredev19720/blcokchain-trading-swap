@@ -112,3 +112,7 @@ export interface GenTwoFactorRes extends BaseRes {
     transactionId: string;
   };
 }
+
+export interface SetCurrentAccRes extends BaseRes {
+  d: string;
+}
