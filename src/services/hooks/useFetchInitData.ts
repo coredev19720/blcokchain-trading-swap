@@ -11,7 +11,6 @@ import { useDispatch } from "react-redux";
 import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
 import {
   setAccounts,
-  setActiveAccount,
   setAuthorInfo,
   setPermissions,
 } from "@/src/redux/features/userSlice";

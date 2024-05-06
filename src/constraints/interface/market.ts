@@ -334,3 +334,25 @@ export interface AccountRTData {
   via: string; // Kênh đặt lệnh
   norp: string; // Lệnh thỏa thuận hay ko?
 }
+
+export interface TransLog {
+  id: string;
+  sequenceMsg: string;
+  tradingdate: string;
+  symbol: string;
+  formattedTime: string;
+  lastColor: string;
+  formattedMatchPrice: string;
+  changeColor: string;
+  formattedChangeValue: string;
+  formattedVol: string;
+  formattedAccVol: string;
+  formattedAccVal: string;
+  createAt: number;
+}
+export interface TranslogDataRes {
+  nextIndex: number;
+  sumAccVol: number;
+  sumSellVol: number;
+  translog: TransLog[];
+}

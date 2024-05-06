@@ -31,6 +31,7 @@ const SearchPanel = ({ open, setOpenPanel }: IProps) => {
         price: "0",
       })
     );
+    setSearchText("");
     setOpenPanel(false);
   }, [selectedStock]);
 

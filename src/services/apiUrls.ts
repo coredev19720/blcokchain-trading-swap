@@ -20,4 +20,7 @@ export const genAccountServiceUrl = (accountId: string, path: string) =>
 export const genInstrumentUrl = (symbol: string) => {
   return `${apiUrls.getInstruments}?symbols=${symbol}`;
 };
+export const getTranslogsUrl = (symbol: string) => {
+  return `${baseUrl}/datafeed/translogsnaps/${symbol}`;
+};
 export default apiUrls;

@@ -20,7 +20,7 @@ import {
   setSelectedStock,
 } from "@/src/redux/features/marketSlice";
 import { usePreviousValue } from "@/src/hooks";
-import { useGetInstrument } from "@/src/services/hooks/useGetInstrument";
+import { useGetInstrument } from "@/src/services/hooks";
 import { stockMappingRTData } from "@/src/utils/market";
 import { TradeRTData } from "@/src/constraints/interface/market";
 import {
@@ -73,7 +73,6 @@ export default function Layout({ children }: { children: ReactNode }) {
     setSocket(skt);
     skt.on("connect", connect);
     skt.on("disconnect", () => console.log("Disconnected from the server"));
-    // skt.on("connection", symbolSub(skt, "HCM"));
     skt.on("i", (data: any) => {
       if (data.d[0]) {
         handleIEvent(data.d[0]);
@@ -143,8 +142,6 @@ export default function Layout({ children }: { children: ReactNode }) {
     dispatch(setHisTrades(data));
   };
   const initTicker = () => {
-    console.log("ports", ports);
-    console.log("selectedStock", selectedStock);
     if (selectedStock.symbol) return;
     const s = searchParams?.get("s");
     const lastSymbol = localStorage.getItem(lastSymLocalKey);

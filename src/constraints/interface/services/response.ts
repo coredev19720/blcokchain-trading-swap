@@ -13,6 +13,7 @@ import {
   Stock,
   OrderInfo,
   WaitMatchedOrd,
+  TranslogDataRes,
 } from "../market";
 
 export interface BaseRes {
@@ -115,4 +116,8 @@ export interface GenTwoFactorRes extends BaseRes {
 
 export interface SetCurrentAccRes extends BaseRes {
   d: string;
+}
+
+export interface GetTransLogsRes extends BaseRes {
+  d: TranslogDataRes[];
 }

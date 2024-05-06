@@ -1,4 +1,3 @@
-import { GetAccSummaryRes } from "@src/constraints/interface/services/response";
 import { useQuery } from "@tanstack/react-query";
 import { genAccountServiceUrl } from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
@@ -20,7 +19,7 @@ const handleGetData = async (
     const res = await axiosInst.get(
       genAccountServiceUrl(accountId, "summaryAccount")
     );
-    const { d, s, ec } = res.data;
+    const { s, ec } = res.data;
     if (s === "ok") {
       dispatch(
         setAccountSummary({
@@ -34,8 +33,6 @@ const handleGetData = async (
       };
     }
     throw new Error(ec);
-
-    return res.data;
   } catch (e) {
     throw e;
   }

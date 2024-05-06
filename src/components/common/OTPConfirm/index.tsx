@@ -46,7 +46,6 @@ const OTPConfirm = ({
     return () => clearInterval(intervalId);
   }, [countdown]);
   useEffect(() => {
-    console.log(genSuccess);
     if (genSuccess) {
       setCountdown(countdownTime);
     }

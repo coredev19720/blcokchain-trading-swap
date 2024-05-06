@@ -17,7 +17,6 @@ const Header = ({ columns, dataSource, setData }: IProps) => {
     const tempData = [...dataSource];
     if (field && way) {
       const dataType = typeof tempData[0][field];
-      console.log("dataType", dataType);
       dataType === "number" &&
         tempData.sort((a, b) =>
           way === "desc" ? a[field] - b[field] : b[field] - a[field]
@@ -67,10 +66,6 @@ const Header = ({ columns, dataSource, setData }: IProps) => {
     </TableRow>
   );
   return <TableHead>{renderRow}</TableHead>;
-};
-
-Header.defaultProps = {
-  columns: [],
 };
 
 export default Header;

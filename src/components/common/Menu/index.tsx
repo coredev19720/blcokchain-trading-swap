@@ -9,19 +9,37 @@ import {
   useLogout,
   useGetAccountSummary,
   useFetchInitData,
+  useSetCurrentAcc,
 } from "@/src/services/hooks";
-import { useAppSelector } from "@/src/redux/hooks";
+import { useAppSelector, useAppDispatch } from "@/src/redux/hooks";
 import Cookies from "js-cookie";
+import { setActiveAccount } from "@src/redux/features/userSlice";
+import { TAccountType } from "@/src/constraints/enum/common";
 const Menu = () => {
-  const { activeAccount } = useAppSelector((state) => state.user);
+  const { onSetCurrentAcc } = useSetCurrentAcc();
+  const { activeAccount, accounts } = useAppSelector((state) => state.user);
   const { refetch: fetchData } = useFetchInitData();
   const { onLogout } = useLogout();
+  const dispatch = useAppDispatch();
   useGetAccountSummary(activeAccount?.id ?? "");
   const pathname = usePathname();
   const router = useRouter();
   const t = useTranslations("menu");
   const [idleTime, setIdleTime] = useState<number>(1800);
-
+  useEffect(() => {
+    if (accounts.length) {
+      const defaultAcc =
+        accounts.find((acc) => acc.accounttype === TAccountType.THUONG) ??
+        accounts[0];
+      dispatch(setActiveAccount(defaultAcc));
+    }
+  }, [accounts]);
+  useEffect(() => {
+    if (activeAccount) {
+      console.log("onSetCurrentAcc", activeAccount.id);
+      onSetCurrentAcc({ afacctno: activeAccount.id });
+    }
+  }, [activeAccount?.id]);
   useEffect(() => {
     const idle = window.localStorage.getItem(
       process.env.NEXT_PUBLIC_IDLE_STO_NAME ?? "idle_time"
@@ -36,6 +54,7 @@ const Menu = () => {
       !activeAccount && fetchData();
     }
   }, []);
+
   const onIdle = () => {
     onLogout();
   };

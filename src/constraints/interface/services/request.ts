@@ -1,4 +1,4 @@
-import { TOrderType, TPinAuthType, TPwdType, TSide } from "../../enum/common";
+import { TMarket, TPinAuthType, TPwdType, TSide } from "../../enum/common";
 
 export interface LoginRequest {
   grant_type: string;
@@ -83,4 +83,11 @@ export interface GenTwoFactorReq {
 
 export interface SetCurrentAccReq {
   afacctno: string;
+}
+
+export interface GetTransLogsReq {
+  symbol: string;
+  index?: number;
+  exchange?: TMarket;
+  getall?: string;
 }

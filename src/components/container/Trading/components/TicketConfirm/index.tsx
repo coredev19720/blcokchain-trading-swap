@@ -32,15 +32,7 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
 
   const [otp, setOTP] = useState<string>("");
   const { onCreateOrder, isError, isSuccess, error } = useCreateOrder();
-  const {
-    onGenTwoFactor,
-    isSuccess: isGenSuccess,
-    isError: isGenErr,
-    data: genOtpData,
-  } = useGenTwoFactorAuth();
-  console.log("isGenSuccess", isGenSuccess);
-  console.log("isGenErr", isGenErr);
-  console.log("genOtpData", genOtpData);
+  const { onGenTwoFactor, isSuccess: isGenSuccess } = useGenTwoFactorAuth();
   useEffect(() => {
     console.log("mounted");
   }, []);

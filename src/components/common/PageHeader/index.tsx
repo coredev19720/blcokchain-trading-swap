@@ -4,13 +4,7 @@ import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
 import { setActiveAccount } from "@src/redux/features/userSlice";
 import { Sync } from "@mui/icons-material";
 import { AccInfo } from "@/src/constraints/interface/account";
-import {
-  useGetPortfolio,
-  useGetAccountSummary,
-  useSetCurrentAcc,
-} from "@/src/services/hooks";
-import { useEffect } from "react";
-import { TAccountType } from "@/src/constraints/enum/common";
+import { useGetPortfolio, useGetAccountSummary } from "@/src/services/hooks";
 
 interface Props {
   title: string;
@@ -23,7 +17,6 @@ const PageHeader = ({ title, accSumRefresh, portRefresh }: Props) => {
   const { refetch: AccSumRefetch } = useGetAccountSummary(
     activeAccount?.id ?? ""
   );
-  const { onSetCurrentAcc, isError, isSuccess } = useSetCurrentAcc();
   const { refetch: portRefetch } = useGetPortfolio(activeAccount?.id ?? "");
   const handleChangeAccount = (e: SelectChangeEvent<unknown>) => {
     if (typeof e.target.value === "string") {
@@ -35,20 +28,7 @@ const PageHeader = ({ title, accSumRefresh, portRefresh }: Props) => {
     accSumRefresh && AccSumRefetch();
     portRefresh && portRefetch();
   };
-  useEffect(() => {
-    if (accounts.length) {
-      const defaultAcc =
-        accounts.find((acc) => acc.accounttype === TAccountType.THUONG) ??
-        accounts[0];
-      dispatch(setActiveAccount(defaultAcc));
-    }
-  }, [accounts]);
 
-  useEffect(() => {
-    if (activeAccount) {
-      onSetCurrentAcc({ afacctno: activeAccount.id });
-    }
-  }, [activeAccount]);
   return (
     <S.Wrapper>
       <S.Title>

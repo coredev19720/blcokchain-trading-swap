@@ -1,8 +1,6 @@
-import { AccAvailTradeRes } from "@src/constraints/interface/services/response";
 import { useQuery } from "@tanstack/react-query";
 import { genAccountServiceUrl } from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
-import { useAppDispatch } from "@src/redux/hooks";
 import { TSide } from "@/src/constraints/enum/common";
 import { AccAvailTrade } from "@/src/constraints/interface/account";
 
@@ -46,7 +44,6 @@ export const useGetAvailTrade = (
   side: TSide,
   quotePrice: number
 ): UseGetAvailTrade => {
-  const dispatch = useAppDispatch();
   const { isError, isSuccess, refetch, isLoading, data } = useQuery({
     queryKey: ["avail-trade", accountId],
     queryFn: () => handleGetData(accountId, symbol, side, quotePrice),

@@ -1,5 +1,5 @@
 import { GetAuthorInfoRes } from "@src/constraints/interface/services/response";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import apiUrls from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
 import { useAppDispatch } from "@src/redux/hooks";
