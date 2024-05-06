@@ -21,6 +21,7 @@ const handleGetData = async (symbol: string): Promise<Instrument> => {
     }
     throw new Error(ec);
   } catch (e) {
+    console.error(e);
     throw e;
   }
 };

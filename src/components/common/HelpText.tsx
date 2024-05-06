@@ -27,7 +27,7 @@ const HelpText = ({ txt, icon, stt, icoPos }: IProps) => {
     <Wrapper>
       {icoPos !== "right" && icon}
       <Typography
-        color={colorMapping[stt as keyof typeof colorMapping] || "secondary"}
+        color={colorMapping[stt as keyof typeof colorMapping] ?? "secondary"}
         variant="subtitle2"
       >
         {txt}

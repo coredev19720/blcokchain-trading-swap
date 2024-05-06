@@ -24,7 +24,7 @@ const Actions = ({ inst }: Props) => {
   const t = useTranslations("market");
   const ticket = useAppSelector((state) => state.market.ticket);
   const handleClick = (side: TSide) => {
-    dispatch(setTicket({ ...ticket, side, market: inst?.EX || "" }));
+    dispatch(setTicket({ ...ticket, side, market: inst?.EX ?? "" }));
     router.push("trading");
   };
   return (

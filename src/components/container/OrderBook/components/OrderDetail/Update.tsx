@@ -16,10 +16,12 @@ import * as S from "./styles";
 import { UpdateOrderReq } from "@/src/constraints/interface/services/request";
 import { AccInfo, AccPermissions } from "@/src/constraints/interface/account";
 import { TSide } from "@/src/constraints/enum/common";
-import { useUpdateOrder } from "@/src/services/hooks/order/useUpdateOrder";
-import { useGetInstrument } from "@/src/services/hooks/useGetInstrument";
-import { usePrecheckOrder } from "@/src/services/hooks/order/usePrecheckOrder";
-import { useGenTwoFactorAuth } from "@/src/services/hooks/useGenTwoFactorAuth";
+import {
+  useUpdateOrder,
+  useGetInstrument,
+  usePrecheckOrder,
+  useGenTwoFactorAuth,
+} from "@/src/services/hooks";
 
 interface IProps {
   data: OrderInfo | null;
@@ -34,10 +36,11 @@ const Update = ({
   activePermission,
 }: IProps) => {
   const t = useTranslations("order_book");
-  const { onGenTwoFactor, data: twoFactorData } = useGenTwoFactorAuth();
-  const { onUpdateOrder, data: uData } = useUpdateOrder();
+  const { onGenTwoFactor, isSuccess: genTwoFactorSuccess } =
+    useGenTwoFactorAuth();
+  const { onUpdateOrder } = useUpdateOrder();
   const { onPrecheckOrder, data: precheckData } = usePrecheckOrder();
-  const { data: symbolData } = useGetInstrument(data?.symbol || "");
+  const { data: symbolData } = useGetInstrument(data?.symbol ?? "");
   const [otp, setOtp] = useState<string>("");
   const [updatePrice, setUpdatePrice] = useState<string>(
     data?.price ? (data.price / 1000).toFixed(2) : "0"
@@ -62,18 +65,17 @@ const Update = ({
     if (!symbolData) return;
     if (symbolData && Number(updatePrice) * 1000 < symbolData.floor) {
       setUpdatePrice((symbolData.floor / 1000).toFixed(2));
-      return;
     }
   };
 
   const handleRequestOTP = () => {
-    onGenTwoFactor({ transactionId: precheckData?.transactionId || "" });
+    onGenTwoFactor({ transactionId: precheckData?.transactionId ?? "" });
   };
 
   const handleSubmit = () => {
     if (data) {
       onPrecheckOrder({
-        accountId: activeAccount?.id || "",
+        accountId: activeAccount?.id ?? "",
         instrument: data.symbol, // Mã chứng khoán
         qty: data.remainqtty,
         //fix me uncomment this code
@@ -86,12 +88,12 @@ const Update = ({
   };
   const handleUpdateOrder = () => {
     const ord: UpdateOrderReq = {
-      accountId: activeAccount?.id || "",
-      orderId: data?.rootorderid || "",
+      accountId: activeAccount?.id ?? "",
+      orderId: data?.rootorderid ?? "",
       limitPrice: Number(updatePrice) * 1000,
-      tokenid: precheckData?.tokenid || "",
-      transactionId: precheckData?.transactionId || "",
-      qty: data?.qtty || 0,
+      tokenid: precheckData?.tokenid ?? "",
+      transactionId: precheckData?.transactionId ?? "",
+      qty: data?.qtty ?? 0,
       code: otp,
     };
     onUpdateOrder(ord);
@@ -110,13 +112,13 @@ const Update = ({
         />
         <RowContent
           leftTxt={t("fn_ob_txt_qtyProgress")}
-          rightTxt={`${formatNumber(data?.execqtty || 0)} / ${formatNumber(
-            data?.qtty || 0
+          rightTxt={`${formatNumber(data?.execqtty ?? 0)} / ${formatNumber(
+            data?.qtty ?? 0
           )}`}
         />
         <RowContent
           leftTxt={t("en_ord_order_price")}
-          rightTxt={formatNumber(data?.price || 0)}
+          rightTxt={formatNumber(data?.price ?? 0)}
         />
       </S.Content>
       <RowContent
@@ -155,6 +157,7 @@ const Update = ({
           handleChangeOTP={handleChangeOTP}
           handleRequest={handleRequestOTP}
           activePermission={activePermission}
+          genSuccess={genTwoFactorSuccess}
         />
         <HelpText txt={t("fn_obEdit_txt_notice")} stt="error" />
         <S.Action

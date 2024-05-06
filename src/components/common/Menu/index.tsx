@@ -5,16 +5,18 @@ import { useTranslations } from "next-intl";
 import colors from "@src/themes/colors";
 import { useRouter, usePathname } from "next/navigation";
 import { useIdleTimer } from "react-idle-timer";
-import { useLogout } from "@/src/services/hooks/useLogout";
-import { useGetAccountSummary } from "@/src/services/hooks/useGetAccountSummary";
-import { useFetchInitData } from "@/src/services/hooks/useFetchInitData";
+import {
+  useLogout,
+  useGetAccountSummary,
+  useFetchInitData,
+} from "@/src/services/hooks";
 import { useAppSelector } from "@/src/redux/hooks";
 import Cookies from "js-cookie";
 const Menu = () => {
   const { activeAccount } = useAppSelector((state) => state.user);
   const { refetch: fetchData } = useFetchInitData();
   const { onLogout } = useLogout();
-  useGetAccountSummary(activeAccount?.id || "");
+  useGetAccountSummary(activeAccount?.id ?? "");
   const pathname = usePathname();
   const router = useRouter();
   const t = useTranslations("menu");
@@ -22,7 +24,7 @@ const Menu = () => {
 
   useEffect(() => {
     const idle = window.localStorage.getItem(
-      process.env.NEXT_PUBLIC_IDLE_STO_NAME || "idle_time"
+      process.env.NEXT_PUBLIC_IDLE_STO_NAME ?? "idle_time"
     );
     if (idle) {
       setIdleTime(parseInt(idle));

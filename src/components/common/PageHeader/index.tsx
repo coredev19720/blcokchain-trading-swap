@@ -1,12 +1,10 @@
 import * as S from "./styles";
 import { MenuItem, SelectChangeEvent, Typography } from "@mui/material";
-import { useTranslations } from "next-intl";
 import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
 import { setActiveAccount } from "@src/redux/features/userSlice";
 import { Sync } from "@mui/icons-material";
 import { AccInfo } from "@/src/constraints/interface/account";
-import { useGetAccountSummary } from "@src/services/hooks/useGetAccountSummary";
-import { useGetPortfolio } from "@/src/services/hooks/useGetPortfolio";
+import { useGetPortfolio, useGetAccountSummary } from "@/src/services/hooks";
 
 interface Props {
   title: string;
@@ -17,9 +15,9 @@ const PageHeader = ({ title, accSumRefresh, portRefresh }: Props) => {
   const dispatch = useAppDispatch();
   const { activeAccount, accounts } = useAppSelector((state) => state.user);
   const { refetch: AccSumRefetch } = useGetAccountSummary(
-    activeAccount?.id || ""
+    activeAccount?.id ?? ""
   );
-  const { refetch: portRefetch } = useGetPortfolio(activeAccount?.id || "");
+  const { refetch: portRefetch } = useGetPortfolio(activeAccount?.id ?? "");
   const handleChangeAccount = (e: SelectChangeEvent<unknown>) => {
     if (typeof e.target.value === "string") {
       const availAcc = accounts.find((acc) => acc.id === e.target.value);

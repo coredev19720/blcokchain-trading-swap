@@ -1,18 +1,21 @@
 "use client";
 import { useEffect, useState } from "react";
-import { TickerWrapper, Wrapper } from "./styles";
-import { Backdrop, Slide, Typography } from "@mui/material";
+import { Wrapper } from "./styles";
+import { Backdrop, Slide } from "@mui/material";
 import SearchInput from "./components/SearchInput";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { setSelectedStock, setTicket } from "@src/redux/features/marketSlice";
 import { setLastSymbolToLocalStorage } from "@src/utils/helpers";
-import { Stock } from "@/src/constraints/interface/market";
+
 import { List, AutoSizer } from "react-virtualized";
+import RowRendered from "./components/RowRendered";
+import { Stock } from "@/src/constraints/interface/market";
 
 interface IProps {
   open: boolean;
   setOpenPanel: (val: boolean) => void;
 }
+
 const SearchPanel = ({ open, setOpenPanel }: IProps) => {
   const { ticket, stocks, selectedStock } = useAppSelector(
     (state) => state.market
@@ -35,7 +38,15 @@ const SearchPanel = ({ open, setOpenPanel }: IProps) => {
     dispatch(setSelectedStock(val));
     setLastSymbolToLocalStorage(val.symbol);
   };
-
+  const renderItem = ({ key, index }: { key: string; index: number }) => (
+    <RowRendered
+      key={key}
+      index={index}
+      handleClickTicker={handleClickTicker}
+      searchText={searchText}
+      stocks={stocks}
+    />
+  );
   return (
     <Backdrop open={open}>
       <Slide direction="left" in={open} mountOnEnter unmountOnExit>
@@ -56,23 +67,7 @@ const SearchPanel = ({ open, setOpenPanel }: IProps) => {
                     stocks.filter((x) => x.symbol.includes(searchText)).length
                   }
                   rowHeight={46}
-                  rowRenderer={({ key, index, style }) => {
-                    const stock = stocks.filter((x) =>
-                      x.symbol.includes(searchText)
-                    )[index];
-                    return (
-                      <TickerWrapper
-                        key={key}
-                        style={style}
-                        onClick={() => handleClickTicker(stock)}
-                      >
-                        <Typography fontWeight={600}>{stock.symbol}</Typography>
-                        <Typography variant="subtitle2" fontWeight={400}>
-                          {stock.FullName}
-                        </Typography>
-                      </TickerWrapper>
-                    );
-                  }}
+                  rowRenderer={renderItem}
                 />
               );
             }}

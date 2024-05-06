@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import TextInput from "../../../common/TextInput";
-import { usePostConfirmOTP } from "@/src/services/hooks/usePostConfirmOTP";
+import { usePostConfirmOTP } from "@/src/services/hooks";
 import { useRouter } from "next/navigation";
 const FillOTP = () => {
   const t = useTranslations("resetpwd");

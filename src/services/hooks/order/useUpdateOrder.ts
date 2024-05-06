@@ -20,10 +20,11 @@ const handleUpdateOrder = async (
       genOrderUrl(data.accountId, `orders/${data.orderId}`),
       { data: rest }
     );
-    const { s, ec, d } = res.data;
+    const { s, ec } = res.data;
     if (s !== "ok") throw new Error(ec);
     return res.data;
   } catch (e) {
+    console.error(e);
     throw e;
   }
 };

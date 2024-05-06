@@ -5,8 +5,15 @@ import {
   AccsPermissions,
   AuthorInfo,
 } from "../account";
-import { Instrument, MatchedOrd, PortItem } from "../market";
-import { PreCheckData, Stock, OrderInfo, WaitMatchedOrd } from "../market";
+import {
+  Instrument,
+  MatchedOrd,
+  PortItem,
+  PreCheckData,
+  Stock,
+  OrderInfo,
+  WaitMatchedOrd,
+} from "../market";
 
 export interface BaseRes {
   s: string;

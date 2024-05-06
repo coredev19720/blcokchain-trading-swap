@@ -26,7 +26,7 @@ const Detail = ({ data }: IProps) => {
         <Line />
         <RowContent
           leftTxt={t("en_ord_order_qty")}
-          rightTxt={formatNumber(data?.qtty || 0)}
+          rightTxt={formatNumber(data?.qtty ?? 0)}
         />
         <RowContent
           leftTxt={t("en_ord_order_value")}
@@ -34,12 +34,12 @@ const Detail = ({ data }: IProps) => {
         />
         <RowContent
           leftTxt={t("en_ord_match_qty")}
-          rightTxt={formatNumber(data?.execqtty || 0)}
+          rightTxt={formatNumber(data?.execqtty ?? 0)}
         />
         <Line />
         <RowContent
           leftTxt={t("en_ord_match_remainQty")}
-          rightTxt={formatNumber(data?.remainqtty || 0)}
+          rightTxt={formatNumber(data?.remainqtty ?? 0)}
         />
         <RowContent
           leftTxt={t("en_ord_match_value")}

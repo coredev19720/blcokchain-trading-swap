@@ -1,22 +1,20 @@
 "use client";
 import { PortItem } from "@interface/market";
 import * as S from "./styles";
-import { useAppSelector } from "@src/redux/hooks";
+import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
 import { useEffect, useState } from "react";
 import DataTable from "./components/DataTable";
 import PortInfo from "./components/PortInfo";
 import { PageHeader, Loading } from "@components/common";
 import { useTranslations } from "next-intl";
-import { useGetPortfolio } from "@/src/services/hooks/useGetPortfolio";
-import { useAppDispatch } from "@src/redux/hooks";
+import { useGetPortfolio } from "@/src/services/hooks";
 import { setPorts } from "@src/redux/features/marketSlice";
-import { FormControlLabel, Switch } from "@mui/material";
 
 const Portfolio = () => {
   const dispatch = useAppDispatch();
   const { activeAccount } = useAppSelector((state) => state.user);
   const { ports } = useAppSelector((state) => state.market);
-  const { isLoading, data } = useGetPortfolio(activeAccount?.id || "");
+  const { isLoading, data } = useGetPortfolio(activeAccount?.id ?? "");
   const t = useTranslations("portfolio");
   const [port, setPort] = useState<PortItem | null>(null);
   const [isShowPrice, setIsShowPrice] = useState<boolean>(false);

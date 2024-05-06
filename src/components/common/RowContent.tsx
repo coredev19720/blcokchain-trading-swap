@@ -26,13 +26,13 @@ const RowContent = ({
 }: IProps) => {
   return (
     <Wrapper isChild={isChild}>
-      <Typography variant="body2" color={leftColor || "text.secondary"}>
+      <Typography variant="body2" color={leftColor ?? "text.secondary"}>
         {leftTxt}
       </Typography>
       <Typography
         variant="body2"
         fontWeight={600}
-        color={rightColor || "text.primary"}
+        color={rightColor ?? "text.primary"}
       >
         {typeof rightTxt === "number" ? formatNumber(rightTxt) : rightTxt}
       </Typography>

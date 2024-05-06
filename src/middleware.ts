@@ -14,7 +14,7 @@ export function middleware(req: NextRequest) {
   const localeCookie = req.cookies.get("NEXT_LOCALE");
   let locale = localeCookie ? localeCookie.value : defaultLocale;
   const tokenCookiesName =
-    process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME || "access_token";
+    process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME ?? "access_token";
   const token = req.cookies.get(tokenCookiesName);
   let isPublic = publicUrls.some(
     (x) => `/${locale}/${x}` === req.nextUrl.pathname
@@ -40,6 +40,3 @@ export function middleware(req: NextRequest) {
 export const config = {
   matcher: ["/", "/(vi|en)/:path*"],
 };
-// export const config = {
-//   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
-// };

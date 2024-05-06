@@ -6,14 +6,12 @@ import { PageWrapper, MainContent } from "@src/styles/common";
 import { ToastContainer } from "react-toastify";
 import Menu from "./Menu";
 import { publicUrls } from "@src/constants/routes";
-import { usePathname, useParams } from "next/navigation";
-import { getInitColorSchemeScript } from "@mui/material/styles";
-import { useColorScheme } from "@mui/material/styles";
+import { usePathname, useParams, useSearchParams } from "next/navigation";
+import { getInitColorSchemeScript, useColorScheme } from "@mui/material/styles";
 import { socketCfg } from "@/src/constants/config";
 //@ts-ignore
 import io from "socket.io-client";
-import { useAppSelector } from "@/src/redux/hooks";
-import { useAppDispatch } from "@/src/redux/hooks";
+import { useAppSelector, useAppDispatch } from "@/src/redux/hooks";
 import {
   clearHisTrades,
   setHisTrades,
@@ -21,7 +19,7 @@ import {
   setPorts,
   setSelectedStock,
 } from "@/src/redux/features/marketSlice";
-import { usePreviousValue } from "@/src/hooks/usePrevious";
+import { usePreviousValue } from "@/src/hooks";
 import { useGetInstrument } from "@/src/services/hooks/useGetInstrument";
 import { stockMappingRTData } from "@/src/utils/market";
 import { TradeRTData } from "@/src/constraints/interface/market";
@@ -29,8 +27,8 @@ import {
   setLastSymbolToLocalStorage,
   lastSymLocalKey,
 } from "@src/utils/helpers";
-import { useSearchParams } from "next/navigation";
 import { useGetPortfolio } from "@/src/services/hooks/useGetPortfolio";
+
 const Wrapper = styled("main")(({ theme }) => {
   return {
     height: "100%",
@@ -151,7 +149,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     const s = searchParams?.get("s");
     const lastSymbol = localStorage.getItem(lastSymLocalKey);
     const firstPortItem = ports && ports.length > 0 ? ports[0].symbol : "";
-    const symbol = s || lastSymbol || firstPortItem;
+    const symbol = s ?? lastSymbol ?? firstPortItem;
     const stock = stocks.find((s) => s.symbol === symbol?.toUpperCase());
     if (stock) {
       dispatch(setSelectedStock(stock));

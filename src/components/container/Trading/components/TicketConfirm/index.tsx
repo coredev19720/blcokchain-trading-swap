@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import * as S from "./styles";
 import { FlexContent } from "@src/styles/common";
 import { Backdrop, Button, Slide, Typography } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
+import { useAppSelector } from "@src/redux/hooks";
 import { TSide } from "@enum/common";
 import { useTranslations } from "next-intl";
 import colors from "@src/themes/colors";
 import { formatNumber, generateUniqueId } from "@src/utils/helpers";
 import OTPConfirm from "@components/common/OTPConfirm";
 import { useRouter } from "next/navigation";
-import { useCreateOrder } from "@/src/services/hooks/order/useCreateOrder";
+import { useCreateOrder, useGenTwoFactorAuth } from "@/src/services/hooks";
 import { CreateOrderReq } from "@/src/constraints/interface/services/request";
 import { PreCheckData } from "@/src/constraints/interface/market";
 import { errHandling } from "@/src/utils/error";
@@ -32,6 +32,18 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
 
   const [otp, setOTP] = useState<string>("");
   const { onCreateOrder, isError, isSuccess, error } = useCreateOrder();
+  const {
+    onGenTwoFactor,
+    isSuccess: isGenSuccess,
+    isError: isGenErr,
+    data: genOtpData,
+  } = useGenTwoFactorAuth();
+  console.log("isGenSuccess", isGenSuccess);
+  console.log("isGenErr", isGenErr);
+  console.log("genOtpData", genOtpData);
+  useEffect(() => {
+    console.log("mounted");
+  }, []);
   useEffect(() => {
     if (isSuccess) {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
@@ -51,7 +63,10 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
     }
   };
   const handleRequestOTP = () => {
-    console.log("handleRequestOTP");
+    if (!precheckData) {
+      return;
+    }
+    onGenTwoFactor({ transactionId: precheckData.transactionId });
   };
   const handleSubmit = () => {
     if (!activeAccount || !precheckData) return;
@@ -179,6 +194,7 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
               handleChangeOTP={handleChangeOTP}
               otp={otp}
               activePermission={activePermission}
+              genSuccess={isGenSuccess}
             />
             <Button
               color="primary"

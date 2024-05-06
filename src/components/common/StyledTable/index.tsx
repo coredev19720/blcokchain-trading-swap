@@ -17,7 +17,6 @@ export interface IProps {
   columns: IColumn[];
   stickyHeader?: boolean;
   height?: number;
-  border?: boolean;
   rowClick?: (e: any, key: number) => void;
   columnsFooter?: IColumn[];
   layout?: "auto" | "fixed";
@@ -62,8 +61,8 @@ const StyledTable = ({
     <TableWrapper
       onScroll={onScroll}
       style={{
-        ...(styles ? styles : {}),
-        height: height || "auto",
+        ...(styles || {}),
+        height: height ?? "auto",
         tableLayout: layout,
       }}
     >

@@ -11,10 +11,9 @@ import TicketConfirm from "./components/TicketConfirm";
 import { useAppSelector } from "@src/redux/hooks";
 import { PageHeader, NotiContent } from "@components/common";
 import { PortItem } from "@/src/constraints/interface/market";
-import { usePrecheckOrder } from "@/src/services/hooks/order/usePrecheckOrder";
+import { usePrecheckOrder, useGetAvailTrade } from "@/src/services/hooks";
 import { toast } from "react-toastify";
 import { errHandling } from "@/src/utils/error";
-import { useGetAvailTrade } from "@/src/services/hooks/useGetAvailTrade";
 
 const Trading = () => {
   const t = useTranslations("trade");
@@ -27,8 +26,8 @@ const Trading = () => {
   const { onPrecheckOrder, isError, isSuccess, error, data } =
     usePrecheckOrder();
   const { data: availTrade, refetch: refetchAvailTrade } = useGetAvailTrade(
-    activeAccount?.id || "",
-    selectedStock?.symbol || "",
+    activeAccount?.id ?? "",
+    selectedStock?.symbol ?? "",
     TSide.buy,
     ticket.price ? Number(ticket.price) * 1000 : 0
   );
@@ -38,8 +37,8 @@ const Trading = () => {
     activeAccount && permissions ? permissions[activeAccount.id] : null;
   const maxVol =
     ticket?.side === TSide.sell
-      ? symbolPort?.trade || 0
-      : availTrade?.maxqtty || 0;
+      ? symbolPort?.trade ?? 0
+      : availTrade?.maxqtty ?? 0;
 
   useEffect(() => {
     if (ticket && ports) {
@@ -131,7 +130,7 @@ const Trading = () => {
       <TicketConfirm
         open={isConfirm}
         setOpen={setIsConfirm}
-        precheckData={data ? data : null}
+        precheckData={data ?? null}
       />
     </S.Wrapper>
   );

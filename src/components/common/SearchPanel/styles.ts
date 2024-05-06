@@ -1,4 +1,3 @@
-import colors from "@src/themes/colors";
 import { styled } from "@mui/system";
 
 export const Wrapper = styled("div")(({ theme }) => ({
@@ -12,11 +11,11 @@ export const Wrapper = styled("div")(({ theme }) => ({
   width: "100%",
 }));
 
-export const TickerWrapper = styled("div")(({ theme }) => ({
+export const TickerWrapper = styled("div")({
   cursor: "pointer",
   display: "flex",
   flexDirection: "column",
-}));
+});
 
 export const Tickers = styled("div")(({ theme }) => ({
   flex: 1,

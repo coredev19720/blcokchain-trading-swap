@@ -23,6 +23,7 @@ const handlePrecheckOrder = async (
     if (s !== "ok") throw new Error(ec);
     return d;
   } catch (e) {
+    console.error(e);
     throw e;
   }
 };

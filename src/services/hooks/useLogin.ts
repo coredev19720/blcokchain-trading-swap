@@ -27,7 +27,7 @@ const handleLogin = async (data: {
     });
     if (res.data.access_token) {
       window.localStorage.setItem(
-        process.env.NEXT_PUBLIC_IDLE_STO_NAME || "idle_time",
+        process.env.NEXT_PUBLIC_IDLE_STO_NAME ?? "idle_time",
         data.t.toString()
       );
       return res.data;

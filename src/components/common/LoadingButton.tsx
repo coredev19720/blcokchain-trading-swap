@@ -1,5 +1,4 @@
-import { Button } from "@mui/material";
-import { CircularProgress } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 
 type Props = {
   text: string;
@@ -20,9 +19,9 @@ const LoadingButton = ({
   return (
     <Button
       fullWidth={fullWidth}
-      variant={variant || "contained"}
+      variant={variant ?? "contained"}
       onClick={onClick}
-      size={size || "medium"}
+      size={size ?? "medium"}
       disabled={loading}
     >
       {loading ? <CircularProgress style={{ color: "inherit" }} /> : text}

@@ -25,7 +25,7 @@ const handleGetData = async (accountId: string): Promise<WaitMatchedOrd[]> => {
   }
 };
 
-export const useGetWaitMatchedOrds = (
+export const useGetWaitMatchedOrders = (
   accountId: string
 ): UseGetWaitMatchedOrds => {
   const { isError, isSuccess, isLoading, refetch, data } = useQuery({

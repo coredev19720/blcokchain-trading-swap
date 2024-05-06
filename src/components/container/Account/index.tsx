@@ -4,13 +4,11 @@ import { PageHeader, LoadingButton } from "@components/common";
 import Content from "./components/Content";
 import { useTranslations } from "next-intl";
 import LanguageToggle from "./components/LanguageToggle";
-import { useLogout } from "@/src/services/hooks/useLogout";
-import { useRouter } from "next/navigation";
+import { useLogout } from "@/src/services/hooks";
 
 const Account = () => {
   const t = useTranslations("account");
   const { onLogout, isPending } = useLogout();
-  const router = useRouter();
 
   return (
     <Wrapper>

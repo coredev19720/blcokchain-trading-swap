@@ -5,7 +5,7 @@ import { genTrend } from "@src/utils/helpers";
 import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTranslations } from "next-intl";
-import { InsRTData, Stock } from "@/src/constraints/interface/market";
+import { InsRTData } from "@/src/constraints/interface/market";
 import SplashText from "@/src/components/common/SplashText";
 import React from "react";
 const Wrapper = styled("div")(() => ({
@@ -65,7 +65,7 @@ const PriceInfo = ({ inst }: Props) => {
       <ContentBlock>
         <RowContent>
           <FieldLabel>{t("en_sb_price_ref")}</FieldLabel>
-          <SplashText val={inst?.RE || 0} trend="ref">
+          <SplashText val={inst?.RE ?? 0} trend="ref">
             <Typography fontWeight={500} variant="body2" color="inherit">
               {inst ? (inst.RE / 1000).toFixed(2) : "-"}
             </Typography>
@@ -73,7 +73,7 @@ const PriceInfo = ({ inst }: Props) => {
         </RowContent>
         <RowContent>
           <FieldLabel>{t("en_sb_price_celling")}</FieldLabel>
-          <SplashText val={inst?.CL || 0} trend="ce">
+          <SplashText val={inst?.CL ?? 0} trend="ce">
             <Typography fontWeight={500} variant="body2" color="inherit">
               {inst ? (inst.CL / 1000).toFixed(2) : "-"}
             </Typography>
@@ -81,7 +81,7 @@ const PriceInfo = ({ inst }: Props) => {
         </RowContent>
         <RowContent>
           <FieldLabel>{t("en_sb_price_floor")}</FieldLabel>
-          <SplashText val={inst?.FL || 0} trend="fl">
+          <SplashText val={inst?.FL ?? 0} trend="fl">
             <Typography fontWeight={500} variant="body2" color="inherit">
               {inst ? (inst.FL / 1000).toFixed(2) : "-"}
             </Typography>

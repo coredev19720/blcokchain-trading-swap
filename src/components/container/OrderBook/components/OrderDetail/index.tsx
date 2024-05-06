@@ -25,7 +25,6 @@ const OrderDetail = ({
   activeAccount,
   activePermission,
 }: IProps) => {
-  const t = useTranslations("order_book");
   const tTrade = useTranslations("trade");
   //unimplemented
   const title = {

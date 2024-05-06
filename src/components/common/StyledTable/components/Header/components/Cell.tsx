@@ -3,7 +3,6 @@ import { TableCell, Typography } from "@mui/material";
 import { HeadCellWrapper, HeaderShorter } from "../../../styles";
 import colors from "@src/themes/colors";
 import { ArrowDropUp, ArrowDropDown } from "@mui/icons-material";
-import { TShortSide } from "@/src/constraints/enum/common";
 import { IColumn } from "@/src/constraints/interface/table";
 interface IProps {
   col: IColumn;
@@ -45,7 +44,7 @@ const Cell = ({ col, sortKey, sortWay, handleClick }: IProps) => {
       ) : (
         <HeadCellWrapper isSort={col.isSort}>
           <Typography
-            align={col.align || "left"}
+            align={col.align ?? "left"}
             variant="subtitle2"
             fontWeight="400"
             color={colors.p300}

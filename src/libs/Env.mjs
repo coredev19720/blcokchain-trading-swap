@@ -26,6 +26,7 @@ export const Env = createEnv({
     NEXT_PUBLIC_NODE_ENV: z.string().min(1),
     NEXT_PUBLIC_TRANSFER_GUIDE_URL: z.string().min(1),
     NEXT_PUBLIC_TRADE_GUIDE_URL: z.string().min(1),
+    NEXT_PUBLIC_OTP_COUNTDOWN: z.string().min(1),
   },
   runtimeEnv: {
     NEXT_PUBLIC_DEFAULT_PAGE: process.env.NEXT_PUBLIC_DEFAULT_PAGE,
@@ -49,5 +50,6 @@ export const Env = createEnv({
     RECAPTCHA_SECRET_KEY: process.env.RECAPTCHA_SECRET_KEY,
     NEXT_PUBLIC_TRANSFER_GUIDE_URL: process.env.NEXT_PUBLIC_TRANSFER_GUIDE_URL,
     NEXT_PUBLIC_TRADE_GUIDE_URL: process.env.NEXT_PUBLIC_TRADE_GUIDE_URL,
+    NEXT_PUBLIC_OTP_COUNTDOWN: process.env.NEXT_PUBLIC_OTP_COUNTDOWN,
   },
 });

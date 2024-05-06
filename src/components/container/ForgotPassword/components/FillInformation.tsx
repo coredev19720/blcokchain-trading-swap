@@ -2,7 +2,7 @@
 import { Button, Slide } from "@mui/material";
 import { useRef, KeyboardEvent, useEffect, createRef } from "react";
 import { useForm, FieldValues } from "react-hook-form";
-import { usePostForgotPwd } from "@/src/services/hooks/usePostForgotPwd";
+import { usePostForgotPwd } from "@/src/services/hooks";
 import dayjs from "dayjs";
 import { useTranslations } from "next-intl";
 import * as S from "../styles";
@@ -19,7 +19,7 @@ const FillInformation = () => {
   const router = useRouter();
   const t = useTranslations("resetpwd");
   const tNoti = useTranslations("notification");
-  const { onForgotPwd, isSuccess, isError, error } = usePostForgotPwd();
+  const { onForgotPwd, isSuccess, isError } = usePostForgotPwd();
   const recaptchaRef = createRef<ReCAPTCHA>();
   const {
     control,
@@ -45,16 +45,11 @@ const FillInformation = () => {
     field: string
   ) => {
     if (e.keyCode === 13) {
-      switch (field) {
-        case "username":
-          if (nameRef.current) {
-            nameRef.current.focus();
-          }
-          return;
-        default:
-          handleSubmit(onSubmit);
-          return;
+      if (field === "username" && nameRef.current) {
+        nameRef.current.focus();
+        return;
       }
+      handleSubmit(onSubmit);
     }
   };
   const onSubmit = async (data: FieldValues) => {
@@ -174,7 +169,7 @@ const FillInformation = () => {
         />
         <ReCAPTCHA
           ref={recaptchaRef}
-          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ""}
           // onChange={onRecaptchaChange}
         />
         <Button

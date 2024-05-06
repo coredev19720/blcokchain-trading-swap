@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { TableBody, TableCell, Typography } from "@mui/material";
 import { IColumn } from "@interface/table";
 import { StyledRow } from "./styles";
@@ -21,7 +21,7 @@ const Body = ({ data, columns, rowClick, selected }: IProps) => {
   };
   return (
     <TableBody>
-      {data.map((row: any, idx: any) => (
+      {data.map((row: any, idx: number) => (
         <StyledRow
           key={`${idx}_row`}
           hoverable={!!rowClick}
@@ -31,7 +31,7 @@ const Body = ({ data, columns, rowClick, selected }: IProps) => {
             <TableCell
               key={`${col.key}-${index}`}
               style={{
-                textAlign: col.align || "left",
+                textAlign: col.align ?? "left",
                 ...(col.style ? col.style : {}),
               }}
               onClick={

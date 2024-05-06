@@ -2,10 +2,11 @@ import { styled } from "@mui/system";
 import { keyframes } from "@emotion/react";
 import colors from "@/src/themes/colors";
 import React from "react";
-import { usePreviousValue } from "@/src/hooks/usePrevious";
+import { usePreviousValue } from "@/src/hooks/usePreviousValue";
+type Trend = "up" | "down" | "ref" | "ce" | "fl";
 interface Props {
   val: string | number | undefined;
-  trend?: "up" | "down" | "ref" | "ce" | "fl";
+  trend?: Trend;
   children?: React.ReactNode;
 }
 const splash = keyframes`  0% {
@@ -104,22 +105,27 @@ const ftAni = keyframes`
   }
 `;
 const eff = "0.7s ease-in-out ";
+const genAni = (trend?: Trend) => {
+  if (!trend) return "";
+  switch (trend) {
+    case "down":
+      return `${dAni} ${eff}, ${dtAni} ${eff}`;
+    case "up":
+      return `${uAni} ${eff}, ${utAni} ${eff}`;
+    case "ref":
+      return `${rAni} ${eff}, ${rtAni} ${eff}`;
+    case "ce":
+      return `${cAni} ${eff}, ${ctAni} ${eff}`;
+    case "fl":
+      return `${fAni} ${eff}, ${ftAni} ${eff}`;
+    default:
+      return "";
+  }
+};
 export const Wrapper = styled("div")<{
   trend?: "up" | "down" | "ref" | "ce" | "fl";
 }>((props) => ({
-  animation: `${splash} ${eff}, ${
-    props.trend === "down"
-      ? `${dAni} ${eff}, ${dtAni} ${eff}`
-      : props.trend === "up"
-      ? `${uAni} ${eff}, ${utAni} ${eff}`
-      : props.trend === "ref"
-      ? `${rAni} ${eff}, ${rtAni} ${eff}`
-      : props.trend === "ce"
-      ? `${cAni} ${eff}, ${ctAni} ${eff}`
-      : props.trend === "fl"
-      ? `${fAni} ${eff}, ${ftAni} ${eff}`
-      : ""
-  }`,
+  animation: `${splash} ${eff}, ${genAni(props.trend)}`,
   animationFillMode: "forwards",
 }));
 

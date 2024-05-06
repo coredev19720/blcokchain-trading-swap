@@ -12,8 +12,9 @@ export const genTrend = (
   if (!ref || !price || !ceil || !floor) return "ref";
   if (price === ceil) return "ce";
   if (price === floor) return "fl";
-
-  return price > ref ? "up" : price < ref ? "down" : "ref";
+  if (price > ref) return "up";
+  if (price < ref) return "down";
+  return "ref";
 };
 export const genPriceColor = (
   ref?: number,

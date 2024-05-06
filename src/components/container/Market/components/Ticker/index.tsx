@@ -5,11 +5,7 @@ import Line from "@components/common/Line";
 import { IBestDeal } from "@interface/common";
 import MarketIndex from "./components/MarketIndex";
 import Actions from "./components/Actions";
-import {
-  InsRTData,
-  Stock,
-  TradeRTData,
-} from "@/src/constraints/interface/market";
+import { InsRTData, TradeRTData } from "@/src/constraints/interface/market";
 import FieldLabel from "@/src/components/common/FieldLabel";
 import StyledTable from "@/src/components/common/StyledTable";
 import { TShortSide } from "@/src/constraints/enum/common";

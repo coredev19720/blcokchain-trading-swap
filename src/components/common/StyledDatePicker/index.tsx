@@ -2,7 +2,7 @@ import React from "react";
 import DatePicker from "react-datepicker";
 import { Wrapper, Icon } from "./styles";
 import "react-datepicker/dist/react-datepicker.css";
-import dayjs from "dayjs";
+
 interface Props {
   selected: Date;
   handleChange: (val: Date) => void;

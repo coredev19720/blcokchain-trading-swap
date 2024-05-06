@@ -29,7 +29,6 @@ export const usePostCreatePwd = (): UsePostCreatePwd => {
     mutate: onCreatePwd,
     isError,
     isSuccess,
-    data,
     error,
   } = useMutation({
     mutationFn: handleCreatePwd,

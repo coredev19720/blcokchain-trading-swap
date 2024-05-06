@@ -56,11 +56,9 @@ const PortItemDetail = ({ data, handleClose }: IProps) => {
   };
   const genTextColor = (value: number | undefined) => {
     if (value === undefined) return "text.primary";
-    return value > 0
-      ? colors.lightUpText
-      : value < 0
-      ? colors.lightDownText
-      : "text.primary";
+    if (value > 0) return colors.lightUpText;
+    if (value < 0) return colors.lightDownText;
+    return "text.primary";
   };
   return (
     <Backdrop open={!!data} onClick={handleClose}>

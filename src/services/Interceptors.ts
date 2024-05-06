@@ -15,13 +15,16 @@ const reqFullfiled = (config: InternalAxiosRequestConfig) => {
     config.headers["Authorization"] = `Bearer ${token}`;
     config.headers["x-via"] = "K";
     config.headers["x-lang"] = "vi";
-    // config.headers["Access-Control-Allow-Origin"] = "*";
   }
   return config;
 };
 
-const reqRejected = (error: any) => {
-  return Promise.reject(error);
+const reqRejected = (error: unknown) => {
+  if (axios.isCancel(error)) {
+    return Promise.reject(error);
+  } else {
+    return Promise.reject(new Error("Request rejected"));
+  }
 };
 
 const resFullfiled = (res: any) => {

@@ -21,6 +21,7 @@ const handleGetData = async (accountId: string): Promise<PortItem[]> => {
     }
     throw new Error(ec);
   } catch (e) {
+    console.error(e);
     throw e;
   }
 };

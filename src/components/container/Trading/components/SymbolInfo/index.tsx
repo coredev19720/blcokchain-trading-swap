@@ -122,7 +122,7 @@ const SymbolInfo = ({ inst, maxVol }: IProps) => {
         <S.PriceBlock>
           <FieldLabel>{t("en_sb_price_avg")}</FieldLabel>
           <Typography variant="body2" fontWeight={600}>
-            {formatNumber(inst?.AP || 0)}
+            {formatNumber(inst?.AP ?? 0)}
           </Typography>
         </S.PriceBlock>
         <S.PriceBlock>

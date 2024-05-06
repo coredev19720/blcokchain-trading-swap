@@ -1,7 +1,17 @@
 import { styled } from "@mui/system";
 import colors from "../themes/colors";
 
-
+export const LayoutWrapper = styled("main")(({ theme }) => {
+  return {
+    height: "100%",
+    width: "100%",
+    overflow: "hidden",
+    background: theme.palette.common.background,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  };
+});
 export const PageWrapper = styled("div")(({ theme }) => ({
   maxWidth: 600,
   height: "100%",

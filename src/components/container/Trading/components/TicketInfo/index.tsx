@@ -39,7 +39,6 @@ const TicketInfo = ({ inst, maxVol }: Props) => {
     if (!inst) return;
     if (Number(ticket.price) * 1000 < inst.FL) {
       dispatch(setTicket({ ...ticket, price: (inst.FL / 1000).toFixed(2) }));
-      return;
     }
   };
   const handleChangeOrderKind = (e: SelectChangeEvent<unknown>) => {

@@ -6,7 +6,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Wrapper, AdormentWrapper } from "./styles";
 import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "react-toastify";
-import { useLogin } from "@/src/services/hooks/useLogin";
+import { useLogin } from "@/src/services/hooks";
 import { encrypt } from "@src/libs/hash";
 import { useRouter } from "next/navigation";
 import TextInput from "@/src/components/common/TextInput";
@@ -22,7 +22,6 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
     setValue,
-    getValues,
   } = useForm({
     reValidateMode: "onSubmit",
   });
@@ -64,24 +63,13 @@ const LoginForm = () => {
   };
   const handleChangeExpireTime = (e: React.ChangeEvent<HTMLInputElement>) => {
     const maxIdleTime: number = Number(
-      process.env.NEXT_PUBLIC_MAX_IDLE_TIME || 120
+      process.env.NEXT_PUBLIC_MAX_IDLE_TIME ?? 120
     );
     if (Number(e.target.value) > maxIdleTime) {
       setValue("expireTime", maxIdleTime);
       return;
     }
     setValue("expireTime", Number(e.target.value));
-  };
-
-  const handleBlurExpireTime = () => {
-    const minIdleTime: number = Number(
-      process.env.NEXT_PUBLIC_MIN_IDLE_TIME || 1
-    );
-    const expireTime = getValues("expireTime");
-    if (expireTime < minIdleTime) {
-      setValue("expireTime", minIdleTime);
-      return;
-    }
   };
 
   const handleChangeUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -109,7 +97,7 @@ const LoginForm = () => {
       u: data.username,
       p: encrypt(data.pwd),
       t: data.expireTime * 60,
-      captchaToken: recaptchaVal || "",
+      captchaToken: recaptchaVal ?? "",
     });
   };
   return (
@@ -169,7 +157,6 @@ const LoginForm = () => {
           handleEnter={handleKeyDownEnter}
           onChangeValue={handleChangeExpireTime}
           inputRef={expireTimeRef}
-          onBlur={handleBlurExpireTime}
           defaultValue={60}
           inputProps={{
             endAdornment: (
@@ -183,7 +170,7 @@ const LoginForm = () => {
         />
         <ReCAPTCHA
           ref={recaptchaRef}
-          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ""}
           // onChange={onRecaptchaChange}
         />
         <LoadingButton

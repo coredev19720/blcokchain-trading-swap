@@ -15,15 +15,20 @@ interface IProps {
   otp: string;
   handleChangeOTP: (e: React.ChangeEvent<HTMLInputElement>) => void;
   activePermission: AccPermissions | null;
+  genSuccess: boolean;
 }
 const OTPConfirm = ({
   handleRequest,
   handleChangeOTP,
   otp,
   activePermission,
+  genSuccess,
 }: IProps) => {
   const t = useTranslations("order_book");
   const [countdown, setCountdown] = useState(0);
+  const countdownTime = process.env.NEXT_PUBLIC_OTP_COUNTDOWN
+    ? Number(process.env.NEXT_PUBLIC_OTP_COUNTDOWN)
+    : 30;
   useEffect(() => {
     const intervalId = setInterval(() => {
       // Update countdown every 1 second
@@ -40,6 +45,12 @@ const OTPConfirm = ({
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
   }, [countdown]);
+  useEffect(() => {
+    console.log(genSuccess);
+    if (genSuccess) {
+      setCountdown(countdownTime);
+    }
+  }, [genSuccess]);
 
   const handleClickCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.checked);
@@ -59,14 +70,11 @@ const OTPConfirm = ({
           />
           {activePermission?.ORDINPUT[0] === TPinAuthType.SMSOTP && (
             <S.OTPButton
-              onClick={() => {
-                handleRequest();
-                setCountdown(30);
-              }}
+              onClick={handleRequest}
               variant="outlined"
               disabled={!!countdown}
             >
-              {!!countdown ? `(${countdown})` : t("fn_ob_cta_token")}
+              {countdown ? `(${countdown})` : t("fn_ob_cta_token")}
             </S.OTPButton>
           )}
         </S.OTPInput>

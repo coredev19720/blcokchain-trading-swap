@@ -1,17 +1,16 @@
 "use client";
 import { Button, Slide, Typography, IconButton } from "@mui/material";
 import * as S from "../styles";
-import { KeyboardEvent, createRef, useEffect, useRef, useState } from "react";
+import { KeyboardEvent, createRef, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import TextInput from "../../../common/TextInput";
-import { usePostCreatePwd } from "@/src/services/hooks/usePostCreatePwd";
+import { usePostCreatePwd } from "@/src/services/hooks";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const FillPassword = () => {
-  const params = useParams();
   const router = useRouter();
   const confPwdRef: React.Ref<any> = createRef();
   const t = useTranslations("resetpwd");
@@ -61,14 +60,9 @@ const FillPassword = () => {
     name: string
   ) => {
     if (e.keyCode === 13) {
-      switch (name) {
-        case "pwd":
-          confPwdRef.current?.focus();
-          return;
-        case "confPwd":
-          handleSubmit(onSubmit)();
-        default:
-          break;
+      if (name === "pwd") {
+        confPwdRef.current?.focus();
+        return;
       }
       handleSubmit(onSubmit)();
     }

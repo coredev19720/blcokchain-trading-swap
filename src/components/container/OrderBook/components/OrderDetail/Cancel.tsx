@@ -7,12 +7,11 @@ import { useEffect, useState } from "react";
 import RowContent from "@components/common/RowContent";
 import OTPConfirm from "@components/common/OTPConfirm";
 import dayjs from "dayjs";
-import { usePrecheckOrder } from "@/src/services/hooks/order/usePrecheckOrder";
+import { usePrecheckOrder, useCancelOrder } from "@/src/services/hooks";
 import { CancelOrderReq } from "@/src/constraints/interface/services/request";
 import { AccInfo, AccPermissions } from "@/src/constraints/interface/account";
 import { toast } from "react-toastify";
 import { errHandling } from "@/src/utils/error";
-import { useCancelOrder } from "@/src/services/hooks/order/useCancelOrder";
 import { useQueryClient } from "@tanstack/react-query";
 interface IProps {
   data: OrderInfo;
@@ -44,7 +43,7 @@ const Cancel = ({
   const [otp, setOtp] = useState<string>("");
   useEffect(() => {
     onPrecheckOrder({
-      accountId: activeAccount?.id || "",
+      accountId: activeAccount?.id ?? "",
       instrument: data.symbol, // Mã chứng khoán
       qty: data.remainqtty,
       //fix me uncomment this code
@@ -81,8 +80,8 @@ const Cancel = ({
     if (precheckData) {
       try {
         const ord: CancelOrderReq = {
-          accountId: activeAccount?.id || "",
-          orderId: data?.rootorderid || "",
+          accountId: activeAccount?.id ?? "",
+          orderId: data?.rootorderid ?? "",
           tokenid: precheckData?.tokenid,
           transactionId: precheckData.transactionId,
           code: otp,
@@ -139,6 +138,7 @@ const Cancel = ({
           handleChangeOTP={handleChangeOTP}
           otp={otp}
           activePermission={activePermission}
+          genSuccess={precheckIsSuccess}
         />
         <S.Action
           color="primary"
