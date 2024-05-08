@@ -336,23 +336,32 @@ export interface AccountRTData {
 }
 
 export interface TransLog {
-  id: string;
-  sequenceMsg: string;
-  tradingdate: string;
-  symbol: string;
-  formattedTime: string;
-  lastColor: string;
-  formattedMatchPrice: string;
-  changeColor: string;
-  formattedChangeValue: string;
-  formattedVol: string;
-  formattedAccVol: string;
-  formattedAccVal: string;
+  id: string; // indentity
+  sequenceMsg: string; // Sequence MSG
+  tradingdate: string; // Ngày giao dịch
+  symbol: string; // Mã CK
+  formattedTime: string; // Thời gian
+  lastColor: string; // Màu
+  formattedMatchPrice: number; // Giá khớp
+  changeColor: string; // Màu thay đổi
+  formattedChangeValue: number; // Giá trị thay đổi
+  formattedVol: number; // KL khớp
+  formattedAccVol: number; // KL tích lũy
+  formattedAccVal: number; // Giá trị tích lũy
   createAt: number;
 }
 export interface TranslogDataRes {
   nextIndex: number;
   sumAccVol: number;
   sumSellVol: number;
+  sumBuyVol: number;
   translog: TransLog[];
+}
+
+export interface IndexRTData {
+  MC: string; // tên sàn
+  MI: number; // chỉ số
+  ICH: number; // Thay đổi chỉ số.
+  IPC: number; //Phần trăm thay đổi chỉ số
+  TVS: number; //Khối lượng
 }

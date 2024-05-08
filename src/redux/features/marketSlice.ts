@@ -1,8 +1,8 @@
 import { TMarket, TOrderKind, TOrderType, TSide } from "@enum/common";
 import {
   ITicket,
+  IndexRTData,
   InsRTData,
-  Instrument,
   OrderInfo,
   PortItem,
   TradeRTData,
@@ -20,6 +20,7 @@ type MarketState = {
   port: PortItem | null;
   inst: InsRTData | null;
   hisTrades: TradeRTData[];
+  idx: IndexRTData[];
 };
 
 const initialState = {
@@ -43,6 +44,7 @@ const initialState = {
   port: null,
   inst: null,
   hisTrades: [],
+  idx: [],
 } as MarketState;
 
 export const market = createSlice({
@@ -88,11 +90,42 @@ export const market = createSlice({
         ? { ...state.inst, ...action.payload }
         : action.payload;
     },
-    setHisTrades: (state, action: PayloadAction<TradeRTData>) => {
-      state.hisTrades = [action.payload, ...state.hisTrades];
+    setHisTrades: (state, action: PayloadAction<TradeRTData[]>) => {
+      state.hisTrades = [...action.payload, ...state.hisTrades];
     },
     clearHisTrades: (state) => {
       state.hisTrades = [];
+    },
+    setIdx: (state, action: PayloadAction<IndexRTData>) => {
+      const { MI, ICH, IPC, TVS, MC } = action.payload;
+      const existed = state.idx.find((i) => i.MC === MC);
+      if (!existed) {
+        state.idx = [
+          ...state.idx,
+          {
+            MC,
+            MI: MI ?? 0,
+            ICH: ICH ?? 0,
+            IPC: IPC ?? 0,
+            TVS: TVS ?? 0,
+          },
+        ];
+      }
+      if (existed) {
+        const result = state.idx.map((i) => {
+          if (i.MC === MC) {
+            return {
+              ...i,
+              ...(MI ? { MI } : {}),
+              ...(ICH ? { ICH } : {}),
+              ...(IPC ? { IPC } : {}),
+              ...(TVS ? { TVS } : {}),
+            };
+          }
+          return i;
+        });
+        state.idx = result;
+      }
     },
   },
 });
@@ -111,5 +144,6 @@ export const {
   setInstrument,
   setHisTrades,
   clearHisTrades,
+  setIdx,
 } = market.actions;
 export default market.reducer;

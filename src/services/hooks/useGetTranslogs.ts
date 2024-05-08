@@ -1,23 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
 import { getTranslogsUrl } from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
-import { GetAccountsRes } from "@src/constraints/interface/services/response";
 import { GetTransLogsReq } from "@/src/constraints/interface/services/request";
+import { TranslogDataRes } from "@/src/constraints/interface/market";
 interface UseGetTranslogs {
   isError: boolean;
   isSuccess: boolean;
   isLoading: boolean;
-  data: GetAccountsRes | undefined;
+  data: TranslogDataRes | undefined;
   refetch: () => void;
 }
-const onGetData = async (data: GetTransLogsReq): Promise<GetAccountsRes> => {
+const onGetData = async (data: GetTransLogsReq): Promise<TranslogDataRes> => {
   try {
     const { symbol, ...rest } = data;
     const url = getTranslogsUrl(symbol);
     const res = await axiosInst.get(url, {
       params: rest,
     });
-    return res.data;
+    const { s, d, ec } = res.data;
+    if (s === "ok") {
+      return d;
+    }
+    throw new Error(ec);
   } catch (e) {
     throw e;
   }

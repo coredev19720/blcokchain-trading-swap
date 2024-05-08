@@ -63,8 +63,8 @@ export enum TPinAuthType {
 }
 
 export enum TShortSide {
-  s = "s",
-  b = "b",
+  s = "S",
+  b = "B",
 }
 export enum TSide {
   buy = "buy",

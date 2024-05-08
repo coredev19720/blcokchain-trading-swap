@@ -127,6 +127,7 @@ export const Wrapper = styled("div")<{
 }>((props) => ({
   animation: `${splash} ${eff}, ${genAni(props.trend)}`,
   animationFillMode: "forwards",
+  display: "inline-block",
 }));
 
 const genColor = (trend: "up" | "down" | "ref" | "ce" | "fl") => {

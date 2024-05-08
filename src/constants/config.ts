@@ -5,4 +5,5 @@ export const socketCfg = {
   lang: "javascript",
   transport: ["websocket"],
   subscribePath: "/client/subscribe",
+  accSubscribe: "/client/send",
 };

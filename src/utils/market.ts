@@ -1,4 +1,9 @@
-import { InsRTData, Instrument } from "../constraints/interface/market";
+import {
+  InsRTData,
+  Instrument,
+  TradeRTData,
+  TransLog,
+} from "../constraints/interface/market";
 
 export const stockMappingRTData = (stock: Instrument): InsRTData => {
   return {
@@ -61,5 +66,24 @@ export const stockMappingRTData = (stock: Instrument): InsRTData => {
     ER: "", // ExerciseRatio
     IN: "", // IssuerName
     MD: "", // MaturityDate
+  };
+};
+
+export const translogsMappingTradeRTData = (
+  translog: TransLog
+): TradeRTData => {
+  return {
+    IID: translog.id, // Indentity
+    SM: translog.sequenceMsg, // Sequence MSG
+    TD: translog.tradingdate, // Ngày giao dịch
+    SB: translog.symbol, // Mã CK
+    FT: translog.formattedTime, // Thời gian
+    FMP: translog.formattedMatchPrice, // Giá khớp
+    FCV: translog.formattedMatchPrice, // Giá trị thay đổi
+    FV: translog.formattedVol, // KL khớp
+    AVO: translog.formattedChangeValue, // KL tích lũy // unimplemented
+    AVA: translog.formattedAccVal, // Giá trị tích lũy - unimplemented
+    FMV: translog.formattedAccVol, // Giá trị khớp - unimplemented
+    LC: translog.lastColor, // Loại lệnh
   };
 };

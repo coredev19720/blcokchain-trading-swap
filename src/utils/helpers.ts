@@ -31,6 +31,12 @@ export const genPriceColor = (
   return colors.lightRefText;
 };
 
+export const genIndexTrend = (chg: number) => {
+  if (chg > 0) return "up";
+  if (chg < 0) return "down";
+  return "ref";
+};
+
 export const genIndexColor = (chg: number) => {
   if (chg > 0) return colors.lightUpText;
   if (chg < 0) return colors.lightDownText;
@@ -38,7 +44,7 @@ export const genIndexColor = (chg: number) => {
 };
 export const genTextWithPrefix = (val: number) => {
   if (val > 0) return `+${val}`;
-  if (val < 0) return `-${val}`;
+  if (val < 0) return `${val}`;
   return val;
 };
 
