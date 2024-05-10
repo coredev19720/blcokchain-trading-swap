@@ -1,7 +1,7 @@
 import * as S from "./styles";
 import { OrderInfo } from "@interface/market";
 import { useTranslations } from "next-intl";
-import { formatNumber } from "@src/utils/helpers";
+import { formatNumber, genOTPLenth } from "@src/utils/helpers";
 import { TSide } from "@enum/common";
 import { useEffect, useState } from "react";
 import RowContent from "@components/common/RowContent";
@@ -93,7 +93,7 @@ const Cancel = ({
     }
   };
   const handleChangeOTP = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length <= 6) {
+    if (e.target.value.length <= genOTPLenth(activePermission?.ORDINPUT[0])) {
       setOtp(e.target.value);
     }
   };
@@ -137,14 +137,15 @@ const Cancel = ({
           handleRequest={handleRequestOTP}
           handleChangeOTP={handleChangeOTP}
           otp={otp}
-          activePermission={activePermission}
+          type={activePermission?.ORDINPUT[0]}
           genSuccess={precheckIsSuccess}
         />
         <S.Action
+          size="large"
           color="primary"
           variant="contained"
           fullWidth
-          disabled={otp.length !== 6}
+          disabled={otp.length !== genOTPLenth(activePermission?.ORDINPUT[0])}
           onClick={handleSubmit}
         >
           {t("fn_ob_cta_confirm")}

@@ -8,20 +8,19 @@ import {
   RadioButtonUncheckedRounded,
   RadioButtonCheckedRounded,
 } from "@mui/icons-material";
-import { AccPermissions } from "@/src/constraints/interface/account";
 import { TPinAuthType } from "@/src/constraints/enum/common";
 interface IProps {
   handleRequest: () => void;
   otp: string;
   handleChangeOTP: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  activePermission: AccPermissions | null;
+  type?: TPinAuthType;
   genSuccess: boolean;
 }
 const OTPConfirm = ({
   handleRequest,
   handleChangeOTP,
   otp,
-  activePermission,
+  type,
   genSuccess,
 }: IProps) => {
   const t = useTranslations("order_book");
@@ -67,7 +66,7 @@ const OTPConfirm = ({
             fullWidth
             autoFocus
           />
-          {activePermission?.ORDINPUT[0] === TPinAuthType.SMSOTP && (
+          {type === TPinAuthType.SMSOTP && (
             <S.OTPButton
               onClick={handleRequest}
               variant="outlined"

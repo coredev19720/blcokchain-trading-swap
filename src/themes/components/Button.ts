@@ -1,5 +1,4 @@
 import colors from "@src/themes/colors";
-import breakpoints from "@src/themes/breakpoints";
 
 const Button = {
   styleOverrides: {
@@ -8,6 +7,7 @@ const Button = {
       lineHeight: "1.8rem",
       borderRadius: 8,
       boxShadow: "none",
+      height: 40,
       "&:hover": {
         boxShadow: "none",
       },
@@ -18,6 +18,11 @@ const Button = {
       fontSize: "1.7rem",
       lineHeight: "2.2rem",
       borderRadius: 12,
+    },
+    sizeSmall: {
+      fontSize: "1.3rem",
+      lineHeight: "1.8rem",
+      height: 28,
     },
     containedPrimary: {},
     containedSecondary: {
@@ -117,11 +122,6 @@ const Button = {
     },
     outlinedSizeMedium: {
       padding: "6px 14px",
-    },
-    sizeSmall: {
-      fontSize: "1.5rem",
-      lineHeight: "2rem",
-      padding: "8px 16px",
     },
     outlinedSizeSmall: {
       padding: "6px 14px",

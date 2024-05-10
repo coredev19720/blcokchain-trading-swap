@@ -8,13 +8,15 @@ export const BestDeal = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
   gap: 8,
-  flex: 1,
+  width: "calc(50% - 4px)",
+  minWidth: "calc(50% - 4px)",
 }));
 export const HistoryDeals = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
   gap: 8,
-  flex: 1,
+  width: "calc(50% - 4px)",
+  minWidth: "calc(50% - 4px)",
 }));
 export const Wrapper = styled("div")(() => ({
   display: "flex",

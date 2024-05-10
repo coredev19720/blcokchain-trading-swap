@@ -96,36 +96,15 @@ export const market = createSlice({
     clearHisTrades: (state) => {
       state.hisTrades = [];
     },
-    setIdx: (state, action: PayloadAction<IndexRTData>) => {
-      const { MI, ICH, IPC, TVS, MC } = action.payload;
-      const existed = state.idx.find((i) => i.MC === MC);
-      if (!existed) {
-        state.idx = [
-          ...state.idx,
-          {
-            MC,
-            MI: MI ?? 0,
-            ICH: ICH ?? 0,
-            IPC: IPC ?? 0,
-            TVS: TVS ?? 0,
-          },
-        ];
-      }
-      if (existed) {
-        const result = state.idx.map((i) => {
-          if (i.MC === MC) {
-            return {
-              ...i,
-              ...(MI ? { MI } : {}),
-              ...(ICH ? { ICH } : {}),
-              ...(IPC ? { IPC } : {}),
-              ...(TVS ? { TVS } : {}),
-            };
-          }
-          return i;
-        });
-        state.idx = result;
-      }
+    setIdx: (state, action: PayloadAction<IndexRTData[]>) => {
+      action.payload.forEach((i) => {
+        const existed = state.idx.find((idx) => idx.MC === i.MC);
+        if (!existed) {
+          state.idx = [...state.idx, i];
+        } else {
+          state.idx = state.idx.map((idx) => (idx.MC === i.MC ? i : idx));
+        }
+      });
     },
   },
 });

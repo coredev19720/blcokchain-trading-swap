@@ -8,16 +8,24 @@ import Search from "./components/Search";
 import SymbolInfo from "./components/SymbolInfo";
 import TicketInfo from "./components/TicketInfo";
 import TicketConfirm from "./components/TicketConfirm";
-import { useAppSelector } from "@src/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { PageHeader, NotiContent } from "@components/common";
 import { PortItem } from "@/src/constraints/interface/market";
 import { usePrecheckOrder, useGetAvailTrade } from "@/src/services/hooks";
 import { toast } from "react-toastify";
 import { errHandling } from "@/src/utils/error";
+import { setSelectedStock } from "@/src/redux/features/marketSlice";
+import { useSearchParams } from "next/navigation";
+import {
+  lastSymLocalKey,
+  setLastSymbolToLocalStorage,
+} from "@/src/utils/helpers";
 
 const Trading = () => {
+  const dispatch = useAppDispatch();
+  const searchParams = useSearchParams();
   const t = useTranslations("trade");
-  const { ticket, selectedStock, ports, inst } = useAppSelector(
+  const { ticket, selectedStock, ports, inst, stocks } = useAppSelector(
     (state) => state.market
   );
   const { accountSummary, activeAccount, permissions } = useAppSelector(
@@ -61,6 +69,10 @@ const Trading = () => {
       setIsConfirm(true);
     }
   }, [isSuccess]);
+  useEffect(() => {
+    !!stocks.length && activeAccount && ports && initTicker();
+  }, [stocks, activeAccount, ports]);
+
   const handleClickTrade = () => {
     if (
       !selectedStock ||
@@ -80,7 +92,24 @@ const Trading = () => {
       authtype: activePermission.ORDINPUT[0],
     });
   };
-
+  const initTicker = () => {
+    let s = searchParams?.get("s");
+    let lastSym = null;
+    let firstPortItem = null;
+    if (!selectedStock.symbol) {
+      lastSym = localStorage.getItem(lastSymLocalKey);
+      firstPortItem = ports && ports.length > 0 ? ports[0].symbol : "";
+    }
+    if (s === selectedStock.symbol) {
+      s = null;
+    }
+    const symbol = s ?? lastSym ?? firstPortItem;
+    const stock = stocks.find((s) => s.symbol === symbol?.toUpperCase());
+    if (stock) {
+      dispatch(setSelectedStock(stock));
+      setLastSymbolToLocalStorage(stock.symbol);
+    }
+  };
   const btnDisabled =
     !inst ||
     !ticket.price ||

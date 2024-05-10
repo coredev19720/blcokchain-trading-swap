@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 
 import { TextField } from "@mui/material";
 import { OrderInfo } from "@interface/market";
-import { formatNumber } from "@src/utils/helpers";
+import { formatNumber, genOTPLenth } from "@src/utils/helpers";
 import {
   RowContent,
   FieldLabel,
@@ -99,7 +99,7 @@ const Update = ({
     onUpdateOrder(ord);
   };
   const handleChangeOTP = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length <= 6) {
+    if (e.target.value.length <= genOTPLenth(activePermission?.ORDINPUT[0])) {
       setOtp(e.target.value);
     }
   };
@@ -156,14 +156,16 @@ const Update = ({
           otp={otp}
           handleChangeOTP={handleChangeOTP}
           handleRequest={handleRequestOTP}
-          activePermission={activePermission}
+          type={activePermission?.ORDINPUT[0]}
           genSuccess={genTwoFactorSuccess}
         />
         <HelpText txt={t("fn_obEdit_txt_notice")} stt="error" />
         <S.Action
+          size="large"
           color="primary"
           variant="contained"
           fullWidth
+          disabled={otp.length !== genOTPLenth(activePermission?.ORDINPUT[0])}
           onClick={handleSubmit}
         >
           {t("fn_ob_cta_confirm")}

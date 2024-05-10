@@ -5,10 +5,21 @@ import Content from "./components/Content";
 import { useTranslations } from "next-intl";
 import LanguageToggle from "./components/LanguageToggle";
 import { useLogout } from "@/src/services/hooks";
+import { useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 const Account = () => {
+  const queryClient = useQueryClient();
   const t = useTranslations("account");
-  const { onLogout, isPending } = useLogout();
+  const { onLogout, isPending, isSuccess, isError } = useLogout();
+  useEffect(() => {
+    if (isSuccess || isError) {
+      queryClient.invalidateQueries();
+      // queryClient.invalidateQueries({
+      //   queryKey: ["get-accounts", "orders", "fectch-init-data"],
+      // });
+    }
+  }, [isSuccess, isError]);
 
   return (
     <Wrapper>
@@ -16,7 +27,6 @@ const Account = () => {
         <PageHeader title={t("fn_acc_txt_title")} accSumRefresh />
         <Content />
         <LanguageToggle />
-        {/* <ModeToggle /> */}
       </ContentWrapper>
       <ButtonWrapper>
         <LoadingButton

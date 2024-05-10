@@ -6,17 +6,40 @@ interface UseGetIndex {
   isError: boolean;
   isSuccess: boolean;
   isLoading: boolean;
+  data: IndexRTData[] | undefined;
   refetch: () => void;
 }
-const onGetData = async (indexes: string[]) => {
+const onGetData = async (indexes: string[]): Promise<IndexRTData[]> => {
   const promiseArr = indexes.map((index) => {
     const url = getIndexesUrl(index);
     return axiosInst.get(url);
   });
   return Promise.all(promiseArr)
     .then((values) => {
-      const data = values.map((value) => value.data.d);
-      console.log(data);
+      const data: IndexRTData[] = values.map((value) => {
+        const {
+          indexChange,
+          indexPercentChange,
+          marketCode,
+          marketIndex,
+          totalValue,
+        } = value.data.d[0];
+        return {
+          MC: marketCode ?? "",
+          MI: marketIndex ?? 0,
+          ICH: indexChange ?? 0,
+          IPC: indexPercentChange ?? 0,
+          TVS: totalValue ?? 0,
+        };
+      });
+      const result: IndexRTData[] = [];
+      indexes.forEach((index) => {
+        const indexData = data.find((d) => d.MC === index);
+        if (indexData) {
+          result.push(indexData);
+        }
+      });
+      return result;
     })
     .catch((e) => {
       throw e;
@@ -24,7 +47,7 @@ const onGetData = async (indexes: string[]) => {
 };
 
 export const useGetIndexes = (indexes: string[]): UseGetIndex => {
-  const { refetch, isError, isSuccess, isLoading } = useQuery({
+  const { refetch, isError, isSuccess, isLoading, data } = useQuery({
     queryKey: [
       "get-translogs",
       {
@@ -35,5 +58,5 @@ export const useGetIndexes = (indexes: string[]): UseGetIndex => {
     enabled: !!indexes.length,
   });
 
-  return { isError, isSuccess, refetch, isLoading };
+  return { isError, isSuccess, refetch, data, isLoading };
 };

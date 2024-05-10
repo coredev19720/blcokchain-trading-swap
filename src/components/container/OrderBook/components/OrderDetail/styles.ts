@@ -40,6 +40,7 @@ export const Actions = styled("div")(({ theme }) => ({
 
 export const Action = styled(Button)(() => ({
   flex: 1,
+  minHeight: 52,
 }));
 export const TicketSide = styled("div")<{ side?: TSide }>(
   ({ theme, side }) => ({

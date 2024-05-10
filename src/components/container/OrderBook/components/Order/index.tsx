@@ -79,6 +79,7 @@ const Order = ({ data, handleClick }: IProps) => {
           variant="contained"
           fullWidth
           onClick={() => handleClick(data, TOrderActionType.cancel)}
+          size="small"
         >
           {t("fn_ob_cta_cancel")}
         </S.Action>
@@ -88,6 +89,7 @@ const Order = ({ data, handleClick }: IProps) => {
           variant="contained"
           fullWidth
           onClick={() => handleClick(data, TOrderActionType.update)}
+          size="small"
         >
           {t("fn_ob_cta_edit")}
         </S.Action>
@@ -96,6 +98,7 @@ const Order = ({ data, handleClick }: IProps) => {
           color="secondary"
           fullWidth
           onClick={() => handleClick(data, TOrderActionType.detail)}
+          size="small"
         >
           {t("fn_ob_cta_detail")}
         </S.Action>

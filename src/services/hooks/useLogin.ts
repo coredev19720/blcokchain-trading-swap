@@ -27,7 +27,7 @@ const handleLogin = async (data: {
     });
     if (res.data.access_token) {
       window.localStorage.setItem(
-        process.env.NEXT_PUBLIC_IDLE_STO_NAME ?? "idle_time",
+        process.env.NEXT_PUBLIC_IDLE_STO_NAME as string,
         data.t.toString()
       );
       return res.data;
@@ -38,13 +38,13 @@ const handleLogin = async (data: {
   }
 };
 
-const handleLoginSuccess = (data: LoginRes) => {
+const handleLoginSuccess = (data: LoginRes, variable: any) => {
   if (data.access_token) {
     Cookies.set(
       process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME as string,
       data.access_token,
       {
-        expires: data.expires_in,
+        expires: variable.t,
         path: "/",
       }
     );

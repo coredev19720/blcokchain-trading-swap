@@ -16,6 +16,16 @@ const LoadingButton = ({
   loading,
   fullWidth,
 }: Props) => {
+  const genLoadingSize = () => {
+    switch (size) {
+      case "small":
+        return 20;
+      case "large":
+        return 36;
+      default:
+        return 24;
+    }
+  };
   return (
     <Button
       fullWidth={fullWidth}
@@ -24,7 +34,14 @@ const LoadingButton = ({
       size={size ?? "medium"}
       disabled={loading}
     >
-      {loading ? <CircularProgress style={{ color: "inherit" }} /> : text}
+      {loading ? (
+        <CircularProgress
+          size={genLoadingSize()}
+          style={{ color: "inherit" }}
+        />
+      ) : (
+        text
+      )}
     </Button>
   );
 };

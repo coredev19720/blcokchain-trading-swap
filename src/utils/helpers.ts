@@ -1,5 +1,6 @@
 import crypto from "crypto";
 import colors from "@src/themes/colors";
+import { TPinAuthType } from "../constraints/enum/common";
 export const uIdGen = () => {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
 };
@@ -104,4 +105,11 @@ export const genChgTextClass = (chg: number) => {
 
 export const generateUniqueId = () => {
   return crypto.randomBytes(8).toString("hex");
+};
+
+export const genOTPLenth = (type?: TPinAuthType) => {
+  const otpLen = Number(process.env.NEXT_PUBLIC_OTP_LEN);
+  const pinLen = Number(process.env.NEXT_PUBLIC_PIN_LEN);
+  if (!type) return otpLen;
+  return type === TPinAuthType.SMSOTP ? otpLen : pinLen;
 };

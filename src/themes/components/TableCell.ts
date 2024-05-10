@@ -7,6 +7,8 @@ const TableCell = {
       backgroundColor: colors.sb60,
     },
     root: {
+      fontSize: "unset",
+      lineHeight: "unset",
       padding: "8px 16px",
       // border: `1px solid ${colors.ln10}`,
       [`@media screen and (max-width: ${breakpoints.xl}px)`]: {

@@ -6,7 +6,7 @@ import { PageWrapper, MainContent } from "@src/styles/common";
 import { ToastContainer } from "react-toastify";
 import Menu from "./Menu";
 import { publicUrls } from "@src/constants/routes";
-import { usePathname, useParams, useSearchParams } from "next/navigation";
+import { usePathname, useParams } from "next/navigation";
 import { getInitColorSchemeScript, useColorScheme } from "@mui/material/styles";
 import { socketCfg } from "@/src/constants/config";
 //@ts-ignore
@@ -16,7 +16,6 @@ import {
   setHisTrades,
   setInstrument,
   setPorts,
-  setSelectedStock,
   setIdx,
 } from "@/src/redux/features/marketSlice";
 import { usePreviousValue } from "@/src/hooks";
@@ -31,12 +30,9 @@ import {
   TradeRTData,
   TranslogDataRes,
 } from "@/src/constraints/interface/market";
-import {
-  setLastSymbolToLocalStorage,
-  lastSymLocalKey,
-} from "@src/utils/helpers";
 import { useGetPortfolio } from "@/src/services/hooks/useGetPortfolio";
 import { useGetTranslogs } from "@/src/services/hooks/useGetTranslogs";
+
 const Wrapper = styled("main")(({ theme }) => {
   return {
     height: "100%",
@@ -52,20 +48,17 @@ import Cookies from "js-cookie";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const indexesString = ["HOSE", "HNX", "UPCOM"];
-  const { refetch } = useGetIndexes(indexesString);
+  const { data: indexData } = useGetIndexes(indexesString);
   const cookieToken = Cookies.get(
     process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME as string
   );
-  const { selectedStock, stocks, ports } = useAppSelector(
-    (state) => state.market
-  );
+  const { selectedStock } = useAppSelector((state) => state.market);
   const { activeAccount } = useAppSelector((state) => state.user);
   const { data: portData } = useGetPortfolio(activeAccount?.id ?? "");
   const { data: stockData } = useGetInstrument(selectedStock?.symbol ?? "");
   const { data: translogs } = useGetTranslogs({
     symbol: selectedStock?.symbol,
   });
-  const searchParams = useSearchParams();
 
   const dispatch = useAppDispatch();
   const pathname = usePathname();
@@ -76,6 +69,12 @@ export default function Layout({ children }: { children: ReactNode }) {
   const [socket, setSocket] = useState<io.Socket | null>(null);
   const prevSymbol = usePreviousValue(selectedStock?.symbol);
   const prevActiveAccountId = usePreviousValue(activeAccount?.id);
+  useEffect(() => {
+    if (indexData?.length) {
+      dispatch(setIdx(indexData));
+    }
+  }, [indexData]);
+
   useEffect(() => {
     setMounted(true);
     const url = process.env.NEXT_PUBLIC_API_URL ?? "";
@@ -120,9 +119,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   useEffect(() => {
     portData && dispatch(setPorts(portData));
   }, [portData]);
-  useEffect(() => {
-    !!stocks.length && activeAccount && ports && initTicker();
-  }, [stocks, activeAccount, ports]);
+
   useEffect(() => {
     //handle socket listen index
     socket && indexSub();
@@ -223,25 +220,14 @@ export default function Layout({ children }: { children: ReactNode }) {
     console.log("index event", data);
     const { MI, ICH, IPC, TVS, MC } = data;
     if (MI || ICH || IPC || TVS) {
-      dispatch(setIdx({ MC, MI, ICH, IPC, TVS }));
+      dispatch(setIdx([{ MI, ICH, IPC, TVS, MC }]));
     }
   };
   //handle Trade event from socket
   const handleTEvent = (data: TradeRTData) => {
     dispatch(setHisTrades([data]));
   };
-  const initTicker = () => {
-    if (selectedStock.symbol) return;
-    const s = searchParams?.get("s");
-    const lastSymbol = localStorage.getItem(lastSymLocalKey);
-    const firstPortItem = ports && ports.length > 0 ? ports[0].symbol : "";
-    const symbol = s ?? lastSymbol ?? firstPortItem;
-    const stock = stocks.find((s) => s.symbol === symbol?.toUpperCase());
-    if (stock) {
-      dispatch(setSelectedStock(stock));
-      setLastSymbolToLocalStorage(stock.symbol);
-    }
-  };
+
   const handleTranslogs = (translogs: TranslogDataRes) => {
     const { translog } = translogs;
     const trans = translog.map((i) => translogsMappingTradeRTData(i));

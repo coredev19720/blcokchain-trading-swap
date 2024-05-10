@@ -6,7 +6,11 @@ import { useAppSelector } from "@src/redux/hooks";
 import { TSide } from "@enum/common";
 import { useTranslations } from "next-intl";
 import colors from "@src/themes/colors";
-import { formatNumber, generateUniqueId } from "@src/utils/helpers";
+import {
+  formatNumber,
+  genOTPLenth,
+  generateUniqueId,
+} from "@src/utils/helpers";
 import OTPConfirm from "@components/common/OTPConfirm";
 import { useRouter } from "next/navigation";
 import { useCreateOrder, useGenTwoFactorAuth } from "@/src/services/hooks";
@@ -50,7 +54,7 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
     }
   }, [isError, error]);
   const handleChangeOTP = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length <= 6) {
+    if (e.target.value.length <= genOTPLenth(activePermission?.ORDINPUT[0])) {
       setOTP(e.target.value);
     }
   };
@@ -185,14 +189,16 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
               handleRequest={handleRequestOTP}
               handleChangeOTP={handleChangeOTP}
               otp={otp}
-              activePermission={activePermission}
+              type={activePermission?.ORDINPUT[0]}
               genSuccess={isGenSuccess}
             />
             <Button
               color="primary"
               variant="contained"
               fullWidth
-              disabled={otp.length !== 6}
+              disabled={
+                otp.length !== genOTPLenth(activePermission?.ORDINPUT[0])
+              }
               onClick={handleSubmit}
               size="large"
             >

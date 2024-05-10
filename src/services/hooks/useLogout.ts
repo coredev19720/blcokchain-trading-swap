@@ -7,6 +7,8 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 interface UseLogout {
   onLogout: () => void;
   isPending: boolean;
+  isSuccess: boolean;
+  isError: boolean;
 }
 const handleLogout = async (router: AppRouterInstance) => {
   //unimplement
@@ -26,9 +28,14 @@ const handleLogout = async (router: AppRouterInstance) => {
 };
 export const useLogout = (): UseLogout => {
   const router = useRouter();
-  const { mutate: onLogout, isPending } = useMutation({
+  const {
+    mutate: onLogout,
+    isPending,
+    isSuccess,
+    isError,
+  } = useMutation({
     mutationFn: () => handleLogout(router),
   });
 
-  return { onLogout, isPending };
+  return { onLogout, isPending, isSuccess, isError };
 };

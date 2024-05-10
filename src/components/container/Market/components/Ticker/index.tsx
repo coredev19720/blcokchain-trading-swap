@@ -158,7 +158,11 @@ const Ticker = ({ inst, trades }: Props) => {
         <S.DealWrapper>
           <S.BestDeal>
             <FieldLabel>{t("fn_symbol_txt_bestQuote")}</FieldLabel>
-            <StyledTable columns={bestDealCols} dataSource={bestDeals} />
+            <StyledTable
+              columns={bestDealCols}
+              dataSource={bestDeals}
+              stickyHeader
+            />
           </S.BestDeal>
           <S.HistoryDeals>
             <FieldLabel>{t("fn_symbol_txt_ordHist")}</FieldLabel>
