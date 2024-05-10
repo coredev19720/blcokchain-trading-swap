@@ -20,7 +20,7 @@ import {
   setIdx,
 } from "@/src/redux/features/marketSlice";
 import { usePreviousValue } from "@/src/hooks";
-import { useGetInstrument } from "@/src/services/hooks";
+import { useGetInstrument, useGetIndexes } from "@/src/services/hooks";
 import {
   stockMappingRTData,
   translogsMappingTradeRTData,
@@ -51,6 +51,8 @@ const Wrapper = styled("main")(({ theme }) => {
 import Cookies from "js-cookie";
 
 export default function Layout({ children }: { children: ReactNode }) {
+  const indexesString = ["HOSE", "HNX", "UPCOM"];
+  const { refetch } = useGetIndexes(indexesString);
   const cookieToken = Cookies.get(
     process.env.NEXT_PUBLIC_TOKEN_COOKIE_NAME as string
   );

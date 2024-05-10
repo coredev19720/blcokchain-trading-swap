@@ -22,6 +22,7 @@ import { useGetWaitMatchedOrders } from "./order/useGetWaitMatchedOrders";
 import { usePrecheckOrder } from "./order/usePrecheckOrder";
 import { useUpdateOrder } from "./order/useUpdateOrder";
 import { useSetCurrentAcc } from "./useSetCurrentAcc";
+import { useGetIndexes } from "./useGetIndex";
 export {
   useFetchInitData,
   useGenTwoFactorAuth,
@@ -47,4 +48,5 @@ export {
   usePrecheckOrder,
   useUpdateOrder,
   useSetCurrentAcc,
+  useGetIndexes,
 };

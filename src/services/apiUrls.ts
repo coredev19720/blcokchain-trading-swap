@@ -23,4 +23,7 @@ export const genInstrumentUrl = (symbol: string) => {
 export const getTranslogsUrl = (symbol: string) => {
   return `${baseUrl}/datafeed/translogsnaps/${symbol}`;
 };
+export const getIndexesUrl = (index: string) => {
+  return `${baseUrl}/datafeed/indexsnaps/${index}`;
+};
 export default apiUrls;
