@@ -117,7 +117,12 @@ export default function Layout({ children }: { children: ReactNode }) {
     };
   }, []);
   useEffect(() => {
-    portData && dispatch(setPorts(portData));
+    if (portData && portData.length > 0) {
+      const sortedData = portData.toSorted(
+        (a, b) => b.costPriceAmt - a.costPriceAmt
+      );
+      dispatch(setPorts(sortedData));
+    }
   }, [portData]);
 
   useEffect(() => {
@@ -217,7 +222,6 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   //handle index event  from socket
   const handleIdxEvent = (data: any) => {
-    console.log("index event", data);
     const { MI, ICH, IPC, TVS, MC } = data;
     if (MI || ICH || IPC || TVS) {
       dispatch(setIdx([{ MI, ICH, IPC, TVS, MC }]));

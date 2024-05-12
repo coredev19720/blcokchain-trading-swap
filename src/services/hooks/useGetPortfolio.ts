@@ -30,6 +30,7 @@ export const useGetPortfolio = (accountId: string): UseGetPortfolio => {
     queryKey: [`get-portfolio-${accountId}`],
     queryFn: () => handleGetData(accountId),
     enabled: !!accountId,
+    staleTime: 0,
   });
 
   return { data, isError, isSuccess, isLoading, refetch };

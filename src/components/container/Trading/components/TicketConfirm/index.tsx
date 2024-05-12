@@ -10,6 +10,7 @@ import {
   formatNumber,
   genOTPLenth,
   generateUniqueId,
+  unFormatNumber,
 } from "@src/utils/helpers";
 import OTPConfirm from "@components/common/OTPConfirm";
 import { useRouter } from "next/navigation";
@@ -71,7 +72,8 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
         accountId: activeAccount.id,
         requestId: generateUniqueId(),
         instrument: ticket.symbol,
-        qty: ticket.vol,
+        qty: unFormatNumber(ticket.vol),
+        splitval: ticket.multiple,
         side: ticket.side,
         type: ticket.type === "LO" ? "limit" : "market",
         limitPrice: Number(ticket.price) * 1000,
@@ -145,7 +147,7 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
                   {t("fn_trade_txt_qty")}
                 </Typography>
                 <Typography variant="body2" fontWeight={600}>
-                  {formatNumber(ticket.vol)}
+                  {ticket.vol}
                 </Typography>
               </FlexContent>
               <FlexContent>
@@ -161,7 +163,9 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
                   {t("fn_trade_txt_value")}
                 </Typography>
                 <Typography variant="body2" fontWeight={600}>
-                  {formatNumber(Number(ticket.price) * 1000 * ticket.vol)}
+                  {formatNumber(
+                    Number(ticket.price) * 1000 * unFormatNumber(ticket.vol)
+                  )}
                 </Typography>
               </FlexContent>
             </S.Block>

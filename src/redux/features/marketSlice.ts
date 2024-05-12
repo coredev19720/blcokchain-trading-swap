@@ -31,11 +31,12 @@ const initialState = {
   ticket: {
     side: TSide.buy,
     price: "0",
-    vol: 0,
+    vol: "0",
     symbol: "",
     type: TOrderType.LO,
     kind: "normal" as TOrderKind,
     market: TMarket.HOSE,
+    multiple: "1",
   },
   stocks: [],
   orders: [],

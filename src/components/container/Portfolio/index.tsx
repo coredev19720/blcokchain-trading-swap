@@ -19,7 +19,12 @@ const Portfolio = () => {
   const [port, setPort] = useState<PortItem | null>(null);
   const [isShowPrice, setIsShowPrice] = useState<boolean>(false);
   useEffect(() => {
-    data && dispatch(setPorts(data));
+    if (data && data.length > 0) {
+      const sortedData = data.toSorted(
+        (a, b) => b.costPriceAmt - a.costPriceAmt
+      );
+      dispatch(setPorts(sortedData));
+    }
   }, [data]);
 
   const handleSwitch = (event: React.ChangeEvent<HTMLInputElement>) => {

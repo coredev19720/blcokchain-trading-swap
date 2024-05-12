@@ -12,7 +12,14 @@ const Search = () => {
   const { ticket } = useAppSelector((state) => state.market);
   const [openPanel, setOpenPanel] = useState<boolean>(false);
   const handleChangeSide = (side: TSide) => {
-    dispatch(setTicket({ ...ticket, side }));
+    dispatch(
+      setTicket({
+        ...ticket,
+        side,
+        price: "0",
+        vol: "0",
+      })
+    );
   };
   return (
     <S.Wrapper>

@@ -223,10 +223,11 @@ export interface ITicket {
   symbol: string;
   side: TSide;
   price: string;
-  vol: number;
+  vol: string;
   kind: TOrderKind;
   type: TOrderType;
   market: string;
+  multiple: string;
 }
 export interface InsRTData {
   Id: string; // identify

@@ -123,12 +123,14 @@
     "en_trade_custodyCd": "Số lưu ký",
     "en_trade_accNo": "Tiểu khoản",
     "fn_trade_cta_confirm": "Xác nhận",
-    "fn_trade_txt_confirm_buy_title": "Xác nhận lệnh mua",
-    "fn_trade_txt_confirm_sell_title": "Xác nhận lệnh bán",
+    "fn_trade_txt_confirm_buy_title": "Xác nhận lệnh MUA",
+    "fn_trade_txt_confirm_sell_title": "Xác nhận lệnh BÁN",
     "fn_trade_txt_ord_type": "Loại lệnh",
     "fn_trade_txt_qty": "Khối lượng đặt",
     "fn_trade_txt_price": "Giá đặt",
-    "fn_trade_txt_value": "Giá trị dự kiến"
+    "fn_trade_txt_value": "Giá trị dự kiến",
+    "fn_trade_txt_no_auth_notice": "Quý khách cần đăng ký phương thức xác thực lệnh. Liên hệ CSKH của Bảo Minh để biết thêm chi tiết",
+    "fn_trade_txt_auth_notice": "Hình thực xác thực lệnh không được hỗ trợ. Liên hệ CSKH của Bảo Minh để biết thêm chi tiết"
   },
   "order_book": {
     "fn_ob_txt_title": "Sổ lệnh",

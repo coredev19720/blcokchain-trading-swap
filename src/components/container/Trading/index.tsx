@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Button, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import * as S from "./styles";
-import { TOrderType, TSide } from "@enum/common";
+import { TOrderType, TPinAuthType, TSide } from "@enum/common";
 import Search from "./components/Search";
 import SymbolInfo from "./components/SymbolInfo";
 import TicketInfo from "./components/TicketInfo";
@@ -19,6 +19,7 @@ import { useSearchParams } from "next/navigation";
 import {
   lastSymLocalKey,
   setLastSymbolToLocalStorage,
+  unFormatNumber,
 } from "@/src/utils/helpers";
 
 const Trading = () => {
@@ -47,7 +48,6 @@ const Trading = () => {
     ticket?.side === TSide.sell
       ? symbolPort?.trade ?? 0
       : availTrade?.maxqtty ?? 0;
-
   useEffect(() => {
     if (ticket && ports) {
       const port = ports.find((p) => p.symbol === ticket?.symbol);
@@ -56,7 +56,7 @@ const Trading = () => {
   }, [ticket]);
   useEffect(() => {
     ticket?.side === TSide.buy && refetchAvailTrade();
-  }, [ticket.price, ticket.symbol]);
+  }, [ticket.symbol, activeAccount]);
 
   useEffect(() => {
     if (isError && error) {
@@ -72,20 +72,20 @@ const Trading = () => {
   useEffect(() => {
     !!stocks.length && activeAccount && ports && initTicker();
   }, [stocks, activeAccount, ports]);
+  const invalidTicket =
+    !inst ||
+    !unFormatNumber(ticket.price) ||
+    !unFormatNumber(ticket.vol) ||
+    !activeAccount ||
+    !activePermission ||
+    activePermission?.STOCKTRANS[0] === TPinAuthType.DIGI_SIGN;
 
   const handleClickTrade = () => {
-    if (
-      !selectedStock ||
-      !ticket.price ||
-      !ticket.vol ||
-      !activeAccount ||
-      !activePermission
-    )
-      return;
+    if (invalidTicket) return;
     onPrecheckOrder({
       accountId: activeAccount.id || "",
       instrument: ticket.symbol,
-      qty: ticket.vol,
+      qty: unFormatNumber(ticket.vol) * unFormatNumber(ticket.multiple),
       side: ticket.side,
       type: ticket.type === TOrderType.LO ? "limit" : "market",
       limitPrice: Number(ticket.price) * 1000,
@@ -110,12 +110,15 @@ const Trading = () => {
       setLastSymbolToLocalStorage(stock.symbol);
     }
   };
-  const btnDisabled =
-    !inst ||
-    !ticket.price ||
-    !ticket.vol ||
-    !activeAccount ||
-    !activePermission;
+  const genNoticeMsg = () => {
+    if (!activePermission?.STOCKTRANS[0]) {
+      return t("fn_trade_txt_no_auth_notice");
+    }
+    if (activePermission?.STOCKTRANS[0] === TPinAuthType.SMSOTP) {
+      return t("fn_trade_txt_auth_notice");
+    }
+    return "";
+  };
 
   return (
     <S.Wrapper>
@@ -124,7 +127,11 @@ const Trading = () => {
         <S.MainContent>
           <Search />
           <SymbolInfo inst={inst} maxVol={maxVol} />
-          <TicketInfo inst={inst} maxVol={maxVol} />
+          <TicketInfo
+            inst={inst}
+            maxVol={maxVol}
+            refetchAvailTrade={refetchAvailTrade}
+          />
           {/* Trạng thái tiểu khoản */}
           <S.AccStatus>
             <Typography variant="body2">
@@ -137,11 +144,14 @@ const Trading = () => {
             </Typography>
           </S.AccStatus>
           {/* 2FA type noti */}
-          <NotiContent type="warning" message="Thông báo" />
+          {(!activePermission?.STOCKTRANS[0] ||
+            activePermission?.STOCKTRANS[0] === TPinAuthType.DIGI_SIGN) && (
+            <NotiContent type="warning" message={genNoticeMsg()} />
+          )}
         </S.MainContent>
         <S.ButtonWrapper>
           <Button
-            disabled={btnDisabled}
+            disabled={invalidTicket}
             fullWidth
             variant="contained"
             color={ticket.side === TSide.buy ? "success" : "error"}

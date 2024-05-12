@@ -87,3 +87,10 @@ export const translogsMappingTradeRTData = (
     LC: translog.lastColor, // Loại lệnh
   };
 };
+
+export const roundDownVol = (val: number): number => {
+  if (!val) {
+    return 0;
+  }
+  return Math.floor(val / 100) * 100;
+};

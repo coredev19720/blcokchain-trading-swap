@@ -122,12 +122,14 @@
     "en_trade_custodyCd": "Custody",
     "en_trade_accNo": "Account",
     "fn_trade_cta_confirm": "Confirm",
-    "fn_trade_txt_confirm_buy_title": "Confirm buy",
-    "fn_trade_txt_confirm_sell_title": "Confirm sell",
+    "fn_trade_txt_confirm_buy_title": "Order confirmation - BUY",
+    "fn_trade_txt_confirm_sell_title": "Order confirmation - SELL",
     "fn_trade_txt_ord_type": "Type",
     "fn_trade_txt_qty": "Qty",
     "fn_trade_txt_price": "Price",
-    "fn_trade_txt_value": "Value"
+    "fn_trade_txt_value": "Value",
+    "fn_trade_txt_no_auth_notice": "Quý khách cần đăng ký phương thức xác thực lệnh. Liên hệ CSKH của Bảo Minh để biết thêm chi tiết",
+    "fn_trade_txt_auth_notice": "Hình thực xác thực lệnh không được hỗ trợ. Liên hệ CSKH của Bảo Minh để biết thêm chi tiết"
   },
   "order_book": {
     "fn_ob_txt_title": "Order book",

@@ -13,44 +13,95 @@ import { TMarket, TOrderKind, TOrderType } from "@enum/common";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import { setTicket } from "@src/redux/features/marketSlice";
 import { InsRTData } from "@/src/constraints/interface/market";
+import { roundDownVol } from "@/src/utils/market";
+import { formatNumber, uIdGen, unFormatNumber } from "@/src/utils/helpers";
+import { useEffect } from "react";
+import { usePreviousValue } from "@/src/hooks";
 
 interface Props {
   inst: InsRTData | null;
   maxVol: number;
+  refetchAvailTrade: () => void;
 }
-const TicketInfo = ({ inst, maxVol }: Props) => {
+const TicketInfo = ({ inst, maxVol, refetchAvailTrade }: Props) => {
+  const prevMaxVol = usePreviousValue(maxVol);
   const orderTypes = orderTypeOpts[(inst?.EX as TMarket) || "HOSE"];
   const t = useTranslations("trade");
   const dispatch = useAppDispatch();
   const { ticket } = useAppSelector((state) => state.market);
+  useEffect(() => {
+    if (prevMaxVol && maxVol < prevMaxVol) {
+      handleReCalcTicket();
+    }
+  }, [maxVol]);
+
+  const handleReCalcTicket = () => {
+    dispatch(setTicket({ ...ticket, vol: "0", multiple: "1" }));
+  };
   const handleChangeOrderType = (e: SelectChangeEvent<unknown>) => {
     dispatch(setTicket({ ...ticket, type: e.target.value as TOrderType }));
-  };
-
-  const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!inst) return;
-    if (Number(e.target.value) * 1000 > inst.CL) {
-      dispatch(setTicket({ ...ticket, price: (inst.CL / 1000).toFixed(2) }));
-      return;
-    }
-    dispatch(setTicket({ ...ticket, price: e.target.value }));
-  };
-  const handleBlurPriceInput = () => {
-    if (!inst) return;
-    if (Number(ticket.price) * 1000 < inst.FL) {
-      dispatch(setTicket({ ...ticket, price: (inst.FL / 1000).toFixed(2) }));
-    }
   };
   const handleChangeOrderKind = (e: SelectChangeEvent<unknown>) => {
     dispatch(setTicket({ ...ticket, kind: e.target.value as TOrderKind }));
   };
+  const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (inst && /^\d*\.?\d*$/.test(e.target.value)) {
+      if (Number(e.target.value) * 1000 > inst.CL) {
+        dispatch(setTicket({ ...ticket, price: (inst.CL / 1000).toFixed(2) }));
+        return;
+      }
+      dispatch(setTicket({ ...ticket, price: e.target.value }));
+    }
+  };
+  const handleBlurPrice = () => {
+    if (!inst) return;
+    if (Number(ticket.price) * 1000 < inst.FL) {
+      dispatch(setTicket({ ...ticket, price: (inst.FL / 1000).toFixed(2) }));
+    }
+    refetchAvailTrade();
+  };
   const handleChangeVol = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = unFormatNumber(e.target.value);
+    const realMaxVol = Math.floor(maxVol / unFormatNumber(ticket.multiple));
+    if (inst && value >= 0) {
+      dispatch(
+        setTicket({
+          ...ticket,
+          vol: formatNumber(value > realMaxVol ? realMaxVol : value, 0, "0"),
+        })
+      );
+    }
+  };
+  const handleBlurVol = () => {
     dispatch(
       setTicket({
         ...ticket,
-        vol: Number(e.target.value) > maxVol ? maxVol : Number(e.target.value),
+        vol: formatNumber(roundDownVol(unFormatNumber(ticket.vol)), 0, "0"),
       })
     );
+  };
+  const handleChangeMultipe = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = unFormatNumber(e.target.value);
+    const maxVal = Math.floor(maxVol / unFormatNumber(ticket.vol));
+    if (maxVol && value >= 0) {
+      dispatch(
+        setTicket({
+          ...ticket,
+          multiple: formatNumber(value > maxVal ? maxVal : value, 0, ""),
+        })
+      );
+    }
+  };
+  const handleBlurMultiple = () => {
+    const value = unFormatNumber(ticket.multiple);
+    if (!value || value < 1) {
+      dispatch(
+        setTicket({
+          ...ticket,
+          multiple: "1",
+        })
+      );
+    }
   };
   return (
     <S.Wrapper>
@@ -77,7 +128,7 @@ const TicketInfo = ({ inst, maxVol }: Props) => {
             fullWidth
             value={ticket.price}
             onChange={handleChangePrice}
-            onBlur={handleBlurPriceInput}
+            onBlur={handleBlurPrice}
             type="decimal"
           />
         </S.FieldBlock>
@@ -101,16 +152,24 @@ const TicketInfo = ({ inst, maxVol }: Props) => {
           <FieldLabel>{t("fn_trade_inp_ordQty")}</FieldLabel>
           <TextField
             fullWidth
-            value={ticket.vol}
+            value={ticket.vol ? ticket.vol : "0"}
             onChange={handleChangeVol}
+            onBlur={handleBlurVol}
             type="decimal"
+            id={uIdGen()}
           />
         </S.FieldBlock>
         {/* Nhân lệnh */}
         <S.FieldBlock item xs={6}>
           <FieldLabel>{t("fn_trade_inp_ordMulti")}</FieldLabel>
-          {/* fix me */}
-          <TextField fullWidth value={1} type="number" />
+          <TextField
+            fullWidth
+            value={ticket.multiple}
+            type="decimal"
+            onChange={handleChangeMultipe}
+            onBlur={handleBlurMultiple}
+            id={uIdGen()}
+          />
         </S.FieldBlock>
       </Grid>
     </S.Wrapper>

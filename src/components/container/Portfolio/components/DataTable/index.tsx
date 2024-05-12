@@ -8,7 +8,7 @@ import { ArrowForwardIos } from "@mui/icons-material";
 import { MuiIcon } from "@src/styles/common";
 import PortItemDetail from "../PortItemDetail";
 import { useRouter } from "next/navigation";
-
+import { useState } from "react";
 interface Props {
   ports: PortItem[];
   port: PortItem | null;
@@ -18,6 +18,7 @@ interface Props {
 const DataTable = ({ ports, port, setPort, isShowPrice }: Props) => {
   const t = useTranslations("portfolio");
   const router = useRouter();
+  const [itemShowPrice, setItemShowPrice] = useState<number[]>([]);
   const handleClickItem = (item: PortItem, idx: number) => {
     setPort(item);
   };
@@ -28,15 +29,25 @@ const DataTable = ({ ports, port, setPort, isShowPrice }: Props) => {
   const goToSymbol = (symbol: string) => {
     router.push(`market?s=${symbol.toUpperCase()}`);
   };
-
-  const renderPrice = (row: PortItem) => {
+  const handleClickPrice = (idx: number) => {
+    if (itemShowPrice.includes(idx)) {
+      setItemShowPrice(itemShowPrice.filter((item) => item !== idx));
+    } else {
+      setItemShowPrice([...itemShowPrice, idx]);
+    }
+  };
+  const renderPrice = (row: PortItem, idx: number) => {
     const { closeprice, basicPrice, costPriceAmt } = row;
     let price = costPriceAmt;
-    if (isShowPrice) {
+    if (isShowPrice || itemShowPrice.includes(idx)) {
       price = closeprice !== "0" ? Number(closeprice) : basicPrice;
     }
     return (
-      <Typography variant="body2" fontWeight={600}>
+      <Typography
+        variant="body2"
+        fontWeight={600}
+        onClick={() => handleClickPrice(idx)}
+      >
         {formatNumber(price)}
       </Typography>
     );
@@ -72,6 +83,7 @@ const DataTable = ({ ports, port, setPort, isShowPrice }: Props) => {
       dataIndex: "costPriceAmt",
       render: renderPrice,
       align: "right",
+      noClick: true,
       isSort: true,
     },
     {

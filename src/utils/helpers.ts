@@ -57,8 +57,8 @@ export const formatBigNumber = (val: number | undefined) => {
   return val;
 };
 
-export const formatNumber = (number: number, decimal = 0) => {
-  if (number === 0) return "-";
+export const formatNumber = (number: number, decimal = 0, defaultVal = "-") => {
+  if (number === 0) return defaultVal;
   return number
     ? number.toLocaleString("en-US", {
         minimumFractionDigits: decimal,
@@ -67,9 +67,9 @@ export const formatNumber = (number: number, decimal = 0) => {
     : "-";
 };
 
-export const unFormatNumber = (number: number | string) => {
+export const unFormatNumber = (number: number | string): number => {
   if (typeof number === "string") {
-    return number.split(".").join("").split(",").join("");
+    return Number(number.split(".").join("").split(",").join(""));
   }
   return number;
 };
@@ -112,4 +112,8 @@ export const genOTPLenth = (type?: TPinAuthType) => {
   const pinLen = Number(process.env.NEXT_PUBLIC_PIN_LEN);
   if (!type) return otpLen;
   return type === TPinAuthType.SMSOTP ? otpLen : pinLen;
+};
+
+export const removeCommas = (val: string) => {
+  return val.replace(/,/g, "");
 };
