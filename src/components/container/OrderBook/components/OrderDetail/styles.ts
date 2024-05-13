@@ -1,6 +1,6 @@
-import { TSide } from "@enum/common";
+import { TOrderEnSide } from "@enum/common";
 import colors from "@src/themes/colors";
-import { Button, Select } from "@mui/material";
+import { Button } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const Wrapper = styled("div")(({ theme }) => ({
@@ -42,11 +42,11 @@ export const Action = styled(Button)(() => ({
   flex: 1,
   minHeight: 52,
 }));
-export const TicketSide = styled("div")<{ side?: TSide }>(
+export const TicketSide = styled("div")<{ side?: TOrderEnSide }>(
   ({ theme, side }) => ({
     padding: theme.spacing(1),
     borderRadius: theme.spacing(1),
-    backgroundColor: side === TSide.buy ? colors.sg10 : colors.sr10,
+    backgroundColor: side === TOrderEnSide.Buy ? colors.sg10 : colors.sr10,
   })
 );
 

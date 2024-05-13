@@ -191,6 +191,8 @@
     "txt_login_success": "Đăng nhập thành công",
     "txt_login_fail": "Đăng nhập thất bại, vui lòng thử lại",
     "txt_pwd_updated": "Mật khẩu mới đã được cập nhật",
-    "txt_recaptcha_fail": "Vui lòng xác nhận bạn không phải là robot"
+    "txt_recaptcha_fail": "Vui lòng xác nhận bạn không phải là robot",
+    "FO40001": "Mã giao dịch không hợp lệ",
+    "FO20013": "Mã xác thực không hợp lệ"
   }
 }

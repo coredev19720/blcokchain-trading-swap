@@ -3,7 +3,7 @@ import { FlexContent } from "@src/styles/common";
 import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { OrderInfo } from "@interface/market";
-import { TOrderActionType, TSide } from "@enum/common";
+import { TOrderActionType, TOrderEnSide } from "@enum/common";
 import colors from "@src/themes/colors";
 import { formatNumber } from "@src/utils/helpers";
 interface IProps {
@@ -24,14 +24,14 @@ const Order = ({ data, handleClick }: IProps) => {
             <Typography
               variant="body2"
               color={
-                data.en_side === TSide.buy
+                data.en_side === TOrderEnSide.Buy
                   ? colors.lightUpText
                   : colors.lightDownText
               }
               style={{ textTransform: "capitalize" }}
             >
               {tTrade(
-                data.en_side === TSide.buy
+                data.en_side === TOrderEnSide.Buy
                   ? "txt_trade_confirm_buy"
                   : "txt_trade_confirm_sell"
               )}

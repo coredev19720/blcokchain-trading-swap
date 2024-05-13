@@ -3,20 +3,25 @@ import { FlexContent, SlideLine } from "@src/styles/common";
 import { Backdrop, Slide, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { OrderInfo } from "@interface/market";
-import { TOrderActionType, TSide } from "@enum/common";
+import { TOrderActionType, TOrderEnSide } from "@enum/common";
 import colors from "@src/themes/colors";
 import Detail from "./Detail";
 import Cancel from "./Cancel";
 import Update from "./Update";
 import { useEffect, useState } from "react";
 import { handleSlideDown } from "@src/utils/behaviors";
-import { AccInfo, AccPermissions } from "@/src/constraints/interface/account";
+import {
+  AccInfo,
+  AccPermissions,
+  AccVerifyInfo,
+} from "@/src/constraints/interface/account";
 interface IProps {
   data: OrderInfo;
   type: TOrderActionType;
   handleClose: () => void;
   activeAccount: AccInfo | null;
   activePermission: AccPermissions | null;
+  verifyInfo: AccVerifyInfo | null;
 }
 const OrderDetail = ({
   data,
@@ -24,6 +29,7 @@ const OrderDetail = ({
   handleClose,
   activeAccount,
   activePermission,
+  verifyInfo,
 }: IProps) => {
   const tTrade = useTranslations("trade");
   //unimplemented
@@ -72,14 +78,14 @@ const OrderDetail = ({
                 <Typography
                   variant="body2"
                   color={
-                    data?.en_side === TSide.buy
+                    data?.en_side === TOrderEnSide.Buy
                       ? colors.lightUpText
                       : colors.lightDownText
                   }
                   style={{ textTransform: "capitalize" }}
                 >
                   {tTrade(
-                    data?.en_side === TSide.buy
+                    data?.en_side === TOrderEnSide.Buy
                       ? "txt_trade_confirm_buy"
                       : "txt_trade_confirm_sell"
                   )}
@@ -94,6 +100,7 @@ const OrderDetail = ({
               handleClose={handleClose}
               activeAccount={activeAccount}
               activePermission={activePermission}
+              verifyInfo={verifyInfo}
             />
           )}
           {type === TOrderActionType.update && (
@@ -102,6 +109,7 @@ const OrderDetail = ({
               handleClose={handleClose}
               activeAccount={activeAccount}
               activePermission={activePermission}
+              verifyInfo={verifyInfo}
             />
           )}
         </S.Wrapper>

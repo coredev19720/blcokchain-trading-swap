@@ -29,9 +29,8 @@ const Trading = () => {
   const { ticket, selectedStock, ports, inst, stocks } = useAppSelector(
     (state) => state.market
   );
-  const { accountSummary, activeAccount, permissions } = useAppSelector(
-    (state) => state.user
-  );
+  const { accountSummary, activeAccount, permissions, verifyInfo } =
+    useAppSelector((state) => state.user);
   const { onPrecheckOrder, isError, isSuccess, error, data } =
     usePrecheckOrder();
   const { data: availTrade, refetch: refetchAvailTrade } = useGetAvailTrade(
@@ -170,6 +169,7 @@ const Trading = () => {
         open={isConfirm}
         setOpen={setIsConfirm}
         precheckData={data ?? null}
+        verifyInfo={verifyInfo}
       />
     </S.Wrapper>
   );

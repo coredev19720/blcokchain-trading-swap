@@ -9,8 +9,14 @@ import OrderDetail from "./components/OrderDetail";
 import { TOrderActionType } from "@enum/common";
 import { useGetOrders } from "@/src/services/hooks";
 import Loading from "../../common/Loading";
+import { useTranslations } from "next-intl";
+import { useGetVerifyInfo } from "@/src/services/hooks/useGetVerifyInfo";
 const OrderBook = () => {
-  const { activeAccount, permissions } = useAppSelector((state) => state.user);
+  const {} = useGetVerifyInfo();
+
+  const { activeAccount, permissions, verifyInfo } = useAppSelector(
+    (state) => state.user
+  );
   const activePermission =
     activeAccount && permissions ? permissions[activeAccount.id] : null;
   const { data: ordersData, isLoading: ordsIsLoading } = useGetOrders(
@@ -19,6 +25,7 @@ const OrderBook = () => {
   const [type, setType] = useState<TOrderActionType>(TOrderActionType.detail);
   const [ords, setOrds] = useState<OrderInfo[] | []>([]);
   const [ord, setOrd] = useState<OrderInfo | null>(null);
+
   const handleClickOrder = (order: OrderInfo, type: TOrderActionType) => {
     setOrd(order);
     setType(type);
@@ -64,6 +71,7 @@ const OrderBook = () => {
           handleClose={handleClose}
           activeAccount={activeAccount}
           activePermission={activePermission}
+          verifyInfo={verifyInfo}
         />
       )}
       {ordsIsLoading && <Loading />}

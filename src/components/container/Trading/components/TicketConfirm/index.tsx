@@ -21,13 +21,15 @@ import { errHandling } from "@/src/utils/error";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
 import { useGetVerifyInfo } from "@/src/services/hooks/useGetVerifyInfo";
+import { AccVerifyInfo } from "@/src/constraints/interface/account";
 
 interface IProps {
   open: boolean;
   setOpen: (val: boolean) => void;
   precheckData: PreCheckData | null;
+  verifyInfo: AccVerifyInfo | null;
 }
-const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
+const TicketConfirm = ({ open, setOpen, precheckData, verifyInfo }: IProps) => {
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
   const t = useTranslations("trade");
@@ -41,6 +43,7 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
   const { refetch: refetchVerify } = useGetVerifyInfo();
   const { onCreateOrder, isError, isSuccess, error } = useCreateOrder();
   const { onGenTwoFactor, isSuccess: isGenSuccess } = useGenTwoFactorAuth();
+  const [isSaveVerify, setIsSaveVerify] = useState<boolean>(false);
 
   useEffect(() => {
     if (isSuccess) {
@@ -49,7 +52,11 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
       router.push("order-book");
     }
   }, [isSuccess]);
-
+  useEffect(() => {
+    if (verifyInfo) {
+      setIsSaveVerify(!!verifyInfo.isVerified);
+    }
+  }, [verifyInfo]);
   useEffect(() => {
     if (isError && error) {
       const errMsg = errHandling(error);
@@ -67,6 +74,9 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
     }
     onGenTwoFactor({ transactionId: precheckData.transactionId });
   };
+  const handleChangeIsSaveVerify = (val: boolean) => {
+    setIsSaveVerify(val);
+  };
   const handleSubmit = () => {
     if (!activeAccount || !precheckData) return;
     try {
@@ -81,7 +91,8 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
         limitPrice: Number(ticket.price) * 1000,
         tokenid: precheckData.tokenid,
         transactionId: precheckData.transactionId,
-        code: otp,
+        ...(!verifyInfo?.isVerified && { code: otp }),
+        isSaveVerify,
       };
       onCreateOrder(data);
     } catch (e) {
@@ -191,20 +202,21 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
           </S.TicketInfo>
           {/* Actions */}
           <S.Actions>
-            <OTPConfirm
-              handleRequest={handleRequestOTP}
-              handleChangeOTP={handleChangeOTP}
-              otp={otp}
-              type={activePermission?.ORDINPUT[0]}
-              genSuccess={isGenSuccess}
-            />
+            {!verifyInfo?.isVerified && (
+              <OTPConfirm
+                handleRequest={handleRequestOTP}
+                handleChangeOTP={handleChangeOTP}
+                otp={otp}
+                type={activePermission?.ORDINPUT[0]}
+                genSuccess={isGenSuccess}
+                handleCheckBox={handleChangeIsSaveVerify}
+              />
+            )}
             <Button
               color="primary"
               variant="contained"
               fullWidth
-              // disabled={
-              //   otp.length !== genOTPLenth(activePermission?.ORDINPUT[0])
-              // }
+              disabled={!otp.length && !verifyInfo?.isVerified}
               onClick={handleSubmit}
               size="large"
             >

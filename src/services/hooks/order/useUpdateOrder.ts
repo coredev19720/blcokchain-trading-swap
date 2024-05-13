@@ -18,7 +18,7 @@ const handleUpdateOrder = async (
     const { accountId, orderId, ...rest } = data;
     const res = await axiosInst.put(
       genOrderUrl(data.accountId, `orders/${data.orderId}`),
-      { data: rest }
+      rest
     );
     const { s, ec } = res.data;
     if (s !== "ok") throw new Error(ec);

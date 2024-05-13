@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import apiUrls, { getTranslogsUrl } from "@/src/services/apiUrls";
+import apiUrls from "@/src/services/apiUrls";
 import axiosInst from "../Interceptors";
-import { GetTransLogsReq } from "@/src/constraints/interface/services/request";
 import { AccVerifyInfo } from "@/src/constraints/interface/account";
 import { useAppDispatch } from "@/src/redux/hooks";
 import { setVerifyInfo } from "@/src/redux/features/userSlice";

@@ -1,6 +1,6 @@
 import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import { AppConfig } from "@src/utils/AppConfig";
 import ThemeRegistry from "../ThemeRegistry";

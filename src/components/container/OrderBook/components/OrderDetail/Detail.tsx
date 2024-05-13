@@ -5,12 +5,13 @@ import { useTranslations } from "next-intl";
 import dayjs from "dayjs";
 import RowContent from "@components/common/RowContent";
 import Line from "@components/common/Line";
-
+import utc from "dayjs/plugin/utc";
 interface IProps {
   data: OrderInfo | null;
 }
 
 const Detail = ({ data }: IProps) => {
+  dayjs.extend(utc);
   const t = useTranslations("order_book");
   return (
     <>
@@ -59,9 +60,7 @@ const Detail = ({ data }: IProps) => {
       <RowContent
         leftTxt={t("en_ord_order_timestamp")}
         rightTxt={
-          data?.odtimestamp
-            ? dayjs(data.odtimestamp).format("YYYY-MM-DD HH:mm:ss")
-            : "-"
+          data ? dayjs.utc(data.odtimestamp).format("DD/MM/YYYY HH:mm:ss") : "-"
         }
         isChild
       />

@@ -46,14 +46,15 @@ export interface CreateOrderReq {
   splitval?: string; // Khối lượng chẻ
   tokenid: string; // Tokeninfo lấy từ hàm 3.9
   transactionId: string; // Mã giao dịch lấy từ hàm 3.9
-  code: string; // Mã xác thực 2 l
+  code?: string; // Mã xác thực 2
+  isSaveVerify?: boolean; // Lưu thông tin xác thực
 }
 
 export interface PrecheckOrderReq {
   accountId: string;
   instrument: string; // Mã chứng khoán
   qty: number; // Khối lượng
-  side: string; // Mua/Bán - 'buy' or 'sell' // fix me
+  side: TSide; // Mua/Bán - 'buy' or 'sell' // fix me
   type: "limit" | "market"; // 'limit': Lệnh LO, 'market':Lệnh thị trường ATO, ATC,...
   limitPrice?: number; // Giá
   authtype?: TPinAuthType; // Loại xác thực, tra cứu bảng 3.5.3
@@ -66,7 +67,8 @@ export interface UpdateOrderReq {
   tokenid: string; // Tokeninfo lấy từ hàm 3.9
   transactionId: string; // Mã giao dịch lấy từ hàm 3.9
   qty: number; // Khối lượng
-  code: string; // mã xác thực 2 lớp.
+  code?: string; // mã xác thực 2 lớp.
+  isSaveVerify?: boolean; // Lưu thông tin xác thực
 }
 
 export interface CancelOrderReq {
@@ -74,7 +76,8 @@ export interface CancelOrderReq {
   orderId: string;
   tokenid: string; // Tokeninfo lấy từ hàm 3.9
   transactionId: string; // Mã giao dịch lấy từ hàm 3.9
-  code: string; // mã xác thực 2 lớp.
+  code?: string; // mã xác thực 2 lớp.
+  isSaveVerify?: boolean; // Lưu thông tin xác thực
 }
 
 export interface GenTwoFactorReq {

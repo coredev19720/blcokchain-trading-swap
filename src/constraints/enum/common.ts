@@ -66,6 +66,11 @@ export enum TShortSide {
   s = "S",
   b = "B",
 }
+
+export enum TOrderEnSide {
+  Buy = "Buy",
+  Sell = "Sell",
+}
 export enum TSide {
   buy = "buy",
   sell = "sell",

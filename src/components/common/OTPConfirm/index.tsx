@@ -15,6 +15,7 @@ interface IProps {
   handleChangeOTP: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: TPinAuthType;
   genSuccess: boolean;
+  handleCheckBox: (val: boolean) => void;
 }
 const OTPConfirm = ({
   handleRequest,
@@ -22,6 +23,7 @@ const OTPConfirm = ({
   otp,
   type,
   genSuccess,
+  handleCheckBox,
 }: IProps) => {
   const t = useTranslations("order_book");
   const [countdown, setCountdown] = useState(0);
@@ -51,7 +53,7 @@ const OTPConfirm = ({
   }, [genSuccess]);
 
   const handleClickCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.checked);
+    handleCheckBox(e.target.checked);
   };
 
   return (

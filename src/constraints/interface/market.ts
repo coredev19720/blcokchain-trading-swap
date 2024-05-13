@@ -1,4 +1,5 @@
 import {
+  TOrderEnSide,
   TOrderKind,
   TOrderStatus,
   TOrderType,
@@ -120,7 +121,7 @@ export interface OrderInfo extends BaseOrd {
   allowcancel: string; // Có được Hủy lệnh không (Y: có, N: không)
   allowamend: string; // Có được Sửa lệnh không (Y: có, N: không)
   side: TViSide; // Mua/Bán tiếng việt
-  en_side: TSide; // Mua/Bán tiếng anh
+  en_side: TOrderEnSide; // Mua/Bán tiếng anh
   price: number; // Giá đặt
   pricetype: string; // Loại giá. Tra cứu select * from allcode where cdname ='PRICETYPE' and cdtype = 'OD'
   via: string; // Kênh giao dịch
