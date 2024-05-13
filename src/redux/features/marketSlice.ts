@@ -103,7 +103,17 @@ export const market = createSlice({
         if (!existed) {
           state.idx = [...state.idx, i];
         } else {
-          state.idx = state.idx.map((idx) => (idx.MC === i.MC ? i : idx));
+          state.idx = state.idx.map((idx) =>
+            idx.MC === i.MC
+              ? {
+                  ...idx,
+                  ...(i.MI ? { MI: i.MI } : {}),
+                  ...(i.ICH ? { ICH: i.ICH } : {}),
+                  ...(i.IPC ? { IPC: i.IPC } : {}),
+                  ...(i.TVS ? { TVS: i.TVS } : {}),
+                }
+              : idx
+          );
         }
       });
     },

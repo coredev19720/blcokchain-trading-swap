@@ -6,11 +6,12 @@ export const uIdGen = () => {
 };
 export const genTrend = (
   ref?: number,
-  price?: number,
+  price?: number | string,
   ceil?: number,
   floor?: number
 ) => {
-  if (!ref || !price || !ceil || !floor) return "ref";
+  if (!ref || !price || !ceil || !floor || typeof price !== "number")
+    return "ref";
   if (price === ceil) return "ce";
   if (price === floor) return "fl";
   if (price > ref) return "up";

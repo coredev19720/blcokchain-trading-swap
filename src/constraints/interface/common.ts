@@ -25,7 +25,7 @@ export interface ITickerData {
   market: TMarket;
 }
 export interface IBestDeal {
-  price: number;
+  price: number | string;
   buyVol: number;
   sellVol: number;
 }

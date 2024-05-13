@@ -80,7 +80,7 @@ const MarketIndex = () => {
 
   return (
     <Wrapper>
-      <FieldLabel>{t("fn_symbol_txt_bestQuote")}</FieldLabel>
+      <FieldLabel>{t("fn_symbol_txt_index")}</FieldLabel>
       <StyledTable columns={columns} dataSource={idx} />
     </Wrapper>
   );

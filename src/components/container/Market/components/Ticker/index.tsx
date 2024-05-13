@@ -82,7 +82,9 @@ const Ticker = ({ inst, trades }: Props) => {
           trend={genTrend(inst?.RE, row.price, inst?.CL, inst?.FL)}
         >
           <Typography variant="subtitle1" color="inherit">
-            {(row.price / 1000).toFixed(2)}
+            {typeof row.price === "number"
+              ? (row.price / 1000).toFixed(2)
+              : row.price}
           </Typography>
         </SplashText>
       ),
