@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import * as S from "./styles";
 import { FlexContent } from "@src/styles/common";
 import { Backdrop, Button, Slide, Typography } from "@mui/material";
-import { useAppSelector } from "@src/redux/hooks";
+import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
 import { TSide } from "@enum/common";
 import { useTranslations } from "next-intl";
 import colors from "@src/themes/colors";
@@ -20,6 +20,7 @@ import { PreCheckData } from "@/src/constraints/interface/market";
 import { errHandling } from "@/src/utils/error";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
+import { useGetVerifyInfo } from "@/src/services/hooks/useGetVerifyInfo";
 
 interface IProps {
   open: boolean;
@@ -28,6 +29,7 @@ interface IProps {
 }
 const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
   const queryClient = useQueryClient();
+  const dispatch = useAppDispatch();
   const t = useTranslations("trade");
   const { ticket } = useAppSelector((state) => state.market);
   const { activeAccount, permissions } = useAppSelector((state) => state.user);
@@ -36,13 +38,13 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
     activeAccount && permissions ? permissions[activeAccount.id] : null;
 
   const [otp, setOTP] = useState<string>("");
+  const { refetch: refetchVerify } = useGetVerifyInfo();
   const { onCreateOrder, isError, isSuccess, error } = useCreateOrder();
   const { onGenTwoFactor, isSuccess: isGenSuccess } = useGenTwoFactorAuth();
-  useEffect(() => {
-    console.log("mounted");
-  }, []);
+
   useEffect(() => {
     if (isSuccess) {
+      refetchVerify();
       queryClient.invalidateQueries({ queryKey: ["orders"] });
       router.push("order-book");
     }
@@ -200,9 +202,9 @@ const TicketConfirm = ({ open, setOpen, precheckData }: IProps) => {
               color="primary"
               variant="contained"
               fullWidth
-              disabled={
-                otp.length !== genOTPLenth(activePermission?.ORDINPUT[0])
-              }
+              // disabled={
+              //   otp.length !== genOTPLenth(activePermission?.ORDINPUT[0])
+              // }
               onClick={handleSubmit}
               size="large"
             >

@@ -5,6 +5,7 @@ import {
   AccsPermissions,
   AccsSummary,
   AccSummary,
+  AccVerifyInfo,
   AuthorInfo,
 } from "@interface/account";
 
@@ -15,6 +16,7 @@ type UserState = {
   customerInfo: AuthorInfo | null;
   accountSummary: AccsSummary | null;
   accountAvailTrade: AccAvailTrade | null;
+  verifyInfo: AccVerifyInfo | null;
 };
 
 const initialState = {
@@ -23,6 +25,7 @@ const initialState = {
   activeAccount: null,
   accountSummary: null,
   accountAvailTrade: null,
+  verifyInfo: null,
 } as UserState;
 
 export const user = createSlice({
@@ -47,6 +50,9 @@ export const user = createSlice({
         [action.payload.id]: action.payload,
       };
     },
+    setVerifyInfo: (state, action: PayloadAction<AccVerifyInfo>) => {
+      state.verifyInfo = action.payload;
+    },
   },
 });
 
@@ -56,5 +62,6 @@ export const {
   setActiveAccount,
   setAuthorInfo,
   setAccountSummary,
+  setVerifyInfo,
 } = user.actions;
 export default user.reducer;

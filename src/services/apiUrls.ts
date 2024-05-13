@@ -11,6 +11,7 @@ const apiUrls = {
   getInstruments: `${baseUrl}/datafeed/instruments`,
   getAcounts: `${baseUrl}/accounts`,
   setCurrentAcc: `${baseUrl}/sso/info/setCurrentAccount`,
+  getVerify: `${baseUrl}/sso/api/info`,
 };
 export const genOrderUrl = (accountId: string, path: string) =>
   `${baseUrl}/accounts/${accountId}/${path}`;

@@ -156,3 +156,8 @@ export interface AccPermissions {
 export interface AccsPermissions {
   [key: string]: AccPermissions;
 }
+
+export interface AccVerifyInfo {
+  username: string;
+  isVerified: boolean | null;
+}

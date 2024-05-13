@@ -145,7 +145,7 @@ const Cancel = ({
           color="primary"
           variant="contained"
           fullWidth
-          disabled={otp.length !== genOTPLenth(activePermission?.ORDINPUT[0])}
+          // disabled={otp.length !== genOTPLenth(activePermission?.ORDINPUT[0])}
           onClick={handleSubmit}
         >
           {t("fn_ob_cta_confirm")}
