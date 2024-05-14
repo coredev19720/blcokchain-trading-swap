@@ -77,7 +77,6 @@ const MarketIndex = () => {
       align: "right",
     },
   ];
-
   return (
     <Wrapper>
       <FieldLabel>{t("fn_symbol_txt_index")}</FieldLabel>

@@ -24,7 +24,7 @@ const Ticker = ({ inst, trades }: Props) => {
   const [bestDeals, setBestDeals] = useState<IBestDeal[]>([]);
   const t = useTranslations("market");
   useEffect(() => {
-    if (inst) {
+    if (inst?.B1 && inst?.B2 && inst?.B3 && inst?.S1 && inst?.S2 && inst?.S3) {
       setBestDeals([
         {
           buyVol: 0,

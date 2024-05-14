@@ -26,7 +26,7 @@ const SymbolInfo = ({ inst, maxVol }: IProps) => {
   const [bestDeals, setBestDeals] = useState<BestDeal[]>([]);
   const t = useTranslations("trade");
   useEffect(() => {
-    if (inst) {
+    if (inst?.B1 && inst?.B2 && inst?.B3 && inst?.S1 && inst?.S2 && inst?.S3) {
       setBestDeals([
         {
           buyVol: inst.V3,

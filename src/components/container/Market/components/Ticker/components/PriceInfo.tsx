@@ -23,7 +23,6 @@ type Props = {
 };
 const PriceInfo = ({ inst }: Props) => {
   const t = useTranslations("market");
-
   return (
     <Wrapper>
       <ContentBlock>
@@ -34,7 +33,7 @@ const PriceInfo = ({ inst }: Props) => {
             trend={genTrend(inst?.RE, inst?.OP, inst?.CL, inst?.FL)}
           >
             <Typography fontWeight={500} variant="body2" color="inherit">
-              {inst ? (inst.OP / 1000).toFixed(2) : "-"}
+              {inst?.OP ? (inst.OP / 1000).toFixed(2) : "-"}
             </Typography>
           </SplashText>
         </RowContent>
@@ -45,7 +44,7 @@ const PriceInfo = ({ inst }: Props) => {
             trend={genTrend(inst?.RE, inst?.HI, inst?.CL, inst?.FL)}
           >
             <Typography fontWeight={500} variant="body2" color="inherit">
-              {inst ? (inst.HI / 1000).toFixed(2) : "-"}
+              {inst?.HI ? (inst.HI / 1000).toFixed(2) : "-"}
             </Typography>
           </SplashText>
         </RowContent>
@@ -56,7 +55,7 @@ const PriceInfo = ({ inst }: Props) => {
             trend={genTrend(inst?.RE, inst?.LO, inst?.CL, inst?.FL)}
           >
             <Typography fontWeight={500} variant="body2" color="inherit">
-              {inst ? (inst.LO / 1000).toFixed(2) : "-"}
+              {inst?.LO ? (inst.LO / 1000).toFixed(2) : "-"}
             </Typography>
           </SplashText>
         </RowContent>
