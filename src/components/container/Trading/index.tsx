@@ -125,7 +125,7 @@ const Trading = () => {
       <S.Content>
         <S.MainContent>
           <Search />
-          <SymbolInfo inst={inst} maxVol={maxVol} />
+          <SymbolInfo inst={inst} />
           <TicketInfo
             inst={inst}
             maxVol={maxVol}

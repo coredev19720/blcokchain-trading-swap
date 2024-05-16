@@ -27,6 +27,7 @@ import {
   useGenTwoFactorAuth,
 } from "@/src/services/hooks";
 import { toast } from "react-toastify";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface IProps {
   data: OrderInfo | null;
@@ -42,14 +43,15 @@ const Update = ({
   activePermission,
   verifyInfo,
 }: IProps) => {
+  const queryClient = useQueryClient();
   const t = useTranslations("order_book");
-
   const { onGenTwoFactor, isSuccess: genTwoFactorSuccess } =
     useGenTwoFactorAuth();
   const {
     onUpdateOrder,
     isError: isUpdateError,
     error: updateError,
+    isSuccess: isUpdateSuccess,
   } = useUpdateOrder();
   const {
     onPrecheckOrder,
@@ -67,7 +69,15 @@ const Update = ({
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
   const [isSubmitWithoutOTP, setIsSubmitWithoutOTP] = useState<boolean>(false);
   useEffect(() => {
-    if (orderValid) {
+    if (isUpdateSuccess) {
+      queryClient.invalidateQueries({
+        queryKey: ["orders"],
+      });
+      handleClose();
+    }
+  }, [isUpdateSuccess]);
+  useEffect(() => {
+    if (orderValid && !isSaveVerify) {
       setIsConfirm(true);
     }
   }, [orderValid]);
@@ -88,12 +98,10 @@ const Update = ({
   }, [precheckData]);
 
   const onErr = (error: unknown) => {
-    let msg = "";
-    if (error instanceof Error) {
-      msg = error.message;
+    if (error && error instanceof Error) {
+      toast.error(error.message);
+      handleClose();
     }
-    toast.error(msg);
-    handleClose();
   };
   const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!symbolData) {

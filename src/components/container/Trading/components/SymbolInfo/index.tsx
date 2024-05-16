@@ -12,17 +12,18 @@ import { useEffect, useState } from "react";
 import SplashText from "@/src/components/common/SplashText";
 interface IProps {
   inst: InsRTData | null;
-  maxVol: number;
 }
 interface BestDeal {
   buyVol: number;
   sellVol: number;
-  buyPrice: number;
-  sellPrice: number;
+  buyPrice: number | string;
+  sellPrice: number | string;
 }
-const SymbolInfo = ({ inst, maxVol }: IProps) => {
+const SymbolInfo = ({ inst }: IProps) => {
   const { ticket } = useAppSelector((state) => state.market);
-
+  const { accountSummary, activeAccount } = useAppSelector(
+    (state) => state.user
+  );
   const [bestDeals, setBestDeals] = useState<BestDeal[]>([]);
   const t = useTranslations("trade");
   useEffect(() => {
@@ -67,7 +68,9 @@ const SymbolInfo = ({ inst, maxVol }: IProps) => {
           trend={genTrend(inst?.RE, row.buyPrice, inst?.CL, inst?.FL)}
         >
           <Typography fontWeight={600} variant="body2" color="inherit">
-            {(row.buyPrice / 1000).toFixed(2)}
+            {typeof row.buyPrice === "number"
+              ? (row.buyPrice / 1000).toFixed(2)
+              : row.buyPrice}
           </Typography>
         </SplashText>
       ),
@@ -81,7 +84,9 @@ const SymbolInfo = ({ inst, maxVol }: IProps) => {
           trend={genTrend(inst?.RE, row.sellPrice, inst?.CL, inst?.FL)}
         >
           <Typography fontWeight={600} variant="body2" color="inherit">
-            {(row.sellPrice / 1000).toFixed(2)}
+            {typeof row.sellPrice === "number"
+              ? (row.sellPrice / 1000).toFixed(2)
+              : row.sellPrice}
           </Typography>
         </SplashText>
       ),
@@ -108,7 +113,9 @@ const SymbolInfo = ({ inst, maxVol }: IProps) => {
           )}
         </Typography>
         <Typography fontWeight={700} variant="body2">
-          {formatNumber(maxVol || 0)}
+          {accountSummary && activeAccount
+            ? formatNumber(accountSummary[activeAccount.id].pp)
+            : 0}
         </Typography>
       </S.PowerBuying>
       {/* Price info */}

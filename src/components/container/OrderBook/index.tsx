@@ -9,7 +9,6 @@ import OrderDetail from "./components/OrderDetail";
 import { TOrderActionType } from "@enum/common";
 import { useGetOrders } from "@/src/services/hooks";
 import Loading from "../../common/Loading";
-import { useTranslations } from "next-intl";
 import { useGetVerifyInfo } from "@/src/services/hooks/useGetVerifyInfo";
 const OrderBook = () => {
   const {} = useGetVerifyInfo();
