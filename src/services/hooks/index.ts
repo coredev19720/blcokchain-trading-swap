@@ -1,6 +1,5 @@
 import { useFetchInitData } from "./useFetchInitData";
 import { useGenTwoFactorAuth } from "./useGenTwoFactorAuth";
-import { useGetAccounts } from "./useGetAccounts";
 import { useGetAccountSummary } from "./useGetAccountSummary";
 import { useGetAuthorityInfo } from "./useGetAuthorityInfo";
 import { useGetAvailTrade } from "./useGetAvailTrade";
@@ -26,7 +25,6 @@ import { useGetIndexes } from "./useGetIndex";
 export {
   useFetchInitData,
   useGenTwoFactorAuth,
-  useGetAccounts,
   useGetAccountSummary,
   useGetAuthorityInfo,
   useGetAvailTrade,
