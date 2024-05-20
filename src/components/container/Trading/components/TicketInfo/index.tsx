@@ -113,6 +113,7 @@ const TicketInfo = ({ inst, maxVol, refetchAvailTrade }: Props) => {
             onChange={handleChangeOrderKind}
             fullWidth
             value={ticket.kind}
+            disabled
           >
             {orderKindOpts.map((x) => (
               <MenuItem value={x.value} key={x.value}>
